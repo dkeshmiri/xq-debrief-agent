@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>XQ Family Debrief — Dev Console</title>
+
+    <script
+        crossorigin
+        src="https://unpkg.com/@daily-co/daily-js"
+    ></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f4f6f8;
+            color: #222;
+        }
+
+        header {
+            background: #1f2937;
+            color: white;
+            padding: 16px 24px;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 24px auto;
+            padding: 0 20px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 740px 1fr;
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        #video-container {
+            width: 720px;
+            height: 480px;
+            background: #111;
+        }
+
+        button {
+            margin: 4px;
+            padding: 10px 16px;
+            cursor: pointer;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 100px;
+            box-sizing: border-box;
+            margin-top: 8px;
+        }
+
+        #status {
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        #output {
+            white-space: pre-wrap;
+            font-family: monospace;
+            font-size: 13px;
+            max-height: 300px;
+            overflow-y: auto;
+            background: #111827;
+            color: #e5e7eb;
+            padding: 12px;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h2>XQ Family Debrief — Developer Console</h2>
+</header>
+
+<main>
+
+    <div id="status">
+        Status: Idle
+    </div>
+
+    <div class="grid">
+
+        <div class="card">
+            <h3>Tavus PAL</h3>
+
+            <div id="video-container"></div>
+
+            <div>
+                <label for="person-select">
+                    Debrief Person
+                </label>
+
+                <select id="person-select">
+                    <option value="">
+                        Loading people...
+                    </option>
+                </select>
+            </div>
+
+            <div>
+                <button id="start-button">
+                    Start Test Session
+                </button>
+
+                <button id="end-button">
+                    End Session
+                </button>
+            </div>
+        </div>
+
+        <div class="card">
+
+            <h3>XQ Controls</h3>
+
+            <div>
+                <button id="speak-button">
+                    Speak Current
+                </button>
+
+                <button id="next-button">
+                    Next
+                </button>
+
+                <button id="repeat-button">
+                    Repeat
+                </button>
+
+                <button id="restart-button">
+                    Restart
+                </button>
+            </div>
+
+            <hr>
+
+            <h3>Ask XQ</h3>
+            <p>Unmute in the call to interrupt and ask by voice. Say “never mind” to resume.</p>
+
+            <textarea
+                id="question-input"
+                placeholder="Ask a question about the current profile..."
+            ></textarea>
+
+            <button id="ask-button">
+                Ask Question
+            </button>
+            <button id="dismiss-button">Never mind — resume</button>
+
+            <hr>
+
+            <h3>API Response</h3>
+
+            <div id="output">
+                Waiting...
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+<script src="/static/app.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,1227 @@
+--- a/app.py
++++ b/app.py
+@@ -1,4 +1,5 @@
+ import json
++import os
+ from pathlib import Path
+ import time
+ from functools import wraps
+@@ -22,6 +23,21 @@
+ from playback_coordinator import PlaybackCoordinator
+ from failure_recovery import FailureRecovery
+ from recovery_controller import RecoveryController
++from daily import Daily
++from speech_transcriber import (
++    AUDIO_CONTENT_TYPES,
++    MAX_UPLOAD_BYTES,
++    SpeechTranscriber,
++)
++from voice_activity import (
++    EnergySpeechScorer,
++    SegmenterConfig,
++)
++from voice_input import VoiceInputPipeline
++from voice_intent import (
++    VoiceIntent,
++    classify_question_mode_utterance,
++)
+ 
+ 
+ # =========================================================
+@@ -93,6 +109,30 @@
+     failure_recovery
+ )
+ 
++# Voice barge-in that arrived between sentences, before
++# Tavus reported the next sentence's inference ID.
++voice_interrupt_requested_at: float | None = None
++last_voice_event: dict | None = None
++
++VOICE_INTERRUPT_REQUEST_TTL_SECONDS = 3.0
++VOICE_QUESTION_WAIT_SECONDS = 4.0
++
++
++class RouteError(Exception):
++    """
++    A playback-state conflict, reported to HTTP callers
++    as an error response and to voice input as a log line.
++    """
++
++    def __init__(
++        self,
++        message: str,
++        status_code: int = 409,
++    ) -> None:
++        super().__init__(message)
++        self.message = message
++        self.status_code = status_code
++
+ # =========================================================
+ # TAVUS SETUP
+ # =========================================================
+@@ -240,6 +280,15 @@
+             event
+         )
+ 
++        if (
++            event_type == PlaybackEventTracker.STARTED
++            and voice_interrupt_requested_at is not None
++        ):
++            # The user started talking between sentences.
++            # This sentence now has an inference ID: stop it.
++            honour_voice_interrupt_request()
++            return
++
+         if completed:
+             retired_inference_ids.add(inference_id)
+             print(
+@@ -274,6 +323,40 @@
+ 
+ tavus.on_playback_event = handle_tavus_playback_event
+ 
++
++# =========================================================
++# VOICE INPUT SETUP
++# =========================================================
++
++def create_speech_scorer():
++    """
++    One speech detector per participant stream.
++
++    XQ_VAD_BACKEND=daily  (default) Daily's native VAD
++    XQ_VAD_BACKEND=energy loudness only, for testing
++    """
++
++    backend = os.getenv("XQ_VAD_BACKEND", "daily")
++
++    if backend == "energy":
++        return EnergySpeechScorer()
++
++    if backend != "daily":
++        raise RuntimeError(
++            f"Unknown XQ_VAD_BACKEND: {backend!r}"
++        )
++
++    vad = Daily.create_native_vad(
++        reset_period_ms=1000,
++        sample_rate=VoiceInputPipeline.SAMPLE_RATE,
++        channels=1,
++    )
++
++    return vad.analyze_frames
++
++
++speech_transcriber = SpeechTranscriber()
++
+ active_tavus_conversation_id: str | None = None
+ 
+ session_ending = False
+@@ -401,6 +484,14 @@
+     },
+ 
+     "tavus": tavus.status(),
++
++    "voice": {
++        **voice_pipeline.status(),
++        "interrupt_requested": (
++            voice_interrupt_requested_at is not None
++        ),
++        "last_event": last_voice_event,
++    },
+ }
+ 
+ 
+@@ -521,6 +612,465 @@
+ 
+ 
+ # =========================================================
++# QUESTION MODE + VOICE HELPERS
++# =========================================================
++
++def reset_voice_state() -> None:
++    """
++    Caller must hold playback_lock.
++    """
++
++    global voice_interrupt_requested_at
++
++    voice_interrupt_requested_at = None
++    voice_pipeline.reset()
++
++
++def request_interruption() -> str:
++    """
++    Ask Tavus to stop the tracked sentence.
++
++    Caller must hold playback_lock. Question mode opens
++    when Tavus confirms the stop (see
++    handle_tavus_playback_event).
++    """
++
++    global interruption_pending
++    global interrupted_inference_id
++
++    if interruption_pending:
++        raise RouteError(
++            "An interruption is already pending."
++        )
++
++    if not tracked_playback_active():
++        raise RouteError(
++            "There is no tracked narration to interrupt."
++        )
++
++    if playback_tracker.inference_id is None:
++        raise RouteError(
++            "Waiting for Tavus playback to start."
++        )
++
++    if not tavus.connected:
++        raise RouteError(
++            "Tavus is not connected."
++        )
++
++    interrupted_inference_id = (
++        playback_tracker.inference_id
++    )
++
++    interruption_pending = True
++
++    try:
++        tavus.interrupt()
++
++    except Exception as error:
++        interruption_pending = False
++        interrupted_inference_id = None
++
++        raise RouteError(
++            str(error),
++            500,
++        ) from error
++
++    return interrupted_inference_id
++
++
++def dismiss_open_question() -> dict:
++    """
++    Close question mode without calling the reasoner
++    and resume the interrupted sentence.
++
++    Caller must hold playback_lock.
++    """
++
++    if orchestrator.phase != ConversationPhase.QUESTION_READY:
++        raise RouteError(
++            "There is no open question to dismiss."
++        )
++
++    if not tavus.connected:
++        raise RouteError(
++            "Tavus is not connected."
++        )
++
++    if (
++        playback_tracker.utterance_id is not None
++        or answer_playback_tracker.utterance_id is not None
++        or untracked_playback_active
++    ):
++        raise RouteError(
++            "A playback utterance is already pending."
++        )
++
++    turn = orchestrator.dismiss_question()
++
++    if turn is None:
++        return {
++            "resumed": False,
++        }
++
++    PlaybackCoordinator(
++        orchestrator,
++        playback_tracker,
++    ).register_utterance(
++        turn.utterance_id
++    )
++
++    try:
++        speak_text(
++            turn.text
++        )
++
++    except Exception as error:
++        recovery_controller.handle_resume_submission_error(
++            orchestrator=orchestrator,
++            narration_tracker=playback_tracker,
++        )
++
++        raise RouteError(
++            "Resume submission uncertain. "
++            "Narration ownership preserved: "
++            f"{error}",
++            500,
++        ) from error
++
++    print(
++        "[XQ QUESTION] Question mode dismissed. "
++        f"Resumed utterance {turn.utterance_id}."
++    )
++
++    return {
++        "resumed": True,
++        "spoken": turn.text,
++        "utterance_id": turn.utterance_id,
++    }
++
++
++def answer_open_question(question: str) -> dict:
++    """
++    Answer through the XQ engine and speak the answer.
++
++    Caller must hold playback_lock.
++    """
++
++    if orchestrator.phase != ConversationPhase.QUESTION_READY:
++        raise RouteError(
++            "Interrupt narration and wait for it to stop "
++            "before asking a question."
++        )
++
++    if not tavus.connected:
++        raise RouteError(
++            "Tavus is not connected."
++        )
++
++    state_before = engine.get_current_state()
++
++    try:
++        answer = orchestrator.ask_question(question)
++
++    except Exception as error:
++        raise RouteError(
++            str(error),
++            500,
++        ) from error
++
++    state_after = engine.get_current_state()
++
++    if state_after != state_before:
++        raise RouteError(
++            "Debrief state changed during question mode.",
++            500,
++        )
++
++    # A separate tracker owns the answer; its ID is local to that tracker.
++    answer_playback_tracker.arm(1)
++
++    try:
++        speak_text(answer)
++
++    except Exception as error:
++        # Echo delivery is uncertain. Preserve ownership; end session to recover.
++        raise RouteError(
++            str(error),
++            500,
++        ) from error
++
++    return {
++        "question": question,
++        "answer": answer,
++        "state_before": state_before.value,
++        "state_after": state_after.value,
++    }
++
++
++def record_voice_event(
++    action: str,
++    **details,
++) -> dict:
++    global last_voice_event
++
++    last_voice_event = {
++        "action": action,
++        "at": time.time(),
++        **details,
++    }
++
++    print(
++        f"[XQ VOICE] {action}: {details}"
++    )
++
++    return last_voice_event
++
++
++def voice_interrupt_request_fresh() -> bool:
++    """
++    Caller must hold playback_lock.
++    Expire a barge-in whose sentence never started.
++    """
++
++    global voice_interrupt_requested_at
++
++    if voice_interrupt_requested_at is None:
++        return False
++
++    age = time.monotonic() - voice_interrupt_requested_at
++
++    if age > VOICE_INTERRUPT_REQUEST_TTL_SECONDS:
++        voice_interrupt_requested_at = None
++        record_voice_event(
++            "interrupt_request_expired",
++            age_seconds=round(age, 2),
++        )
++        return False
++
++    return True
++
++
++def honour_voice_interrupt_request() -> None:
++    """
++    Called with playback_lock held when a tracked
++    sentence starts after the user began speaking.
++    """
++
++    global voice_interrupt_requested_at
++
++    if not voice_interrupt_request_fresh():
++        return
++
++    voice_interrupt_requested_at = None
++
++    try:
++        inference_id = request_interruption()
++
++    except RouteError as error:
++        record_voice_event(
++            "interrupt_failed",
++            error=error.message,
++        )
++        return
++
++    record_voice_event(
++        "interrupt_requested",
++        inference_id=inference_id,
++        deferred=True,
++    )
++
++
++def handle_voice_speech_started(
++    participant_id: str,
++) -> None:
++    """
++    The user began talking: interrupt narration.
++    Question mode opens once Tavus confirms the stop.
++    """
++
++    global voice_interrupt_requested_at
++
++    with playback_lock:
++        if (
++            session_ending
++            or not active_tavus_conversation_id
++        ):
++            return
++
++        # Already stopping, already in question mode,
++        # or an answer is playing.
++        if (
++            interruption_pending
++            or orchestrator.phase
++            != ConversationPhase.NARRATING
++        ):
++            return
++
++        if not tracked_playback_active():
++            record_voice_event(
++                "speech_ignored",
++                participant_id=participant_id,
++                reason="No tracked narration is playing.",
++            )
++            return
++
++        if playback_tracker.inference_id is None:
++            voice_interrupt_requested_at = time.monotonic()
++
++            record_voice_event(
++                "interrupt_deferred",
++                participant_id=participant_id,
++                reason="Waiting for Tavus to start the sentence.",
++            )
++            return
++
++        try:
++            inference_id = request_interruption()
++
++        except RouteError as error:
++            record_voice_event(
++                "interrupt_failed",
++                participant_id=participant_id,
++                error=error.message,
++            )
++            return
++
++        record_voice_event(
++            "interrupt_requested",
++            participant_id=participant_id,
++            inference_id=inference_id,
++        )
++
++
++def wait_for_voice_question_mode(
++    timeout_seconds: float = VOICE_QUESTION_WAIT_SECONDS,
++) -> None:
++    """
++    A short utterance can finish before Tavus confirms
++    the stop. Wait (without the lock) for that first.
++    """
++
++    deadline = time.monotonic() + timeout_seconds
++
++    while time.monotonic() < deadline:
++        with playback_lock:
++            if (
++                not interruption_pending
++                and not voice_interrupt_request_fresh()
++            ):
++                return
++
++        time.sleep(0.05)
++
++
++def route_voice_transcript(
++    text: str,
++    participant_id: str,
++) -> dict:
++    """
++    Decide what a transcript does in question mode.
++
++    Caller must hold playback_lock.
++    """
++
++    if orchestrator.phase != ConversationPhase.QUESTION_READY:
++        return record_voice_event(
++            "transcript_ignored",
++            participant_id=participant_id,
++            transcript=text,
++            reason=(
++                "Question mode is not open "
++                f"(phase={orchestrator.phase.value})."
++            ),
++        )
++
++    result = classify_question_mode_utterance(text)
++
++    if result.intent == VoiceIntent.EMPTY:
++        return record_voice_event(
++            "still_listening",
++            participant_id=participant_id,
++            transcript=text,
++        )
++
++    if result.intent == VoiceIntent.DISMISS:
++        resumed = dismiss_open_question()
++
++        return record_voice_event(
++            "question_dismissed",
++            participant_id=participant_id,
++            transcript=text,
++            matched_phrases=list(result.matched_phrases),
++            **resumed,
++        )
++
++    answered = answer_open_question(result.text)
++
++    return record_voice_event(
++        "question_answered",
++        participant_id=participant_id,
++        transcript=text,
++        **answered,
++    )
++
++
++def handle_voice_transcript(
++    participant_id: str,
++    text: str,
++) -> None:
++    wait_for_voice_question_mode()
++
++    with playback_lock:
++        if (
++            session_ending
++            or not active_tavus_conversation_id
++        ):
++            record_voice_event(
++                "transcript_ignored",
++                participant_id=participant_id,
++                transcript=text,
++                reason="No active session.",
++            )
++            return
++
++        try:
++            route_voice_transcript(
++                text,
++                participant_id,
++            )
++
++        except RouteError as error:
++            record_voice_event(
++                "transcript_failed",
++                participant_id=participant_id,
++                transcript=text,
++                error=error.message,
++            )
++
++
++voice_pipeline = VoiceInputPipeline(
++    transcriber=speech_transcriber,
++    on_speech_started=handle_voice_speech_started,
++    on_transcript=handle_voice_transcript,
++    scorer_factory=create_speech_scorer,
++    config=SegmenterConfig(
++        speech_threshold=float(
++            os.getenv("XQ_VAD_THRESHOLD", "0.6")
++        ),
++        end_silence_ms=int(
++            os.getenv("XQ_VOICE_END_SILENCE_MS", "700")
++        ),
++    ),
++)
++
++tavus.on_user_audio = voice_pipeline.feed_audio
++tavus.on_user_audio_closed = voice_pipeline.drop_participant
++
++voice_pipeline.start()
++
++
++# =========================================================
+ # PAGE
+ # =========================================================
+ 
+@@ -630,6 +1180,7 @@
+     interrupted_inference_id = None
+     untracked_inference_id = None
+     untracked_playback_active = False
++    reset_voice_state()
+ 
+     return jsonify({
+         "ok": True,
+@@ -690,6 +1241,20 @@
+ 
+         backend_joined = wait_for_tavus_connection()
+ 
++        voice_error = None
++
++        if backend_joined:
++            try:
++                tavus.listen_to_existing_participants()
++
++            except Exception as error:
++                voice_error = str(error)
++
++                print(
++                    "[XQ VOICE] Could not attach to "
++                    f"participants already in the room: {error}"
++                )
++
+         return jsonify({
+             "ok": True,
+             "conversation": {
+@@ -704,6 +1269,7 @@
+                 ),
+             },
+             "backend_joined": backend_joined,
++            "voice_error": voice_error,
+             **current_payload(),
+         })
+ 
+@@ -760,6 +1326,7 @@
+         untracked_inference_id = None
+         interruption_pending = False
+         interrupted_inference_id = None
++        reset_voice_state()
+         session_ending = False
+     return jsonify({"ok": True, "message": "Session ended."})
+ 
+@@ -1071,50 +1638,14 @@
+ @app.post("/api/debrief/interrupt")
+ @serialized_route
+ def interrupt_debrief():
+-    global interruption_pending
+-    global interrupted_inference_id
+-
+     with playback_lock:
+-        if interruption_pending:
+-            return error_response(
+-                "An interruption is already pending.",
+-                409,
+-            )
+-
+-        if not tracked_playback_active():
+-            return error_response(
+-                "There is no tracked narration to interrupt.",
+-                409,
+-            )
+-
+-        if playback_tracker.inference_id is None:
+-            return error_response(
+-                "Waiting for Tavus playback to start.",
+-                409,
+-            )
+-
+-        if not tavus.connected:
+-            return error_response(
+-                "Tavus is not connected.",
+-                409,
+-            )
+-
+-        interrupted_inference_id = (
+-            playback_tracker.inference_id
+-        )
+-
+-        interruption_pending = True
+-
+         try:
+-            tavus.interrupt()
+-
+-        except Exception as error:
+-            interruption_pending = False
+-            interrupted_inference_id = None
++            request_interruption()
+ 
++        except RouteError as error:
+             return error_response(
+-                str(error),
+-                500,
++                error.message,
++                error.status_code,
+             )
+ 
+         return jsonify({
+@@ -1167,38 +1698,195 @@
+                 "A question is required."
+             )
+ 
+-        if orchestrator.phase != ConversationPhase.QUESTION_READY:
+-            return error_response("Interrupt narration and wait for it to stop before asking a question.", 409)
+-        if not tavus.connected:
+-            return error_response("Tavus is not connected.", 409)
++        # "Never mind", "continue", ... close question
++        # mode without calling the reasoner.
++        intent = classify_question_mode_utterance(question)
++
++        try:
++            if intent.intent == VoiceIntent.DISMISS:
++                resumed = dismiss_open_question()
++
++                return jsonify({
++                    "ok": True,
++                    "question": question,
++                    "dismissed": True,
++                    "matched_phrases": list(
++                        intent.matched_phrases
++                    ),
++                    **resumed,
++                    **current_payload(),
++                })
++
++            answered = answer_open_question(question)
++
++        except RouteError as error:
++            return error_response(
++                error.message,
++                error.status_code,
++            )
++
++        except Exception as error:
++            return error_response(
++                str(error),
++                500,
++            )
++
++        return jsonify({
++            "ok": True,
++            **answered,
++            **current_payload(),
++        })
++
++
++@app.post("/api/question/dismiss")
++@serialized_route
++def dismiss_question():
++    """
++    Leave question mode without asking anything and
++    resume the interrupted sentence (UI button).
++    """
++
++    with playback_lock:
++        if interruption_in_progress():
++            return error_response(
++                "An interruption is pending. "
++                "Wait for Tavus to stop speaking.",
++                409,
++            )
+ 
+-        state_before = engine.get_current_state()
+         try:
+-            answer = orchestrator.ask_question(question)
++            resumed = dismiss_open_question()
++
++        except RouteError as error:
++            return error_response(
++                error.message,
++                error.status_code,
++            )
++
+         except Exception as error:
+-            return error_response(str(error), 500)
++            return error_response(
++                str(error),
++                500,
++            )
++
++        return jsonify({
++            "ok": True,
++            "dismissed": True,
++            **resumed,
++            **current_payload(),
++        })
++
++
++# =========================================================
++# VOICE INPUT (HTTP)
++# =========================================================
++
++@app.post("/api/voice/audio")
++def voice_audio():
++    """
++    Push-to-talk path: the body is one recorded
++    utterance (WAV, WebM, OGG, MP3, M4A or FLAC).
++
++    Same behaviour as live room audio: interrupt
++    narration, transcribe, then answer the question
++    or dismiss question mode.
++
++    Not serialized: speech-to-text runs without
++    holding playback_lock.
++    """
++
++    with playback_lock:
++        if session_ending:
++            return error_response(
++                "Session shutdown is in progress.",
++                409,
++            )
++
++        if (
++            not active_tavus_conversation_id
++            or not tavus.connected
++        ):
++            return error_response(
++                "Start and join a Tavus session first.",
++                409,
++            )
++
++    extension = AUDIO_CONTENT_TYPES.get(
++        (request.mimetype or "").lower()
++    )
++
++    if extension is None:
++        return error_response(
++            "Unsupported audio type. Send one of: "
++            + ", ".join(sorted(AUDIO_CONTENT_TYPES)),
++            415,
++        )
++
++    if (
++        request.content_length is not None
++        and request.content_length > MAX_UPLOAD_BYTES
++    ):
++        return error_response(
++            "Audio exceeds the 25 MB limit.",
++            413,
++        )
++
++    audio = request.get_data(cache=False)
++
++    if not audio:
++        return error_response(
++            "The request body must contain audio."
++        )
++
++    # The user spoke: stop narration while we transcribe.
++    handle_voice_speech_started("http")
++
++    try:
++        transcript = speech_transcriber.transcribe_file(
++            audio,
++            extension,
++        )
++
++    except ValueError as error:
++        return error_response(str(error))
++
++    except Exception as error:
++        return error_response(
++            f"Speech-to-text failed: {error}",
++            502,
++        )
++
++    wait_for_voice_question_mode()
++
++    with playback_lock:
++        if session_ending:
++            return error_response(
++                "Session shutdown is in progress.",
++                409,
++            )
+ 
+-        state_after = engine.get_current_state()
+-        if state_after != state_before:
+-            return error_response("Debrief state changed during question mode.", 500)
+-        # A separate tracker owns the answer; its ID is local to that tracker.
+-        answer_playback_tracker.arm(1)
+         try:
+-            speak_text(answer)
++            outcome = route_voice_transcript(
++                transcript,
++                "http",
++            )
++
++        except RouteError as error:
++            return error_response(
++                error.message,
++                error.status_code,
++            )
++
+         except Exception as error:
+-            # Echo delivery is uncertain. Preserve ownership; end session to recover.
+-            return error_response(str(error), 500)
++            return error_response(
++                str(error),
++                500,
++            )
+ 
+         return jsonify({
+             "ok": True,
+-            "question": question,
+-            "answer": answer,
+-            "state_before": (
+-                state_before.value
+-            ),
+-            "state_after": (
+-                state_after.value
+-            ),
++            "transcript": transcript,
++            "voice_result": outcome,
+             **current_payload(),
+         })
+ 
+--- a/conversation_orchestrator.py
++++ b/conversation_orchestrator.py
+@@ -36,6 +36,7 @@
+     """
+ 
+     RESUME_PREFIX = "To continue where we left off... "
++    DISMISS_PREFIX = "No problem. Picking up where we left off... "
+ 
+     def __init__(
+         self,
+@@ -164,6 +165,36 @@
+ 
+         return answer
+ 
++    def dismiss_question(self) -> SpeechTurn | None:
++        """
++        Leave question mode without asking anything
++        ("never mind", "continue", ...).
++
++        No answer is generated. Restore the original
++        debrief section and replay the interrupted
++        sentence.
++        """
++
++        if self.phase != ConversationPhase.QUESTION_READY:
++            raise RuntimeError(
++                "There is no open question to dismiss."
++            )
++
++        self.engine.exit_question_mode()
++
++        self.pending_answer = None
++        self.phase = ConversationPhase.NARRATING
++
++        utterance = self.cursor.resume()
++
++        if utterance is None:
++            return None
++
++        return SpeechTurn(
++            utterance_id=utterance.id,
++            text=self.DISMISS_PREFIX + utterance.text,
++        )
++
+     def recover_from_interrupted_answer(self) -> None:
+         """
+         Recover after answer playback was interrupted.
+--- a/tavus_client.py
++++ b/tavus_client.py
+@@ -70,6 +70,16 @@
+         if not isinstance(message, dict):
+             return
+ 
++        # Tavus protocol messages come from the PAL.
++        # Never treat its audio as the user's voice.
++        if message.get("message_type") in (
++            "conversation",
++            "system",
++        ):
++            self.tavus_client.mark_pal_participant(
++                sender
++            )
++
+         event_type = message.get("event_type")
+ 
+         playback_events = {
+@@ -85,6 +95,23 @@
+         if callback is not None:
+             callback(message)
+ 
++    def on_participant_joined(
++        self,
++        participant: Any,
++    ) -> None:
++        self.tavus_client.listen_to_participant(
++            participant
++        )
++
++    def on_participant_left(
++        self,
++        participant: Any,
++        reason: str,
++    ) -> None:
++        self.tavus_client.stop_listening(
++            participant.get("id")
++        )
++
+ class TavusClient:
+     """
+     Transport adapter between XQ and a Tavus Echo PAL.
+@@ -112,6 +139,23 @@
+ 
+         self._daily_initialized = False
+ 
++        # Voice input: PCM16 mono 16 kHz from the user.
++        self.on_user_audio: (
++            Callable[[str, bytes, int, int], None] | None
++        ) = None
++
++        self.on_user_audio_closed: (
++            Callable[[str], None] | None
++        ) = None
++
++        # Optional: listen only to this Daily userName.
++        self.voice_user_name = (
++            os.getenv("XQ_VOICE_USER_NAME") or None
++        )
++
++        self.pal_participant_ids: set[str] = set()
++        self.listening_participant_ids: set[str] = set()
++
+         self.api_key = os.getenv("TAVUS_API_KEY")
+ 
+         self.pal_id = os.getenv("TAVUS_PAL_ID")
+@@ -369,6 +413,13 @@
+         self.conversation_id = None
+         self.conversation_url = None
+ 
++        for participant_id in tuple(
++            self.listening_participant_ids
++        ):
++            self.stop_listening(participant_id)
++
++        self.pal_participant_ids.clear()
++
+         print()
+         print("[TAVUS] Disconnected.")
+ 
+@@ -385,4 +436,149 @@
+             "conversation_url_set": (
+                 self.conversation_url is not None
+             ),
+-        }
+\ No newline at end of file
++            "voice_listening_participants": sorted(
++                self.listening_participant_ids
++            ),
++            "pal_participants": sorted(
++                self.pal_participant_ids
++            ),
++        }
++
++    # =====================================================
++    # VOICE INPUT
++    # =====================================================
++
++    def listen_to_existing_participants(self) -> None:
++        """
++        Attach audio to participants who joined before
++        the backend client did.
++
++        Call from an application thread, not from a
++        Daily event callback.
++        """
++
++        if self.call_client is None:
++            raise RuntimeError(
++                "Tavus call client is unavailable."
++            )
++
++        for key, participant in (
++            self.call_client.participants().items()
++        ):
++            if key == "local":
++                continue
++
++            self.listen_to_participant(participant)
++
++    def listen_to_participant(
++        self,
++        participant: Any,
++    ) -> None:
++        """
++        Start receiving a remote participant's microphone,
++        unless it is the PAL or not the configured user.
++        """
++
++        if self.call_client is None:
++            return
++
++        participant_id = participant.get("id")
++        info = participant.get("info") or {}
++        user_name = info.get("userName")
++
++        if not participant_id or info.get("isLocal"):
++            return
++
++        if participant_id in self.pal_participant_ids:
++            return
++
++        if participant_id in self.listening_participant_ids:
++            return
++
++        if (
++            self.voice_user_name is not None
++            and user_name != self.voice_user_name
++        ):
++            print(
++                "[XQ VOICE] Not listening to participant "
++                f"{participant_id} (userName={user_name!r}); "
++                "XQ_VOICE_USER_NAME is "
++                f"{self.voice_user_name!r}."
++            )
++            return
++
++        self.call_client.set_audio_renderer(
++            participant_id,
++            self._on_participant_audio,
++            audio_source="microphone",
++            sample_rate=16000,
++            callback_interval_ms=20,
++        )
++
++        self.listening_participant_ids.add(participant_id)
++
++        print(
++            "[XQ VOICE] Listening to participant "
++            f"{participant_id} (userName={user_name!r})."
++        )
++
++    def mark_pal_participant(
++        self,
++        participant_id: str,
++    ) -> None:
++        if (
++            not participant_id
++            or participant_id in self.pal_participant_ids
++        ):
++            return
++
++        self.pal_participant_ids.add(participant_id)
++
++        print(
++            "[XQ VOICE] Participant "
++            f"{participant_id} identified as the PAL."
++        )
++
++        self.stop_listening(participant_id)
++
++    def stop_listening(
++        self,
++        participant_id: str | None,
++    ) -> None:
++        """
++        Ignore a participant's audio from now on.
++
++        The Daily renderer may still deliver frames;
++        _on_participant_audio drops them.
++        """
++
++        if participant_id not in self.listening_participant_ids:
++            return
++
++        self.listening_participant_ids.discard(participant_id)
++
++        callback = self.on_user_audio_closed
++
++        if callback is not None:
++            callback(participant_id)
++
++    def _on_participant_audio(
++        self,
++        participant_id: str,
++        audio_data: Any,
++        audio_source: str,
++    ) -> None:
++        if participant_id not in self.listening_participant_ids:
++            return
++
++        callback = self.on_user_audio
++
++        if callback is None:
++            return
++
++        callback(
++            participant_id,
++            audio_data.audio_frames,
++            audio_data.sample_rate,
++            audio_data.num_channels,
++        )
+\ No newline at end of file
+--- a/api-tests.http
++++ b/api-tests.http
+@@ -38,4 +38,23 @@
+ POST http://localhost:5000/api/dev/disc-narrative
+ 
+ ### End session
+-POST http://localhost:5000/api/session/end
+\ No newline at end of file
++POST http://localhost:5000/api/session/end
++
++### Dismiss question mode (no API call, resumes narration)
++POST http://localhost:5000/api/question/dismiss
++
++
++### Typed dismissal through the question route (no API call)
++POST http://localhost:5000/api/question
++Content-Type: application/json
++
++{
++  "question": "Never mind, please continue."
++}
++
++
++### Push-to-talk: send one recorded utterance (interrupts, transcribes, answers or dismisses)
++POST http://localhost:5000/api/voice/audio
++Content-Type: audio/wav
++
++< ./sample-question.wav

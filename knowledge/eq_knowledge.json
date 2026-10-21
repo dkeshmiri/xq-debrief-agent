@@ -1,0 +1,148 @@
+{
+  "schema_version": "1.0",
+  "knowledge_domain": "Emotional Intelligence",
+
+  "dimensions": {
+    "self_awareness": {
+      "display_name": "Self-Awareness",
+      "category": "SELF",
+      "definition": "The capacity to recognize and understand one's own emotional states, reactions, tendencies, and their possible effects.",
+      "higher_expression": [
+        "May recognize emotional reactions more readily",
+        "May identify personal triggers or patterns",
+        "May better understand how emotions affect behavior"
+      ],
+      "development_considerations": [
+        "Pause and identify emotions before reacting",
+        "Notice recurring emotional triggers",
+        "Separate emotional reaction from behavioral choice"
+      ],
+      "family_implications": [
+        "Greater awareness may support clearer emotional communication",
+        "Recognizing personal triggers can improve conflict recovery",
+        "Self-awareness does not automatically guarantee self-control"
+      ]
+    },
+
+    "self_regulation": {
+      "display_name": "Self-Regulation",
+      "category": "SELF",
+      "definition": "The capacity to manage emotional reactions and choose responses rather than acting only from immediate emotional impulse.",
+      "higher_expression": [
+        "May recover more effectively from emotional activation",
+        "May pause before reacting",
+        "May manage impulses more consistently"
+      ],
+      "development_considerations": [
+        "Create space between emotion and response",
+        "Use deliberate recovery strategies",
+        "Recognize situations where regulation becomes more difficult"
+      ],
+      "family_implications": [
+        "Can influence how conflict escalates or de-escalates",
+        "Regulation helps preserve communication during stress",
+        "Strong regulation should not be confused with suppressing emotion"
+      ]
+    },
+
+    "motivation": {
+      "display_name": "Motivation",
+      "category": "SELF",
+      "definition": "The capacity to direct emotional energy toward goals, persistence, achievement, and continued effort.",
+      "higher_expression": [
+        "May sustain effort toward meaningful goals",
+        "May recover from setbacks more readily",
+        "May maintain internal drive"
+      ],
+      "development_considerations": [
+        "Clarify meaningful goals",
+        "Connect effort to purpose",
+        "Identify barriers that reduce sustained engagement"
+      ],
+      "family_implications": [
+        "May influence persistence in family responsibilities",
+        "Differences in internal drive can create different expectations",
+        "Motivation should not automatically be interpreted as emotional health or overall well-being"
+      ]
+    },
+
+    "social_awareness": {
+      "display_name": "Social Awareness",
+      "category": "OTHERS",
+      "definition": "The capacity to recognize, interpret, and respond to the emotions, perspectives, and interpersonal cues of other people.",
+      "higher_expression": [
+        "May notice emotional cues in others",
+        "May recognize shifts in interpersonal atmosphere",
+        "May understand perspectives different from one's own"
+      ],
+      "development_considerations": [
+        "Ask rather than assume what another person feels",
+        "Observe verbal and nonverbal signals",
+        "Consider how circumstances affect another person's reaction"
+      ],
+      "family_implications": [
+        "Can support empathy and perspective-taking",
+        "Awareness of another person's emotion does not guarantee agreement",
+        "Misreading cues can still occur even with generally strong social awareness"
+      ]
+    },
+
+    "social_regulation": {
+      "display_name": "Social Regulation",
+      "category": "OTHERS",
+      "definition": "The capacity to manage interpersonal interactions effectively, influence emotional dynamics constructively, and adapt communication in response to others.",
+      "higher_expression": [
+        "May navigate interpersonal tension effectively",
+        "May adapt communication based on the situation",
+        "May help relationships recover after conflict"
+      ],
+      "development_considerations": [
+        "Adjust communication without becoming inauthentic",
+        "Practice conflict repair",
+        "Balance influence with listening"
+      ],
+      "family_implications": [
+        "Can strongly affect conflict resolution",
+        "May help create constructive emotional climates",
+        "Effective social regulation should not become manipulation or avoidance of necessary disagreement"
+      ]
+    }
+  },
+
+  "composites": {
+    "SELF": {
+      "includes": [
+        "self_awareness",
+        "self_regulation",
+        "motivation"
+      ],
+      "definition": "A combined view of emotional capacities primarily related to understanding, managing, and directing oneself."
+    },
+
+    "OTHERS": {
+      "includes": [
+        "social_awareness",
+        "social_regulation"
+      ],
+      "definition": "A combined view of emotional capacities primarily related to understanding and navigating relationships with other people."
+    },
+
+    "TOTAL_EQ": {
+      "includes": [
+        "self_awareness",
+        "self_regulation",
+        "motivation",
+        "social_awareness",
+        "social_regulation"
+      ],
+      "definition": "An overall composite representing the combined measured emotional intelligence dimensions in this assessment."
+    }
+  },
+
+  "interpretation_rules": {
+    "do_not_diagnose": true,
+    "do_not_label_score_as_good_or_bad": true,
+    "do_not_infer_mental_health_condition": true,
+    "instruction": "EQ scores describe measured emotional intelligence patterns within the assessment framework. They must not be used to diagnose psychological, psychiatric, developmental, or medical conditions."
+  }
+}

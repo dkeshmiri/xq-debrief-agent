@@ -1,0 +1,194 @@
+{
+  "forces": {
+    "Intellectual": {
+      "high": {
+        "core": "Understanding matters to you. You are energized by learning, gaining knowledge, and making sense of how things work.",
+        "family_expression": "Within the family, you may naturally ask questions, seek context, or want to understand the reasoning behind a decision.",
+        "strength": "This can bring curiosity, perspective, and thoughtful problem-solving.",
+        "watchout": "You may sometimes want more explanation than another family member feels is necessary."
+      },
+      "low": {
+        "core": "You are less likely to need extensive explanation or knowledge before something becomes useful to you.",
+        "family_expression": "Within the family, you may be comfortable moving forward once you have enough information rather than continuing to study the issue.",
+        "strength": "This can support practical decision-making and reduce unnecessary analysis.",
+        "watchout": "A highly Intellectual family member may occasionally feel that an issue is being resolved before it has been fully understood."
+      }
+    },
+
+    "Instinctive": {
+      "high": {
+        "core": "You tend to trust experience, intuition, and what has already proven useful rather than needing extensive theory.",
+        "family_expression": "You may often approach family decisions through what feels practical or familiar.",
+        "strength": "This can help simplify decisions and keep attention on what actually works.",
+        "watchout": "Highly Intellectual family members may sometimes want more analysis or explanation than you naturally require."
+      },
+      "low": {
+        "core": "Instinctive considerations are less likely to dominate your decisions.",
+        "family_expression": "You may be more willing to investigate, learn, or challenge familiar assumptions before deciding what makes sense.",
+        "strength": "This can support curiosity and openness to new information.",
+        "watchout": "There may be times when additional analysis adds complexity to something another person sees as straightforward."
+      }
+    },
+
+    "Resourceful": {
+      "high": {
+        "core": "You tend to pay close attention to usefulness, efficiency, resources, and return on effort.",
+        "family_expression": "At home, you may naturally ask whether a decision produces a meaningful result or makes good use of time, money, or energy.",
+        "strength": "This can bring practical judgment and strong stewardship of resources.",
+        "watchout": "Not every family decision is best evaluated primarily through efficiency or measurable return."
+      },
+      "low": {
+        "core": "Practical return is less likely to be the central reason something matters to you.",
+        "family_expression": "You may be willing to invest in something because of its personal or relational value even when the practical payoff is difficult to measure.",
+        "strength": "This can make room for experiences and priorities that are valuable without being efficient.",
+        "watchout": "A highly Resourceful family member may occasionally wonder why practical implications are receiving less attention."
+      }
+    },
+
+    "Selfless": {
+      "high": {
+        "core": "You may be relatively willing to contribute time, effort, or resources without requiring a direct personal return.",
+        "family_expression": "Within the family, you may naturally support needs simply because helping feels worthwhile.",
+        "strength": "This can bring generosity and willingness to contribute without keeping score.",
+        "watchout": "Without healthy boundaries, generosity can sometimes become overextension."
+      },
+      "low": {
+        "core": "You are less likely to separate effort completely from the value or outcome it produces.",
+        "family_expression": "You may naturally consider whether an investment of time or resources makes sense before committing.",
+        "strength": "This can protect against overcommitment or poorly defined obligations.",
+        "watchout": "More Selfless family members may sometimes experience this practical evaluation as overly transactional."
+      }
+    },
+
+    "Harmonious": {
+      "high": {
+        "core": "You tend to value experience, balance, surroundings, and a sense that life feels personally meaningful.",
+        "family_expression": "You may be especially attentive to atmosphere, quality of experience, and whether family life feels balanced.",
+        "strength": "This can bring sensitivity to environment, experience, and quality of life.",
+        "watchout": "Highly practical family members may sometimes place less weight on atmosphere or experience than you do."
+      },
+      "low": {
+        "core": "Experience or aesthetic balance is less likely to outweigh practical considerations.",
+        "family_expression": "You may focus more readily on what needs to be accomplished than on whether the process feels ideal.",
+        "strength": "This can help maintain focus when conditions are imperfect.",
+        "watchout": "Family members who strongly value experience or harmony may occasionally feel that atmosphere is being overlooked."
+      }
+    },
+
+    "Objective": {
+      "high": {
+        "core": "You tend to place greater emphasis on functionality and observable results than on atmosphere or aesthetic experience.",
+        "family_expression": "You may naturally focus on whether something works rather than whether it feels ideal.",
+        "strength": "This can bring practicality and clarity when circumstances are messy.",
+        "watchout": "A highly Harmonious family member may want greater attention paid to the experience surrounding the outcome."
+      },
+      "low": {
+        "core": "Pure functionality is less likely to be enough by itself when evaluating an experience or decision.",
+        "family_expression": "You may care not only about what happens, but also about how the environment or experience feels.",
+        "strength": "This can support greater attention to quality of life and personal experience.",
+        "watchout": "Practical family members may occasionally see those considerations as secondary."
+      }
+    },
+
+    "Altruistic": {
+      "high": {
+        "core": "You tend to place meaningful value on helping, supporting, and improving outcomes for other people.",
+        "family_expression": "Within the family, you may naturally notice who needs support and feel motivated to contribute to their well-being.",
+        "strength": "This can bring empathy, generosity, and strong concern for others.",
+        "watchout": "A strong desire to help can occasionally make it difficult to recognize when another person needs independence rather than assistance."
+      },
+      "low": {
+        "core": "Helping others is less likely to become an automatic priority simply because a need exists.",
+        "family_expression": "You may be more selective about when, where, and how you invest support.",
+        "strength": "This can protect boundaries and encourage personal responsibility.",
+        "watchout": "Highly Altruistic family members may sometimes experience that selectivity as a lack of concern even when that is not the intention."
+      }
+    },
+
+    "Intentional": {
+      "high": {
+        "core": "You tend to be selective about where your time, support, and attention are invested.",
+        "family_expression": "You may naturally consider purpose, boundaries, and intended outcomes before becoming involved.",
+        "strength": "This can create focus and reduce indiscriminate overcommitment.",
+        "watchout": "A highly Altruistic family member may sometimes prefer helping first and evaluating limits later."
+      },
+      "low": {
+        "core": "Strict selectivity is less likely to determine whether you become involved in supporting others.",
+        "family_expression": "You may be relatively open to responding when someone needs assistance.",
+        "strength": "This can make you accessible and responsive to people around you.",
+        "watchout": "Without clear boundaries, responsiveness can occasionally become overextension."
+      }
+    },
+
+    "Commanding": {
+      "high": {
+        "core": "You tend to value influence, direction, independence, and the ability to shape outcomes.",
+        "family_expression": "Within the family, you may naturally want a meaningful voice in decisions and feel energized when you can affect what happens next.",
+        "strength": "This can bring leadership, confidence, and willingness to take responsibility.",
+        "watchout": "Other family members may sometimes need influence over the process even when you already see a clear direction."
+      },
+      "low": {
+        "core": "Personal control or authority is less likely to be a central source of motivation.",
+        "family_expression": "You may be comfortable contributing without needing to determine the final direction.",
+        "strength": "This can support flexibility and shared decision-making.",
+        "watchout": "Highly Commanding family members may occasionally occupy more leadership space than you intended to give them."
+      }
+    },
+
+    "Collaborative": {
+      "high": {
+        "core": "You tend to value shared participation, collective contribution, and working with others toward outcomes.",
+        "family_expression": "You may naturally prefer family decisions that allow people to contribute rather than concentrating influence in one person.",
+        "strength": "This can support inclusion, teamwork, and shared ownership.",
+        "watchout": "Collaboration can sometimes take longer than a more individually driven family member considers necessary."
+      },
+      "low": {
+        "core": "Collective participation is less likely to be required before you feel comfortable moving forward.",
+        "family_expression": "You may be relatively comfortable with individual ownership and clearly defined decision authority.",
+        "strength": "This can create speed and accountability.",
+        "watchout": "Highly Collaborative family members may occasionally want more involvement in decisions than you naturally expect."
+      }
+    },
+
+    "Structured": {
+      "high": {
+        "core": "You tend to value established systems, consistency, principles, and clear frameworks.",
+        "family_expression": "Within the family, you may prefer expectations, routines, or decisions to have a recognizable structure behind them.",
+        "strength": "This can create consistency, clarity, and dependable standards.",
+        "watchout": "A strongly Receptive family member may sometimes experience established structure as unnecessarily restrictive."
+      },
+      "low": {
+        "core": "Established systems or traditions are less likely to receive automatic preference simply because they already exist.",
+        "family_expression": "You may be willing to reconsider routines or rules when another approach appears more useful.",
+        "strength": "This can create adaptability and openness to change.",
+        "watchout": "Highly Structured family members may need greater consistency than you naturally require."
+      }
+    },
+
+    "Receptive": {
+      "high": {
+        "core": "You tend to be open to new approaches, alternatives, and changing established methods when circumstances justify it.",
+        "family_expression": "You may naturally question whether an existing family routine is still the best way to handle something.",
+        "strength": "This can bring adaptability, experimentation, and openness to improvement.",
+        "watchout": "Highly Structured family members may sometimes experience that flexibility as instability or unnecessary change."
+      },
+      "low": {
+        "core": "Constantly reconsidering established approaches is less likely to be motivating for you.",
+        "family_expression": "You may prefer consistency when an existing structure continues to work.",
+        "strength": "This can support stability and continuity.",
+        "watchout": "More Receptive family members may occasionally want greater freedom to experiment or redefine the process."
+      }
+    }
+  },
+
+  "clusters": {
+    "primary": "These are the motivations most likely to consistently capture your attention and influence your decisions.",
+    "situational": "These motivations remain available to you, but their importance is more likely to depend on the circumstances.",
+    "indifferent": "These motivations generally carry less weight in determining why you choose one direction over another."
+  },
+
+  "closing": [
+    "Driving Forces become especially useful in family dynamics because two people can agree on what should happen while being motivated by completely different reasons.",
+    "Understanding those differences makes it easier to distinguish disagreement about the goal from disagreement about what makes the goal worth pursuing."
+  ]
+}

@@ -1,0 +1,154 @@
+{
+  "schema_version": "1.0",
+
+  "person": {
+    "person_id": "samuel_demo_001",
+    "first_name": "Samuel",
+    "display_name": "Samuel",
+    "age": 45,
+    "family_role": "Father"
+  },
+
+  "assessment": {
+    "assessment_id": "demo_assessment_001",
+    "assessment_date": "2026-07-20",
+    "source": "XQ Family Demo Data"
+  },
+
+  "disc": {
+    "natural": {
+      "D": 72,
+      "I": 54,
+      "S": 31,
+      "C": 43
+    },
+
+    "adapted": {
+      "D": 65,
+      "I": 61,
+      "S": 37,
+      "C": 48
+    },
+
+    "primary_style": "Persuader",
+
+    "behavioral_characteristics": [
+      "Direct",
+      "Persuasive",
+      "Results-oriented"
+    ],
+
+    "value_to_family": [
+      "Brings energy and direction",
+      "Encourages action",
+      "Helps move decisions forward"
+    ],
+
+    "communication_do": [
+      "Be direct",
+      "Focus on results",
+      "Allow room for discussion"
+    ],
+
+    "communication_dont": [
+      "Overload with unnecessary detail",
+      "Avoid the main issue",
+      "Move too slowly without explanation"
+    ]
+  },
+
+  "driving_forces": {
+    "scores": {
+      "Intellectual": 72,
+      "Instinctive": 28,
+
+      "Resourceful": 81,
+      "Selfless": 19,
+
+      "Harmonious": 44,
+      "Objective": 56,
+
+      "Altruistic": 63,
+      "Intentional": 37,
+
+      "Commanding": 69,
+      "Collaborative": 31,
+
+      "Structured": 34,
+      "Receptive": 66
+    },
+
+    "primary_cluster": [
+      "Resourceful",
+      "Intellectual",
+      "Commanding"
+    ],
+
+    "situational_cluster": [
+      "Receptive",
+      "Altruistic",
+      "Objective"
+    ],
+
+    "indifferent_cluster": [
+      "Structured",
+      "Collaborative",
+      "Instinctive"
+    ],
+
+    "motivational_strengths": [
+      "Seeks useful outcomes",
+      "Values knowledge",
+      "Comfortable influencing direction"
+    ],
+
+    "energizers": [
+      "Progress",
+      "Learning",
+      "Measurable results"
+    ],
+
+    "stressors": [
+      "Wasted resources",
+      "Lack of progress",
+      "Being unable to influence important outcomes"
+    ]
+  },
+
+  "eq": {
+    "scores": {
+      "self_awareness": 78,
+      "self_regulation": 68,
+      "motivation": 81,
+      "social_awareness": 71,
+      "social_regulation": 74
+    },
+
+    "self_composite": 73,
+    "others_composite": 72,
+    "total_eq": 73
+  },
+
+  "integrated": {
+    "overview": "Samuel combines a persuasive, fast-moving behavioral style with strong priorities around useful results, knowledge, and influence. His profile suggests that he is likely to bring momentum, direction, and energy to family decisions.",
+    "strengths": [
+      "Can move ideas toward action quickly.",
+      "Uses knowledge and practical outcomes to support decision-making.",
+      "Can motivate others and help the family maintain forward progress.",
+      "Brings confidence and direction when decisions need to be made."
+    ],
+    "development_areas": [
+      "May move faster than steadier family members are comfortable with.",
+      "May become frustrated when progress appears slow or inefficient.",
+      "May emphasize results before others have had enough time to process.",
+      "May need to deliberately slow down and listen during emotionally demanding conversations."
+    ],
+    "family_applications": [
+      "Explain the desired outcome while allowing others time to respond.",
+      "Separate genuine urgency from personal impatience.",
+      "Invite quieter family members to contribute before finalizing decisions.",
+      "Use directness with patience so that momentum does not override inclusion."
+    ],
+    "closing_summary": "Samuel is likely to contribute vision, momentum, persuasion, and practical direction. His strongest family impact occurs when his drive for results is balanced with patience, listening, and room for different decision-making styles."
+  }
+}

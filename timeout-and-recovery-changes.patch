@@ -1,0 +1,680 @@
+--- a/app.py
++++ b/app.py
+@@ -2,6 +2,7 @@
+ import os
+ from pathlib import Path
+ import time
++import traceback
+ from functools import wraps
+ 
+ from dotenv import load_dotenv
+@@ -19,9 +20,9 @@
+ from conversation_orchestrator import ConversationOrchestrator, ConversationPhase
+ from playback_event_tracker import PlaybackEventTracker
+ from sentence_splitter import split_sentences
+-from threading import RLock
++from threading import RLock, Thread
+ from playback_coordinator import PlaybackCoordinator
+-from failure_recovery import FailureRecovery
++from failure_recovery import FailureRecovery, RecoveryState
+ from recovery_controller import RecoveryController
+ from daily import Daily
+ from speech_transcriber import (
+@@ -117,6 +118,21 @@
+ VOICE_INTERRUPT_REQUEST_TTL_SECONDS = 3.0
+ VOICE_QUESTION_WAIT_SECONDS = 4.0
+ 
++# Question mode closes by itself after this many seconds
++# without a question, a dismissal or user speech.
++# 0 disables the timeout.
++QUESTION_MODE_TIMEOUT_SECONDS = float(
++    os.getenv("XQ_QUESTION_TIMEOUT_SECONDS", "30")
++)
++QUESTION_TIMEOUT_POLL_SECONDS = 0.25
++
++if QUESTION_MODE_TIMEOUT_SECONDS < 0:
++    raise RuntimeError(
++        "XQ_QUESTION_TIMEOUT_SECONDS cannot be negative."
++    )
++
++question_mode_deadline: float | None = None
++
+ 
+ class RouteError(Exception):
+     """
+@@ -187,6 +203,7 @@
+                 orchestrator.interrupt()
+                 retired_inference_ids.add(inference_id)
+                 playback_tracker.cancel()
++                restart_question_mode_timer()
+ 
+                 interruption_pending = False
+                 interrupted_inference_id = None
+@@ -282,6 +299,24 @@
+ 
+         if (
+             event_type == PlaybackEventTracker.STARTED
++            and failure_recovery.state
++            == RecoveryState.RESUME_DELIVERY_UNCERTAIN
++            and playback_tracker.inference_id == inference_id
++        ):
++            # The resume that raised was delivered after all.
++            # Normal tracking takes over from here.
++            recovery_controller.confirm_resume_started(
++                inference_id=inference_id,
++            )
++            recovery_controller.reset()
++
++            print(
++                "[XQ RECOVERY] Uncertain resume confirmed "
++                f"by Tavus ({inference_id}). Recovery cleared."
++            )
++
++        if (
++            event_type == PlaybackEventTracker.STARTED
+             and voice_interrupt_requested_at is not None
+         ):
+             # The user started talking between sentences.
+@@ -481,6 +516,13 @@
+         "tracked_pending": (
+             playback_tracker.utterance_id is not None
+         ),
++        "question_mode_timeout_seconds": (
++            QUESTION_MODE_TIMEOUT_SECONDS or None
++        ),
++        "question_mode_seconds_left": (
++            question_mode_seconds_left()
++        ),
++        "recovery_state": failure_recovery.state.value,
+     },
+ 
+     "tavus": tavus.status(),
+@@ -582,6 +624,18 @@
+         f"{turn.utterance_id}: {turn.text}"
+     )
+ 
++    if (
++        failure_recovery.state
++        == RecoveryState.READY_TO_RESUME_NARRATION
++    ):
++        # Narration is back after an interrupted answer.
++        recovery_controller.reset()
++
++        print(
++            "[XQ RECOVERY] Narration resumed after an "
++            "interrupted answer. Recovery cleared."
++        )
++
+     return turn
+ 
+ def serialized_route(function):
+@@ -679,7 +733,9 @@
+     return interrupted_inference_id
+ 
+ 
+-def dismiss_open_question() -> dict:
++def dismiss_open_question(
++    prefix: str | None = None,
++) -> dict:
+     """
+     Close question mode without calling the reasoner
+     and resume the interrupted sentence.
+@@ -706,7 +762,7 @@
+             "A playback utterance is already pending."
+         )
+ 
+-    turn = orchestrator.dismiss_question()
++    turn = orchestrator.dismiss_question(prefix)
+ 
+     if turn is None:
+         return {
+@@ -768,6 +824,9 @@
+             "Tavus is not connected."
+         )
+ 
++    # If the answer fails, the user gets a full timeout to retry.
++    restart_question_mode_timer()
++
+     state_before = engine.get_current_state()
+ 
+     try:
+@@ -808,6 +867,116 @@
+     }
+ 
+ 
++def restart_question_mode_timer() -> None:
++    """
++    Give the user a full timeout from now.
++    Caller must hold playback_lock.
++    """
++
++    global question_mode_deadline
++
++    if QUESTION_MODE_TIMEOUT_SECONDS <= 0:
++        question_mode_deadline = None
++        return
++
++    question_mode_deadline = (
++        time.monotonic()
++        + QUESTION_MODE_TIMEOUT_SECONDS
++    )
++
++
++def question_mode_seconds_left() -> float | None:
++    if (
++        question_mode_deadline is None
++        or orchestrator.phase
++        != ConversationPhase.QUESTION_READY
++    ):
++        return None
++
++    return round(
++        max(0.0, question_mode_deadline - time.monotonic()),
++        1,
++    )
++
++
++def check_question_mode_timeout(
++    now: float | None = None,
++) -> dict | None:
++    """
++    Close question mode when nobody asked, dismissed or
++    spoke for QUESTION_MODE_TIMEOUT_SECONDS, and resume
++    the interrupted sentence (no reasoner call).
++
++    Caller must hold playback_lock.
++    """
++
++    global question_mode_deadline
++
++    if question_mode_deadline is None:
++        return None
++
++    if (
++        session_ending
++        or orchestrator.phase
++        != ConversationPhase.QUESTION_READY
++    ):
++        question_mode_deadline = None
++        return None
++
++    if now is None:
++        now = time.monotonic()
++
++    # Talking or a transcript on its way counts as activity.
++    if voice_pipeline.busy():
++        question_mode_deadline = (
++            now + QUESTION_MODE_TIMEOUT_SECONDS
++        )
++        return None
++
++    if now < question_mode_deadline:
++        return None
++
++    question_mode_deadline = None
++
++    try:
++        resumed = dismiss_open_question(
++            orchestrator.TIMEOUT_PREFIX
++        )
++
++    except RouteError as error:
++        # Try again after another full timeout, not every tick.
++        question_mode_deadline = (
++            now + QUESTION_MODE_TIMEOUT_SECONDS
++        )
++
++        return record_voice_event(
++            "question_timeout_failed",
++            error=error.message,
++        )
++
++    return record_voice_event(
++        "question_timed_out",
++        timeout_seconds=QUESTION_MODE_TIMEOUT_SECONDS,
++        **resumed,
++    )
++
++
++def run_question_mode_watchdog() -> None:
++    while True:
++        time.sleep(QUESTION_TIMEOUT_POLL_SECONDS)
++
++        try:
++            with playback_lock:
++                check_question_mode_timeout()
++
++        except Exception:
++            print(
++                "[XQ QUESTION] Question mode "
++                "timeout check failed."
++            )
++            traceback.print_exc()
++
++
+ def record_voice_event(
+     action: str,
+     **details,
+@@ -898,8 +1067,15 @@
+         ):
+             return
+ 
+-        # Already stopping, already in question mode,
+-        # or an answer is playing.
++        if (
++            orchestrator.phase
++            == ConversationPhase.QUESTION_READY
++        ):
++            # The user is answering the open question.
++            restart_question_mode_timer()
++            return
++
++        # Already stopping or an answer is playing.
+         if (
+             interruption_pending
+             or orchestrator.phase
+@@ -1069,6 +1245,13 @@
+ 
+ voice_pipeline.start()
+ 
++if QUESTION_MODE_TIMEOUT_SECONDS > 0:
++    Thread(
++        target=run_question_mode_watchdog,
++        name="xq-question-timeout",
++        daemon=True,
++    ).start()
++
+ 
+ # =========================================================
+ # PAGE
+@@ -1180,6 +1363,7 @@
+     interrupted_inference_id = None
+     untracked_inference_id = None
+     untracked_playback_active = False
++    recovery_controller.reset()
+     reset_voice_state()
+ 
+     return jsonify({
+@@ -1326,6 +1510,7 @@
+         untracked_inference_id = None
+         interruption_pending = False
+         interrupted_inference_id = None
++        recovery_controller.reset()
+         reset_voice_state()
+         session_ending = False
+     return jsonify({"ok": True, "message": "Session ended."})
+@@ -1777,6 +1962,30 @@
+         })
+ 
+ 
++@app.post("/api/question/keepalive")
++@serialized_route
++def keep_question_mode_open():
++    """
++    Restart the question-mode timeout, e.g. while
++    the user is typing a question.
++    """
++
++    if orchestrator.phase != ConversationPhase.QUESTION_READY:
++        return error_response(
++            "Question mode is not open.",
++            409,
++        )
++
++    restart_question_mode_timer()
++
++    return jsonify({
++        "ok": True,
++        "question_mode_seconds_left": (
++            question_mode_seconds_left()
++        ),
++    })
++
++
+ # =========================================================
+ # VOICE INPUT (HTTP)
+ # =========================================================
+--- a/conversation_orchestrator.py
++++ b/conversation_orchestrator.py
+@@ -37,6 +37,7 @@
+ 
+     RESUME_PREFIX = "To continue where we left off... "
+     DISMISS_PREFIX = "No problem. Picking up where we left off... "
++    TIMEOUT_PREFIX = "Let's keep going. Picking up where we left off... "
+ 
+     def __init__(
+         self,
+@@ -165,14 +166,18 @@
+ 
+         return answer
+ 
+-    def dismiss_question(self) -> SpeechTurn | None:
++    def dismiss_question(
++        self,
++        prefix: str | None = None,
++    ) -> SpeechTurn | None:
+         """
+         Leave question mode without asking anything
+-        ("never mind", "continue", ...).
++        ("never mind", "continue", a timeout, ...).
+ 
+         No answer is generated. Restore the original
+         debrief section and replay the interrupted
+-        sentence.
++        sentence, spoken after prefix (default:
++        DISMISS_PREFIX).
+         """
+ 
+         if self.phase != ConversationPhase.QUESTION_READY:
+@@ -190,9 +195,12 @@
+         if utterance is None:
+             return None
+ 
++        if prefix is None:
++            prefix = self.DISMISS_PREFIX
++
+         return SpeechTurn(
+             utterance_id=utterance.id,
+-            text=self.DISMISS_PREFIX + utterance.text,
++            text=prefix + utterance.text,
+         )
+ 
+     def recover_from_interrupted_answer(self) -> None:
+@@ -213,6 +221,11 @@
+         self.pending_answer = None
+         self.phase = ConversationPhase.NARRATING
+ 
++        # Unpause without starting playback: the next
++        # narration request replays the preserved
++        # sentence. (cursor.resume() would start it now.)
++        self.cursor.paused = False
++
+     def answer_finished(self) -> SpeechTurn | None:
+         """
+         Called only after the answer has actually
+--- a/voice_input.py
++++ b/voice_input.py
+@@ -91,6 +91,10 @@
+         self._queue: queue.Queue = queue.Queue()
+         self._worker: threading.Thread | None = None
+ 
++        # Speech events queued or being handled (speech-to-text
++        # and routing included). Guarded by self._lock.
++        self._pending = 0
++
+     # -----------------------------------------------------
+     # LIFECYCLE
+     # -----------------------------------------------------
+@@ -232,6 +236,7 @@
+         event,
+     ) -> None:
+         if event.event_type == SegmentEventType.SPEECH_STARTED:
++            self._pending += 1
+             self._queue.put(
+                 _SpeechStarted(participant_id)
+             )
+@@ -240,6 +245,7 @@
+         if event.duration_ms < self.min_utterance_ms:
+             return
+ 
++        self._pending += 1
+         self._queue.put(
+             _UtteranceReady(
+                 participant_id=participant_id,
+@@ -269,6 +275,10 @@
+                 )
+                 traceback.print_exc()
+ 
++            finally:
++                with self._lock:
++                    self._pending -= 1
++
+     def _handle(self, item) -> None:
+         if isinstance(item, _SpeechStarted):
+             print(
+@@ -295,6 +305,18 @@
+             text,
+         )
+ 
++    def busy(self) -> bool:
++        """
++        True while the user is talking or an utterance
++        is still being transcribed or handled.
++        """
++
++        with self._lock:
++            return self._pending > 0 or any(
++                stream.segmenter.speaking
++                for stream in self._streams.values()
++            )
++
+     def status(self) -> dict:
+         with self._lock:
+             return {
+--- a/api-tests.http
++++ b/api-tests.http
+@@ -44,6 +44,10 @@
+ POST http://localhost:5000/api/question/dismiss
+ 
+ 
++### Keep question mode open (restarts the timeout, e.g. while typing)
++POST http://localhost:5000/api/question/keepalive
++
++
+ ### Typed dismissal through the question route (no API call)
+ POST http://localhost:5000/api/question
+ Content-Type: application/json
+--- a/tests/test_voice_input.py
++++ b/tests/test_voice_input.py
+@@ -525,6 +525,7 @@
+             app.untracked_playback_active = False
+             app.untracked_inference_id = None
+             app.failure_recovery.reset()
++            app.question_mode_deadline = None
+             app.reset_voice_state()
+ 
+         self.call_client = FakeCallClient()
+@@ -648,6 +649,31 @@
+             "question",
+         )
+ 
++    def open_question_mode(self, narration="narration-1"):
++        response = self.http.post("/api/debrief/interrupt")
++        self.assertEqual(response.status_code, 200, response.get_json())
++        self.stopped(narration, interrupted=True)
++        self.assertEqual(self.phase(), "question_ready")
++
++    def ask_typed_question(self):
++        response = self.http.post(
++            "/api/question",
++            json={"question": "What does a high D mean?"},
++        )
++        self.assertEqual(response.status_code, 200, response.get_json())
++        self.assertEqual(self.phase(), "answering")
++
++    def recovery_state(self):
++        return self.app_module.failure_recovery.state.value
++
++    def check_timeout(self, seconds_from_now):
++        app = self.app_module
++
++        with app.playback_lock:
++            return app.check_question_mode_timeout(
++                time.monotonic() + seconds_from_now
++            )
++
+     # ------------------------------------------------- tests
+ 
+     def test_pal_audio_is_never_captured(self):
+@@ -829,6 +855,171 @@
+         )
+         self.assertEqual(body["tavus"]["pal_participants"], ["pal-1"])
+ 
++    # ------------------------------- question mode timeout
++
++    def test_question_mode_times_out_and_resumes(self):
++        self.start_narration()
++        self.open_question_mode()
++
++        body = self.http.get("/api/status").get_json()
++        self.assertEqual(body["playback"]["question_mode_timeout_seconds"], 30)
++        self.assertGreater(body["playback"]["question_mode_seconds_left"], 29)
++
++        # Not yet.
++        self.assertIsNone(self.check_timeout(10))
++        self.assertEqual(self.phase(), "question_ready")
++
++        outcome = self.check_timeout(31)
++
++        self.assertEqual(outcome["action"], "question_timed_out")
++        self.assertEqual(self.phase(), "narrating")
++        self.assertEqual(self.app_module.engine.questions, [])
++        self.assertEqual(
++            self.app_module.engine.get_interaction_mode().value,
++            "debrief",
++        )
++        self.assertEqual(
++            self.echoes()[-1],
++            "Let's keep going. Picking up where we left off... "
++            "Your DISC profile shows a strong D.",
++        )
++
++        # The resumed sentence is tracked as usual.
++        self.started("narration-2")
++        self.stopped("narration-2", interrupted=False)
++        self.assertEqual(self.echoes()[-1], "You move quickly toward results.")
++
++    def test_question_mode_timeout_waits_while_user_talks(self):
++        app = self.app_module
++        self.start_narration()
++        self.open_question_mode()
++
++        original_busy = app.voice_pipeline.busy
++        app.voice_pipeline.busy = lambda: True
++
++        try:
++            # Speaking or transcribing: never times out.
++            self.assertIsNone(self.check_timeout(31))
++            self.assertEqual(self.phase(), "question_ready")
++
++        finally:
++            app.voice_pipeline.busy = original_busy
++
++        # The full timeout counts again from the last activity.
++        self.assertIsNone(self.check_timeout(40))
++        self.assertEqual(self.phase(), "question_ready")
++
++        self.assertEqual(
++            self.check_timeout(62)["action"],
++            "question_timed_out",
++        )
++        self.assertEqual(self.phase(), "narrating")
++
++    def test_live_speech_in_question_mode_restarts_timer(self):
++        app = self.app_module
++        self.start_narration()
++        self.open_question_mode()
++
++        with app.playback_lock:
++            app.question_mode_deadline = time.monotonic() + 1
++
++        app.handle_voice_speech_started("user-1")
++
++        self.assertGreater(app.question_mode_seconds_left(), 29)
++        # No second interrupt: question mode is already open.
++        self.assertEqual(len(self.interrupts()), 1)
++
++    def test_keepalive_restarts_timer(self):
++        app = self.app_module
++
++        response = self.http.post("/api/question/keepalive")
++        self.assertEqual(response.status_code, 409)
++
++        self.start_narration()
++        self.open_question_mode()
++
++        with app.playback_lock:
++            app.question_mode_deadline = time.monotonic() + 1
++
++        response = self.http.post("/api/question/keepalive")
++        body = response.get_json()
++
++        self.assertEqual(response.status_code, 200, body)
++        self.assertGreater(body["question_mode_seconds_left"], 29)
++
++    def test_answering_stops_the_timer(self):
++        self.start_narration()
++        self.open_question_mode()
++        self.ask_typed_question()
++
++        self.assertIsNone(self.check_timeout(31))
++        self.assertIsNone(self.app_module.question_mode_deadline)
++        self.assertEqual(self.phase(), "answering")
++
++    # ------------------------------------- failure recovery
++
++    def test_interrupted_answer_recovers_every_time(self):
++        self.start_narration()
++
++        for round_number in (1, 2, 3):
++            self.open_question_mode(f"narration-{round_number}")
++            self.ask_typed_question()
++
++            self.started(f"answer-{round_number}")
++            self.stopped(f"answer-{round_number}", interrupted=True)
++
++            self.assertEqual(self.phase(), "narrating")
++            self.assertEqual(self.recovery_state(), "ready_to_resume_narration")
++
++            # The preserved sentence plays again on the next request.
++            response = self.http.post("/api/debrief/tracked/next")
++            body = response.get_json()
++
++            self.assertEqual(response.status_code, 200, body)
++            self.assertNotIn("finished", body)
++            self.assertEqual(body["spoken"], "Your DISC profile shows a strong D.")
++            self.assertEqual(self.recovery_state(), "idle")
++
++            self.started(f"narration-{round_number + 1}")
++
++    def test_uncertain_resume_is_confirmed_and_cleared(self):
++        self.start_narration()
++        self.open_question_mode()
++        self.ask_typed_question()
++        self.started("answer-1")
++
++        # The resume reaches Tavus, but the client reports an error.
++        original_send = self.call_client.send_app_message
++
++        def delivered_then_raises(message):
++            self.call_client.send_app_message = original_send
++            original_send(message)
++            raise ConnectionError("acknowledgement lost")
++
++        self.call_client.send_app_message = delivered_then_raises
++
++        self.stopped("answer-1", interrupted=False)
++
++        self.assertEqual(self.phase(), "narrating")
++        self.assertEqual(self.recovery_state(), "resume_delivery_uncertain")
++
++        # Tavus proves it is playing: recovery is cleared.
++        self.started("narration-2")
++        self.assertEqual(self.recovery_state(), "idle")
++
++        self.stopped("narration-2", interrupted=False)
++        self.assertEqual(self.echoes()[-1], "You move quickly toward results.")
++
++        # A later interrupted answer still recovers.
++        self.started("narration-3")
++        self.open_question_mode("narration-3")
++        self.ask_typed_question()
++        self.started("answer-2")
++        self.stopped("answer-2", interrupted=True)
++
++        self.assertEqual(self.phase(), "narrating")
++        self.assertEqual(self.recovery_state(), "ready_to_resume_narration")
++
+ 
+ if __name__ == "__main__":
+     unittest.main()

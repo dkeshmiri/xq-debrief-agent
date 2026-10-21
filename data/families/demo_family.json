@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "family_id": "demo_family_001",
+  "family_name": "Demo Family",
+  "members": [
+    {
+      "person_id": "samuel_demo_001",
+      "display_name": "Samuel",
+      "family_role": "Father",
+      "persona_file": "data/personas/samuel.json",
+      "debrief_enabled": true
+    },
+    {
+      "person_id": "jennifer_demo_001",
+      "display_name": "Jennifer",
+      "family_role": "Mother",
+      "persona_file": "data/personas/jennifer.json",
+      "debrief_enabled": true
+    }
+  ],
+  "default_person_id": "samuel_demo_001"
+}

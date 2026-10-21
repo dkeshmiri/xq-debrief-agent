@@ -1,0 +1,267 @@
+{
+  "schema_version": "1.0",
+  "knowledge_domain": "DISC",
+  "terminology_policy": {
+    "protected_style_names": [
+      "Conductor",
+      "Persuader",
+      "Promoter",
+      "Relater",
+      "Supporter",
+      "Coordinator",
+      "Analyzer",
+      "Implementor"
+    ],
+    "instruction": "Use approved XQ style names exactly as written. Do not substitute alternative style labels."
+  },
+
+  "dimensions": {
+    "D": {
+      "name": "Dominance",
+      "core_focus": "How a person tends to approach problems, challenges, authority, and results.",
+      "higher_expression": [
+        "May approach challenges directly",
+        "May prefer faster decision-making",
+        "May focus strongly on results and forward movement",
+        "May be comfortable taking control when action is needed"
+      ],
+      "lower_expression": [
+        "May prefer cooperation over direct confrontation",
+        "May take more time before challenging existing direction",
+        "May be less motivated by competition or control"
+      ],
+      "family_considerations": [
+        "Differences in pace and directness can affect conflict",
+        "High directness may be experienced differently by more reserved family members",
+        "Clear expectations can reduce unnecessary power struggles"
+      ]
+    },
+
+    "I": {
+      "name": "Influence",
+      "core_focus": "How a person tends to approach people, communication, persuasion, and social interaction.",
+      "higher_expression": [
+        "May communicate openly and expressively",
+        "May enjoy interaction and verbal processing",
+        "May influence through enthusiasm and persuasion",
+        "May place importance on connection and engagement"
+      ],
+      "lower_expression": [
+        "May communicate more selectively",
+        "May prefer facts or reflection over spontaneous social interaction",
+        "May be less motivated by visibility or social recognition"
+      ],
+      "family_considerations": [
+        "Differences in communication volume and frequency can create misunderstandings",
+        "Expressive family members may need to leave room for quieter processing styles",
+        "Recognition and interpersonal feedback may carry different importance for different people"
+      ]
+    },
+
+    "S": {
+      "name": "Steadiness",
+      "core_focus": "How a person tends to approach pace, consistency, change, patience, and support.",
+      "higher_expression": [
+        "May prefer consistency and predictability",
+        "May value patience, cooperation, and stable relationships",
+        "May take time to adjust to sudden change",
+        "May provide dependable support to others"
+      ],
+      "lower_expression": [
+        "May prefer faster movement and greater variety",
+        "May adjust more readily to rapid change",
+        "May become restless with prolonged routine"
+      ],
+      "family_considerations": [
+        "Unexpected change may affect family members differently",
+        "Advance notice can reduce avoidable stress",
+        "Differences in pace should not automatically be interpreted as resistance or impatience"
+      ]
+    },
+
+    "C": {
+      "name": "Compliance",
+      "core_focus": "How a person tends to approach standards, accuracy, structure, rules, and details.",
+      "higher_expression": [
+        "May value accuracy and clear standards",
+        "May examine details before reaching conclusions",
+        "May prefer established processes and defined expectations",
+        "May be cautious about avoidable errors"
+      ],
+      "lower_expression": [
+        "May be more flexible about structure or procedure",
+        "May act with less need for detailed analysis",
+        "May prioritize speed or adaptability over precision"
+      ],
+      "family_considerations": [
+        "Different standards for detail can create friction",
+        "Rules and expectations should be explicit rather than assumed",
+        "A need for accuracy should not automatically be interpreted as criticism"
+      ]
+    }
+  },
+
+  "styles": {
+    "Conductor": {
+      "code": "D",
+      "definition": "A primarily results-focused behavioral pattern characterized by directness, decisiveness, and a tendency to move quickly toward objectives.",
+      "potential_strengths": [
+        "Can provide direction",
+        "Can make decisions under pressure",
+        "May address problems directly",
+        "Can create momentum when action is needed"
+      ],
+      "potential_challenges": [
+        "May move faster than others are ready for",
+        "May appear overly direct",
+        "May become impatient with lengthy discussion",
+        "May unintentionally dominate decisions"
+      ],
+      "communication_guidance": {
+        "do": [
+          "Be direct and concise",
+          "State the main issue clearly",
+          "Discuss outcomes and options",
+          "Allow reasonable autonomy"
+        ],
+        "avoid": [
+          "Hiding the main issue under excessive detail",
+          "Using vague expectations",
+          "Taking directness personally without examining intent"
+        ]
+      }
+    },
+
+    "Persuader": {
+      "code": "DI",
+      "definition": "A fast-paced, persuasive behavioral pattern combining strong results orientation with interpersonal influence.",
+      "potential_strengths": [
+        "Can generate enthusiasm around action",
+        "May influence others effectively",
+        "Often combines initiative with communication",
+        "Can help move groups toward decisions"
+      ],
+      "potential_challenges": [
+        "May move quickly from discussion to action",
+        "May underestimate the amount of detail others need",
+        "Can become frustrated by slow progress",
+        "May unintentionally overpower quieter voices"
+      ],
+      "communication_guidance": {
+        "do": [
+          "Be direct",
+          "Keep the conversation interactive",
+          "Connect ideas to action and outcomes",
+          "Allow room for discussion"
+        ],
+        "avoid": [
+          "Excessive unnecessary detail",
+          "Avoiding the main issue",
+          "Moving slowly without explanation"
+        ]
+      }
+    },
+
+    "Promoter": {
+      "code": "I",
+      "definition": "A people-oriented behavioral pattern characterized by communication, enthusiasm, social engagement, and interpersonal influence.",
+      "potential_strengths": [
+        "Can build enthusiasm",
+        "May create connection quickly",
+        "Often encourages communication",
+        "Can help maintain positive interpersonal energy"
+      ],
+      "potential_challenges": [
+        "May become distracted from details",
+        "May speak before fully processing",
+        "May rely heavily on verbal interaction",
+        "Can underestimate follow-through requirements"
+      ]
+    },
+
+    "Relater": {
+      "code": "IS",
+      "definition": "A relationship-centered behavioral pattern combining interpersonal warmth with patience, support, and cooperation.",
+      "potential_strengths": [
+        "Can create emotional connection",
+        "Often supports cooperation",
+        "May encourage open communication",
+        "Can help maintain relational stability"
+      ],
+      "potential_challenges": [
+        "May avoid difficult confrontation",
+        "May place harmony ahead of necessary disagreement",
+        "Can delay difficult decisions",
+        "May absorb interpersonal tension"
+      ]
+    },
+
+    "Supporter": {
+      "code": "S",
+      "definition": "A steady and supportive behavioral pattern characterized by patience, reliability, consistency, and relational stability.",
+      "potential_strengths": [
+        "Provides dependable support",
+        "May remain patient during difficult situations",
+        "Can create stability",
+        "Often values cooperation"
+      ],
+      "potential_challenges": [
+        "May resist abrupt change",
+        "May delay expressing disagreement",
+        "Can tolerate problems too long before confronting them",
+        "May need time to process major changes"
+      ]
+    },
+
+    "Coordinator": {
+      "code": "SC",
+      "definition": "A stable and systematic behavioral pattern combining consistency with attention to standards, structure, and reliability.",
+      "potential_strengths": [
+        "Can create dependable routines",
+        "Often values consistency and accuracy",
+        "May organize responsibilities carefully",
+        "Can provide stable follow-through"
+      ],
+      "potential_challenges": [
+        "May be uncomfortable with sudden change",
+        "May need more information before acting",
+        "Can become overly cautious",
+        "May struggle when expectations are ambiguous"
+      ]
+    },
+
+    "Analyzer": {
+      "code": "C",
+      "definition": "A precise and analytical behavioral pattern characterized by attention to standards, accuracy, logic, and careful evaluation.",
+      "potential_strengths": [
+        "May identify important details",
+        "Can evaluate decisions carefully",
+        "Often values consistency and accuracy",
+        "May reduce preventable errors"
+      ],
+      "potential_challenges": [
+        "May overanalyze decisions",
+        "Can appear critical when focused on accuracy",
+        "May delay action while seeking more information",
+        "Can become frustrated by unclear expectations"
+      ]
+    },
+
+    "Implementor": {
+      "code": "CD",
+      "definition": "A results-focused and systematic behavioral pattern combining decisiveness with analysis, standards, and problem-solving.",
+      "potential_strengths": [
+        "Can solve complex problems",
+        "May combine action with careful evaluation",
+        "Often maintains high standards",
+        "Can challenge inefficient systems"
+      ],
+      "potential_challenges": [
+        "May communicate criticism very directly",
+        "Can set demanding expectations",
+        "May become impatient with inefficiency",
+        "Can appear difficult to satisfy"
+      ]
+    }
+  }
+}

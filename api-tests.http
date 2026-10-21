@@ -1,0 +1,64 @@
+### Status
+GET http://localhost:5000/api/status
+
+
+### Start session
+POST http://localhost:5000/api/session/start
+Content-Type: application/json
+
+{}
+
+
+### Speak current section
+POST http://localhost:5000/api/debrief/speak
+
+
+### Next section
+POST http://localhost:5000/api/debrief/next
+
+
+### Ask integrated question
+POST http://localhost:5000/api/question
+Content-Type: application/json
+
+{
+  "question": "How do my DISC style, Driving Forces, and EQ work together in my family role?"
+}
+
+
+### Repeat section
+POST http://localhost:5000/api/debrief/repeat
+
+
+### Restart debrief
+POST http://localhost:5000/api/debrief/restart
+
+
+### Test DISC narrative through Tavus
+POST http://localhost:5000/api/dev/disc-narrative
+
+### End session
+POST http://localhost:5000/api/session/end
+
+### Dismiss question mode (no API call, resumes narration)
+POST http://localhost:5000/api/question/dismiss
+
+
+### Keep question mode open (restarts the timeout, e.g. while typing)
+POST http://localhost:5000/api/question/keepalive
+
+
+### Typed dismissal through the question route (no API call)
+POST http://localhost:5000/api/question
+Content-Type: application/json
+
+{
+  "question": "Never mind, please continue."
+}
+
+
+### Push-to-talk: send one recorded utterance (interrupts, transcribes, answers or dismisses)
+POST http://localhost:5000/api/voice/audio
+Content-Type: audio/wav
+
+< ./sample-question.wav

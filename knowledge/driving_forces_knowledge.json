@@ -1,0 +1,304 @@
+{
+  "schema_version": "1.0",
+  "knowledge_domain": "Driving Forces",
+
+  "terminology_policy": {
+    "protected_names": [
+      "Intellectual",
+      "Instinctive",
+      "Resourceful",
+      "Selfless",
+      "Harmonious",
+      "Objective",
+      "Altruistic",
+      "Intentional",
+      "Commanding",
+      "Collaborative",
+      "Structured",
+      "Receptive"
+    ],
+
+    "forbidden_substitutions": {
+      "Theoretical": "Intellectual or Instinctive",
+      "Utilitarian": "Resourceful or Selfless",
+      "Aesthetic": "Harmonious or Objective",
+      "Social": "Altruistic or Intentional",
+      "Individualistic": "Commanding or Collaborative",
+      "Traditional": "Structured or Receptive"
+    },
+
+    "instruction": "Use the approved Driving Forces terminology exactly. Never substitute legacy Motivator terminology for a Driving Force."
+  },
+
+  "forces": {
+    "Intellectual": {
+      "pair": "Instinctive",
+      "dimension": "Knowledge",
+      "definition": "A motivation toward acquiring knowledge, understanding concepts, learning, and discovering how or why things work.",
+      "possible_energizers": [
+        "Learning",
+        "Research",
+        "Understanding complex ideas",
+        "Opportunities to gain expertise"
+      ],
+      "possible_stressors": [
+        "Lack of opportunity to learn",
+        "Decisions made without sufficient understanding",
+        "Being discouraged from asking questions"
+      ],
+      "family_implications": [
+        "May value explanation and understanding before accepting a decision",
+        "May enjoy teaching or sharing knowledge",
+        "Could become frustrated when questions are dismissed"
+      ]
+    },
+
+    "Instinctive": {
+      "pair": "Intellectual",
+      "dimension": "Knowledge",
+      "definition": "A motivation toward using practical experience, intuition, and immediately useful information rather than pursuing knowledge for its own sake.",
+      "possible_energizers": [
+        "Practical application",
+        "Learning only what is necessary",
+        "Using experience and intuition",
+        "Quick access to useful information"
+      ],
+      "possible_stressors": [
+        "Excessive theory without application",
+        "Unnecessary research",
+        "Information overload"
+      ],
+      "family_implications": [
+        "May prefer practical answers over lengthy explanation",
+        "May rely heavily on experience",
+        "Could become impatient with unnecessary detail"
+      ]
+    },
+
+    "Resourceful": {
+      "pair": "Selfless",
+      "dimension": "Utility",
+      "definition": "A motivation toward maximizing usefulness, return, efficiency, and practical value from time, energy, resources, and opportunities.",
+      "possible_energizers": [
+        "Measurable progress",
+        "Efficient use of resources",
+        "Useful outcomes",
+        "Return on invested effort"
+      ],
+      "possible_stressors": [
+        "Waste",
+        "Inefficiency",
+        "Effort without meaningful return",
+        "Poor use of available resources"
+      ],
+      "family_implications": [
+        "May focus strongly on practical value when making family decisions",
+        "May be sensitive to wasted time or money",
+        "Could evaluate choices partly by usefulness or return"
+      ]
+    },
+
+    "Selfless": {
+      "pair": "Resourceful",
+      "dimension": "Utility",
+      "definition": "A motivation toward contributing time, effort, or resources without requiring a direct or measurable personal return.",
+      "possible_energizers": [
+        "Contributing without expectation of return",
+        "Helping where needed",
+        "Giving time or resources freely"
+      ],
+      "possible_stressors": [
+        "Overemphasis on personal gain",
+        "Relationships treated as transactions",
+        "Constant measurement of return"
+      ],
+      "family_implications": [
+        "May readily give time or resources to others",
+        "May place less emphasis on measurable return",
+        "Could differ from Resourceful family members in how value is evaluated"
+      ]
+    },
+
+    "Harmonious": {
+      "pair": "Objective",
+      "dimension": "Surroundings",
+      "definition": "A motivation toward balance, experience, surroundings, expression, and a sense of harmony between people and environment.",
+      "possible_energizers": [
+        "Pleasant surroundings",
+        "Balance",
+        "Meaningful experiences",
+        "Personal expression"
+      ],
+      "possible_stressors": [
+        "Chaotic or unpleasant environments",
+        "Persistent imbalance",
+        "Lack of attention to experience or surroundings"
+      ],
+      "family_implications": [
+        "May place importance on atmosphere and experience",
+        "Could be strongly affected by household environment",
+        "May seek balance between function and quality of experience"
+      ]
+    },
+
+    "Objective": {
+      "pair": "Harmonious",
+      "dimension": "Surroundings",
+      "definition": "A motivation toward function, practicality, and objective outcomes with less emphasis on environmental harmony or subjective experience.",
+      "possible_energizers": [
+        "Practical environments",
+        "Functional solutions",
+        "Objective evaluation",
+        "Getting the job done"
+      ],
+      "possible_stressors": [
+        "Excessive focus on appearance",
+        "Form prioritized over function",
+        "Decisions based mainly on subjective preference"
+      ],
+      "family_implications": [
+        "May prioritize practicality when making household choices",
+        "May place less emphasis on atmosphere or aesthetics",
+        "Could disagree with Harmonious family members about what matters in an environment"
+      ]
+    },
+
+    "Altruistic": {
+      "pair": "Intentional",
+      "dimension": "Others",
+      "definition": "A motivation toward helping, supporting, and improving the well-being of others.",
+      "possible_energizers": [
+        "Helping others",
+        "Supporting growth",
+        "Making a positive difference",
+        "Providing assistance"
+      ],
+      "possible_stressors": [
+        "Seeing others ignored or unsupported",
+        "Perceived selfishness",
+        "Being unable to help when help seems necessary"
+      ],
+      "family_implications": [
+        "May readily invest energy in helping family members",
+        "Could prioritize others' needs strongly",
+        "May need boundaries to avoid overextending"
+      ]
+    },
+
+    "Intentional": {
+      "pair": "Altruistic",
+      "dimension": "Others",
+      "definition": "A motivation toward helping selectively and intentionally based on purpose, context, priorities, and perceived appropriateness.",
+      "possible_energizers": [
+        "Purposeful assistance",
+        "Clear boundaries",
+        "Helping where impact is meaningful",
+        "Selective investment of effort"
+      ],
+      "possible_stressors": [
+        "Pressure to help indiscriminately",
+        "Poor boundaries",
+        "Support without clear purpose"
+      ],
+      "family_implications": [
+        "May decide carefully when and how to help",
+        "Could be perceived as less giving by highly Altruistic family members",
+        "Often values purposeful rather than automatic assistance"
+      ]
+    },
+
+    "Commanding": {
+      "pair": "Collaborative",
+      "dimension": "Power",
+      "definition": "A motivation toward directing outcomes, exercising influence, achieving personal control, and advancing individual authority or position.",
+      "possible_energizers": [
+        "Influence",
+        "Control over outcomes",
+        "Leadership opportunities",
+        "Personal advancement"
+      ],
+      "possible_stressors": [
+        "Lack of influence",
+        "Being unable to affect important outcomes",
+        "Loss of autonomy"
+      ],
+      "family_implications": [
+        "May naturally seek influence in family decisions",
+        "Could be comfortable assuming leadership",
+        "May need to consciously make room for shared decision-making"
+      ]
+    },
+
+    "Collaborative": {
+      "pair": "Commanding",
+      "dimension": "Power",
+      "definition": "A motivation toward shared success, collective contribution, and supporting outcomes without requiring personal control or recognition.",
+      "possible_energizers": [
+        "Team success",
+        "Shared decision-making",
+        "Contributing without needing authority",
+        "Collective achievement"
+      ],
+      "possible_stressors": [
+        "Excessive competition for control",
+        "Status-driven environments",
+        "Individual recognition prioritized over group success"
+      ],
+      "family_implications": [
+        "May prefer shared decisions",
+        "May not require visible authority",
+        "Could yield influence more readily than a Commanding family member"
+      ]
+    },
+
+    "Structured": {
+      "pair": "Receptive",
+      "dimension": "Methodologies",
+      "definition": "A motivation toward established systems, principles, methods, beliefs, or defined approaches that provide consistency and direction.",
+      "possible_energizers": [
+        "Clear principles",
+        "Established systems",
+        "Consistency",
+        "Defined methods"
+      ],
+      "possible_stressors": [
+        "Constantly changing rules",
+        "Lack of clear principles",
+        "Unstructured approaches"
+      ],
+      "family_implications": [
+        "May value consistent family rules or traditions",
+        "Could prefer established methods",
+        "May experience frequent changes in expectations as frustrating"
+      ]
+    },
+
+    "Receptive": {
+      "pair": "Structured",
+      "dimension": "Methodologies",
+      "definition": "A motivation toward flexibility, openness to different systems or approaches, and willingness to adapt methods based on circumstances.",
+      "possible_energizers": [
+        "Flexibility",
+        "Exploring different approaches",
+        "Freedom from rigid methodology",
+        "Adapting as circumstances change"
+      ],
+      "possible_stressors": [
+        "Rigid systems",
+        "Rules without clear purpose",
+        "Being required to follow one method regardless of circumstances"
+      ],
+      "family_implications": [
+        "May be open to changing routines or traditions",
+        "Could resist rigid family rules",
+        "May prefer adapting methods to the situation"
+      ]
+    }
+  },
+
+  "cluster_definitions": {
+    "primary": "Driving Forces that are more likely to exert strong motivational influence and frequently shape priorities, energy, and decision-making.",
+    "situational": "Driving Forces that may become more influential depending on circumstances, environment, role, or context.",
+    "indifferent": "Driving Forces that are less likely to create strong motivational pull and may receive less personal attention unless circumstances require them."
+  }
+}

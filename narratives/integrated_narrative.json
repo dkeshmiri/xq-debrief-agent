@@ -1,0 +1,53 @@
+{
+  "patterns": {
+    "decisive_influence": {
+      "text": "Your behavioral decisiveness and desire to influence outcomes reinforce one another. When something matters, you may be especially comfortable stepping forward, shaping direction, and creating movement."
+    },
+
+    "driven_momentum": {
+      "text": "Your behavioral pace is reinforced by strong internal motivation. This can create considerable persistence and forward momentum, particularly when the outcome feels important."
+    },
+
+    "analytical_learning": {
+      "text": "Your analytical behavioral tendencies are reinforced by a strong desire to understand. You may be most comfortable making decisions after you have examined both the information and the reasoning behind it."
+    },
+
+    "relational_support": {
+      "text": "Your steadier behavioral tendencies align with a strong concern for other people. This can make support, patience, and relational consistency especially visible within the family."
+    },
+
+    "collaborative_awareness": {
+      "text": "Your preference for collaboration is supported by strong awareness of other people's emotional signals. You may naturally notice not only whether people are participating, but also how they are experiencing the interaction."
+    },
+
+    "structured_regulation": {
+      "text": "Your preference for consistency and structure is reinforced by strong emotional regulation. This can help you bring steadiness to situations that might otherwise become reactive or disorganized."
+    },
+
+    "adaptive_openness": {
+      "text": "Your openness to new approaches is supported by enough emotional flexibility to adjust when circumstances or people change."
+    },
+
+    "high_drive_regulation_gap": {
+      "text": "One important tension in your profile is that your drive can move faster than your emotional regulation. You may know where you want to go before you have fully decided how best to pace the interaction."
+    },
+
+    "awareness_before_regulation": {
+      "text": "You may often recognize what you are feeling before you have fully determined how you want to manage or express that reaction."
+    },
+
+    "strong_interpersonal_eq": {
+      "text": "Your interpersonal EQ provides an important balancing resource. You are relatively well positioned to notice emotional cues from others and adjust your response when the situation calls for it."
+    }
+  },
+
+  "openings": [
+    "When we bring your behavioral style, motivations, and EQ together, the picture becomes much more useful than any individual score by itself.",
+    "The value of an integrated profile is that behavior, motivation, and emotional intelligence do not operate independently. They continually shape one another."
+  ],
+
+  "closings": [
+    "The goal is not to change the traits that make you effective. It is to understand when those strengths are helping the family and when the same strengths may need a different pace, tone, or expression.",
+    "This integrated view gives us a stronger basis for understanding not only what you tend to do, but why you do it and how that behavior may be experienced by the people closest to you."
+  ]
+}

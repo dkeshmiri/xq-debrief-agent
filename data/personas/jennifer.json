@@ -1,0 +1,136 @@
+{
+  "schema_version": "1.0",
+  "person": {
+    "person_id": "jennifer_demo_001",
+    "first_name": "Jennifer",
+    "display_name": "Jennifer",
+    "age": 45,
+    "family_role": "Mother"
+  },
+  "assessment": {
+    "assessment_id": "jennifer_demo_assessment_001",
+    "assessment_date": "2026-07-20",
+    "source": "XQ Family Demo Data"
+  },
+  "disc": {
+    "natural": {
+      "D": 34,
+      "I": 46,
+      "S": 78,
+      "C": 58
+    },
+    "adapted": {
+      "D": 40,
+      "I": 51,
+      "S": 72,
+      "C": 63
+    },
+    "primary_style": "Supporter",
+    "behavioral_characteristics": [
+      "Patient",
+      "Dependable",
+      "Steady",
+      "Relationship-oriented"
+    ],
+    "value_to_family": [
+      "Provides consistency and dependable support.",
+      "Creates space for family members to be heard.",
+      "Helps maintain stability during change."
+    ],
+    "communication_do": [
+      "Allow time for thoughtful responses.",
+      "Use a calm and respectful tone.",
+      "Explain changes before expecting immediate action.",
+      "Recognize consistency and follow-through."
+    ],
+    "communication_dont": [
+      "Pressure her into an immediate decision.",
+      "Use unnecessary confrontation.",
+      "Dismiss the effect of change on other people.",
+      "Mistake patience for agreement."
+    ]
+  },
+  "driving_forces": {
+    "scores": {
+      "Intellectual": 58,
+      "Instinctive": 42,
+      "Resourceful": 42,
+      "Selfless": 58,
+      "Harmonious": 67,
+      "Objective": 33,
+      "Altruistic": 72,
+      "Intentional": 28,
+      "Commanding": 38,
+      "Collaborative": 62,
+      "Structured": 61,
+      "Receptive": 39
+    },
+    "primary_cluster": [
+      "Altruistic",
+      "Harmonious",
+      "Collaborative"
+    ],
+    "situational_cluster": [
+      "Structured",
+      "Intellectual",
+      "Selfless"
+    ],
+    "indifferent_cluster": [
+      "Instinctive",
+      "Resourceful",
+      "Objective",
+      "Intentional",
+      "Commanding",
+      "Receptive"
+    ],
+    "motivational_strengths": [
+      "Seeks useful outcomes",
+      "Values knowledge",
+      "Comfortable influencing direction"
+    ],
+    "energizers": [
+      "Progress",
+      "Learning",
+      "Measurable results"
+    ],
+    "stressors": [
+      "Wasted resources",
+      "Lack of progress",
+      "Being unable to influence important outcomes"
+    ]
+  },
+  "eq": {
+    "scores": {
+      "self_awareness": 74,
+      "self_regulation": 77,
+      "motivation": 69,
+      "social_awareness": 82,
+      "social_regulation": 79
+    },
+    "self_composite": 73,
+    "others_composite": 81,
+    "total_eq": 76
+  },
+  "integrated": {
+    "overview": "Jennifer combines a steady, relationship-oriented behavioral style with strong priorities around helping others, harmony, and collaboration. Her profile suggests that she is likely to contribute stability, emotional awareness, and dependable support within the family.",
+    "strengths": [
+      "Creates consistency and emotional steadiness during change.",
+      "Pays close attention to how decisions affect other family members.",
+      "Supports collaboration and helps people feel heard.",
+      "Uses strong Social Awareness and Social Regulation to navigate interpersonal situations."
+    ],
+    "development_areas": [
+      "May delay expressing disagreement in order to preserve harmony.",
+      "May need additional time before responding to sudden decisions or changes.",
+      "May place the needs of others ahead of her own priorities.",
+      "May become stressed when pressured into immediate action without adequate discussion."
+    ],
+    "family_applications": [
+      "State concerns directly rather than relying on others to notice them.",
+      "Ask for processing time when decisions are moving too quickly.",
+      "Balance support for others with clear communication of personal needs.",
+      "Use her awareness of family dynamics to facilitate calm and inclusive conversations."
+    ],
+    "closing_summary": "Jennifer is likely to contribute patience, consistency, empathy, and relational stability. Her strongest family impact occurs when her support for others is paired with direct self-expression, clear boundaries, and confidence in voicing disagreement."
+  }
+}
