@@ -14,6 +14,7 @@ from flask import (
     request,
 )
 
+from assessment_routes import create_assessment_blueprint
 from debrief_engine import DebriefEngine
 from debrief_state import DebriefState
 from family_repository import FamilyRepository
@@ -59,6 +60,7 @@ load_dotenv(
 
 app = Flask(__name__)
 app.config["MAX_CONTENT_LENGTH"] = MAX_UPLOAD_BYTES
+app.register_blueprint(create_assessment_blueprint())
 
 FAMILY_MANIFEST_PATH = (
     BASE_DIR

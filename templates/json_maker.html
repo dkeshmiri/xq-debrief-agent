@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Assessment JSON Maker · XQ Family</title>
+  <link rel="stylesheet" href="/static/json_maker.css">
+  <script src="/static/json_maker.js" defer></script>
+</head>
+<body>
+  <header><a class="brand" href="/">XQ <span>FAMILY</span></a><a href="/">Back to debrief <span aria-hidden="true">↗</span></a></header>
+  <main>
+    <div class="intro"><p class="eyebrow">ASSESSMENT WORKSPACE</p><h1>From assessment<br>to family understanding.</h1><p>Bring the report. Keep the facts. Create a family-oriented persona in the format your debrief already uses.</p></div>
+    <ol class="steps" aria-label="Workflow"><li><b>01</b> Upload reports</li><li><b>02</b> Review the facts</li><li><b>03</b> Create & download</li></ol>
+    <div id="status" role="status" aria-live="polite"></div>
+    <section class="card" aria-labelledby="upload-title">
+      <div class="section-heading"><div><p class="eyebrow">01 / SOURCE MATERIAL</p><h2 id="upload-title">Start with the assessment.</h2></div><span class="tag">PDF → JSON</span></div>
+      <form id="upload-form"><fieldset id="upload-fields">
+        <div class="upload-grid"><label class="file-zone">Assessment reports <span>Choose up to 3 PDFs for the same person.</span><input id="reports" name="reports" type="file" accept="application/pdf,.pdf" multiple required><small>24 MiB combined. Include an EQ supplement if it is a separate report.</small></label>
+          <div><label for="family-role">Their role in the family</label><input id="family-role" name="family_role" maxlength="100" placeholder="e.g. Father, Daughter, Grandparent" required><p class="hint">You provide the role. The report provides the assessment facts.</p><p class="privacy">Selected PDFs are sent to the configured OpenAI API for extraction. This app does not save the PDFs. Extracted facts and saved overrides stay in a local review draft.</p></div>
+        </div><div class="actions"><button type="submit" id="extract-button">Extract assessment <span aria-hidden="true">→</span></button><span class="hint">Large reports may take a few minutes.</span></div>
+      </fieldset></form>
+    </section>
+    <section id="review-section" class="card" aria-labelledby="review-title" hidden>
+      <div class="section-heading"><div><p class="eyebrow">02 / OPERATOR REVIEW</p><h2 id="review-title">Check what the report says.</h2></div><span id="review-badge" class="tag"></span></div>
+      <p>Confirm every score against the report. Unknown values stay blank; zero is a real score. Suggestions and family language are generated in the next step.</p>
+      <div id="warnings" class="notice" hidden></div>
+      <form id="review-form"><fieldset id="review-fields">
+        <h3>Person & assessment</h3><div id="identity-fields" class="field-grid"></div>
+        <h3>DISC</h3><p class="hint">Natural and Adapted are separate profiles.</p><div id="disc-fields" class="score-grid"></div>
+        <h3>Driving Forces</h3><div id="force-fields" class="field-grid"></div><div id="cluster-fields" class="field-grid clusters"></div>
+        <h3>Emotional intelligence</h3><p class="hint">Enter only reported scores. Do not calculate or estimate missing composites.</p><div id="eq-fields" class="field-grid"></div>
+        <details><summary>Source evidence & report findings</summary><p class="hint">Page references and summaries from all substantive sections are retained in the extraction download. They are not instructions to the generator.</p><div id="evidence"></div><div id="sections"></div></details>
+        <div id="missing" class="notice"></div>
+        <div id="override-panel" class="override-panel" hidden>
+          <h3>Save manual overrides</h3>
+          <p class="hint">Enter missing scores or correct any extracted variable above, then enter your operator PIN to save. Generation always uses the saved review.</p>
+          <label for="override-pin">Override PIN</label>
+          <input id="override-pin" type="password" inputmode="numeric" maxlength="64" autocomplete="off" placeholder="Enter PIN">
+          <div class="actions"><button type="button" id="save-overrides">Save changes</button><button type="button" id="reload-review" class="secondary">Reload saved review</button></div>
+        </div>
+        <p id="override-history" class="hint"></p>
+        <label class="confirm"><input type="checkbox" id="reviewed" required> <span>I checked the extracted facts and source warnings. Any missing values are intentionally left blank.</span></label>
+        <div class="actions"><button type="submit" id="generate-button" disabled>Generate family JSON</button><button type="button" id="download-extraction" class="secondary">Download reviewed extraction</button></div>
+      </fieldset></form>
+    </section>
+    <section id="result-section" class="card" aria-labelledby="result-title" hidden>
+      <div class="section-heading"><div><p class="eyebrow">03 / FAMILY PERSONA</p><h2 id="result-title">Your JSON is ready to review.</h2></div><span id="result-badge" class="tag"></span></div>
+      <p id="result-note"></p><p id="family-overview" class="overview"></p>
+      <div class="actions"><button id="download-json" type="button">Download persona JSON</button><button id="copy-json" type="button" class="secondary">Copy JSON</button></div>
+      <details><summary>View full JSON</summary><pre id="json-preview" tabindex="0"></pre></details>
+    </section>
+    <footer>Exact scores. Thoughtful interpretation. <span>Nothing is added to your family roster automatically.</span></footer>
+  </main>
+</body>
+</html>

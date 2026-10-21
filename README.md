@@ -35,3 +35,9 @@ workers would have independent playback and voice state.
 
 The two supplied `*.patch` files describe earlier versions. Changes are already
 applied to the source; do not apply those patches again.
+
+## Assessment JSON Maker
+
+Open `/json-maker` to turn assessment PDFs into family-oriented persona JSON.
+Missing facts can be entered manually and saved with PIN **2020**. See
+`JSON_MAKER.md` for draft handling, source review, and API details.
