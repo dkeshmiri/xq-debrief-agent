@@ -7,8 +7,8 @@ class PlaybackCoordinator:
     """
     Connect Tavus playback events to the XQ orchestrator.
 
-    This first version does not send Echo messages or
-    automatically schedule the next sentence.
+    The application submits the next Echo after this coordinator accepts
+    completion. This class only tracks state; it does not perform transport.
     """
 
     def __init__(

@@ -153,15 +153,11 @@ class ComparisonContextBuilder:
             "primary_styles": {
                 "person_a": {
                     "name": style_a,
-                    "approved_knowledge": approved_styles[
-                        style_a
-                    ],
+                    "approved_knowledge": approved_styles.get(style_a, {}),
                 },
                 "person_b": {
                     "name": style_b,
-                    "approved_knowledge": approved_styles[
-                        style_b
-                    ],
+                    "approved_knowledge": approved_styles.get(style_b, {}),
                 },
                 "same_style": styles["same_style"],
             },

@@ -15,6 +15,7 @@ from flask import (
 )
 
 from assessment_routes import create_assessment_blueprint
+from assessment_drafts import DraftConflict
 from debrief_engine import DebriefEngine
 from debrief_state import DebriefState
 from family_repository import FamilyRepository
@@ -24,6 +25,8 @@ from playback_event_tracker import PlaybackEventTracker
 from sentence_splitter import split_sentences
 from threading import Event, RLock, Thread
 from playback_coordinator import PlaybackCoordinator
+from playback_latency import PlaybackLatency
+from activity_presenter import describe_activity
 from failure_recovery import FailureRecovery, RecoveryState
 from recovery_controller import RecoveryController
 from daily import Daily
@@ -99,6 +102,8 @@ orchestrator = ConversationOrchestrator(engine)
 playback_tracker = PlaybackEventTracker()
 answer_playback_tracker = PlaybackEventTracker()
 playback_lock = RLock()
+playback_latency = PlaybackLatency()
+reasoning_active = Event()
 
 
 untracked_playback_active = False
@@ -177,7 +182,9 @@ def handle_tavus_playback_event(event: dict) -> None:
     global interrupted_inference_id
     global untracked_inference_id, question_mode_generation
 
+    received_at = time.monotonic()
     with playback_lock:
+        handler_entered_at = time.monotonic()
         event_type = event.get("event_type")
         inference_id = event.get("inference_id")
         if session_ending:
@@ -305,6 +312,8 @@ def handle_tavus_playback_event(event: dict) -> None:
         completed = coordinator.handle_playback_event(
             event
         )
+        if event_type == PlaybackEventTracker.STARTED and playback_tracker.inference_id == inference_id:
+            playback_latency.started(playback_tracker.utterance_id)
 
         if (
             event_type == PlaybackEventTracker.STARTED
@@ -342,7 +351,7 @@ def handle_tavus_playback_event(event: dict) -> None:
             )
 
             try:
-                next_turn = submit_next_tracked_sentence()
+                next_turn = submit_next_tracked_sentence(received_at, handler_entered_at)
 
             except Exception as error:
                 print(
@@ -412,39 +421,11 @@ session_starting = False
 # =========================================================
 
 def get_available_personas() -> list[dict]:
-    personas = []
-
-    for persona_path in sorted(
-        PERSONA_DIR.glob("*.json")
-    ):
-        with persona_path.open(
-            "r",
-            encoding="utf-8",
-        ) as file:
-            data = json.load(file)
-
-        person = data.get(
-            "person",
-            {}
-        )
-
-        personas.append({
-            "file": persona_path.name,
-            "person_id": person.get(
-                "person_id",
-                "",
-            ),
-            "display_name": person.get(
-                "display_name",
-                "",
-            ),
-            "family_role": person.get(
-                "family_role",
-                "",
-            ),
-        })
-
-    return personas
+    return [
+        {"file": Path(member["persona_file"]).name,
+         **{key: member[key] for key in ("person_id", "display_name", "family_role")}}
+        for member in repository.list_members(debrief_enabled_only=True)
+    ]
 
 def error_response(
     message: str,
@@ -581,7 +562,7 @@ def interruption_in_progress() -> bool:
     return interruption_pending
 
 
-def submit_next_tracked_sentence():
+def submit_next_tracked_sentence(stopped_at=None, handler_entered_at=None):
     """
     Submit the next sentence in the current section.
 
@@ -626,7 +607,9 @@ def submit_next_tracked_sentence():
     )
 
     # If delivery raises, keep ownership because Echo may have been submitted.
+    playback_latency.submitted(turn.utterance_id, stopped_at, handler_entered_at)
     speak_text(turn.text)
+    playback_latency.sent(turn.utterance_id)
 
     print(
         "[XQ PLAYBACK] Submitted utterance "
@@ -692,6 +675,7 @@ def reset_voice_state() -> None:
     question_mode_deadline = None
     last_voice_event = None
     voice_pipeline.reset()
+    playback_latency.reset_pending()
 
 
 def request_interruption() -> str:
@@ -844,7 +828,11 @@ def answer_open_question(question: str) -> dict:
     state_before = engine.get_current_state()
 
     try:
-        answer = orchestrator.ask_question(question)
+        reasoning_active.set()
+        try:
+            answer = orchestrator.ask_question(question)
+        finally:
+            reasoning_active.clear()
 
     except Exception as error:
         restart_question_mode_timer()
@@ -1283,9 +1271,24 @@ if QUESTION_MODE_TIMEOUT_SECONDS > 0:
 
 @app.get("/")
 def index():
+    return render_template("start.html")
+
+
+@app.get("/debrief")
+def debrief_page():
     return render_template(
         "index.html"
     )
+
+
+def save_assessment_persona(persona):
+    with playback_lock:
+        if session_starting or session_ending or active_tavus_conversation_id:
+            raise DraftConflict("End the active session before adding a profile.")
+        return repository.save_persona(persona, PERSONA_DIR)
+
+
+app.config["SAVE_ASSESSMENT_PERSONA"] = save_assessment_persona
 
 
 #==========================================================
@@ -1411,6 +1414,38 @@ def status():
         "ok": True,
         **current_payload(),
     })
+
+
+@app.get("/api/playback/latency")
+def playback_latency_status():
+    with playback_lock:
+        return jsonify(playback_latency.snapshot())
+
+
+@app.get("/api/activity")
+def activity_status():
+    # Observational snapshot: do not wait on the playback lock held by reasoning.
+    # This endpoint contains no transcript, scores, prompt, or generated narrative.
+    active = bool(active_tavus_conversation_id)
+    pending = any(tracker.utterance_id is not None for tracker in (playback_tracker, answer_playback_tracker)) or untracked_playback_active
+    speaking = any(tracker.inference_id is not None for tracker in (playback_tracker, answer_playback_tracker)) or untracked_inference_id is not None
+    question_ready = orchestrator.phase == ConversationPhase.QUESTION_READY
+    code, title, detail = describe_activity(
+        active=active, connected=tavus.connected, starting=session_starting,
+        ending=session_ending, reasoning=reasoning_active.is_set(),
+        interrupted=interruption_pending, question_ready=question_ready,
+        pending=pending, speaking=speaking, voice_busy=voice_pipeline.busy(),
+    )
+    response = jsonify(code=code, title=title, detail=detail,
+                       active=active, connected=tavus.connected,
+                       changing=session_starting or session_ending,
+                       pending=pending, question_ready=question_ready,
+                       phase=orchestrator.phase.value, interrupted=interruption_pending,
+                       answer_pending=answer_playback_tracker.utterance_id is not None,
+                       state=engine.get_current_state().value,
+                       person_id=repository.active_person_id)
+    response.headers["Cache-Control"] = "no-store"
+    return response
 
 
 # =========================================================

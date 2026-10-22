@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Welcome · XQ Family</title>
+  <link rel="stylesheet" href="/static/json_maker.css">
+  <link rel="stylesheet" href="/static/portal.css">
+  <script src="/static/start.js" defer></script>
+</head>
+<body class="welcome">
+  <header class="topbar"><a class="brand" href="/">xq <span>FAMILY</span></a><span>Understanding begins at home.</span></header>
+  <main>
+    <p class="eyebrow">FAMILY DEBRIEF</p>
+    <h1>A little understanding.<br>A closer family.</h1>
+    <p>Choose a saved family profile or create one from assessment reports.</p>
+    <div class="actions" role="group" aria-label="Choose how to begin">
+      <button id="choose-existing" aria-pressed="true">Use a saved profile</button>
+      <button id="choose-new" class="secondary" aria-pressed="false">Create a new profile</button>
+    </div>
+    <p id="status" role="status" aria-live="polite"></p>
+    <section id="existing-panel" class="card">
+      <p class="eyebrow">YOUR FAMILY PROFILES</p><h2>Continue with someone you know.</h2>
+      <form id="select-form">
+        <label for="saved-profile">Saved profile</label>
+        <select id="saved-profile" required><option value="">Loading profiles…</option></select>
+        <div class="actions"><button id="continue" disabled>Continue to debrief</button></div>
+      </form>
+      <p class="hint">You can review the selection before starting the video session.</p>
+    </section>
+    <section id="new-panel" class="card" hidden>
+      <p class="eyebrow">A NEW PERSPECTIVE</p><h2>Bring the reports. Build a family profile.</h2>
+      <p>Upload up to three PDFs for one person, enter their family role, and review the extracted results. Save a completed profile to use it in the debrief.</p>
+      <div class="actions"><a href="/json-maker">Upload assessment documents →</a></div>
+      <p class="hint">Missing scores can be entered by hand. Saving those changes requires your operator PIN.</p>
+    </section>
+  </main>
+</body>
+</html>

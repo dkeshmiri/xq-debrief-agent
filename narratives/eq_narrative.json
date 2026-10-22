@@ -2,35 +2,30 @@
   "dimensions": {
     "self_awareness": {
       "label": "Self-Awareness",
-
       "very_high": {
         "core": "You show a strong tendency to recognize your own emotional responses, reactions, and internal state.",
         "family_expression": "Within the family, this can help you notice when something is affecting you before the feeling becomes the entire conversation.",
         "strength": "This can support reflection, emotional clarity, and greater understanding of your own reactions.",
         "watchout": "Recognizing an emotion does not automatically mean it is easy to regulate or communicate."
       },
-
       "high": {
         "core": "You generally show good awareness of your own emotional state and reactions.",
         "family_expression": "You may often recognize what you are feeling and why a particular interaction is affecting you.",
         "strength": "This can support thoughtful communication and self-reflection.",
         "watchout": "Awareness is most useful when it is followed by an intentional response."
       },
-
       "moderate": {
         "core": "You show a functional level of awareness of your emotional responses.",
         "family_expression": "You may recognize many emotional reactions clearly, while others become easier to understand after the moment has passed.",
         "strength": "This provides a useful foundation for reflection and growth.",
         "watchout": "Strong emotions or unfamiliar situations may make internal signals harder to identify quickly."
       },
-
       "developing": {
         "core": "Recognizing emotional reactions in the moment may require more deliberate attention.",
         "family_expression": "You may occasionally understand how strongly something affected you only after the interaction is over.",
         "strength": "Greater attention to internal cues can make emotional patterns easier to recognize over time.",
         "watchout": "Unrecognized emotions can sometimes influence behavior before their source becomes clear."
       },
-
       "lower": {
         "core": "Emotional self-recognition may not always occur automatically or immediately.",
         "family_expression": "Within family interactions, reactions may sometimes become visible before the feeling underneath them has been fully identified.",
@@ -38,38 +33,32 @@
         "watchout": "Without that reflection, others may notice a reaction before you have fully understood it yourself."
       }
     },
-
     "self_regulation": {
       "label": "Self-Regulation",
-
       "very_high": {
         "core": "You show a strong capacity to manage emotional reactions and choose how you respond.",
         "family_expression": "Within the family, you may often be able to stay deliberate even when an interaction becomes emotionally charged.",
         "strength": "This can support composure, patience, and constructive conflict management.",
         "watchout": "Strong regulation should not become emotional suppression or avoidance."
       },
-
       "high": {
         "core": "You generally show good ability to regulate emotional reactions once they arise.",
         "family_expression": "You may often be able to pause, adjust, and respond rather than simply react.",
         "strength": "This can support steadier communication and more productive conflict recovery.",
         "watchout": "Regulation can become harder when pressure is unusually high or prolonged."
       },
-
       "moderate": {
         "core": "You show a functional ability to manage emotional reactions, though that ability may vary with circumstances.",
         "family_expression": "Some family situations may be easy to regulate while higher-stakes interactions require more effort.",
         "strength": "You have a workable foundation for intentional emotional response.",
         "watchout": "Fatigue, frustration, or repeated conflict may reduce the amount of regulation available in the moment."
       },
-
       "developing": {
         "core": "Managing emotional reactions may require conscious effort, especially under pressure.",
         "family_expression": "You may sometimes know how you would prefer to respond while still finding it difficult to do so in the moment.",
         "strength": "Regulation can improve significantly through awareness, pacing, and deliberate response habits.",
         "watchout": "High-intensity situations may produce faster reactions than intended."
       },
-
       "lower": {
         "core": "Emotional reactions may sometimes emerge faster than they can be deliberately managed.",
         "family_expression": "Family members may occasionally experience the reaction before they understand the intention behind it.",
@@ -77,38 +66,32 @@
         "watchout": "Without deliberate recovery strategies, emotionally charged interactions may escalate quickly."
       }
     },
-
     "motivation": {
       "label": "Motivation",
-
       "very_high": {
         "core": "You show a strong internal drive to pursue goals, persist, and continue moving toward meaningful outcomes.",
         "family_expression": "Within the family, you may often become a source of momentum when something needs sustained effort.",
         "strength": "This can support persistence, optimism, and determination.",
         "watchout": "Strong internal drive can sometimes keep pushing after other people need a slower pace."
       },
-
       "high": {
         "core": "You generally show solid internal motivation and persistence.",
         "family_expression": "You may be willing to keep working toward an outcome even when progress becomes frustrating.",
         "strength": "This can support resilience and follow-through.",
         "watchout": "Persistence is most effective when the people around you are able to remain engaged as well."
       },
-
       "moderate": {
         "core": "Your motivation appears reasonably steady, with some variation depending on the meaning or importance of the goal.",
         "family_expression": "You may show strong persistence when something matters personally while being more selective elsewhere.",
         "strength": "This can help direct effort toward priorities rather than treating every goal equally.",
         "watchout": "Low-interest or unclear goals may be harder to sustain."
       },
-
       "developing": {
         "core": "Sustaining internal drive may depend more heavily on environment, clarity, or external reinforcement.",
         "family_expression": "You may be more energized when goals are clear and personally meaningful.",
         "strength": "Understanding what creates engagement can improve persistence.",
         "watchout": "Ambiguous or emotionally draining situations may reduce momentum."
       },
-
       "lower": {
         "core": "Internal persistence may be more sensitive to context, emotional climate, or the perceived value of the goal.",
         "family_expression": "Family expectations that lack meaning or clarity may be especially difficult to sustain.",
@@ -116,38 +99,32 @@
         "watchout": "Without that connection, effort may decline before the underlying issue is resolved."
       }
     },
-
     "social_awareness": {
       "label": "Social Awareness",
-
       "very_high": {
         "core": "You show a strong tendency to notice emotional information, reactions, and interpersonal cues from other people.",
         "family_expression": "Within the family, you may often recognize that something has shifted emotionally before anyone says it directly.",
         "strength": "This can support empathy, perspective-taking, and sensitivity to interpersonal dynamics.",
         "watchout": "Awareness of others should not require taking responsibility for every emotion in the room."
       },
-
       "high": {
         "core": "You generally show good awareness of how other people are feeling and responding.",
         "family_expression": "You may often notice changes in tone, mood, or engagement during family interactions.",
         "strength": "This can support empathy and more responsive communication.",
         "watchout": "Emotional cues can still be misread, particularly in tense or ambiguous situations."
       },
-
       "moderate": {
         "core": "You show a functional ability to notice emotional and interpersonal cues.",
         "family_expression": "Clear emotional signals may be easy to recognize while subtler signals require more attention.",
         "strength": "This provides a useful foundation for understanding the experience of others.",
         "watchout": "Quiet or indirect family members may require more deliberate checking-in."
       },
-
       "developing": {
         "core": "Reading emotional cues from others may require more deliberate attention.",
         "family_expression": "You may sometimes focus primarily on the content of a conversation rather than the emotional signals surrounding it.",
         "strength": "Asking rather than assuming can substantially improve interpersonal understanding.",
         "watchout": "Subtle signs of discomfort or withdrawal may occasionally be missed."
       },
-
       "lower": {
         "core": "Other people's emotional signals may not always be immediately obvious.",
         "family_expression": "Family members who communicate indirectly may be especially difficult to read without explicit conversation.",
@@ -155,38 +132,32 @@
         "watchout": "Assuming that silence means agreement can occasionally create misunderstandings."
       }
     },
-
     "social_regulation": {
       "label": "Social Regulation",
-
       "very_high": {
         "core": "You show a strong ability to adjust communication and behavior in response to interpersonal dynamics.",
         "family_expression": "Within the family, you may often help influence the emotional direction of a conversation rather than simply participating in it.",
         "strength": "This can support conflict recovery, relationship management, and constructive communication.",
         "watchout": "Managing the emotional climate should not mean carrying responsibility for everyone else's reaction."
       },
-
       "high": {
         "core": "You generally show good ability to manage relationships and adapt your response to other people.",
         "family_expression": "You may often recognize when a different tone, pace, or approach will make a conversation more productive.",
         "strength": "This can support cooperation and emotional recovery.",
         "watchout": "Relationship management becomes harder when your own emotional resources are depleted."
       },
-
       "moderate": {
         "core": "You show a functional ability to adjust communication across different interpersonal situations.",
         "family_expression": "You may adapt well in many circumstances while finding some personalities or conflicts more difficult.",
         "strength": "This provides a useful foundation for flexible communication.",
         "watchout": "Repeated tension may reduce flexibility and increase reliance on familiar response patterns."
       },
-
       "developing": {
         "core": "Adjusting communication to manage difficult interpersonal dynamics may require more conscious effort.",
         "family_expression": "You may sometimes understand what another person needs while still finding it challenging to alter the interaction.",
         "strength": "Intentional communication strategies can create significant improvement.",
         "watchout": "Emotionally charged exchanges may make adaptation more difficult."
       },
-
       "lower": {
         "core": "Managing difficult interpersonal dynamics may not always occur naturally in the moment.",
         "family_expression": "Once tension rises, it may be harder to shift the tone or direction of the interaction.",
@@ -195,15 +166,96 @@
       }
     }
   },
-
   "composites": {
     "self": "Your Self Composite reflects the combined picture of how you recognize and manage your own emotional experience.",
     "others": "Your Others Composite reflects how effectively you recognize and respond to emotional information involving other people.",
     "total": "Your Total EQ provides an overall view of emotional and interpersonal effectiveness across the measured dimensions."
   },
-
   "closing": [
     "EQ does not operate separately from behavior or motivation. It influences how effectively those natural tendencies are expressed when emotions and relationships enter the situation.",
     "In family dynamics, that distinction matters because a good intention and a good emotional outcome are not always the same thing."
-  ]
+  ],
+  "composite_ranges": {
+    "self": {
+      "very_high": {
+        "core": "This composite suggests a strong reported foundation for recognizing, managing, and directing your own emotional responses.",
+        "family_expression": "In family interactions, you may often be able to pause, name what you feel, and choose how to respond.",
+        "watchout": "This overall result does not guarantee the same ease in every dimension or situation."
+      },
+      "high": {
+        "core": "This composite suggests a generally established reported foundation for recognizing, managing, and directing your own emotional responses.",
+        "family_expression": "You may often find it helpful to pause, name what you feel, and choose how to respond.",
+        "watchout": "Review the individual dimensions for differences that the composite can hide."
+      },
+      "moderate": {
+        "core": "This composite suggests a mixed or context-dependent reported foundation for recognizing, managing, and directing your own emotional responses.",
+        "family_expression": "An intentional family practice is to pause, name what you feel, and choose how to respond.",
+        "watchout": "Use the dimension scores and real examples to identify where support would be useful."
+      },
+      "developing": {
+        "core": "This composite suggests that recognizing, managing, and directing your own emotional responses may benefit from deliberate practice.",
+        "family_expression": "Start with manageable moments to pause, name what you feel, and choose how to respond.",
+        "watchout": "A composite summarizes several results; it does not establish the same difficulty in every dimension."
+      },
+      "lower": {
+        "core": "This composite suggests more opportunity to build the measured skills involved in recognizing, managing, and directing your own emotional responses.",
+        "family_expression": "Clear agreements and time to practice can help you pause, name what you feel, and choose how to respond.",
+        "watchout": "This score is not a diagnosis or a judgment of your worth, intentions, or capacity to grow."
+      }
+    },
+    "others": {
+      "very_high": {
+        "core": "This composite suggests a strong reported foundation for understanding emotional cues and navigating relationships.",
+        "family_expression": "In family interactions, you may often be able to check your understanding of another person's feelings and agree on a next step.",
+        "watchout": "This overall result does not guarantee the same ease in every dimension or situation."
+      },
+      "high": {
+        "core": "This composite suggests a generally established reported foundation for understanding emotional cues and navigating relationships.",
+        "family_expression": "You may often find it helpful to check your understanding of another person's feelings and agree on a next step.",
+        "watchout": "Review the individual dimensions for differences that the composite can hide."
+      },
+      "moderate": {
+        "core": "This composite suggests a mixed or context-dependent reported foundation for understanding emotional cues and navigating relationships.",
+        "family_expression": "An intentional family practice is to check your understanding of another person's feelings and agree on a next step.",
+        "watchout": "Use the dimension scores and real examples to identify where support would be useful."
+      },
+      "developing": {
+        "core": "This composite suggests that understanding emotional cues and navigating relationships may benefit from deliberate practice.",
+        "family_expression": "Start with manageable moments to check your understanding of another person's feelings and agree on a next step.",
+        "watchout": "A composite summarizes several results; it does not establish the same difficulty in every dimension."
+      },
+      "lower": {
+        "core": "This composite suggests more opportunity to build the measured skills involved in understanding emotional cues and navigating relationships.",
+        "family_expression": "Clear agreements and time to practice can help you check your understanding of another person's feelings and agree on a next step.",
+        "watchout": "This score is not a diagnosis or a judgment of your worth, intentions, or capacity to grow."
+      }
+    },
+    "total": {
+      "very_high": {
+        "core": "This composite suggests a strong reported foundation for the emotional capacities measured across all five dimensions.",
+        "family_expression": "In family interactions, you may often be able to combine reflection, listening, and constructive follow-through.",
+        "watchout": "This overall result does not guarantee the same ease in every dimension or situation."
+      },
+      "high": {
+        "core": "This composite suggests a generally established reported foundation for the emotional capacities measured across all five dimensions.",
+        "family_expression": "You may often find it helpful to combine reflection, listening, and constructive follow-through.",
+        "watchout": "Review the individual dimensions for differences that the composite can hide."
+      },
+      "moderate": {
+        "core": "This composite suggests a mixed or context-dependent reported foundation for the emotional capacities measured across all five dimensions.",
+        "family_expression": "An intentional family practice is to combine reflection, listening, and constructive follow-through.",
+        "watchout": "Use the dimension scores and real examples to identify where support would be useful."
+      },
+      "developing": {
+        "core": "This composite suggests that the emotional capacities measured across all five dimensions may benefit from deliberate practice.",
+        "family_expression": "Start with manageable moments to combine reflection, listening, and constructive follow-through.",
+        "watchout": "A composite summarizes several results; it does not establish the same difficulty in every dimension."
+      },
+      "lower": {
+        "core": "This composite suggests more opportunity to build the measured skills involved in the emotional capacities measured across all five dimensions.",
+        "family_expression": "Clear agreements and time to practice can help you combine reflection, listening, and constructive follow-through.",
+        "watchout": "This score is not a diagnosis or a judgment of your worth, intentions, or capacity to grow."
+      }
+    }
+  }
 }

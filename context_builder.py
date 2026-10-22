@@ -9,6 +9,9 @@ from context_router import (
 )
 
 
+from narratives.score_wording import RANGE_POLICY, score_wording
+
+
 class ContextBuilder:
 
     def __init__(
@@ -115,6 +118,10 @@ class ContextBuilder:
                 "confidently resolved."
             )
 
+        wording = score_wording(persona_data, resolved_domain.value)
+        if wording:
+            context["score_range_wording"] = wording
+            context["score_range_policy"] = RANGE_POLICY
         return context
 
     def _build_disc_context(

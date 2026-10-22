@@ -1,4 +1,7 @@
 import json
+import os
+import tempfile
+from uuid import uuid4
 from pathlib import Path
 from typing import Any
 
@@ -180,3 +183,38 @@ class FamilyRepository:
         self,
     ) -> None:
         self.active_person_id = self.default_person_id
+
+    def save_persona(self, persona: dict, directory: Path) -> str:
+        """Publish a validated profile and roster entry; caller serializes writes."""
+        validate_persona(persona)
+        person = persona["person"]
+        person_id = person["person_id"]
+        if self.has_person(person_id):
+            if self.get_persona(person_id) != persona:
+                raise ValueError("A different profile already uses this person ID.")
+            return Path(self.get_member(person_id)["persona_file"]).name
+        directory.mkdir(parents=True, exist_ok=True)
+        target = directory / f"{uuid4().hex}.json"
+        member = {key: person[key] for key in ("person_id", "display_name", "family_role")}
+        member.update(persona_file=str(target.resolve()), debrief_enabled=True)
+        updated = {**self.family_data, "members": [*self.family_data["members"], member]}
+        validate_family_manifest(updated)
+        temporary = None
+        try:
+            with target.open("x", encoding="utf-8") as stream:
+                os.chmod(target, 0o600)
+                json.dump(persona, stream, indent=2, allow_nan=False)
+            with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", dir=self.manifest_path.parent, delete=False) as stream:
+                temporary = Path(stream.name)
+                json.dump(updated, stream, indent=2, allow_nan=False)
+            temporary.replace(self.manifest_path)
+        except Exception:
+            target.unlink(missing_ok=True)
+            raise
+        finally:
+            if temporary is not None:
+                temporary.unlink(missing_ok=True)
+        self.family_data = updated
+        self._members[person_id] = member
+        self._personas[person_id] = persona
+        return target.name

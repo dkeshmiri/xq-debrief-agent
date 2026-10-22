@@ -23,6 +23,7 @@
   }
   function setBusy(value) {
     busy = value;
+    $("use-persona").disabled = value;
     $("upload-fields").disabled = value;
     $("review-fields").disabled = value;
     $("generate-button").disabled = value || dirty || !$("reviewed").checked;
@@ -30,6 +31,7 @@
   }
   function clearResult() {
     result = null;
+    $("use-persona").hidden = true;
     $("result-section").hidden = true;
     $("json-preview").textContent = "";
   }
@@ -210,10 +212,11 @@
     clearResult(); setBusy(true); status("Writing family-oriented language while preserving your reviewed assessment facts…");
     try {
       result = await api("/api/assessments/generate", {method: "POST", headers: {"Content-Type": "application/json"}, body});
+      $("use-persona").hidden = !result.ready_for_debrief;
       $("result-badge").textContent = result.ready_for_debrief ? "Debrief-ready" : "Incomplete draft";
       $("result-badge").classList.toggle("draft", !result.ready_for_debrief);
       $("result-note").textContent = result.ready_for_debrief
-        ? "Validated against the existing persona schema. Read the family language before downloading. This does not add or overwrite a family member."
+        ? "Validated against the persona schema. Review the family language, then save this profile to the app or download the JSON. Saving adds a new family member without replacing an existing profile."
         : `This draft is not valid for the debrief engine. Missing: ${result.missing_fields.map(human).join(", ")}. Complete those fields above and regenerate to produce a debrief-ready file.`;
       $("download-json").textContent = result.ready_for_debrief ? "Download persona JSON" : "Download draft JSON";
       $("family-overview").textContent = result.persona.integrated.overview;
@@ -221,6 +224,15 @@
       $("result-section").hidden = false;
       status(result.ready_for_debrief ? "Family persona generated and validated." : "Family draft generated. Missing scores remain unknown.");
       $("result-section").scrollIntoView({behavior: "smooth", block: "start"});
+    } catch (error) {status(error.message, true);} finally {setBusy(false);}
+  });
+  $("use-persona").addEventListener("click", async () => {
+    if (busy || dirty || !result?.ready_for_debrief) return;
+    setBusy(true);
+    try {
+      const data = await api("/api/assessments/use", {method: "POST", headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({draft_id: draftId, revision, reviewed: true})});
+      window.location.href = `/debrief?file=${encodeURIComponent(data.file)}`;
     } catch (error) {status(error.message, true);} finally {setBusy(false);}
   });
   $("download-json").addEventListener("click", () => {

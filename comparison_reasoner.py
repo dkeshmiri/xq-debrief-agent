@@ -9,6 +9,7 @@ from openai import OpenAI
 
 from comparison_context_builder import ComparisonContextBuilder
 from comparison_engine import ComparisonEngine
+from narratives.score_wording import RANGE_POLICY, score_wording
 from context_router import (
     ContextDomain,
     DISC_TERMS,
@@ -162,6 +163,12 @@ class ComparisonReasoner:
         )
 
         context["question_domain"] = resolved_domain.value
+        domains = included_domains if resolved_domain == ContextDomain.INTEGRATED else [resolved_domain]
+        context["score_range_wording"] = {
+            person: {domain.value: score_wording(persona, domain.value) for domain in domains}
+            for person, persona in (("person_a", persona_a), ("person_b", persona_b))
+        }
+        context["score_range_policy"] = RANGE_POLICY
 
         context["included_domains"] = [
             domain.value
@@ -199,6 +206,8 @@ Follow these rules:
 
 1. Use only the supplied validated comparison context.
 2. Keep person_a and person_b facts separate.
+Use each person's score_range_wording for score interpretations, following
+score_range_policy. General dimension definitions must not override that wording.
 3. Never assign one person's scores, style, role, or traits to the other.
 4. Preserve exact XQ terminology.
 5. Never invent scores, labels, definitions, motives, history, or family facts.

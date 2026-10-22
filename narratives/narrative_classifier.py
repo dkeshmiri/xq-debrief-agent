@@ -1,4 +1,10 @@
 from typing import Literal
+from math import isfinite
+
+
+def validate_score(score: float) -> None:
+    if isinstance(score, bool) or not isinstance(score, (int, float)) or not isfinite(score) or not 0 <= score <= 100:
+        raise ValueError("Score must be a finite number between 0 and 100.")
 
 
 ScoreLevel = Literal[
@@ -30,12 +36,7 @@ def classify_disc_score(
     or primary behavioral style.
     """
 
-    if not 0 <= score <= 100:
-        raise ValueError(
-            f"DISC score must be between 0 and 100. "
-            f"Received: {score}"
-        )
-
+    validate_score(score)
     if score >= 70:
         return "very_high"
 
@@ -63,18 +64,8 @@ def classify_disc_shift(
     why the movement occurred.
     """
 
-    if not 0 <= natural <= 100:
-        raise ValueError(
-            f"Natural DISC score must be between 0 and 100. "
-            f"Received: {natural}"
-        )
-
-    if not 0 <= adapted <= 100:
-        raise ValueError(
-            f"Adapted DISC score must be between 0 and 100. "
-            f"Received: {adapted}"
-        )
-
+    validate_score(natural)
+    validate_score(adapted)
     difference = adapted - natural
 
     if difference >= 15:
@@ -103,12 +94,7 @@ def classify_driving_force_score(
     They do not redefine the canonical assessment.
     """
 
-    if not 0 <= score <= 100:
-        raise ValueError(
-            f"Driving Force score must be between 0 and 100. "
-            f"Received: {score}"
-        )
-
+    validate_score(score)
     if score >= 70:
         return "very_high"
 
@@ -135,12 +121,7 @@ def classify_eq_score(
     They do not redefine the canonical assessment.
     """
 
-    if not 0 <= score <= 100:
-        raise ValueError(
-            f"EQ score must be between 0 and 100. "
-            f"Received: {score}"
-        )
-
+    validate_score(score)
     if score >= 80:
         return "very_high"
 
@@ -163,6 +144,8 @@ def classify_eq_difference(
     Describe the size of the difference between two EQ dimensions.
     """
 
+    validate_score(first)
+    validate_score(second)
     difference = first - second
 
     if difference >= 15:

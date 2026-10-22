@@ -69,6 +69,46 @@ class ImporterTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.service.extract([("x.pdf", b"%PDF-"), ("x.pdf", b"%PDF-")])
 
+    def test_complementary_reports_keep_separate_citations_and_eq_values(self):
+        self.extraction.facts.eq.scores.self_awareness = 100
+        self.extraction.facts.eq.scores.self_regulation = 97
+        self.extraction.facts.eq.scores.motivation = 95
+        self.extraction.facts.eq.scores.social_awareness = 93
+        self.extraction.facts.eq.scores.social_regulation = 100
+        self.extraction.facts.eq.self_composite = 97
+        self.extraction.facts.eq.others_composite = 97
+        self.extraction.facts.eq.total_eq = 97
+        self.extraction.facts.assessment.assessment_date = None
+        self.extraction.evidence = [
+            Evidence(field="disc.natural.D", document="behavior.pdf", page=24, observation="Natural D"),
+            Evidence(field="eq.scores", document="eq.pdf", page=7, observation="Individual EQ results"),
+            Evidence(field="eq.total_eq", document="eq.pdf", page=8, observation="Total 97"),
+        ]
+        self.reply(self.extraction)
+        extracted = self.service.extract([
+            ("behavior.pdf", b"%PDF-1.7 behavior"), ("eq.pdf", b"%PDF-1.7 eq"),
+        ])
+        content = self.client.responses.parse.call_args.kwargs["input"][0]["content"]
+        self.assertEqual([part["filename"] for part in content[:-1]], ["behavior.pdf", "eq.pdf"])
+        self.assertNotEqual(content[0]["file_data"], content[1]["file_data"])
+        self.assertEqual([item.document for item in extracted.evidence], ["behavior.pdf", "eq.pdf", "eq.pdf"])
+        self.reply(self.language)
+        result = self.service.generate(extracted, "Relative")
+        self.assertEqual(result["persona"]["eq"], extracted.facts.eq.model_dump())
+        self.assertEqual(result["missing_fields"], ["assessment.assessment_date"])
+        self.assertFalse(result["ready_for_debrief"])
+        extracted.facts.assessment.assessment_date = "2025-05-30"
+        result = self.service.generate(extracted, "Relative")
+        self.assertTrue(result["ready_for_debrief"])
+        validate_persona(result["persona"])
+
+    def test_multiple_reports_do_not_relabel_unmatched_evidence(self):
+        self.extraction.evidence = [Evidence(field="eq.total_eq", document="unknown.pdf", page=8, observation="97")]
+        self.reply(self.extraction)
+        result = self.service.extract([("behavior.pdf", b"%PDF-"), ("eq.pdf", b"%PDF-")])
+        self.assertEqual(result.evidence[0].document, "unknown.pdf")
+        self.assertTrue(any("filenames could not be matched" in warning for warning in result.warnings))
+
     def test_partial_or_refused_response_rejected(self):
         for status, parsed in (("incomplete", self.extraction), ("completed", None)):
             self.client.responses.parse.return_value = SimpleNamespace(status=status, output_parsed=parsed)
@@ -83,6 +123,9 @@ class ImporterTests(unittest.TestCase):
         validate_persona(persona)
         self.assertTrue(result["ready_for_debrief"])
         self.assertEqual(persona["person"]["family_role"], "Grandparent")
+        language_input = json.loads(self.client.responses.parse.call_args.kwargs["input"][0]["content"][0]["text"])
+        self.assertEqual(language_input["score_range_wording"]["disc"]["natural.D"]["band"], "very_high")
+        self.assertIn("not validated population norms", language_input["score_range_policy"])
         for key in ("disc", "driving_forces", "eq"):
             for field, value in self.extraction.facts.model_dump()[key].items():
                 self.assertEqual(persona[key][field], value)
@@ -218,6 +261,25 @@ class ImportRoutesTests(unittest.TestCase):
         response = self.http.post("/api/assessments/extract", data={"family_role": "Parent", "reports": (io.BytesIO(b"%PDF-1"), "x.pdf")})
         self.assertEqual(response.status_code, 413)
         self.assertIn("error", response.json)
+
+    def test_use_requires_generated_complete_saved_revision(self):
+        save = Mock(return_value="new-person.json")
+        self.app.config["SAVE_ASSESSMENT_PERSONA"] = save
+        payload = {"draft_id": self.draft["id"], "revision": 1, "reviewed": True}
+        self.assertEqual(self.http.post("/api/assessments/use", json=payload).status_code, 400)
+        self.store.save_generated(self.draft["id"], 1, {"persona": {}, "ready_for_debrief": False})
+        self.assertEqual(self.http.post("/api/assessments/use", json=payload).status_code, 400)
+        self.store.save_generated(self.draft["id"], 1, {"persona": {"saved": True}, "ready_for_debrief": True})
+        response = self.http.post("/api/assessments/use", json=payload)
+        self.assertEqual(response.status_code, 200)
+        save.assert_called_once_with({"saved": True})
+        payload["persona"] = {"injected": True}
+        self.assertEqual(self.http.post("/api/assessments/use", json=payload).status_code, 422)
+        del payload["persona"]
+        self.save()
+        self.assertEqual(self.http.post("/api/assessments/use", json=payload).status_code, 409)
+        payload["revision"] = 2
+        self.assertEqual(self.http.post("/api/assessments/use", json=payload).status_code, 400)
 
     def test_path_traversal_and_unknown_drafts_rejected(self):
         with self.assertRaises(KeyError): self.store.get("../../.env")

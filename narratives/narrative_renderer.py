@@ -1,4 +1,4 @@
-#This is the new renderer. It adds refactorization rather than just the loaded demo profiles.
+"""Deterministic family narration from reviewed score-range language."""
 import json
 from pathlib import Path
 from typing import Any
@@ -116,15 +116,12 @@ def render_disc_narrative(
         "profiles"
     ]
 
-    if primary_style not in profile_library:
-        raise ValueError(
-            f"Unsupported DISC profile: "
-            f"{primary_style}"
-        )
-
-    profile = profile_library[
-        primary_style
-    ]
+    profile = profile_library.get(primary_style, {
+        "opening": "We will use the individual scores to explore this reported pattern.",
+        "family_presence": "The style name is retained as it appears in your assessment.",
+        "strength": "Different combinations of preferences can support different family needs.",
+        "watchout": "A style label alone does not explain every response or situation.",
+    })
 
     parts: list[str] = []
 
@@ -242,6 +239,17 @@ def render_disc_narrative(
             shift_parts
         )
 
+    for trait in ("D", "I", "S", "C"):
+        label = library["trait_names"][trait]
+        level = classify_disc_score(adapted[trait])
+        parts.append(f"Your adapted {label} score is {adapted[trait]}.")
+        if level == classify_disc_score(natural[trait]):
+            parts.append("Its preference description is similar to your natural pattern.")
+        else:
+            parts.append("For this adapted pattern, the score suggests the following preferences.")
+            parts.extend(library["traits"][trait][level].values())
+    parts.append("Adapted scores describe a reported adjustment in behavior; they do not establish its cause.")
+
     # -----------------------------------
     # EXISTING PERSON-SPECIFIC CONTENT
     # -----------------------------------
@@ -354,52 +362,6 @@ def render_driving_forces_narrative(
             )
         )
 
-        for force in primary:
-            score = scores[force]
-
-            level = (
-                classify_driving_force_score(
-                    score
-                )
-            )
-
-            direction = (
-                "high"
-                if level in (
-                    "very_high",
-                    "high",
-                    "moderate",
-                )
-                else "low"
-            )
-
-            atom = library[
-                "forces"
-            ][force][direction]
-
-            parts.append(
-                (
-                    f"{force}, at {score}, gives us "
-                    f"one important part of that picture."
-                )
-            )
-
-            parts.append(
-                atom["core"]
-            )
-
-            parts.append(
-                atom["family_expression"]
-            )
-
-            parts.append(
-                atom["strength"]
-            )
-
-            parts.append(
-                atom["watchout"]
-            )
-
     # -----------------------------------
     # SITUATIONAL CLUSTER
     # -----------------------------------
@@ -433,6 +395,12 @@ def render_driving_forces_narrative(
                 f"{library['clusters']['indifferent']}"
             )
         )
+
+    # Explain every measured force, including situational and indifferent results.
+    for force, score in scores.items():
+        atom = library["forces"][force][classify_driving_force_score(score)]
+        parts.append(f"Your {force} score is {score}.")
+        parts.extend(atom[key] for key in ("core", "family_expression", "strength", "watchout"))
 
     # -----------------------------------
     # MOTIVATIONAL CONTRASTS
@@ -708,26 +676,14 @@ def render_eq_narrative(
     # COMPOSITES
     # -----------------------------------
 
-    parts.append(
-        (
-            f"Your Self Composite is {self_composite}. "
-            f"{library['composites']['self']}"
-        )
-    )
-
-    parts.append(
-        (
-            f"Your Others Composite is {others_composite}. "
-            f"{library['composites']['others']}"
-        )
-    )
-
-    parts.append(
-        (
-            f"Your Total EQ is {total_eq}. "
-            f"{library['composites']['total']}"
-        )
-    )
+    for key, label, score in (
+        ("self", "Self Composite", self_composite),
+        ("others", "Others Composite", others_composite),
+        ("total", "Total EQ", total_eq),
+    ):
+        parts.append(f"Your {label} is {score}. {library['composites'][key]}")
+        atom = library["composite_ranges"][key][classify_eq_score(score)]
+        parts.extend(atom.values())
 
     # -----------------------------------
     # SELF VS OTHERS COMPOSITE

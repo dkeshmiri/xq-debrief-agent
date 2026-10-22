@@ -5,10 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Assessment JSON Maker · XQ Family</title>
   <link rel="stylesheet" href="/static/json_maker.css">
+  <link rel="stylesheet" href="/static/portal.css">
   <script src="/static/json_maker.js" defer></script>
 </head>
 <body>
-  <header><a class="brand" href="/">XQ <span>FAMILY</span></a><a href="/">Back to debrief <span aria-hidden="true">↗</span></a></header>
+  <header><a class="brand" href="/">XQ <span>FAMILY</span></a><a href="/">Profile menu <span aria-hidden="true">↗</span></a></header>
   <main>
     <div class="intro"><p class="eyebrow">ASSESSMENT WORKSPACE</p><h1>From assessment<br>to family understanding.</h1><p>Bring the report. Keep the facts. Create a family-oriented persona in the format your debrief already uses.</p></div>
     <ol class="steps" aria-label="Workflow"><li><b>01</b> Upload reports</li><li><b>02</b> Review the facts</li><li><b>03</b> Create & download</li></ol>
@@ -29,7 +30,7 @@
         <h3>Person & assessment</h3><div id="identity-fields" class="field-grid"></div>
         <h3>DISC</h3><p class="hint">Natural and Adapted are separate profiles.</p><div id="disc-fields" class="score-grid"></div>
         <h3>Driving Forces</h3><div id="force-fields" class="field-grid"></div><div id="cluster-fields" class="field-grid clusters"></div>
-        <h3>Emotional intelligence</h3><p class="hint">Enter only reported scores. Do not calculate or estimate missing composites.</p><div id="eq-fields" class="field-grid"></div>
+        <h3>Emotional intelligence</h3><p class="hint">Use the person's results, not population norms. Reported Self, Others, and Total Emotional Quotient map to the composites below. Do not calculate or estimate missing composites.</p><div id="eq-fields" class="field-grid"></div>
         <details><summary>Source evidence & report findings</summary><p class="hint">Page references and summaries from all substantive sections are retained in the extraction download. They are not instructions to the generator.</p><div id="evidence"></div><div id="sections"></div></details>
         <div id="missing" class="notice"></div>
         <div id="override-panel" class="override-panel" hidden>
@@ -47,7 +48,7 @@
     <section id="result-section" class="card" aria-labelledby="result-title" hidden>
       <div class="section-heading"><div><p class="eyebrow">03 / FAMILY PERSONA</p><h2 id="result-title">Your JSON is ready to review.</h2></div><span id="result-badge" class="tag"></span></div>
       <p id="result-note"></p><p id="family-overview" class="overview"></p>
-      <div class="actions"><button id="download-json" type="button">Download persona JSON</button><button id="copy-json" type="button" class="secondary">Copy JSON</button></div>
+      <div class="actions"><button id="use-persona" type="button" hidden>Save profile & continue to debrief</button><button id="download-json" type="button">Download persona JSON</button><button id="copy-json" type="button" class="secondary">Copy JSON</button></div>
       <details><summary>View full JSON</summary><pre id="json-preview" tabindex="0"></pre></details>
     </section>
     <footer>Exact scores. Thoughtful interpretation. <span>Nothing is added to your family roster automatically.</span></footer>

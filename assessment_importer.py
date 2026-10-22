@@ -9,6 +9,7 @@ from openai import OpenAI
 
 from assessment_schema import Extraction, FamilyLanguage, missing_fields, validate_review
 from schemas import validate_persona
+from narratives.score_wording import RANGE_POLICY, score_wording
 
 MAX_PDF_BYTES = 24 * 1024 * 1024
 MAX_REPORTS = 3
@@ -28,6 +29,26 @@ five EQ scores and three composites ONLY when explicitly present. Never estimate
 missing scores, calculate missing composites, copy demo values, or map another
 instrument's dimensions to EQ. Use null for unknown/unreadable/missing facts,
 empty lists for unreported clusters, and explain missing data in warnings.
+
+Combine complementary reports for the SAME person into one set of facts: a
+Talent Insights report may provide DISC and Driving Forces while a separate
+Emotional Quotient report provides EQ. Missing in one document does not mean
+missing if another supplies it. Never average conflicting results or silently
+prefer an attachment: leave the conflicting field null and cite both results.
+For TTI Emotional Quotient reports, map Self-Awareness, Self-Regulation,
+Motivation, Social Awareness, and Social Regulation to the five eq.scores keys.
+Map the reported Self score to self_composite, Others to others_composite, and
+Total Emotional Quotient to total_eq. Read the individual result bars, not the
+asterisked population norms or wheel scale labels. Preserve the printed rounded
+composites even if recalculating them would give a different decimal value.
+Retain individualized EQ characteristics and dimension development guidance in
+sections, distinguishing recommendations from demonstrated behavior.
+
+The persona has only one assessment_date. When reports show different dates or
+any date is ambiguous, leave it null and list each filename and printed date in
+warnings for operator review. Do not substitute an EQ date for the DISC date or
+use copyright/norm years as assessment dates. Include all contributing instrument
+names in assessment.source and retain their separate page evidence.
 
 Use ISO YYYY-MM-DD only when the date interpretation is unambiguous; otherwise
 null with the exact printed date in warnings for operator confirmation. Do not
@@ -66,6 +87,8 @@ report characteristics distinct from suggested family applications. Avoid raw
 numeric scores in prose: the application provides authoritative score fields.
 Use plain, concise sentences, no Markdown, no business-management jargon. Give
 3-6 concrete items per list and short overview and closing paragraphs.
+Use the supplied score_range_wording and score_range_policy to keep score
+interpretations consistent with the spoken debrief. Preserve their qualifications.
 """
 
 
@@ -144,6 +167,8 @@ class AssessmentImporter:
                 "reviewed_assessment": extraction.model_dump(),
                 "family_role": family_role,
                 "missing_fields": missing,
+                "score_range_wording": score_wording(extraction.facts.model_dump(), "integrated"),
+                "score_range_policy": RANGE_POLICY,
             }),
         }])
         facts = extraction.facts.model_dump()

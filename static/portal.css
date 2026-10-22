@@ -1,0 +1,20 @@
+body { background: #f5f4ee; color: #253e34; }
+header { background: #f5f4ee; border-bottom: 1px solid #dedfd5; }
+h1,h2 { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; letter-spacing: -.035em; }
+h1 { font-size: clamp(36px,5vw,64px); line-height: 1.08; }
+h2 { font-size: 29px; }
+button { background: #234e40; border-radius: 9px; }
+.card { border-radius: 18px; box-shadow: 0 10px 35px #243d3210; }
+.brand { font-family: Georgia, serif; font-size: 36px; text-decoration: none; }
+.brand span { font: 11px system-ui; letter-spacing: .18em; }
+.welcome main { max-width: 1050px; padding-top: 64px; }
+.welcome .topbar { display: flex; align-items: center; justify-content: space-between; padding: 20px 6%; }
+.welcome .topbar > span { font-size: 13px; color: #66766c; }
+.welcome main > .eyebrow { color: #966646; letter-spacing: .2em; }
+.welcome main > .actions { margin: 30px 0; }
+.welcome .card { padding: 38px; border-left: 5px solid #ac7756; }
+.welcome #new-panel { background: #e9eee5; }
+.welcome select { max-width: 650px; background: #fffef9; }
+.welcome .hint { color: #647369; }
+:focus-visible { outline: 3px solid #ac7756; outline-offset: 4px; }
+@media(max-width:600px) { .welcome main { padding-top: 30px; } .welcome .card { padding: 24px; } .welcome .topbar > span { display:none; } }

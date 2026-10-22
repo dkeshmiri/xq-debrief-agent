@@ -1,194 +1,398 @@
 {
   "forces": {
     "Intellectual": {
+      "very_high": {
+        "core": "Your Intellectual result suggests a particularly strong emphasis on learning and understanding.",
+        "family_expression": "In family life, you may often ask for the reasoning behind a shared decision.",
+        "strength": "This preference can contribute curiosity and informed choices.",
+        "watchout": "When it becomes a dominant priority, it may help to leave room for a decision once everyone has enough information."
+      },
       "high": {
-        "core": "Understanding matters to you. You are energized by learning, gaining knowledge, and making sense of how things work.",
-        "family_expression": "Within the family, you may naturally ask questions, seek context, or want to understand the reasoning behind a decision.",
-        "strength": "This can bring curiosity, perspective, and thoughtful problem-solving.",
-        "watchout": "You may sometimes want more explanation than another family member feels is necessary."
+        "core": "Your Intellectual result suggests that learning and understanding can be an important motivator.",
+        "family_expression": "You may be drawn to ask for the reasoning behind a shared decision when the family makes plans.",
+        "strength": "This can support curiosity and informed choices.",
+        "watchout": "It can also help to leave room for a decision once everyone has enough information."
+      },
+      "moderate": {
+        "core": "Your Intellectual result suggests a flexible or context-dependent emphasis on learning and understanding.",
+        "family_expression": "You may sometimes ask for the reasoning behind a shared decision, while giving other priorities more weight in other situations.",
+        "strength": "This flexibility can make room for curiosity and informed choices without making it the deciding factor every time.",
+        "watchout": "Explain which priorities matter in the current situation rather than expecting family members to predict them."
       },
       "low": {
-        "core": "You are less likely to need extensive explanation or knowledge before something becomes useful to you.",
-        "family_expression": "Within the family, you may be comfortable moving forward once you have enough information rather than continuing to study the issue.",
-        "strength": "This can support practical decision-making and reduce unnecessary analysis.",
-        "watchout": "A highly Intellectual family member may occasionally feel that an issue is being resolved before it has been fully understood."
+        "core": "Your Intellectual result suggests that learning and understanding may be a less prominent motivator.",
+        "family_expression": "A family member who places greater weight on this priority may want to ask for the reasoning behind a shared decision more often than you do.",
+        "strength": "Naming your different priorities can help the family make room for more than one approach.",
+        "watchout": "A lower preference does not mean inability, lack of care, or a high score on the opposing force."
+      },
+      "very_low": {
+        "core": "Your Intellectual result suggests that learning and understanding may have relatively little motivational pull for you.",
+        "family_expression": "You may need a different reason to engage when a shared activity mainly emphasizes this priority.",
+        "strength": "Recognizing that difference can help you explain what would make participation meaningful.",
+        "watchout": "Relatives who value this priority may still want to ask for the reasoning behind a shared decision. Their preference and yours both deserve consideration."
       }
     },
-
     "Instinctive": {
+      "very_high": {
+        "core": "Your Instinctive result suggests a particularly strong emphasis on drawing on experience and intuition.",
+        "family_expression": "In family life, you may often suggest a familiar approach to a household problem.",
+        "strength": "This preference can contribute practical experience.",
+        "watchout": "When it becomes a dominant priority, it may help to check whether new information changes what worked before."
+      },
       "high": {
-        "core": "You tend to trust experience, intuition, and what has already proven useful rather than needing extensive theory.",
-        "family_expression": "You may often approach family decisions through what feels practical or familiar.",
-        "strength": "This can help simplify decisions and keep attention on what actually works.",
-        "watchout": "Highly Intellectual family members may sometimes want more analysis or explanation than you naturally require."
+        "core": "Your Instinctive result suggests that drawing on experience and intuition can be an important motivator.",
+        "family_expression": "You may be drawn to suggest a familiar approach to a household problem when the family makes plans.",
+        "strength": "This can support practical experience.",
+        "watchout": "It can also help to check whether new information changes what worked before."
+      },
+      "moderate": {
+        "core": "Your Instinctive result suggests a flexible or context-dependent emphasis on drawing on experience and intuition.",
+        "family_expression": "You may sometimes suggest a familiar approach to a household problem, while giving other priorities more weight in other situations.",
+        "strength": "This flexibility can make room for practical experience without making it the deciding factor every time.",
+        "watchout": "Explain which priorities matter in the current situation rather than expecting family members to predict them."
       },
       "low": {
-        "core": "Instinctive considerations are less likely to dominate your decisions.",
-        "family_expression": "You may be more willing to investigate, learn, or challenge familiar assumptions before deciding what makes sense.",
-        "strength": "This can support curiosity and openness to new information.",
-        "watchout": "There may be times when additional analysis adds complexity to something another person sees as straightforward."
+        "core": "Your Instinctive result suggests that drawing on experience and intuition may be a less prominent motivator.",
+        "family_expression": "A family member who places greater weight on this priority may want to suggest a familiar approach to a household problem more often than you do.",
+        "strength": "Naming your different priorities can help the family make room for more than one approach.",
+        "watchout": "A lower preference does not mean inability, lack of care, or a high score on the opposing force."
+      },
+      "very_low": {
+        "core": "Your Instinctive result suggests that drawing on experience and intuition may have relatively little motivational pull for you.",
+        "family_expression": "You may need a different reason to engage when a shared activity mainly emphasizes this priority.",
+        "strength": "Recognizing that difference can help you explain what would make participation meaningful.",
+        "watchout": "Relatives who value this priority may still want to suggest a familiar approach to a household problem. Their preference and yours both deserve consideration."
       }
     },
-
     "Resourceful": {
+      "very_high": {
+        "core": "Your Resourceful result suggests a particularly strong emphasis on making effective use of time, money, and effort.",
+        "family_expression": "In family life, you may often weigh the practical return of a shared purchase.",
+        "strength": "This preference can contribute resource planning.",
+        "watchout": "When it becomes a dominant priority, it may help to include relational value even when it cannot be measured."
+      },
       "high": {
-        "core": "You tend to pay close attention to usefulness, efficiency, resources, and return on effort.",
-        "family_expression": "At home, you may naturally ask whether a decision produces a meaningful result or makes good use of time, money, or energy.",
-        "strength": "This can bring practical judgment and strong stewardship of resources.",
-        "watchout": "Not every family decision is best evaluated primarily through efficiency or measurable return."
+        "core": "Your Resourceful result suggests that making effective use of time, money, and effort can be an important motivator.",
+        "family_expression": "You may be drawn to weigh the practical return of a shared purchase when the family makes plans.",
+        "strength": "This can support resource planning.",
+        "watchout": "It can also help to include relational value even when it cannot be measured."
+      },
+      "moderate": {
+        "core": "Your Resourceful result suggests a flexible or context-dependent emphasis on making effective use of time, money, and effort.",
+        "family_expression": "You may sometimes weigh the practical return of a shared purchase, while giving other priorities more weight in other situations.",
+        "strength": "This flexibility can make room for resource planning without making it the deciding factor every time.",
+        "watchout": "Explain which priorities matter in the current situation rather than expecting family members to predict them."
       },
       "low": {
-        "core": "Practical return is less likely to be the central reason something matters to you.",
-        "family_expression": "You may be willing to invest in something because of its personal or relational value even when the practical payoff is difficult to measure.",
-        "strength": "This can make room for experiences and priorities that are valuable without being efficient.",
-        "watchout": "A highly Resourceful family member may occasionally wonder why practical implications are receiving less attention."
+        "core": "Your Resourceful result suggests that making effective use of time, money, and effort may be a less prominent motivator.",
+        "family_expression": "A family member who places greater weight on this priority may want to weigh the practical return of a shared purchase more often than you do.",
+        "strength": "Naming your different priorities can help the family make room for more than one approach.",
+        "watchout": "A lower preference does not mean inability, lack of care, or a high score on the opposing force."
+      },
+      "very_low": {
+        "core": "Your Resourceful result suggests that making effective use of time, money, and effort may have relatively little motivational pull for you.",
+        "family_expression": "You may need a different reason to engage when a shared activity mainly emphasizes this priority.",
+        "strength": "Recognizing that difference can help you explain what would make participation meaningful.",
+        "watchout": "Relatives who value this priority may still want to weigh the practical return of a shared purchase. Their preference and yours both deserve consideration."
       }
     },
-
     "Selfless": {
+      "very_high": {
+        "core": "Your Selfless result suggests a particularly strong emphasis on contributing effort without requiring a direct return.",
+        "family_expression": "In family life, you may often give time to a shared task without keeping score.",
+        "strength": "This preference can contribute willingness to contribute.",
+        "watchout": "When it becomes a dominant priority, it may help to agree on limits so giving remains sustainable."
+      },
       "high": {
-        "core": "You may be relatively willing to contribute time, effort, or resources without requiring a direct personal return.",
-        "family_expression": "Within the family, you may naturally support needs simply because helping feels worthwhile.",
-        "strength": "This can bring generosity and willingness to contribute without keeping score.",
-        "watchout": "Without healthy boundaries, generosity can sometimes become overextension."
+        "core": "Your Selfless result suggests that contributing effort without requiring a direct return can be an important motivator.",
+        "family_expression": "You may be drawn to give time to a shared task without keeping score when the family makes plans.",
+        "strength": "This can support willingness to contribute.",
+        "watchout": "It can also help to agree on limits so giving remains sustainable."
+      },
+      "moderate": {
+        "core": "Your Selfless result suggests a flexible or context-dependent emphasis on contributing effort without requiring a direct return.",
+        "family_expression": "You may sometimes give time to a shared task without keeping score, while giving other priorities more weight in other situations.",
+        "strength": "This flexibility can make room for willingness to contribute without making it the deciding factor every time.",
+        "watchout": "Explain which priorities matter in the current situation rather than expecting family members to predict them."
       },
       "low": {
-        "core": "You are less likely to separate effort completely from the value or outcome it produces.",
-        "family_expression": "You may naturally consider whether an investment of time or resources makes sense before committing.",
-        "strength": "This can protect against overcommitment or poorly defined obligations.",
-        "watchout": "More Selfless family members may sometimes experience this practical evaluation as overly transactional."
+        "core": "Your Selfless result suggests that contributing effort without requiring a direct return may be a less prominent motivator.",
+        "family_expression": "A family member who places greater weight on this priority may want to give time to a shared task without keeping score more often than you do.",
+        "strength": "Naming your different priorities can help the family make room for more than one approach.",
+        "watchout": "A lower preference does not mean inability, lack of care, or a high score on the opposing force."
+      },
+      "very_low": {
+        "core": "Your Selfless result suggests that contributing effort without requiring a direct return may have relatively little motivational pull for you.",
+        "family_expression": "You may need a different reason to engage when a shared activity mainly emphasizes this priority.",
+        "strength": "Recognizing that difference can help you explain what would make participation meaningful.",
+        "watchout": "Relatives who value this priority may still want to give time to a shared task without keeping score. Their preference and yours both deserve consideration."
       }
     },
-
     "Harmonious": {
+      "very_high": {
+        "core": "Your Harmonious result suggests a particularly strong emphasis on balance, surroundings, and the overall experience.",
+        "family_expression": "In family life, you may often consider how a family routine feels as well as what it achieves.",
+        "strength": "This preference can contribute attention to quality of experience.",
+        "watchout": "When it becomes a dominant priority, it may help to allow for imperfect conditions when something needs doing."
+      },
       "high": {
-        "core": "You tend to value experience, balance, surroundings, and a sense that life feels personally meaningful.",
-        "family_expression": "You may be especially attentive to atmosphere, quality of experience, and whether family life feels balanced.",
-        "strength": "This can bring sensitivity to environment, experience, and quality of life.",
-        "watchout": "Highly practical family members may sometimes place less weight on atmosphere or experience than you do."
+        "core": "Your Harmonious result suggests that balance, surroundings, and the overall experience can be an important motivator.",
+        "family_expression": "You may be drawn to consider how a family routine feels as well as what it achieves when the family makes plans.",
+        "strength": "This can support attention to quality of experience.",
+        "watchout": "It can also help to allow for imperfect conditions when something needs doing."
+      },
+      "moderate": {
+        "core": "Your Harmonious result suggests a flexible or context-dependent emphasis on balance, surroundings, and the overall experience.",
+        "family_expression": "You may sometimes consider how a family routine feels as well as what it achieves, while giving other priorities more weight in other situations.",
+        "strength": "This flexibility can make room for attention to quality of experience without making it the deciding factor every time.",
+        "watchout": "Explain which priorities matter in the current situation rather than expecting family members to predict them."
       },
       "low": {
-        "core": "Experience or aesthetic balance is less likely to outweigh practical considerations.",
-        "family_expression": "You may focus more readily on what needs to be accomplished than on whether the process feels ideal.",
-        "strength": "This can help maintain focus when conditions are imperfect.",
-        "watchout": "Family members who strongly value experience or harmony may occasionally feel that atmosphere is being overlooked."
+        "core": "Your Harmonious result suggests that balance, surroundings, and the overall experience may be a less prominent motivator.",
+        "family_expression": "A family member who places greater weight on this priority may want to consider how a family routine feels as well as what it achieves more often than you do.",
+        "strength": "Naming your different priorities can help the family make room for more than one approach.",
+        "watchout": "A lower preference does not mean inability, lack of care, or a high score on the opposing force."
+      },
+      "very_low": {
+        "core": "Your Harmonious result suggests that balance, surroundings, and the overall experience may have relatively little motivational pull for you.",
+        "family_expression": "You may need a different reason to engage when a shared activity mainly emphasizes this priority.",
+        "strength": "Recognizing that difference can help you explain what would make participation meaningful.",
+        "watchout": "Relatives who value this priority may still want to consider how a family routine feels as well as what it achieves. Their preference and yours both deserve consideration."
       }
     },
-
     "Objective": {
+      "very_high": {
+        "core": "Your Objective result suggests a particularly strong emphasis on functionality and practical features of the surroundings.",
+        "family_expression": "In family life, you may often focus on what makes a household arrangement work.",
+        "strength": "This preference can contribute practical problem-solving.",
+        "watchout": "When it becomes a dominant priority, it may help to ask how the experience feels to others."
+      },
       "high": {
-        "core": "You tend to place greater emphasis on functionality and observable results than on atmosphere or aesthetic experience.",
-        "family_expression": "You may naturally focus on whether something works rather than whether it feels ideal.",
-        "strength": "This can bring practicality and clarity when circumstances are messy.",
-        "watchout": "A highly Harmonious family member may want greater attention paid to the experience surrounding the outcome."
+        "core": "Your Objective result suggests that functionality and practical features of the surroundings can be an important motivator.",
+        "family_expression": "You may be drawn to focus on what makes a household arrangement work when the family makes plans.",
+        "strength": "This can support practical problem-solving.",
+        "watchout": "It can also help to ask how the experience feels to others."
+      },
+      "moderate": {
+        "core": "Your Objective result suggests a flexible or context-dependent emphasis on functionality and practical features of the surroundings.",
+        "family_expression": "You may sometimes focus on what makes a household arrangement work, while giving other priorities more weight in other situations.",
+        "strength": "This flexibility can make room for practical problem-solving without making it the deciding factor every time.",
+        "watchout": "Explain which priorities matter in the current situation rather than expecting family members to predict them."
       },
       "low": {
-        "core": "Pure functionality is less likely to be enough by itself when evaluating an experience or decision.",
-        "family_expression": "You may care not only about what happens, but also about how the environment or experience feels.",
-        "strength": "This can support greater attention to quality of life and personal experience.",
-        "watchout": "Practical family members may occasionally see those considerations as secondary."
+        "core": "Your Objective result suggests that functionality and practical features of the surroundings may be a less prominent motivator.",
+        "family_expression": "A family member who places greater weight on this priority may want to focus on what makes a household arrangement work more often than you do.",
+        "strength": "Naming your different priorities can help the family make room for more than one approach.",
+        "watchout": "A lower preference does not mean inability, lack of care, or a high score on the opposing force."
+      },
+      "very_low": {
+        "core": "Your Objective result suggests that functionality and practical features of the surroundings may have relatively little motivational pull for you.",
+        "family_expression": "You may need a different reason to engage when a shared activity mainly emphasizes this priority.",
+        "strength": "Recognizing that difference can help you explain what would make participation meaningful.",
+        "watchout": "Relatives who value this priority may still want to focus on what makes a household arrangement work. Their preference and yours both deserve consideration."
       }
     },
-
     "Altruistic": {
+      "very_high": {
+        "core": "Your Altruistic result suggests a particularly strong emphasis on helping others for the sake of meeting their needs.",
+        "family_expression": "In family life, you may often offer support when a relative needs assistance.",
+        "strength": "This preference can contribute care for others.",
+        "watchout": "When it becomes a dominant priority, it may help to ask what help is wanted and respect your own limits."
+      },
       "high": {
-        "core": "You tend to place meaningful value on helping, supporting, and improving outcomes for other people.",
-        "family_expression": "Within the family, you may naturally notice who needs support and feel motivated to contribute to their well-being.",
-        "strength": "This can bring empathy, generosity, and strong concern for others.",
-        "watchout": "A strong desire to help can occasionally make it difficult to recognize when another person needs independence rather than assistance."
+        "core": "Your Altruistic result suggests that helping others for the sake of meeting their needs can be an important motivator.",
+        "family_expression": "You may be drawn to offer support when a relative needs assistance when the family makes plans.",
+        "strength": "This can support care for others.",
+        "watchout": "It can also help to ask what help is wanted and respect your own limits."
+      },
+      "moderate": {
+        "core": "Your Altruistic result suggests a flexible or context-dependent emphasis on helping others for the sake of meeting their needs.",
+        "family_expression": "You may sometimes offer support when a relative needs assistance, while giving other priorities more weight in other situations.",
+        "strength": "This flexibility can make room for care for others without making it the deciding factor every time.",
+        "watchout": "Explain which priorities matter in the current situation rather than expecting family members to predict them."
       },
       "low": {
-        "core": "Helping others is less likely to become an automatic priority simply because a need exists.",
-        "family_expression": "You may be more selective about when, where, and how you invest support.",
-        "strength": "This can protect boundaries and encourage personal responsibility.",
-        "watchout": "Highly Altruistic family members may sometimes experience that selectivity as a lack of concern even when that is not the intention."
+        "core": "Your Altruistic result suggests that helping others for the sake of meeting their needs may be a less prominent motivator.",
+        "family_expression": "A family member who places greater weight on this priority may want to offer support when a relative needs assistance more often than you do.",
+        "strength": "Naming your different priorities can help the family make room for more than one approach.",
+        "watchout": "A lower preference does not mean inability, lack of care, or a high score on the opposing force."
+      },
+      "very_low": {
+        "core": "Your Altruistic result suggests that helping others for the sake of meeting their needs may have relatively little motivational pull for you.",
+        "family_expression": "You may need a different reason to engage when a shared activity mainly emphasizes this priority.",
+        "strength": "Recognizing that difference can help you explain what would make participation meaningful.",
+        "watchout": "Relatives who value this priority may still want to offer support when a relative needs assistance. Their preference and yours both deserve consideration."
       }
     },
-
     "Intentional": {
+      "very_high": {
+        "core": "Your Intentional result suggests a particularly strong emphasis on helping in ways connected to a defined purpose.",
+        "family_expression": "In family life, you may often clarify the purpose of a commitment before offering support.",
+        "strength": "This preference can contribute purposeful support.",
+        "watchout": "When it becomes a dominant priority, it may help to listen to needs whose value is not immediately obvious."
+      },
       "high": {
-        "core": "You tend to be selective about where your time, support, and attention are invested.",
-        "family_expression": "You may naturally consider purpose, boundaries, and intended outcomes before becoming involved.",
-        "strength": "This can create focus and reduce indiscriminate overcommitment.",
-        "watchout": "A highly Altruistic family member may sometimes prefer helping first and evaluating limits later."
+        "core": "Your Intentional result suggests that helping in ways connected to a defined purpose can be an important motivator.",
+        "family_expression": "You may be drawn to clarify the purpose of a commitment before offering support when the family makes plans.",
+        "strength": "This can support purposeful support.",
+        "watchout": "It can also help to listen to needs whose value is not immediately obvious."
+      },
+      "moderate": {
+        "core": "Your Intentional result suggests a flexible or context-dependent emphasis on helping in ways connected to a defined purpose.",
+        "family_expression": "You may sometimes clarify the purpose of a commitment before offering support, while giving other priorities more weight in other situations.",
+        "strength": "This flexibility can make room for purposeful support without making it the deciding factor every time.",
+        "watchout": "Explain which priorities matter in the current situation rather than expecting family members to predict them."
       },
       "low": {
-        "core": "Strict selectivity is less likely to determine whether you become involved in supporting others.",
-        "family_expression": "You may be relatively open to responding when someone needs assistance.",
-        "strength": "This can make you accessible and responsive to people around you.",
-        "watchout": "Without clear boundaries, responsiveness can occasionally become overextension."
+        "core": "Your Intentional result suggests that helping in ways connected to a defined purpose may be a less prominent motivator.",
+        "family_expression": "A family member who places greater weight on this priority may want to clarify the purpose of a commitment before offering support more often than you do.",
+        "strength": "Naming your different priorities can help the family make room for more than one approach.",
+        "watchout": "A lower preference does not mean inability, lack of care, or a high score on the opposing force."
+      },
+      "very_low": {
+        "core": "Your Intentional result suggests that helping in ways connected to a defined purpose may have relatively little motivational pull for you.",
+        "family_expression": "You may need a different reason to engage when a shared activity mainly emphasizes this priority.",
+        "strength": "Recognizing that difference can help you explain what would make participation meaningful.",
+        "watchout": "Relatives who value this priority may still want to clarify the purpose of a commitment before offering support. Their preference and yours both deserve consideration."
       }
     },
-
     "Commanding": {
+      "very_high": {
+        "core": "Your Commanding result suggests a particularly strong emphasis on influence, independence, and directing outcomes.",
+        "family_expression": "In family life, you may often seek a meaningful voice in family decisions.",
+        "strength": "This preference can contribute initiative and ownership.",
+        "watchout": "When it becomes a dominant priority, it may help to share decision-making and make room for other voices."
+      },
       "high": {
-        "core": "You tend to value influence, direction, independence, and the ability to shape outcomes.",
-        "family_expression": "Within the family, you may naturally want a meaningful voice in decisions and feel energized when you can affect what happens next.",
-        "strength": "This can bring leadership, confidence, and willingness to take responsibility.",
-        "watchout": "Other family members may sometimes need influence over the process even when you already see a clear direction."
+        "core": "Your Commanding result suggests that influence, independence, and directing outcomes can be an important motivator.",
+        "family_expression": "You may be drawn to seek a meaningful voice in family decisions when the family makes plans.",
+        "strength": "This can support initiative and ownership.",
+        "watchout": "It can also help to share decision-making and make room for other voices."
+      },
+      "moderate": {
+        "core": "Your Commanding result suggests a flexible or context-dependent emphasis on influence, independence, and directing outcomes.",
+        "family_expression": "You may sometimes seek a meaningful voice in family decisions, while giving other priorities more weight in other situations.",
+        "strength": "This flexibility can make room for initiative and ownership without making it the deciding factor every time.",
+        "watchout": "Explain which priorities matter in the current situation rather than expecting family members to predict them."
       },
       "low": {
-        "core": "Personal control or authority is less likely to be a central source of motivation.",
-        "family_expression": "You may be comfortable contributing without needing to determine the final direction.",
-        "strength": "This can support flexibility and shared decision-making.",
-        "watchout": "Highly Commanding family members may occasionally occupy more leadership space than you intended to give them."
+        "core": "Your Commanding result suggests that influence, independence, and directing outcomes may be a less prominent motivator.",
+        "family_expression": "A family member who places greater weight on this priority may want to seek a meaningful voice in family decisions more often than you do.",
+        "strength": "Naming your different priorities can help the family make room for more than one approach.",
+        "watchout": "A lower preference does not mean inability, lack of care, or a high score on the opposing force."
+      },
+      "very_low": {
+        "core": "Your Commanding result suggests that influence, independence, and directing outcomes may have relatively little motivational pull for you.",
+        "family_expression": "You may need a different reason to engage when a shared activity mainly emphasizes this priority.",
+        "strength": "Recognizing that difference can help you explain what would make participation meaningful.",
+        "watchout": "Relatives who value this priority may still want to seek a meaningful voice in family decisions. Their preference and yours both deserve consideration."
       }
     },
-
     "Collaborative": {
+      "very_high": {
+        "core": "Your Collaborative result suggests a particularly strong emphasis on sharing responsibility and contributing without individual recognition.",
+        "family_expression": "In family life, you may often work alongside relatives toward a shared goal.",
+        "strength": "This preference can contribute shared effort.",
+        "watchout": "When it becomes a dominant priority, it may help to state your own needs instead of letting them disappear."
+      },
       "high": {
-        "core": "You tend to value shared participation, collective contribution, and working with others toward outcomes.",
-        "family_expression": "You may naturally prefer family decisions that allow people to contribute rather than concentrating influence in one person.",
-        "strength": "This can support inclusion, teamwork, and shared ownership.",
-        "watchout": "Collaboration can sometimes take longer than a more individually driven family member considers necessary."
+        "core": "Your Collaborative result suggests that sharing responsibility and contributing without individual recognition can be an important motivator.",
+        "family_expression": "You may be drawn to work alongside relatives toward a shared goal when the family makes plans.",
+        "strength": "This can support shared effort.",
+        "watchout": "It can also help to state your own needs instead of letting them disappear."
+      },
+      "moderate": {
+        "core": "Your Collaborative result suggests a flexible or context-dependent emphasis on sharing responsibility and contributing without individual recognition.",
+        "family_expression": "You may sometimes work alongside relatives toward a shared goal, while giving other priorities more weight in other situations.",
+        "strength": "This flexibility can make room for shared effort without making it the deciding factor every time.",
+        "watchout": "Explain which priorities matter in the current situation rather than expecting family members to predict them."
       },
       "low": {
-        "core": "Collective participation is less likely to be required before you feel comfortable moving forward.",
-        "family_expression": "You may be relatively comfortable with individual ownership and clearly defined decision authority.",
-        "strength": "This can create speed and accountability.",
-        "watchout": "Highly Collaborative family members may occasionally want more involvement in decisions than you naturally expect."
+        "core": "Your Collaborative result suggests that sharing responsibility and contributing without individual recognition may be a less prominent motivator.",
+        "family_expression": "A family member who places greater weight on this priority may want to work alongside relatives toward a shared goal more often than you do.",
+        "strength": "Naming your different priorities can help the family make room for more than one approach.",
+        "watchout": "A lower preference does not mean inability, lack of care, or a high score on the opposing force."
+      },
+      "very_low": {
+        "core": "Your Collaborative result suggests that sharing responsibility and contributing without individual recognition may have relatively little motivational pull for you.",
+        "family_expression": "You may need a different reason to engage when a shared activity mainly emphasizes this priority.",
+        "strength": "Recognizing that difference can help you explain what would make participation meaningful.",
+        "watchout": "Relatives who value this priority may still want to work alongside relatives toward a shared goal. Their preference and yours both deserve consideration."
       }
     },
-
     "Structured": {
+      "very_high": {
+        "core": "Your Structured result suggests a particularly strong emphasis on established systems, traditions, and consistent methods.",
+        "family_expression": "In family life, you may often prefer an agreed routine for shared responsibilities.",
+        "strength": "This preference can contribute consistency and continuity.",
+        "watchout": "When it becomes a dominant priority, it may help to revisit a routine when it no longer serves the family."
+      },
       "high": {
-        "core": "You tend to value established systems, consistency, principles, and clear frameworks.",
-        "family_expression": "Within the family, you may prefer expectations, routines, or decisions to have a recognizable structure behind them.",
-        "strength": "This can create consistency, clarity, and dependable standards.",
-        "watchout": "A strongly Receptive family member may sometimes experience established structure as unnecessarily restrictive."
+        "core": "Your Structured result suggests that established systems, traditions, and consistent methods can be an important motivator.",
+        "family_expression": "You may be drawn to prefer an agreed routine for shared responsibilities when the family makes plans.",
+        "strength": "This can support consistency and continuity.",
+        "watchout": "It can also help to revisit a routine when it no longer serves the family."
+      },
+      "moderate": {
+        "core": "Your Structured result suggests a flexible or context-dependent emphasis on established systems, traditions, and consistent methods.",
+        "family_expression": "You may sometimes prefer an agreed routine for shared responsibilities, while giving other priorities more weight in other situations.",
+        "strength": "This flexibility can make room for consistency and continuity without making it the deciding factor every time.",
+        "watchout": "Explain which priorities matter in the current situation rather than expecting family members to predict them."
       },
       "low": {
-        "core": "Established systems or traditions are less likely to receive automatic preference simply because they already exist.",
-        "family_expression": "You may be willing to reconsider routines or rules when another approach appears more useful.",
-        "strength": "This can create adaptability and openness to change.",
-        "watchout": "Highly Structured family members may need greater consistency than you naturally require."
+        "core": "Your Structured result suggests that established systems, traditions, and consistent methods may be a less prominent motivator.",
+        "family_expression": "A family member who places greater weight on this priority may want to prefer an agreed routine for shared responsibilities more often than you do.",
+        "strength": "Naming your different priorities can help the family make room for more than one approach.",
+        "watchout": "A lower preference does not mean inability, lack of care, or a high score on the opposing force."
+      },
+      "very_low": {
+        "core": "Your Structured result suggests that established systems, traditions, and consistent methods may have relatively little motivational pull for you.",
+        "family_expression": "You may need a different reason to engage when a shared activity mainly emphasizes this priority.",
+        "strength": "Recognizing that difference can help you explain what would make participation meaningful.",
+        "watchout": "Relatives who value this priority may still want to prefer an agreed routine for shared responsibilities. Their preference and yours both deserve consideration."
       }
     },
-
     "Receptive": {
+      "very_high": {
+        "core": "Your Receptive result suggests a particularly strong emphasis on new approaches, possibilities, and alternative methods.",
+        "family_expression": "In family life, you may often suggest a different way to handle a familiar family task.",
+        "strength": "This preference can contribute openness to change.",
+        "watchout": "When it becomes a dominant priority, it may help to give others time to understand a proposed change."
+      },
       "high": {
-        "core": "You tend to be open to new approaches, alternatives, and changing established methods when circumstances justify it.",
-        "family_expression": "You may naturally question whether an existing family routine is still the best way to handle something.",
-        "strength": "This can bring adaptability, experimentation, and openness to improvement.",
-        "watchout": "Highly Structured family members may sometimes experience that flexibility as instability or unnecessary change."
+        "core": "Your Receptive result suggests that new approaches, possibilities, and alternative methods can be an important motivator.",
+        "family_expression": "You may be drawn to suggest a different way to handle a familiar family task when the family makes plans.",
+        "strength": "This can support openness to change.",
+        "watchout": "It can also help to give others time to understand a proposed change."
+      },
+      "moderate": {
+        "core": "Your Receptive result suggests a flexible or context-dependent emphasis on new approaches, possibilities, and alternative methods.",
+        "family_expression": "You may sometimes suggest a different way to handle a familiar family task, while giving other priorities more weight in other situations.",
+        "strength": "This flexibility can make room for openness to change without making it the deciding factor every time.",
+        "watchout": "Explain which priorities matter in the current situation rather than expecting family members to predict them."
       },
       "low": {
-        "core": "Constantly reconsidering established approaches is less likely to be motivating for you.",
-        "family_expression": "You may prefer consistency when an existing structure continues to work.",
-        "strength": "This can support stability and continuity.",
-        "watchout": "More Receptive family members may occasionally want greater freedom to experiment or redefine the process."
+        "core": "Your Receptive result suggests that new approaches, possibilities, and alternative methods may be a less prominent motivator.",
+        "family_expression": "A family member who places greater weight on this priority may want to suggest a different way to handle a familiar family task more often than you do.",
+        "strength": "Naming your different priorities can help the family make room for more than one approach.",
+        "watchout": "A lower preference does not mean inability, lack of care, or a high score on the opposing force."
+      },
+      "very_low": {
+        "core": "Your Receptive result suggests that new approaches, possibilities, and alternative methods may have relatively little motivational pull for you.",
+        "family_expression": "You may need a different reason to engage when a shared activity mainly emphasizes this priority.",
+        "strength": "Recognizing that difference can help you explain what would make participation meaningful.",
+        "watchout": "Relatives who value this priority may still want to suggest a different way to handle a familiar family task. Their preference and yours both deserve consideration."
       }
     }
   },
-
   "clusters": {
     "primary": "These are the motivations most likely to consistently capture your attention and influence your decisions.",
     "situational": "These motivations remain available to you, but their importance is more likely to depend on the circumstances.",
     "indifferent": "These motivations generally carry less weight in determining why you choose one direction over another."
   },
-
   "closing": [
     "Driving Forces become especially useful in family dynamics because two people can agree on what should happen while being motivated by completely different reasons.",
     "Understanding those differences makes it easier to distinguish disagreement about the goal from disagreement about what makes the goal worth pursuing."
-  ]
+  ],
+  "range_policy": "These are application wording bands, not population norms or clinical categories. Cluster membership comes from the report, not these cutoffs. A low force does not establish a high opposing force."
 }

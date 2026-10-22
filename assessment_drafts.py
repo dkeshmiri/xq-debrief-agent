@@ -75,9 +75,28 @@ class DraftStore:
 
             compare(previous, updated)
             if changes:
+                draft.pop("generated", None)
                 draft["extraction"]["facts"] = updated["facts"]
                 draft["family_role"] = family_role
                 draft["revision"] += 1
                 draft["overrides"].append({"at": datetime.now(timezone.utc).isoformat(), "changes": changes})
                 self._write(draft)
             return draft
+
+    def save_generated(self, draft_id, revision, result):
+        with _LOCK:
+            draft = self.get(draft_id)
+            if draft["revision"] != revision:
+                raise DraftConflict("The review changed during generation. Generate again from the saved review.")
+            draft["generated"] = result
+            self._write(draft)
+
+    def publish(self, draft_id, revision, save_persona):
+        with _LOCK:
+            draft = self.get(draft_id)
+            if draft["revision"] != revision:
+                raise DraftConflict("The saved review changed. Generate again before saving a profile.")
+            result = draft.get("generated", {})
+            if not result.get("ready_for_debrief"):
+                raise ValueError("Generate a complete, reviewed persona before saving it to the app.")
+            return save_persona(result["persona"])

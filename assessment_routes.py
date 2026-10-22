@@ -70,9 +70,17 @@ def create_assessment_blueprint(importer=None, store=None):
         if draft["revision"] != payload.revision:
             raise DraftConflict("The saved review changed. Reload it before generating.")
         result = service.generate(Extraction.model_validate(draft["extraction"]), draft["family_role"])
-        if drafts().get(payload.draft_id)["revision"] != payload.revision:
-            raise DraftConflict("The review changed during generation. Generate again from the saved review.")
+        drafts().save_generated(payload.draft_id, payload.revision, result)
         return jsonify(result)
+
+    @blueprint.post("/api/assessments/use")
+    def use_persona():
+        payload = GenerateRequest.model_validate(request.get_json(silent=True))
+        save_persona = current_app.config.get("SAVE_ASSESSMENT_PERSONA")
+        if save_persona is None:
+            return jsonify(error="Profile saving is unavailable."), 503
+        filename = drafts().publish(payload.draft_id, payload.revision, save_persona)
+        return jsonify(file=filename, next_url="/debrief")
 
     @blueprint.errorhandler(ValidationError)
     def invalid_contract(error):

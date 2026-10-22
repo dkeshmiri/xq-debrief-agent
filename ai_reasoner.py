@@ -122,6 +122,11 @@ the context packet:
 For application questions, you may then make cautious, profile-grounded
 interpretations using the rules below:
 
+When score_range_wording is supplied, use its matching band language as the
+starting point for interpretation. Preserve its meaning and qualifications.
+General knowledge about a dimension must not override the person's score-specific
+wording. Follow score_range_policy; these wording bands are not population norms.
+
 You may use verified DISC, Driving Forces, EQ, integrated analysis,
 approved narrative content, and known family context to provide
 practical communication, parenting, relationship, conflict-management,
