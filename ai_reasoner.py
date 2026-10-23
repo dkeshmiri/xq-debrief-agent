@@ -35,7 +35,10 @@ class AIReasoner:
         self,
         client: Any | None = None,
         knowledge_dir: str | Path = "knowledge",
+        experience: str = 'family',
     ) -> None:
+        from workspace_experience import Experience
+        self.experience = Experience(experience)
         if client is not None:
             self.client = client
         else:
@@ -49,7 +52,8 @@ class AIReasoner:
             self.client = OpenAI(api_key=api_key)
 
         self.context_builder = ContextBuilder(
-            knowledge_dir=knowledge_dir
+            knowledge_dir=self.experience.knowledge_dir if self.experience.business else knowledge_dir,
+            experience=experience,
         )
 
     def build_context(
@@ -65,6 +69,13 @@ class AIReasoner:
             question=question,
             state=state,
         )
+        if self.experience.business and decision.resolved_domain.value == 'general':
+            if any(term in question.lower() for term in ('feedback', 'leadership', 'handoff', 'meeting', 'collaborat', 'team', 'communication', 'delegat', 'conflict')):
+                from dataclasses import replace
+                from context_router import ContextDomain
+                decision.resolved_domain = ContextDomain.INTEGRATED
+                decision.route = replace(decision.route, domain=ContextDomain.INTEGRATED)
+                decision.reason = 'Workplace coaching question uses integrated assessment context.'
 
         context = self.context_builder.build_context(
             route=decision.route,
@@ -172,6 +183,13 @@ Practical behavioral coaching is allowed.
 Clinical or diagnostic interpretation is not.
 """
 
+        if self.experience.business:
+            from workspace_experience import BUSINESS_RULES
+            system_prompt = BUSINESS_RULES
+
+        from narrative_perspective import SECOND_PERSON_RULES, perspective_issues
+        system_prompt += SECOND_PERSON_RULES
+
         user_prompt = f"""
 CURRENT DEBRIEF STATE:
 {state.value}
@@ -184,29 +202,29 @@ Answer this question usingthe validated context packet above.
 {question}
 """
 
-        response = self.client.responses.create(
-            model="gpt-5.6",
-            input=[
-                {
-                    "role": "system",
-                    "content": system_prompt,
-                },
-                {
-                    "role": "user",
-                    "content": user_prompt,
-                },
-            ],
-        )
-
-        output_text = response.output_text.strip()
+        output_text = ''
+        for attempt in range(2):
+            response = self.client.responses.create(
+                model="gpt-5.6",
+                input=[
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": user_prompt},
+                ],
+            )
+            output_text = response.output_text.strip()
+            if not output_text or not perspective_issues(output_text, persona_data['person']):
+                break
+            system_prompt += ("\nThe last answer failed the perspective contract. "
+                              "Regenerate your answer using you/your in every sentence.")
+        else:
+            # Never send perspective-invalid API text to the speech pipeline.
+            output_text = ('Your answer could not be phrased consistently in second person. '
+                           'Please ask your question again.')
 
         routing_policy = context["routing_policy"]
 
         if not output_text:
-            return (
-                "The reasoning component did not return an answer. "
-                "Please restate the question."
-            )
+            output_text = 'Your question did not receive an answer. Please restate your question.'
 
         return AIReasoningResult(
             response=output_text,

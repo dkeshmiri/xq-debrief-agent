@@ -1,0 +1,15 @@
+/* Shared accessible palette for the family workspace. */
+:root {
+  color-scheme: light;
+  --ink: #243956;
+  --muted: #55516b;
+  --paper: #f3effa;
+  --white: #fcfaff;
+  --line: #80699e;
+  --blue: #244c7a;
+  --blue-deep: #17365b;
+  --blue-soft: #e5edf9;
+  --purple: #503080;
+  --purple-soft: #ebe4f5;
+  --focus: #663d9a;
+}

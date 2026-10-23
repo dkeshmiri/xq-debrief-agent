@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Welcome · XQ Workplace</title>
+  <link rel="stylesheet" href="/static/theme.css">
+  <link rel="stylesheet" href="/static/json_maker.css">
+  <link rel="stylesheet" href="/static/portal.css">
+  <script src="/static/start.js" defer></script>
+</head>
+<body data-experience="business" data-api-base="/business" class="welcome">
+  <header class="topbar"><a class="brand" href="/business/">xq <span>WORKPLACE</span></a><span>Better conversations. Stronger teams.</span></header>
+  <main>
+    <p class="eyebrow">WORKPLACE DEBRIEF</p>
+    <h1>A little understanding.<br>A stronger team.</h1>
+    <p>Choose a saved workplace profile or create one from assessment reports.</p>
+    <div class="actions" role="group" aria-label="Choose how to begin">
+      <button id="choose-existing" aria-pressed="true">Use a saved profile</button>
+      <button id="choose-new" class="secondary" aria-pressed="false">Create a new profile</button>
+      <a href="/business/team">Explore team comparisons →</a>
+    </div>
+    <p id="status" role="status" aria-live="polite"></p>
+    <section id="existing-panel" class="card">
+      <p class="eyebrow">YOUR WORKPLACE PROFILES</p><h2>Continue with someone you know.</h2>
+      <form id="select-form">
+        <label for="saved-profile">Saved profile</label>
+        <select id="saved-profile" required><option value="">Loading profiles…</option></select>
+        <div class="actions"><button id="continue" disabled>Continue to debrief</button></div>
+      </form>
+      <p class="hint">You can review the selection before starting the video session.</p>
+    </section>
+    <section id="new-panel" class="card" hidden>
+      <p class="eyebrow">A NEW PERSPECTIVE</p><h2>Bring the reports. Build a workplace profile.</h2>
+      <p>Upload up to three PDFs for one person, enter their workplace role, and review the extracted results. Save a completed profile to use it in the debrief.</p>
+      <div class="actions"><a href="/business/json-maker">Upload assessment documents →</a></div>
+      <p class="hint">Missing scores can be entered by hand. Saving those changes requires your operator PIN.</p>
+    </section>
+  </main>
+</body>
+</html>

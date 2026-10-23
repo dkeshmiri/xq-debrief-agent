@@ -4,6 +4,7 @@ import math
 from pathlib import Path
 import time
 import traceback
+from copy import deepcopy
 from functools import wraps
 
 from dotenv import load_dotenv
@@ -19,6 +20,8 @@ from assessment_drafts import DraftConflict
 from debrief_engine import DebriefEngine
 from debrief_state import DebriefState
 from family_repository import FamilyRepository
+from workspace_experience import Experience
+from family_routes import FamilySelectionError, create_family_blueprint
 from tavus_client import TavusClient
 from conversation_orchestrator import ConversationOrchestrator, ConversationPhase
 from playback_event_tracker import PlaybackEventTracker
@@ -51,6 +54,8 @@ from voice_intent import (
 # =========================================================
 
 BASE_DIR = Path(__file__).resolve().parent
+EXPERIENCE = Experience(globals().get('WORKSPACE_EXPERIENCE', 'family'))
+WORKSPACE_DATA = Path(globals().get('WORKSPACE_DATA_ROOT') or os.getenv('XQ_BUSINESS_DATA_DIR') or BASE_DIR / 'data/business')
 
 load_dotenv(
     BASE_DIR / ".env"
@@ -63,7 +68,9 @@ load_dotenv(
 
 app = Flask(__name__)
 app.config["MAX_CONTENT_LENGTH"] = MAX_UPLOAD_BYTES
-app.register_blueprint(create_assessment_blueprint())
+app.register_blueprint(create_assessment_blueprint(experience=EXPERIENCE.name))
+if EXPERIENCE.business:
+    app.config['ASSESSMENT_DRAFT_DIR'] = WORKSPACE_DATA / 'assessment_drafts'
 
 FAMILY_MANIFEST_PATH = (
     BASE_DIR
@@ -83,14 +90,21 @@ PERSONA_DIR = (
 # XQ ENGINE SETUP
 # =========================================================
 
-repository = FamilyRepository(
-    str(FAMILY_MANIFEST_PATH)
-)
+if EXPERIENCE.business:
+    from business_repository import BusinessRepository
+    repository = BusinessRepository(WORKSPACE_DATA / 'roster.json')
+    PERSONA_DIR = WORKSPACE_DATA / 'personas'
+else:
+    repository = FamilyRepository(str(FAMILY_MANIFEST_PATH))
 
 
 def create_engine_for_active_person() -> DebriefEngine:
+    if EXPERIENCE.business and repository.active_person_id is None:
+        from business_repository import UnselectedEngine
+        return UnselectedEngine()
     member = repository.get_active_member()
-
+    if EXPERIENCE.business:
+        return DebriefEngine(member['persona_file'], experience='business')
     return DebriefEngine(
         member["persona_file"]
     )
@@ -167,6 +181,9 @@ class RouteError(Exception):
 # =========================================================
 
 tavus = TavusClient()
+if EXPERIENCE.business:
+    tavus.voice_user_name = os.getenv('XQ_BUSINESS_VOICE_USER_NAME', 'XQ Workplace Participant')
+    tavus.pal_id = os.getenv('XQ_BUSINESS_TAVUS_PAL_ID') or tavus.pal_id
 
 
 def handle_tavus_playback_event(event: dict) -> None:
@@ -463,7 +480,8 @@ def wait_for_tavus_connection(
 
 
 def current_payload() -> dict:
-    member = repository.get_active_member()
+    member = repository.get_active_member() if repository.active_person_id is not None else {
+        'person_id': '', 'display_name': 'No profile selected', 'family_role': ''}
 
     return {
     "active_person": {
@@ -1271,24 +1289,95 @@ if QUESTION_MODE_TIMEOUT_SECONDS > 0:
 
 @app.get("/")
 def index():
-    return render_template("start.html")
+    return render_template(EXPERIENCE.template("start.html"))
 
 
 @app.get("/debrief")
 def debrief_page():
     return render_template(
-        "index.html"
+        EXPERIENCE.template("index.html")
     )
 
 
 def save_assessment_persona(persona):
     with playback_lock:
+        if persona.get('experience', 'family') != EXPERIENCE.name:
+            raise DraftConflict('This profile belongs to a different workspace experience.')
         if session_starting or session_ending or active_tavus_conversation_id:
             raise DraftConflict("End the active session before adding a profile.")
         return repository.save_persona(persona, PERSONA_DIR)
 
 
 app.config["SAVE_ASSESSMENT_PERSONA"] = save_assessment_persona
+
+
+@app.before_request
+def require_selected_business_profile():
+    if (EXPERIENCE.business and (repository.active_person_id is None or not hasattr(engine, 'persona_path')) and request.method == 'POST'
+            and (request.path.startswith('/api/debrief/') or request.path.startswith('/api/question')
+                 or request.path == '/api/voice/audio')):
+        return error_response('Select a workplace profile before using conversation controls.', 409)
+
+
+def family_roster_snapshot():
+    with playback_lock:
+        members = repository.list_members(debrief_enabled_only=True)
+        return {
+            "family_id": repository.family_id,
+            "family_name": repository.family_name,
+            "members": [
+                {key: member[key] for key in ("person_id", "display_name", "family_role")}
+                for member in members
+            ],
+        }
+
+
+def family_pair_snapshot(person_a_id, person_b_id):
+    return family_members_snapshot([person_a_id, person_b_id])
+
+
+def family_members_snapshot(person_ids):
+    # Serialize only the snapshot with roster writes. Never change active_person_id.
+    with playback_lock:
+        personas = []
+        for person_id in person_ids:
+            if not repository.has_person(person_id):
+                raise FamilySelectionError("That family member is unavailable. Reload the family roster.", 404)
+            if not repository.get_member(person_id)["debrief_enabled"]:
+                raise FamilySelectionError("That profile is not enabled for family comparisons.", 409)
+            personas.append(deepcopy(repository.get_persona(person_id)))
+        return tuple(personas)
+
+
+def create_family_reasoner():
+    # Lazy construction keeps model configuration/failures out of app startup.
+    from openai import OpenAI
+    from comparison_reasoner import ComparisonReasoner
+    return ComparisonReasoner(
+        client=OpenAI(timeout=30.0, max_retries=0),
+        knowledge_dir=EXPERIENCE.knowledge_dir,
+        experience=EXPERIENCE.name,
+    )
+
+
+def create_family_group_reasoner():
+    from openai import OpenAI
+    from family_group_reasoner import FamilyGroupReasoner
+    return FamilyGroupReasoner(
+        client=OpenAI(timeout=30.0, max_retries=0),
+        knowledge_dir=EXPERIENCE.knowledge_dir,
+        experience=EXPERIENCE.name,
+    )
+
+
+app.register_blueprint(create_family_blueprint(
+    roster_snapshot=family_roster_snapshot,
+    pair_snapshot=family_pair_snapshot,
+    reasoner_factory=create_family_reasoner,
+    group_snapshot=family_members_snapshot,
+    group_reasoner_factory=create_family_group_reasoner,
+    experience=EXPERIENCE.name,
+))
 
 
 #==========================================================
@@ -1434,7 +1523,7 @@ def activity_status():
         active=active, connected=tavus.connected, starting=session_starting,
         ending=session_ending, reasoning=reasoning_active.is_set(),
         interrupted=interruption_pending, question_ready=question_ready,
-        pending=pending, speaking=speaking, voice_busy=voice_pipeline.busy(),
+        pending=pending, speaking=speaking, voice_busy=voice_pipeline.busy(), experience=EXPERIENCE.name,
     )
     response = jsonify(code=code, title=title, detail=detail,
                        active=active, connected=tavus.connected,
@@ -1460,6 +1549,8 @@ def start_session():
 
     # Reserve the session before contacting Tavus.
     with playback_lock:
+        if repository.active_person_id is None or (EXPERIENCE.business and not hasattr(engine, 'persona_path')):
+            return error_response('Select a workplace profile before starting a conversation.', 409)
         if (
             session_starting
             or session_ending
@@ -1475,7 +1566,8 @@ def start_session():
 
     try:
         # Do not hold the lock during network operations.
-        conversation = tavus.create_conversation()
+        conversation = (tavus.create_conversation(conversation_name='XQ Workplace Debrief')
+                        if EXPERIENCE.business else tavus.create_conversation())
 
         with playback_lock:
             active_tavus_conversation_id = (
@@ -2171,6 +2263,12 @@ def dev_integrated_narrative():
 # =========================================================
 # STARTUP
 # =========================================================
+
+if not EXPERIENCE.business:
+    from werkzeug.middleware.dispatcher import DispatcherMiddleware
+    from workspace_host import LazyBusinessApplication
+    business_application = LazyBusinessApplication()
+    app.wsgi_app = DispatcherMiddleware(app.wsgi_app, {'/business': business_application})
 
 if __name__ == "__main__":
     app.run(

@@ -1,4 +1,6 @@
 const $ = id => document.getElementById(id);
+const workspaceBase = document.body?.dataset?.apiBase || '';
+const businessWorkspace = document.body?.dataset?.experience === 'business';
 let callFrame = null, conversationId = null, busy = false, online = false, joined = false;
 let activity = {}, lastCode = '', keepalive = null, lastInput = 0, profiles = [];
 const sections = [...document.querySelectorAll('[data-section]')];
@@ -8,7 +10,7 @@ function notice(message = '') {
     $('notice').hidden = !message;
 }
 async function request(url, body, method = 'POST') {
-    const response = await fetch(url, {
+    const response = await fetch(workspaceBase + url, {
         method, headers: {'Content-Type': 'application/json'},
         ...(body === undefined ? {} : {body: JSON.stringify(body)}),
         ...(method === 'GET' ? {signal: AbortSignal.timeout(5000), cache: 'no-store'} : {})
@@ -29,6 +31,15 @@ function controls() {
         $(id).disabled = !ready || activity.pending || activity.question_ready || activity.code === 'reasoning';
     $('ask-button').disabled = !ready || activity.answer_pending || activity.code === 'reasoning' || !$('question-input').value.trim();
     $('dismiss-button').disabled = !ready || !activity.question_ready || activity.pending;
+    $('pause-question-button').disabled = !ready || activity.phase !== 'narrating'
+        || activity.code !== 'speaking' || !!activity.interrupted;
+    const questionHint = activity.interrupted
+        ? 'Pausing narration. Waiting for the guide to stop…'
+        : activity.question_ready
+            ? 'Question mode is open. Speak or type below, or continue without a question.'
+            : 'Pause the guide manually to ask by voice or type below.';
+    if ($('question-mode-hint').textContent !== questionHint)
+        $('question-mode-hint').textContent = questionHint;
     $('session-label').textContent = active ? 'Conversation open' : 'Your private conversation space';
 }
 function renderActivity(data) {
@@ -137,20 +148,32 @@ async function askQuestion() {
     if (!question) return;
     const current = await request('/api/activity', undefined, 'GET');
     if (current.phase === 'narrating' && current.pending) {
-        await request('/api/debrief/interrupt');
-        const deadline = Date.now() + 10000;
-        while (true) {
-            await new Promise(resolve => setTimeout(resolve, 150));
-            const status = await request('/api/activity', undefined, 'GET');
-            if (status.question_ready && !status.interrupted) break;
-            if (Date.now() > deadline) throw new Error('Speech has not stopped yet. Please try your question again.');
-        }
+        await pauseForQuestion();
     }
     const data = await request('/api/question', {question});
     $('answer-text').textContent = data.answer || 'Your question has been received.';
     $('answer-card').hidden = false;
     $('question-input').value = '';
     stopKeepalive();
+}
+async function pauseForQuestion() {
+    await request('/api/debrief/interrupt');
+    $('question-mode-hint').textContent = 'Pausing narration. Waiting for the guide to stop…';
+    const deadline = Date.now() + 10000;
+    while (true) {
+        const status = await request('/api/activity', undefined, 'GET');
+        renderActivity(status);
+        if (status.question_ready && !status.interrupted) return;
+        if (!status.active || !status.connected)
+            throw new Error('The conversation disconnected before question mode opened.');
+        if (Date.now() >= deadline)
+            throw new Error('Speech has not stopped yet. Wait for question mode to open before asking.');
+        await new Promise(resolve => setTimeout(resolve, 150));
+    }
+}
+async function enterManualQuestionMode() {
+    await pauseForQuestion();
+    $('question-input').focus();
 }
 function stopKeepalive() { clearInterval(keepalive); keepalive = null; }
 async function keepQuestionOpen() {
@@ -173,6 +196,7 @@ $('person-select').addEventListener('change', () => {
 });
 for (const [id, action] of Object.entries({
     'start-button': startSession, 'end-button': endSession, 'ask-button': askQuestion,
+    'pause-question-button': enterManualQuestionMode,
     'dismiss-button': async () => { await request('/api/question/dismiss'); stopKeepalive(); }
 })) $(id).addEventListener('click', () => run(action));
 for (const [id, route] of Object.entries({
@@ -204,7 +228,7 @@ async function loadPersonas() {
         const file = new URLSearchParams(window.location.search).get('file');
         if (data.personas.some(person => person.file === file)) $('person-select').value = file;
         $('person-select').dispatchEvent(new Event('change'));
-        if (!data.personas.length) notice('Create a family profile to begin.');
+        if (!data.personas.length) notice(businessWorkspace ? 'Import a workplace assessment profile to begin.' : 'Create a family profile to begin.');
     } catch (error) { notice(error.message); }
 }
 loadPersonas();

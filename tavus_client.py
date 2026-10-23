@@ -1,4 +1,5 @@
 from typing import Any, Callable
+from threading import Lock
 
 from daily import (
     CallClient,
@@ -134,6 +135,9 @@ class TavusClient:
     This class contains no assessment logic.
     """
 
+    _daily_init_lock = Lock()
+    _daily_sdk = None
+
     def __init__(self) -> None:
         self.call_client: CallClient | None = None
 
@@ -265,7 +269,11 @@ class TavusClient:
             )
 
         if not self._daily_initialized:
-            Daily.init()
+            # Multiple workspace clients share one process-wide native SDK.
+            with self._daily_init_lock:
+                if TavusClient._daily_sdk is not Daily:
+                    Daily.init()
+                    TavusClient._daily_sdk = Daily
             self._daily_initialized = True
 
         self._connection_generation += 1

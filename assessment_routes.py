@@ -13,9 +13,9 @@ from assessment_importer import AssessmentImporter, ImportServiceError, MAX_PDF_
 from assessment_schema import Extraction, GenerateRequest, OverrideRequest, missing_fields
 
 
-def create_assessment_blueprint(importer=None, store=None):
+def create_assessment_blueprint(importer=None, store=None, experience='family'):
     blueprint = Blueprint("assessments", __name__)
-    service = importer or AssessmentImporter()
+    service = importer or (AssessmentImporter(experience=experience) if experience != 'family' else AssessmentImporter())
 
     def drafts():
         return store or DraftStore(current_app.config.get(
@@ -29,7 +29,7 @@ def create_assessment_blueprint(importer=None, store=None):
 
     @blueprint.get("/json-maker")
     def page():
-        return render_template("json_maker.html")
+        return render_template('business/json_maker.html' if experience == 'business' else 'json_maker.html')
 
     @blueprint.post("/api/assessments/extract")
     def extract():
@@ -80,7 +80,7 @@ def create_assessment_blueprint(importer=None, store=None):
         if save_persona is None:
             return jsonify(error="Profile saving is unavailable."), 503
         filename = drafts().publish(payload.draft_id, payload.revision, save_persona)
-        return jsonify(file=filename, next_url="/debrief")
+        return jsonify(file=filename, next_url=request.script_root + "/debrief")
 
     @blueprint.errorhandler(ValidationError)
     def invalid_contract(error):
@@ -115,6 +115,11 @@ def create_assessment_blueprint(importer=None, store=None):
     @blueprint.after_request
     def private_response(response):
         response.headers["Cache-Control"] = "no-store"
+        if experience == 'business' and response.is_json:
+            data = response.get_json()
+            if isinstance(data, dict) and isinstance(data.get('error'), str):
+                data['error'] = data['error'].replace('family_role', 'workplace role').replace('family role', 'workplace role')
+                response.set_data(current_app.json.dumps(data))
         return response
 
     return blueprint

@@ -1,0 +1,17 @@
+{
+  "selected_ids": ["synthetic-parent", "synthetic-child"],
+  "records": {
+    "synthetic-parent": {
+      "confirmed": true,
+      "source": "self_report",
+      "birth_order": {"upbringing_group_id": "parent-origin", "basis": "upbringing", "rank": 2, "sibling_group_size": 3},
+      "experiences": ["I often helped organize shared activities."],
+      "gender_role_experiences": ["My family expected me to avoid showing sadness."]
+    },
+    "synthetic-child": {
+      "confirmed": true,
+      "source": "self_report",
+      "birth_order": {"upbringing_group_id": "child-origin", "basis": "chronological", "rank": 1, "sibling_group_size": 2}
+    }
+  }
+}

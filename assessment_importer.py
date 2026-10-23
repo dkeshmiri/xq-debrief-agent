@@ -97,7 +97,9 @@ class ImportServiceError(RuntimeError):
 
 
 class AssessmentImporter:
-    def __init__(self, client=None, model=None):
+    def __init__(self, client=None, model=None, experience='family'):
+        from workspace_experience import Experience
+        self.experience = Experience(experience)
         self.client = client
         self.model = model or os.getenv("XQ_IMPORT_MODEL", "gpt-5.6")
 
@@ -157,20 +159,43 @@ class AssessmentImporter:
         return result
 
     def generate(self, extraction, family_role):
+        from narrative_perspective import SECOND_PERSON_RULES, language_issues
         family_role = family_role.strip()
         if not family_role or len(family_role) > 100:
             raise ValueError("Enter a family role of 1–100 characters.")
         validate_review(extraction.facts)
         missing = missing_fields(extraction.facts)
-        language = self._parse(FamilyLanguage, LANGUAGE_INSTRUCTIONS, [{
+        instructions = LANGUAGE_INSTRUCTIONS
+        if self.experience.business:
+            from workspace_experience import BUSINESS_RULES
+            instructions = BUSINESS_RULES + '''\nWrite workplace coaching language using only the reviewed facts and source findings.
+Output only the requested language fields. Preserve the legacy JSON field names for compatibility:
+value_to_family means potential contributions to the team; family_applications means workplace applications.
+The supplied family_role is the person's workplace role. Never invent family or household context.
+Keep source report findings distinct from suggested applications. Use 3–6 concrete items per list.
+Scores, identity, role, and metadata are assembled by the application, not by you.
+For missing domains acknowledge the gap. Use plain sentences without Markdown or raw numeric scores.'''
+        instructions += SECOND_PERSON_RULES
+        content = [{
             "type": "input_text", "text": json.dumps({
                 "reviewed_assessment": extraction.model_dump(),
                 "family_role": family_role,
                 "missing_fields": missing,
-                "score_range_wording": score_wording(extraction.facts.model_dump(), "integrated"),
+                "score_range_wording": score_wording(extraction.facts.model_dump(), "integrated", experience=self.experience.name),
                 "score_range_policy": RANGE_POLICY,
             }),
-        }])
+        }]
+        for attempt in range(2):
+            language = self._parse(FamilyLanguage, instructions, content)
+            issues = language_issues(language, extraction.facts.person.model_dump())
+            if not issues:
+                break
+            instructions += ('\nYour previous output failed the perspective contract at: '
+                             + ', '.join(issues) + '. Regenerate all prose in second person.')
+        else:
+            raise ImportServiceError(
+                'The generated wording did not meet the second-person perspective rules. '
+                'No profile was generated. Your reviewed facts are unchanged; please retry.')
         facts = extraction.facts.model_dump()
         person = {"person_id": "person_" + uuid.uuid4().hex, **facts["person"], "family_role": family_role}
         if person["age"] is None:
@@ -184,6 +209,8 @@ class AssessmentImporter:
             "eq": facts["eq"],
             "integrated": language.integrated.model_dump(),
         }
+        if self.experience.business:
+            persona['experience'] = 'business'
         if not missing:
             validate_persona(persona)
         return {"persona": persona, "ready_for_debrief": not missing, "missing_fields": missing}

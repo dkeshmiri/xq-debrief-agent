@@ -17,9 +17,11 @@ class ContextBuilder:
     def __init__(
         self,
         knowledge_dir: str | Path = "knowledge",
+        experience: str = 'family',
     ) -> None:
 
         self.knowledge_dir = Path(knowledge_dir)
+        self.experience = experience
 
         self.disc_knowledge = self._load_json(
             self.knowledge_dir
@@ -118,7 +120,7 @@ class ContextBuilder:
                 "confidently resolved."
             )
 
-        wording = score_wording(persona_data, resolved_domain.value)
+        wording = score_wording(persona_data, resolved_domain.value, experience=self.experience)
         if wording:
             context["score_range_wording"] = wording
             context["score_range_policy"] = RANGE_POLICY

@@ -1,6 +1,7 @@
 "use strict";
 (() => {
   const $ = id => document.getElementById(id);
+  const base = document.body?.dataset?.apiBase || '';
   function choose(existing) {
     $("existing-panel").hidden = !existing;
     $("new-panel").hidden = existing;
@@ -13,11 +14,11 @@
   $("choose-new").addEventListener("click", () => choose(false));
   $("select-form").addEventListener("submit", event => {
     event.preventDefault();
-    if ($("saved-profile").value) window.location.href = `/debrief?file=${encodeURIComponent($("saved-profile").value)}`;
+    if ($("saved-profile").value) window.location.href = `${base}/debrief?file=${encodeURIComponent($("saved-profile").value)}`;
   });
   async function load() {
     try {
-      const response = await fetch("/api/personas");
+      const response = await fetch(`${base}/api/personas`);
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || "Could not load saved profiles.");
       $("saved-profile").replaceChildren();

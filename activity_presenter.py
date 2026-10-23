@@ -2,7 +2,7 @@
 
 
 def describe_activity(*, active, connected, starting, ending, reasoning,
-                      interrupted, question_ready, pending, speaking, voice_busy):
+                      interrupted, question_ready, pending, speaking, voice_busy, experience='family'):
     if ending:
         return "ending", "Closing the conversation", "Finishing the session and releasing the video connection."
     if starting:
@@ -12,7 +12,8 @@ def describe_activity(*, active, connected, starting, ending, reasoning,
     if interrupted:
         return "pausing", "Making room for you", "Waiting for speech to stop while preserving our place in the debrief."
     if not active:
-        return "ready", "Ready when you are", "Choose a family profile, then begin your conversation."
+        detail = 'Choose a workplace profile, then begin your conversation.' if experience == 'business' else 'Choose a family profile, then begin your conversation.'
+        return "ready", "Ready when you are", detail
     if not connected:
         return "disconnected", "Video connection unavailable", "The session exists, but the agent is not connected. End the session before trying again."
     if voice_busy:

@@ -29,7 +29,9 @@ class DebriefEngine:
     different people can be loaded without changing the engine.
     """
 
-    def __init__(self, persona_path: str | Path, ai_reasoner=None,) -> None:
+    def __init__(self, persona_path: str | Path, ai_reasoner=None, experience='family') -> None:
+        from workspace_experience import Experience
+        self.experience = Experience(experience)
         self.persona_path = Path(persona_path)
         self.data = self._load_persona()
 
@@ -40,7 +42,7 @@ class DebriefEngine:
         self.ai_reasoner = (
             ai_reasoner
             if ai_reasoner is not None
-            else AIReasoner()
+            else (AIReasoner(experience='business') if self.experience.business else AIReasoner())
         )
 
     def _load_persona(self) -> dict[str, Any]:
@@ -60,6 +62,24 @@ class DebriefEngine:
             data = json.load(file)
 
         validate_persona(data)
+        if self.experience.business and data.get('experience') != 'business':
+            raise ValueError('Select a business-scoped profile for this workspace.')
+
+        if self.experience.business:
+            from narrative_perspective import legacy_participant_text
+            # Adapt older generated prose only in memory. Scores, identity and
+            # the saved source profile remain untouched.
+            fields = {
+                'disc': ('behavioral_characteristics', 'value_to_family'),
+                'driving_forces': ('motivational_strengths', 'energizers', 'stressors'),
+                'integrated': tuple(data['integrated']),
+            }
+            for section, keys in fields.items():
+                for key in keys:
+                    value = data[section][key]
+                    data[section][key] = ([legacy_participant_text(item, data['person']) for item in value]
+                                          if isinstance(value, list)
+                                          else legacy_participant_text(value, data['person']))
 
         return data
 
@@ -104,12 +124,12 @@ class DebriefEngine:
         adapted = self.data["disc"]["adapted"]
 
         return (
-            f"{name}'s Natural DISC scores are "
+            f"Your Natural DISC scores are "
             f"D {natural['D']}, "
             f"I {natural['I']}, "
             f"S {natural['S']}, "
             f"and C {natural['C']}.\n\n"
-            f"{name}'s Adapted DISC scores are "
+            f"Your Adapted DISC scores are "
             f"D {adapted['D']}, "
             f"I {adapted['I']}, "
             f"S {adapted['S']}, "
@@ -124,7 +144,7 @@ class DebriefEngine:
         style = self.data["disc"]["primary_style"]
 
         return (
-            f"{self.display_name}'s primary behavioral style "
+            f"Your primary behavioral style "
             f"is {style}."
         )
 
@@ -139,7 +159,7 @@ class DebriefEngine:
         ]["behavioral_characteristics"]
 
         lines = [
-            f"{self.display_name}'s behavioral characteristics include:"
+            f"Your behavioral characteristics include:"
         ]
 
         for characteristic in characteristics:
@@ -159,7 +179,8 @@ class DebriefEngine:
         ]["value_to_family"]
 
         lines = [
-            f"{self.display_name}'s potential value to the family includes:"
+            f"Your potential contributions to the team include:" if self.experience.business
+            else f"Your potential value to the family includes:"
         ]
 
         for value in values:
@@ -179,7 +200,7 @@ class DebriefEngine:
         ]["scores"]
 
         lines = [
-            f"{self.display_name}'s Driving Forces scores are:"
+            f"Your Driving Forces scores are:"
         ]
 
         for force, score in scores.items():
@@ -225,7 +246,7 @@ class DebriefEngine:
         scores = eq["scores"]
 
         return (
-            f"{self.display_name}'s Emotional Intelligence scores are:\n"
+            f"Your Emotional Intelligence scores are:\n"
             f"- Self-Awareness: {scores['self_awareness']}\n"
             f"- Self-Regulation: {scores['self_regulation']}\n"
             f"- Motivation: {scores['motivation']}\n"
@@ -244,7 +265,7 @@ class DebriefEngine:
         integrated = self.data["integrated"]
 
         lines = [
-            f"{self.display_name}'s Integrated Analysis",
+            f"Your Integrated Analysis",
             "",
             integrated["overview"],
             "",
@@ -268,7 +289,7 @@ class DebriefEngine:
 
         lines.append("")
         lines.append(
-            "Family Applications:"
+            "Workplace Applications:" if self.experience.business else "Family Applications:"
         )
 
         for application in integrated[
@@ -344,7 +365,7 @@ class DebriefEngine:
 
         if self.current_state == DebriefState.COMPLETE:
             return (
-                f"{self.display_name}'s debrief is complete."
+                f"Your debrief is complete."
             )
 
         handler = state_handlers.get(
@@ -539,7 +560,7 @@ class DebriefEngine:
     #DISC
     def get_disc_narrative(self) -> str:
         return render_disc_narrative(
-            self.data
+            self.data, experience=self.experience.name
         )
 
     #12DF
@@ -547,7 +568,7 @@ class DebriefEngine:
             self,
     ) -> str:
         return render_driving_forces_narrative(
-            self.data
+            self.data, experience=self.experience.name
         )
 
     #EQ
@@ -555,7 +576,7 @@ class DebriefEngine:
             self,
     ) -> str:
         return render_eq_narrative(
-            self.data
+            self.data, experience=self.experience.name
         )
 
     #Integrated
@@ -563,5 +584,5 @@ class DebriefEngine:
             self,
     ) -> str:
         return render_integrated_narrative(
-            self.data
+            self.data, experience=self.experience.name
         )

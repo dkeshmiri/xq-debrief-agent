@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Team comparison · XQ Workplace</title>
+  <link rel="stylesheet" href="/static/theme.css">
+  <link rel="stylesheet" href="/static/json_maker.css">
+  <link rel="stylesheet" href="/static/portal.css">
+  <link rel="stylesheet" href="/static/family.css">
+  <script src="/static/family.js" defer></script>
+</head>
+<body data-experience="business" data-api-base="/business">
+  <a class="family-skip" href="#main">Skip to team comparison</a>
+  <header><a class="brand" href="/business/">xq <span>WORKPLACE</span></a><a href="/business/">Profile menu ↗</a></header>
+  <main id="main">
+    <div class="intro"><p class="eyebrow">A TEAM PERSPECTIVE</p><h1>Different perspectives.<br>More understanding.</h1><p>Explore two to four workplace profiles side by side, then ask how their preferences may show up together.</p></div>
+    <p id="family-name" class="family-name"></p>
+    <section class="card" aria-labelledby="pair-title">
+      <div class="section-heading"><h2 id="pair-title">Choose your perspectives.</h2><span class="tag">TEAM COMPARISON</span></div>
+      <form id="compare-form">
+        <fieldset id="pair-fields" disabled>
+          <legend class="sr-only">Choose two to four team members</legend><p id="selection-help" class="hint">Choose two to four saved profiles. Each person keeps their own assessment results.</p><div id="member-choices" class="member-choices" aria-describedby="selection-help"></div><p id="selection-count" role="status"></p>
+          <div class="actions"><button id="compare-button" type="submit">Compare profiles</button></div>
+        </fieldset>
+      </form>
+      <p class="hint">Higher scores describe different preferences; they do not mean better or worse. This comparison leaves your individual conversation in place.</p>
+    </section>
+    <p id="family-status" role="status" aria-live="polite">Loading the workplace roster…</p>
+    <p id="family-error" class="notice" role="alert" hidden></p>
+    <section id="comparison-card" class="card" aria-labelledby="comparison-title" hidden>
+      <p class="eyebrow">FROM YOUR ASSESSMENTS</p><h2 id="comparison-title" tabindex="-1">Your profiles, side by side.</h2>
+      <p class="hint">These are the saved assessment facts. Possible interaction patterns are explored separately in your question.</p>
+      <div id="comparison-tables"></div>
+    </section>
+    <section id="family-question-card" class="card" aria-labelledby="family-question-title" hidden>
+      <p class="eyebrow">FROM FACTS TO TEAMWORK</p><h2 id="family-question-title">Make room for every perspective at work.</h2>
+      <form id="family-question-form">
+        <label for="family-question">What would you like to explore about these members?</label>
+        <textarea id="family-question" rows="3" maxlength="2000" required aria-describedby="family-question-help" placeholder="How might our DISC preferences affect everyday team decisions?"></textarea>
+        <p id="family-question-help" class="hint">Mention DISC, Driving Forces, or EQ. You can ask about more than one assessment together. Your question uses only the selected profiles.</p>
+        <div class="actions"><button id="family-ask-button" type="submit">Ask about these members</button></div>
+      </form>
+      <div id="family-answer-card" hidden><p class="eyebrow">A POSSIBLE TEAM PERSPECTIVE</p><p id="family-answer"></p></div>
+    </section>
+    <footer><span>XQ WORKPLACE</span><span>Understand yourselves. Strengthen your collaboration.</span></footer>
+  </main>
+</body>
+</html>

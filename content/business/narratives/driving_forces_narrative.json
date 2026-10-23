@@ -1,0 +1,398 @@
+{
+  "forces": {
+    "Intellectual": {
+      "very_high": {
+        "core": "Your Intellectual result suggests a particularly strong emphasis on learning and understanding.",
+        "family_expression": "In workplace interactions, you may often ask for the reasoning behind a shared decision.",
+        "strength": "Your preference may contribute curiosity and informed choices.",
+        "watchout": "When this becomes a dominant priority for you, you may find it helpful to leave room for a decision once everyone has enough information."
+      },
+      "high": {
+        "core": "Your Intellectual result suggests that learning and understanding can be an important motivator.",
+        "family_expression": "You may be drawn to ask for the reasoning behind a shared decision when the team makes plans.",
+        "strength": "Your result suggests you may support curiosity and informed choices.",
+        "watchout": "You may also find it helpful to leave room for a decision once everyone has enough information."
+      },
+      "moderate": {
+        "core": "Your Intellectual result suggests a flexible or context-dependent emphasis on learning and understanding.",
+        "family_expression": "You may sometimes ask for the reasoning behind a shared decision, while giving other priorities more weight in other situations.",
+        "strength": "Your flexibility may make room for curiosity and informed choices without making it the deciding factor every time.",
+        "watchout": "You can explain which priorities matter in the current situation rather than expecting team members to predict them."
+      },
+      "low": {
+        "core": "Your Intellectual result suggests that learning and understanding may be a less prominent motivator.",
+        "family_expression": "A colleague who places greater weight on this priority may want to ask for the reasoning behind a shared decision more often than you do.",
+        "strength": "Naming your different priorities can help the team make room for more than one approach.",
+        "watchout": "Your lower preference does not establish inability, lack of care, or a high score on the opposing force."
+      },
+      "very_low": {
+        "core": "Your Intellectual result suggests that learning and understanding may have relatively little motivational pull for you.",
+        "family_expression": "You may need a different reason to engage when a shared activity mainly emphasizes this priority.",
+        "strength": "Recognizing that difference can help you explain what would make participation meaningful.",
+        "watchout": "Your colleagues who value this priority may still want to ask for the reasoning behind a shared decision. Their preference and yours both deserve consideration."
+      }
+    },
+    "Instinctive": {
+      "very_high": {
+        "core": "Your Instinctive result suggests a particularly strong emphasis on drawing on experience and intuition.",
+        "family_expression": "In workplace interactions, you may often suggest a familiar approach to a team problem.",
+        "strength": "Your preference may contribute practical experience.",
+        "watchout": "When this becomes a dominant priority for you, you may find it helpful to check whether new information changes what worked before."
+      },
+      "high": {
+        "core": "Your Instinctive result suggests that drawing on experience and intuition can be an important motivator.",
+        "family_expression": "You may be drawn to suggest a familiar approach to a team problem when the team makes plans.",
+        "strength": "Your result suggests you may support practical experience.",
+        "watchout": "You may also find it helpful to check whether new information changes what worked before."
+      },
+      "moderate": {
+        "core": "Your Instinctive result suggests a flexible or context-dependent emphasis on drawing on experience and intuition.",
+        "family_expression": "You may sometimes suggest a familiar approach to a team problem, while giving other priorities more weight in other situations.",
+        "strength": "Your flexibility may make room for practical experience without making it the deciding factor every time.",
+        "watchout": "You can explain which priorities matter in the current situation rather than expecting team members to predict them."
+      },
+      "low": {
+        "core": "Your Instinctive result suggests that drawing on experience and intuition may be a less prominent motivator.",
+        "family_expression": "A colleague who places greater weight on this priority may want to suggest a familiar approach to a team problem more often than you do.",
+        "strength": "Naming your different priorities can help the team make room for more than one approach.",
+        "watchout": "Your lower preference does not establish inability, lack of care, or a high score on the opposing force."
+      },
+      "very_low": {
+        "core": "Your Instinctive result suggests that drawing on experience and intuition may have relatively little motivational pull for you.",
+        "family_expression": "You may need a different reason to engage when a shared activity mainly emphasizes this priority.",
+        "strength": "Recognizing that difference can help you explain what would make participation meaningful.",
+        "watchout": "Your colleagues who value this priority may still want to suggest a familiar approach to a team problem. Their preference and yours both deserve consideration."
+      }
+    },
+    "Resourceful": {
+      "very_high": {
+        "core": "Your Resourceful result suggests a particularly strong emphasis on making effective use of time, money, and effort.",
+        "family_expression": "In workplace interactions, you may often weigh the practical return of a proposed use of team time or budget.",
+        "strength": "Your preference may contribute resource planning.",
+        "watchout": "When this becomes a dominant priority for you, you may find it helpful to include relational value even when it cannot be measured."
+      },
+      "high": {
+        "core": "Your Resourceful result suggests that making effective use of time, money, and effort can be an important motivator.",
+        "family_expression": "You may be drawn to weigh the practical return of a proposed use of team time or budget when the team makes plans.",
+        "strength": "Your result suggests you may support resource planning.",
+        "watchout": "You may also find it helpful to include relational value even when it cannot be measured."
+      },
+      "moderate": {
+        "core": "Your Resourceful result suggests a flexible or context-dependent emphasis on making effective use of time, money, and effort.",
+        "family_expression": "You may sometimes weigh the practical return of a proposed use of team time or budget, while giving other priorities more weight in other situations.",
+        "strength": "Your flexibility may make room for resource planning without making it the deciding factor every time.",
+        "watchout": "You can explain which priorities matter in the current situation rather than expecting team members to predict them."
+      },
+      "low": {
+        "core": "Your Resourceful result suggests that making effective use of time, money, and effort may be a less prominent motivator.",
+        "family_expression": "A colleague who places greater weight on this priority may want to weigh the practical return of a proposed use of team time or budget more often than you do.",
+        "strength": "Naming your different priorities can help the team make room for more than one approach.",
+        "watchout": "Your lower preference does not establish inability, lack of care, or a high score on the opposing force."
+      },
+      "very_low": {
+        "core": "Your Resourceful result suggests that making effective use of time, money, and effort may have relatively little motivational pull for you.",
+        "family_expression": "You may need a different reason to engage when a shared activity mainly emphasizes this priority.",
+        "strength": "Recognizing that difference can help you explain what would make participation meaningful.",
+        "watchout": "Your colleagues who value this priority may still want to weigh the practical return of a proposed use of team time or budget. Their preference and yours both deserve consideration."
+      }
+    },
+    "Selfless": {
+      "very_high": {
+        "core": "Your Selfless result suggests a particularly strong emphasis on contributing effort without requiring a direct return.",
+        "family_expression": "In workplace interactions, you may often give time to a shared task without keeping score.",
+        "strength": "Your preference may contribute willingness to contribute.",
+        "watchout": "When this becomes a dominant priority for you, you may find it helpful to agree on limits so giving remains sustainable."
+      },
+      "high": {
+        "core": "Your Selfless result suggests that contributing effort without requiring a direct return can be an important motivator.",
+        "family_expression": "You may be drawn to give time to a shared task without keeping score when the team makes plans.",
+        "strength": "Your result suggests you may support willingness to contribute.",
+        "watchout": "You may also find it helpful to agree on limits so giving remains sustainable."
+      },
+      "moderate": {
+        "core": "Your Selfless result suggests a flexible or context-dependent emphasis on contributing effort without requiring a direct return.",
+        "family_expression": "You may sometimes give time to a shared task without keeping score, while giving other priorities more weight in other situations.",
+        "strength": "Your flexibility may make room for willingness to contribute without making it the deciding factor every time.",
+        "watchout": "You can explain which priorities matter in the current situation rather than expecting team members to predict them."
+      },
+      "low": {
+        "core": "Your Selfless result suggests that contributing effort without requiring a direct return may be a less prominent motivator.",
+        "family_expression": "A colleague who places greater weight on this priority may want to give time to a shared task without keeping score more often than you do.",
+        "strength": "Naming your different priorities can help the team make room for more than one approach.",
+        "watchout": "Your lower preference does not establish inability, lack of care, or a high score on the opposing force."
+      },
+      "very_low": {
+        "core": "Your Selfless result suggests that contributing effort without requiring a direct return may have relatively little motivational pull for you.",
+        "family_expression": "You may need a different reason to engage when a shared activity mainly emphasizes this priority.",
+        "strength": "Recognizing that difference can help you explain what would make participation meaningful.",
+        "watchout": "Your colleagues who value this priority may still want to give time to a shared task without keeping score. Their preference and yours both deserve consideration."
+      }
+    },
+    "Harmonious": {
+      "very_high": {
+        "core": "Your Harmonious result suggests a particularly strong emphasis on balance, surroundings, and the overall experience.",
+        "family_expression": "In workplace interactions, you may often consider how a team workflow feels as well as what it achieves.",
+        "strength": "Your preference may contribute attention to quality of experience.",
+        "watchout": "When this becomes a dominant priority for you, you may find it helpful to allow for imperfect conditions when something needs doing."
+      },
+      "high": {
+        "core": "Your Harmonious result suggests that balance, surroundings, and the overall experience can be an important motivator.",
+        "family_expression": "You may be drawn to consider how a team workflow feels as well as what it achieves when the team makes plans.",
+        "strength": "Your result suggests you may support attention to quality of experience.",
+        "watchout": "You may also find it helpful to allow for imperfect conditions when something needs doing."
+      },
+      "moderate": {
+        "core": "Your Harmonious result suggests a flexible or context-dependent emphasis on balance, surroundings, and the overall experience.",
+        "family_expression": "You may sometimes consider how a team workflow feels as well as what it achieves, while giving other priorities more weight in other situations.",
+        "strength": "Your flexibility may make room for attention to quality of experience without making it the deciding factor every time.",
+        "watchout": "You can explain which priorities matter in the current situation rather than expecting team members to predict them."
+      },
+      "low": {
+        "core": "Your Harmonious result suggests that balance, surroundings, and the overall experience may be a less prominent motivator.",
+        "family_expression": "A colleague who places greater weight on this priority may want to consider how a team workflow feels as well as what it achieves more often than you do.",
+        "strength": "Naming your different priorities can help the team make room for more than one approach.",
+        "watchout": "Your lower preference does not establish inability, lack of care, or a high score on the opposing force."
+      },
+      "very_low": {
+        "core": "Your Harmonious result suggests that balance, surroundings, and the overall experience may have relatively little motivational pull for you.",
+        "family_expression": "You may need a different reason to engage when a shared activity mainly emphasizes this priority.",
+        "strength": "Recognizing that difference can help you explain what would make participation meaningful.",
+        "watchout": "Your colleagues who value this priority may still want to consider how a team workflow feels as well as what it achieves. Their preference and yours both deserve consideration."
+      }
+    },
+    "Objective": {
+      "very_high": {
+        "core": "Your Objective result suggests a particularly strong emphasis on functionality and practical features of the surroundings.",
+        "family_expression": "In workplace interactions, you may often focus on what makes a project process work.",
+        "strength": "Your preference may contribute practical problem-solving.",
+        "watchout": "When this becomes a dominant priority for you, you may find it helpful to ask how the experience feels to others."
+      },
+      "high": {
+        "core": "Your Objective result suggests that functionality and practical features of the surroundings can be an important motivator.",
+        "family_expression": "You may be drawn to focus on what makes a project process work when the team makes plans.",
+        "strength": "Your result suggests you may support practical problem-solving.",
+        "watchout": "You may also find it helpful to ask how the experience feels to others."
+      },
+      "moderate": {
+        "core": "Your Objective result suggests a flexible or context-dependent emphasis on functionality and practical features of the surroundings.",
+        "family_expression": "You may sometimes focus on what makes a project process work, while giving other priorities more weight in other situations.",
+        "strength": "Your flexibility may make room for practical problem-solving without making it the deciding factor every time.",
+        "watchout": "You can explain which priorities matter in the current situation rather than expecting team members to predict them."
+      },
+      "low": {
+        "core": "Your Objective result suggests that functionality and practical features of the surroundings may be a less prominent motivator.",
+        "family_expression": "A colleague who places greater weight on this priority may want to focus on what makes a project process work more often than you do.",
+        "strength": "Naming your different priorities can help the team make room for more than one approach.",
+        "watchout": "Your lower preference does not establish inability, lack of care, or a high score on the opposing force."
+      },
+      "very_low": {
+        "core": "Your Objective result suggests that functionality and practical features of the surroundings may have relatively little motivational pull for you.",
+        "family_expression": "You may need a different reason to engage when a shared activity mainly emphasizes this priority.",
+        "strength": "Recognizing that difference can help you explain what would make participation meaningful.",
+        "watchout": "Your colleagues who value this priority may still want to focus on what makes a project process work. Their preference and yours both deserve consideration."
+      }
+    },
+    "Altruistic": {
+      "very_high": {
+        "core": "Your Altruistic result suggests a particularly strong emphasis on helping others for the sake of meeting their needs.",
+        "family_expression": "In workplace interactions, you may often offer support when a colleague needs assistance.",
+        "strength": "Your preference may contribute care for others.",
+        "watchout": "When this becomes a dominant priority for you, you may find it helpful to ask what help is wanted and respect your own limits."
+      },
+      "high": {
+        "core": "Your Altruistic result suggests that helping others for the sake of meeting their needs can be an important motivator.",
+        "family_expression": "You may be drawn to offer support when a colleague needs assistance when the team makes plans.",
+        "strength": "Your result suggests you may support care for others.",
+        "watchout": "You may also find it helpful to ask what help is wanted and respect your own limits."
+      },
+      "moderate": {
+        "core": "Your Altruistic result suggests a flexible or context-dependent emphasis on helping others for the sake of meeting their needs.",
+        "family_expression": "You may sometimes offer support when a colleague needs assistance, while giving other priorities more weight in other situations.",
+        "strength": "Your flexibility may make room for care for others without making it the deciding factor every time.",
+        "watchout": "You can explain which priorities matter in the current situation rather than expecting team members to predict them."
+      },
+      "low": {
+        "core": "Your Altruistic result suggests that helping others for the sake of meeting their needs may be a less prominent motivator.",
+        "family_expression": "A colleague who places greater weight on this priority may want to offer support when a colleague needs assistance more often than you do.",
+        "strength": "Naming your different priorities can help the team make room for more than one approach.",
+        "watchout": "Your lower preference does not establish inability, lack of care, or a high score on the opposing force."
+      },
+      "very_low": {
+        "core": "Your Altruistic result suggests that helping others for the sake of meeting their needs may have relatively little motivational pull for you.",
+        "family_expression": "You may need a different reason to engage when a shared activity mainly emphasizes this priority.",
+        "strength": "Recognizing that difference can help you explain what would make participation meaningful.",
+        "watchout": "Your colleagues who value this priority may still want to offer support when a colleague needs assistance. Their preference and yours both deserve consideration."
+      }
+    },
+    "Intentional": {
+      "very_high": {
+        "core": "Your Intentional result suggests a particularly strong emphasis on helping in ways connected to a defined purpose.",
+        "family_expression": "In workplace interactions, you may often clarify the purpose of a commitment before offering support.",
+        "strength": "Your preference may contribute purposeful support.",
+        "watchout": "When this becomes a dominant priority for you, you may find it helpful to listen to needs whose value is not immediately obvious."
+      },
+      "high": {
+        "core": "Your Intentional result suggests that helping in ways connected to a defined purpose can be an important motivator.",
+        "family_expression": "You may be drawn to clarify the purpose of a commitment before offering support when the team makes plans.",
+        "strength": "Your result suggests you may support purposeful support.",
+        "watchout": "You may also find it helpful to listen to needs whose value is not immediately obvious."
+      },
+      "moderate": {
+        "core": "Your Intentional result suggests a flexible or context-dependent emphasis on helping in ways connected to a defined purpose.",
+        "family_expression": "You may sometimes clarify the purpose of a commitment before offering support, while giving other priorities more weight in other situations.",
+        "strength": "Your flexibility may make room for purposeful support without making it the deciding factor every time.",
+        "watchout": "You can explain which priorities matter in the current situation rather than expecting team members to predict them."
+      },
+      "low": {
+        "core": "Your Intentional result suggests that helping in ways connected to a defined purpose may be a less prominent motivator.",
+        "family_expression": "A colleague who places greater weight on this priority may want to clarify the purpose of a commitment before offering support more often than you do.",
+        "strength": "Naming your different priorities can help the team make room for more than one approach.",
+        "watchout": "Your lower preference does not establish inability, lack of care, or a high score on the opposing force."
+      },
+      "very_low": {
+        "core": "Your Intentional result suggests that helping in ways connected to a defined purpose may have relatively little motivational pull for you.",
+        "family_expression": "You may need a different reason to engage when a shared activity mainly emphasizes this priority.",
+        "strength": "Recognizing that difference can help you explain what would make participation meaningful.",
+        "watchout": "Your colleagues who value this priority may still want to clarify the purpose of a commitment before offering support. Their preference and yours both deserve consideration."
+      }
+    },
+    "Commanding": {
+      "very_high": {
+        "core": "Your Commanding result suggests a particularly strong emphasis on influence, independence, and directing outcomes.",
+        "family_expression": "In workplace interactions, you may often seek a meaningful voice in team decisions.",
+        "strength": "Your preference may contribute initiative and ownership.",
+        "watchout": "When this becomes a dominant priority for you, you may find it helpful to share decision-making and make room for other voices."
+      },
+      "high": {
+        "core": "Your Commanding result suggests that influence, independence, and directing outcomes can be an important motivator.",
+        "family_expression": "You may be drawn to seek a meaningful voice in team decisions when the team makes plans.",
+        "strength": "Your result suggests you may support initiative and ownership.",
+        "watchout": "You may also find it helpful to share decision-making and make room for other voices."
+      },
+      "moderate": {
+        "core": "Your Commanding result suggests a flexible or context-dependent emphasis on influence, independence, and directing outcomes.",
+        "family_expression": "You may sometimes seek a meaningful voice in team decisions, while giving other priorities more weight in other situations.",
+        "strength": "Your flexibility may make room for initiative and ownership without making it the deciding factor every time.",
+        "watchout": "You can explain which priorities matter in the current situation rather than expecting team members to predict them."
+      },
+      "low": {
+        "core": "Your Commanding result suggests that influence, independence, and directing outcomes may be a less prominent motivator.",
+        "family_expression": "A colleague who places greater weight on this priority may want to seek a meaningful voice in team decisions more often than you do.",
+        "strength": "Naming your different priorities can help the team make room for more than one approach.",
+        "watchout": "Your lower preference does not establish inability, lack of care, or a high score on the opposing force."
+      },
+      "very_low": {
+        "core": "Your Commanding result suggests that influence, independence, and directing outcomes may have relatively little motivational pull for you.",
+        "family_expression": "You may need a different reason to engage when a shared activity mainly emphasizes this priority.",
+        "strength": "Recognizing that difference can help you explain what would make participation meaningful.",
+        "watchout": "Your colleagues who value this priority may still want to seek a meaningful voice in team decisions. Their preference and yours both deserve consideration."
+      }
+    },
+    "Collaborative": {
+      "very_high": {
+        "core": "Your Collaborative result suggests a particularly strong emphasis on sharing responsibility and contributing without individual recognition.",
+        "family_expression": "In workplace interactions, you may often work alongside colleagues toward a shared goal.",
+        "strength": "Your preference may contribute shared effort.",
+        "watchout": "When this becomes a dominant priority for you, you may find it helpful to state your own needs instead of letting them disappear."
+      },
+      "high": {
+        "core": "Your Collaborative result suggests that sharing responsibility and contributing without individual recognition can be an important motivator.",
+        "family_expression": "You may be drawn to work alongside colleagues toward a shared goal when the team makes plans.",
+        "strength": "Your result suggests you may support shared effort.",
+        "watchout": "You may also find it helpful to state your own needs instead of letting them disappear."
+      },
+      "moderate": {
+        "core": "Your Collaborative result suggests a flexible or context-dependent emphasis on sharing responsibility and contributing without individual recognition.",
+        "family_expression": "You may sometimes work alongside colleagues toward a shared goal, while giving other priorities more weight in other situations.",
+        "strength": "Your flexibility may make room for shared effort without making it the deciding factor every time.",
+        "watchout": "You can explain which priorities matter in the current situation rather than expecting team members to predict them."
+      },
+      "low": {
+        "core": "Your Collaborative result suggests that sharing responsibility and contributing without individual recognition may be a less prominent motivator.",
+        "family_expression": "A colleague who places greater weight on this priority may want to work alongside colleagues toward a shared goal more often than you do.",
+        "strength": "Naming your different priorities can help the team make room for more than one approach.",
+        "watchout": "Your lower preference does not establish inability, lack of care, or a high score on the opposing force."
+      },
+      "very_low": {
+        "core": "Your Collaborative result suggests that sharing responsibility and contributing without individual recognition may have relatively little motivational pull for you.",
+        "family_expression": "You may need a different reason to engage when a shared activity mainly emphasizes this priority.",
+        "strength": "Recognizing that difference can help you explain what would make participation meaningful.",
+        "watchout": "Your colleagues who value this priority may still want to work alongside colleagues toward a shared goal. Their preference and yours both deserve consideration."
+      }
+    },
+    "Structured": {
+      "very_high": {
+        "core": "Your Structured result suggests a particularly strong emphasis on established systems, traditions, and consistent methods.",
+        "family_expression": "In workplace interactions, you may often prefer an agreed routine for shared responsibilities.",
+        "strength": "Your preference may contribute consistency and continuity.",
+        "watchout": "When this becomes a dominant priority for you, you may find it helpful to revisit a routine when it no longer serves the team."
+      },
+      "high": {
+        "core": "Your Structured result suggests that established systems, traditions, and consistent methods can be an important motivator.",
+        "family_expression": "You may be drawn to prefer an agreed routine for shared responsibilities when the team makes plans.",
+        "strength": "Your result suggests you may support consistency and continuity.",
+        "watchout": "You may also find it helpful to revisit a routine when it no longer serves the team."
+      },
+      "moderate": {
+        "core": "Your Structured result suggests a flexible or context-dependent emphasis on established systems, traditions, and consistent methods.",
+        "family_expression": "You may sometimes prefer an agreed routine for shared responsibilities, while giving other priorities more weight in other situations.",
+        "strength": "Your flexibility may make room for consistency and continuity without making it the deciding factor every time.",
+        "watchout": "You can explain which priorities matter in the current situation rather than expecting team members to predict them."
+      },
+      "low": {
+        "core": "Your Structured result suggests that established systems, traditions, and consistent methods may be a less prominent motivator.",
+        "family_expression": "A colleague who places greater weight on this priority may want to prefer an agreed routine for shared responsibilities more often than you do.",
+        "strength": "Naming your different priorities can help the team make room for more than one approach.",
+        "watchout": "Your lower preference does not establish inability, lack of care, or a high score on the opposing force."
+      },
+      "very_low": {
+        "core": "Your Structured result suggests that established systems, traditions, and consistent methods may have relatively little motivational pull for you.",
+        "family_expression": "You may need a different reason to engage when a shared activity mainly emphasizes this priority.",
+        "strength": "Recognizing that difference can help you explain what would make participation meaningful.",
+        "watchout": "Your colleagues who value this priority may still want to prefer an agreed routine for shared responsibilities. Their preference and yours both deserve consideration."
+      }
+    },
+    "Receptive": {
+      "very_high": {
+        "core": "Your Receptive result suggests a particularly strong emphasis on new approaches, possibilities, and alternative methods.",
+        "family_expression": "In workplace interactions, you may often suggest a different way to handle a familiar team task.",
+        "strength": "Your preference may contribute openness to change.",
+        "watchout": "When this becomes a dominant priority for you, you may find it helpful to give others time to understand a proposed change."
+      },
+      "high": {
+        "core": "Your Receptive result suggests that new approaches, possibilities, and alternative methods can be an important motivator.",
+        "family_expression": "You may be drawn to suggest a different way to handle a familiar team task when the team makes plans.",
+        "strength": "Your result suggests you may support openness to change.",
+        "watchout": "You may also find it helpful to give others time to understand a proposed change."
+      },
+      "moderate": {
+        "core": "Your Receptive result suggests a flexible or context-dependent emphasis on new approaches, possibilities, and alternative methods.",
+        "family_expression": "You may sometimes suggest a different way to handle a familiar team task, while giving other priorities more weight in other situations.",
+        "strength": "Your flexibility may make room for openness to change without making it the deciding factor every time.",
+        "watchout": "You can explain which priorities matter in the current situation rather than expecting team members to predict them."
+      },
+      "low": {
+        "core": "Your Receptive result suggests that new approaches, possibilities, and alternative methods may be a less prominent motivator.",
+        "family_expression": "A colleague who places greater weight on this priority may want to suggest a different way to handle a familiar team task more often than you do.",
+        "strength": "Naming your different priorities can help the team make room for more than one approach.",
+        "watchout": "Your lower preference does not establish inability, lack of care, or a high score on the opposing force."
+      },
+      "very_low": {
+        "core": "Your Receptive result suggests that new approaches, possibilities, and alternative methods may have relatively little motivational pull for you.",
+        "family_expression": "You may need a different reason to engage when a shared activity mainly emphasizes this priority.",
+        "strength": "Recognizing that difference can help you explain what would make participation meaningful.",
+        "watchout": "Your colleagues who value this priority may still want to suggest a different way to handle a familiar team task. Their preference and yours both deserve consideration."
+      }
+    }
+  },
+  "clusters": {
+    "primary": "These are the motivations most likely to consistently capture your attention and influence your decisions.",
+    "situational": "These motivations remain available to you, but their importance is more likely to depend on the circumstances.",
+    "indifferent": "These motivations generally carry less weight in determining why you choose one direction over another."
+  },
+  "closing": [
+    "Your Driving Forces may help you understand why you and a colleague can agree on what should happen while being motivated by different reasons.",
+    "You can use those differences to distinguish disagreement about your goal from disagreement about what makes that goal worth pursuing."
+  ],
+  "range_policy": "These are application wording bands, not population norms or clinical categories. Cluster membership comes from the report, not these cutoffs. A low force does not establish a high opposing force."
+}

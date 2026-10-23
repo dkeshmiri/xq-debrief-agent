@@ -1,4 +1,7 @@
 import unittest
+import json
+import tempfile
+from pathlib import Path
 
 from family_repository import FamilyRepository
 
@@ -6,8 +9,15 @@ from family_repository import FamilyRepository
 class TestFamilyRepository(unittest.TestCase):
 
     def setUp(self) -> None:
+        # Keep the fixed two-person fixture independent of profiles saved through the UI.
+        directory = tempfile.TemporaryDirectory()
+        self.addCleanup(directory.cleanup)
+        data = json.loads(Path('data/families/demo_family.json').read_text())
+        data['members'] = [m for m in data['members'] if m['person_id'] in ('samuel_demo_001', 'jennifer_demo_001')]
+        manifest = Path(directory.name) / 'family.json'
+        manifest.write_text(json.dumps(data))
         self.repository = FamilyRepository(
-            "data/families/demo_family.json"
+            manifest
         )
 
     def test_family_identity(self) -> None:

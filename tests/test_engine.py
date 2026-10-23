@@ -223,7 +223,7 @@ class TestDebriefEngine(
         content = engine.get_current_content()
 
         self.assertIn(
-            "Samuel's Integrated Analysis",
+            "Your Integrated Analysis",
             content,
         )
 

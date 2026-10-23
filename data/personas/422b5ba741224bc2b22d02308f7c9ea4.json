@@ -1,0 +1,151 @@
+{
+  "schema_version": "1.0",
+  "person": {
+    "person_id": "person_335c302d321343b89a2d586aadbeead5",
+    "first_name": "Ali",
+    "display_name": "Ali Mozayeni",
+    "age": 45,
+    "family_role": "Father"
+  },
+  "assessment": {
+    "assessment_id": "assessment_9f8d9baf143144598eccbac9ae9f6518",
+    "assessment_date": "2026-10-22",
+    "source": "TriMetrix\u00ae EQ Management-Staff (TTI Success Insights\u00ae Behaviors/Style Insights\u00ae, 12 Driving Forces\u00ae, and TTI Emotional Quotient\u2122)"
+  },
+  "disc": {
+    "natural": {
+      "D": 93.0,
+      "I": 72.0,
+      "S": 22.0,
+      "C": 18.0
+    },
+    "adapted": {
+      "D": 93.0,
+      "I": 64.0,
+      "S": 8.0,
+      "C": 28.0
+    },
+    "primary_style": "Persuading Conductor",
+    "behavioral_characteristics": [
+      "You may approach family problems directly, make decisions quickly, and take charge when action is needed.",
+      "You may bring confidence, optimism, persuasion, and lively conversation into family interactions.",
+      "You tend to prefer movement, variety, and quick transitions rather than long periods of routine or uncertainty.",
+      "You may improvise and challenge existing methods when a more practical approach seems available.",
+      "Under pressure, your urgency and certainty may feel demanding or controlling to family members who need more time or input."
+    ],
+    "value_to_family": [
+      "You can initiate action when the family faces a difficult decision or unresolved problem.",
+      "Your confidence and persistence may help the family regain momentum after setbacks.",
+      "You may bring new options to familiar routines, responsibilities, or practical challenges.",
+      "Your directness can help surface disagreements that might otherwise remain unspoken.",
+      "Your energy and optimism may encourage family members during demanding periods."
+    ],
+    "communication_do": [
+      "Be direct, specific, and focused on the issue that needs attention.",
+      "Offer clear options and invite each family member to help shape the decision.",
+      "Ask questions to confirm that you understood both the facts and the feelings involved.",
+      "Pause long enough for quieter family members to express concerns or request more time.",
+      "When repairing conflict, name your part, listen without interrupting, and agree on a practical next step."
+    ],
+    "communication_dont": [
+      "Do not treat speed as more important than another family member\u2019s need to participate.",
+      "Avoid turning a discussion into a one-way decision or repeated attempt to persuade.",
+      "Do not dismiss a concern because it seems emotional, indirect, or slow to resolve.",
+      "Avoid changing routines or priorities without explaining the reason and likely effect.",
+      "Do not rely on confidence alone when important details, limits, or agreements need review."
+    ]
+  },
+  "driving_forces": {
+    "scores": {
+      "Intellectual": 17.0,
+      "Instinctive": 58.0,
+      "Resourceful": 93.0,
+      "Selfless": 0.0,
+      "Harmonious": 11.0,
+      "Objective": 62.0,
+      "Altruistic": 35.0,
+      "Intentional": 47.0,
+      "Commanding": 81.0,
+      "Collaborative": 8.0,
+      "Structured": 14.0,
+      "Receptive": 74.0
+    },
+    "primary_cluster": [
+      "Resourceful",
+      "Commanding",
+      "Receptive",
+      "Objective"
+    ],
+    "situational_cluster": [
+      "Instinctive",
+      "Intentional",
+      "Altruistic",
+      "Intellectual"
+    ],
+    "indifferent_cluster": [
+      "Structured",
+      "Harmonious",
+      "Collaborative",
+      "Selfless"
+    ],
+    "motivational_strengths": [
+      "You are strongly motivated to use time, money, and effort effectively, which may support thoughtful family resource planning.",
+      "You may bring initiative and ownership to shared decisions, especially when a clear result is needed.",
+      "You are receptive to new approaches and may find practical alternatives when an existing family routine is not working.",
+      "You tend to value functional results and may focus on arrangements that make daily life work better.",
+      "Your situational motives may shift with context, so experience, purpose, helping, or learning can matter when connected to the immediate need."
+    ],
+    "energizers": [
+      "Solving a practical family problem with a visible result may give you energy.",
+      "Having a meaningful voice in decisions and freedom in how to carry out responsibilities may increase engagement.",
+      "Finding a faster or more efficient way to handle a recurring task may be motivating.",
+      "Trying a new approach or improving an outdated routine may sustain your interest.",
+      "Working toward a clear family goal with useful progress may help you remain committed."
+    ],
+    "stressors": [
+      "Repeated steps, wasted time, or discussions that do not lead to action may create frustration.",
+      "Having little influence over an important family decision may feel restrictive.",
+      "Rigid traditions or imposed methods may be stressful when their practical purpose is unclear.",
+      "Long delays, outdated routines, or excessive attention to abstract ideas may reduce engagement.",
+      "Pressure to preserve harmony at the expense of addressing the problem may be difficult for you."
+    ]
+  },
+  "eq": {
+    "scores": {
+      "self_awareness": 98.0,
+      "self_regulation": 77.0,
+      "motivation": 81.0,
+      "social_awareness": 76.0,
+      "social_regulation": 84.0
+    },
+    "self_composite": 84.0,
+    "others_composite": 83.0,
+    "total_eq": 84.0
+  },
+  "integrated": {
+    "overview": "Ali\u2019s results suggest a direct, energetic, and change-oriented style supported by strong emotional awareness and relationship skills. As a father, he may readily take initiative, solve practical problems, and create momentum. His strong preference for influence, efficiency, and new approaches can be helpful, while family decisions may work best when others receive enough time, voice, and emotional consideration.",
+    "strengths": [
+      "You may recognize your emotional triggers early and use that awareness to choose a more intentional response.",
+      "You generally may be able to pause, adjust your tone, and recover constructively after tension.",
+      "Your internal drive and persistence can help sustain family commitments through setbacks or slower periods.",
+      "You may notice changes in another person\u2019s tone, mood, or engagement and adjust how you communicate.",
+      "Your combination of decisiveness, practical focus, and openness to change can support effective problem-solving."
+    ],
+    "development_areas": [
+      "Slow the pace of important decisions when another family member needs time, consistency, or more information.",
+      "Check key details and limits before acting on a quick solution or changing an established plan.",
+      "Share responsibility rather than taking over in order to keep control or preserve momentum.",
+      "Ask how a decision will feel to others, not only whether it is efficient or practical.",
+      "During conflict, use your awareness of emotion to validate the other person before offering advice or a solution."
+    ],
+    "family_applications": [
+      "For major choices, present options, ask each person for input, and set a clear time to decide.",
+      "Use a short written list for shared priorities, responsibilities, and follow-through when routines matter.",
+      "Before changing a family routine, explain the practical benefit and ask what adjustment time others need.",
+      "When tension rises, pause, name your reaction without blame, and ask what the other person wants understood.",
+      "Balance measurable value with relational value when deciding how the family uses time, money, or effort.",
+      "After a disagreement, summarize what was heard, acknowledge your part, and agree on one next step."
+    ],
+    "closing_summary": "Ali may bring initiative, confidence, practical judgment, and emotional awareness to his family role. His greatest contribution may come from pairing decisive action with patient listening, shared choices, and room for family members whose pace or priorities differ from his own."
+  }
+}

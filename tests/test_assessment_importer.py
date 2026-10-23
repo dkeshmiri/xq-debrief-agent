@@ -26,8 +26,13 @@ def fixtures():
     facts["assessment"].pop("assessment_id")
     disc = {key: facts["disc"].pop(key) for key in ("behavioral_characteristics", "value_to_family", "communication_do", "communication_dont")}
     forces = {key: facts["driving_forces"].pop(key) for key in ("motivational_strengths", "energizers", "stressors")}
+    language = {"disc": disc, "driving_forces": forces, "integrated": copy.deepcopy(persona["integrated"])}
+    for fields in language.values():
+        for key, value in fields.items():
+            fields[key] = (["You may discuss your assessment in a practical communication experiment."]
+                           if isinstance(value, list) else "Your assessment can inform your communication choices.")
     return (Extraction(facts=Facts.model_validate(facts), evidence=[], sections=[], warnings=[]),
-            FamilyLanguage(disc=disc, driving_forces=forces, integrated=persona["integrated"]))
+            FamilyLanguage.model_validate(language))
 
 
 class ImporterTests(unittest.TestCase):

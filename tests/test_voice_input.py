@@ -953,6 +953,42 @@ class AppVoiceFlowTests(unittest.TestCase):
             "Your DISC profile shows a strong D.",
         )
 
+    def test_manual_button_route_pauses_without_voice_and_resumes_after_answer(self):
+        self.start_narration()
+        app = self.app_module
+        original_index = app.orchestrator.cursor.sentence_index
+        original_echoes = len(self.echoes())
+
+        response = self.http.post("/api/debrief/interrupt")
+        self.assertEqual(response.status_code, 200, response.json)
+        self.assertEqual(len(self.interrupts()), 1)
+        pending = self.http.get("/api/activity").json
+        self.assertTrue(pending["interrupted"])
+        self.assertFalse(pending["question_ready"])
+
+        # An unrelated stop cannot open question mode or advance narration.
+        self.stopped("unrelated", interrupted=True)
+        self.assertEqual(self.phase(), "narrating")
+        self.stopped("narration-1", interrupted=True)
+        paused = self.http.get("/api/activity").json
+        self.assertTrue(paused["question_ready"])
+        self.assertFalse(paused["interrupted"])
+        self.assertEqual(app.engine.get_interaction_mode().value, "question")
+        self.assertEqual(app.orchestrator.cursor.sentence_index, original_index)
+        self.assertEqual(len(self.echoes()), original_echoes)
+        self.assertGreater(app.question_mode_seconds_left(), 29)
+
+        # A delayed completion cannot skip the interrupted sentence.
+        self.stopped("narration-1", interrupted=False)
+        self.assertEqual(app.orchestrator.cursor.sentence_index, original_index)
+        self.ask_typed_question()
+        self.started("answer-1")
+        self.stopped("answer-1", interrupted=False)
+        self.assertEqual(self.phase(), "narrating")
+        self.assertEqual(app.orchestrator.cursor.sentence_index, original_index)
+        self.assertTrue(self.echoes()[-1].startswith("To continue where we left off... "))
+        self.assertIsNone(app.question_mode_seconds_left())
+
     def test_voice_dismissal_resumes_without_api_call(self):
         self.voice_interrupt_then_confirm("Oh, never mind. My mistake, please continue.")
 

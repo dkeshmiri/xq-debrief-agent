@@ -198,6 +198,8 @@ class FamilyRepository:
         member = {key: person[key] for key in ("person_id", "display_name", "family_role")}
         member.update(persona_file=str(target.resolve()), debrief_enabled=True)
         updated = {**self.family_data, "members": [*self.family_data["members"], member]}
+        if not updated['default_person_id']:
+            updated['default_person_id'] = person_id
         validate_family_manifest(updated)
         temporary = None
         try:
@@ -217,4 +219,6 @@ class FamilyRepository:
         self.family_data = updated
         self._members[person_id] = member
         self._personas[person_id] = persona
+        if self.active_person_id is None:
+            self.active_person_id = person_id
         return target.name

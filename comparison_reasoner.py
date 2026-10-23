@@ -81,7 +81,10 @@ class ComparisonReasoner:
         self,
         client: Any | None = None,
         knowledge_dir: str | Path = "knowledge",
+        experience: str = 'family',
     ) -> None:
+        from workspace_experience import Experience
+        self.experience = Experience(experience)
         if client is not None:
             self.client = client
         else:
@@ -97,7 +100,7 @@ class ComparisonReasoner:
         self.comparison_engine = ComparisonEngine()
 
         self.context_builder = ComparisonContextBuilder(
-            knowledge_dir=knowledge_dir
+            knowledge_dir=self.experience.knowledge_dir if self.experience.business else knowledge_dir
         )
 
     def resolve_comparison_domain(
@@ -112,6 +115,10 @@ class ComparisonReasoner:
         """
 
         route = route_question(question)
+
+        if self.experience.business and route.domain == ContextDomain.GENERAL:
+            if any(word in question.lower() for word in ('feedback', 'leadership', 'handoff', 'meeting', 'collaborat', 'team', 'communication', 'delegat', 'conflict')):
+                return ContextDomain.INTEGRATED
 
         if route.domain == ContextDomain.GENERAL:
             raise ValueError(
@@ -165,7 +172,7 @@ class ComparisonReasoner:
         context["question_domain"] = resolved_domain.value
         domains = included_domains if resolved_domain == ContextDomain.INTEGRATED else [resolved_domain]
         context["score_range_wording"] = {
-            person: {domain.value: score_wording(persona, domain.value) for domain in domains}
+            person: {domain.value: score_wording(persona, domain.value, experience=self.experience.name) for domain in domains}
             for person, persona in (("person_a", persona_a), ("person_b", persona_b))
         }
         context["score_range_policy"] = RANGE_POLICY
@@ -231,6 +238,10 @@ those interpretations are supported by the supplied comparison data.
 differences into practical interaction patterns while preserving cautious
 language and avoiding guaranteed outcomes.
 """
+
+        if self.experience.business:
+            from workspace_experience import BUSINESS_RULES
+            system_prompt = BUSINESS_RULES + '\nKeep the two selected people separate. Explain possible interactions using only the included domains.'
 
         user_prompt = f"""
 VALIDATED XQ COMPARISON CONTEXT:

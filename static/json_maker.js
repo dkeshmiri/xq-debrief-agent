@@ -1,6 +1,10 @@
 "use strict";
 (() => {
   const $ = id => document.getElementById(id);
+  const base = document.body?.dataset?.apiBase || '';
+  const business = document.body?.dataset?.experience === 'business';
+  const draftStorageKey = business ? 'xq-business-assessment-draft' : 'xq-assessment-draft';
+  const scope = business ? 'workplace' : 'family';
   const forces = ["Intellectual", "Instinctive", "Resourceful", "Selfless", "Harmonious", "Objective", "Altruistic", "Intentional", "Commanding", "Collaborative", "Structured", "Receptive"];
   const eq = ["self_awareness", "self_regulation", "motivation", "social_awareness", "social_regulation"];
   const composites = ["self_composite", "others_composite", "total_eq"];
@@ -18,7 +22,7 @@
     keys.reduce((obj, key) => obj[key], extraction.facts)[last] = value;
   }
   function status(message, error = false) {
-    $("status").textContent = message;
+    $("status").textContent = business ? message.replaceAll('family-oriented', 'workplace-oriented').replaceAll('family JSON', 'workplace JSON').replaceAll('Family persona', 'Workplace profile').replaceAll('Family draft', 'Workplace draft') : message;
     $("status").classList.toggle("error", error);
   }
   function setBusy(value) {
@@ -55,7 +59,7 @@
     $("missing").textContent = paths.length
       ? `Missing: ${paths.map(human).join(", ")}. You can generate a clearly marked draft now, or complete these fields from verified results. A draft cannot be used by the debrief engine.`
       : "All required factual fields are present. Review them before generating a debrief-ready persona.";
-    $("generate-button").textContent = paths.length ? "Generate family JSON draft" : "Generate family JSON";
+    $("generate-button").textContent = paths.length ? `Generate ${scope} JSON draft` : `Generate ${scope} JSON`;
     document.querySelectorAll("[data-path]").forEach(input => input.classList.toggle("missing", paths.includes(input.dataset.path)));
   }
   function field(container, labelText, path, type = "text") {
@@ -99,7 +103,7 @@
     ];
     identity.forEach(args => field("identity-fields", ...args));
     const roleLabel = document.createElement("label");
-    roleLabel.textContent = "Family role";
+    roleLabel.textContent = business ? 'Workplace role' : 'Family role';
     const roleInput = document.createElement("input");
     roleInput.id = "review-role";
     roleInput.value = role;
@@ -148,7 +152,7 @@
     updateReadiness();
   }
   async function api(url, options) {
-    const response = await fetch(url, options);
+    const response = await fetch(base + url, options);
     let data;
     try {data = await response.json();} catch {throw new Error(`The server returned an unreadable response (${response.status}). Please retry.`);}
     if (!response.ok) throw new Error(data.error || `Request failed (${response.status}).`);
@@ -168,7 +172,7 @@
     $("override-history").textContent = data.overrides.length
       ? `${data.overrides.length} manual override save(s) recorded. Review revision ${revision}. Source evidence is retained as originally extracted.`
       : "No manual overrides saved.";
-    try {sessionStorage.setItem("xq-assessment-draft", draftId);} catch {}
+    try {sessionStorage.setItem(draftStorageKey, draftId);} catch {}
   }
   $("save-overrides").addEventListener("click", async () => {
     if (busy || !dirty || !draftId) return;
@@ -216,7 +220,7 @@
       $("result-badge").textContent = result.ready_for_debrief ? "Debrief-ready" : "Incomplete draft";
       $("result-badge").classList.toggle("draft", !result.ready_for_debrief);
       $("result-note").textContent = result.ready_for_debrief
-        ? "Validated against the persona schema. Review the family language, then save this profile to the app or download the JSON. Saving adds a new family member without replacing an existing profile."
+        ? (business ? "Validated against the profile schema. Review the workplace language, then save or download this profile. Saving adds a colleague without replacing an existing profile." : "Validated against the persona schema. Review the family language, then save this profile to the app or download the JSON. Saving adds a new family member without replacing an existing profile.")
         : `This draft is not valid for the debrief engine. Missing: ${result.missing_fields.map(human).join(", ")}. Complete those fields above and regenerate to produce a debrief-ready file.`;
       $("download-json").textContent = result.ready_for_debrief ? "Download persona JSON" : "Download draft JSON";
       $("family-overview").textContent = result.persona.integrated.overview;
@@ -232,7 +236,7 @@
     try {
       const data = await api("/api/assessments/use", {method: "POST", headers: {"Content-Type": "application/json"},
         body: JSON.stringify({draft_id: draftId, revision, reviewed: true})});
-      window.location.href = `/debrief?file=${encodeURIComponent(data.file)}`;
+      window.location.href = `${base}/debrief?file=${encodeURIComponent(data.file)}`;
     } catch (error) {status(error.message, true);} finally {setBusy(false);}
   });
   $("download-json").addEventListener("click", () => {
@@ -250,11 +254,11 @@
   });
   async function restoreDraft() {
     let saved;
-    try {saved = sessionStorage.getItem("xq-assessment-draft");} catch {return;}
+    try {saved = sessionStorage.getItem(draftStorageKey);} catch {return;}
     if (!saved) return;
     setBusy(true);
     try {loadDraft(await api(`/api/assessments/${encodeURIComponent(saved)}`)); status("Your last saved review has been restored.");}
-    catch {try {sessionStorage.removeItem("xq-assessment-draft");} catch {}}
+    catch {try {sessionStorage.removeItem(draftStorageKey);} catch {}}
     finally {setBusy(false);}
   }
   restoreDraft();

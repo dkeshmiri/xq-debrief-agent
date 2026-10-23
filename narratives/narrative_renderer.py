@@ -2,6 +2,7 @@
 import json
 from pathlib import Path
 from typing import Any
+from workspace_experience import Experience
 
 from .narrative_classifier import (
     classify_disc_score,
@@ -90,6 +91,7 @@ def render_disc_shift(
 #DISC
 def render_disc_narrative(
     persona: dict[str, Any],
+    experience: str = "family",
 ) -> str:
     """
     Produce a deterministic, conversational DISC narrative
@@ -97,7 +99,7 @@ def render_disc_narrative(
     """
 
     library = load_narrative_library(
-        DISC_LIBRARY_PATH
+        Experience(experience).narrative("disc_narrative.json") if experience == "business" else DISC_LIBRARY_PATH
     )
 
     person = persona["person"]
@@ -119,7 +121,7 @@ def render_disc_narrative(
     profile = profile_library.get(primary_style, {
         "opening": "We will use the individual scores to explore this reported pattern.",
         "family_presence": "The style name is retained as it appears in your assessment.",
-        "strength": "Different combinations of preferences can support different family needs.",
+        "strength": "Different combinations of preferences can support different team needs." if experience == "business" else "Different combinations of preferences can support different family needs.",
         "watchout": "A style label alone does not explain every response or situation.",
     })
 
@@ -260,15 +262,16 @@ def render_disc_narrative(
     )
 
     if characteristics:
-        joined_characteristics = ", ".join(
-            characteristics
-        )
+        if experience == 'business':
+            from narrative_perspective import legacy_participant_text
+            characteristics = [legacy_participant_text(item, person) for item in characteristics]
+        joined_characteristics = (" ".join(item.rstrip('. ') + '.' for item in characteristics)
+                                  if experience == 'business' else ", ".join(characteristics))
 
         parts.append(
             (
-                f"Your existing behavioral summary also "
-                f"describes you as "
-                f"{joined_characteristics}."
+                f"Your reported behavioral characteristics: "
+                f"{joined_characteristics.rstrip('. ')}."
             )
         )
 
@@ -278,15 +281,17 @@ def render_disc_narrative(
     )
 
     if family_values:
-        joined_values = "; ".join(
-            family_values
-        )
+        if experience == 'business':
+            from narrative_perspective import legacy_participant_text
+            family_values = [legacy_participant_text(item, person) for item in family_values]
+        joined_values = (" ".join(item.rstrip('. ') + '.' for item in family_values)
+                         if experience == 'business' else "; ".join(family_values))
 
         parts.append(
             (
                 f"Potential ways this can add value "
-                f"within the family include: "
-                f"{joined_values}."
+                f"within the {'team' if experience == 'business' else 'family'} include: "
+                f"{joined_values.rstrip('. ')}."
             )
         )
 
@@ -304,9 +309,10 @@ def render_disc_narrative(
 #12DF
 def render_driving_forces_narrative(
     persona: dict[str, Any],
+    experience: str = "family",
 ) -> str:
     library = load_narrative_library(
-        DRIVING_FORCES_LIBRARY_PATH
+        Experience(experience).narrative("driving_forces_narrative.json") if experience == "business" else DRIVING_FORCES_LIBRARY_PATH
     )
 
     person = persona["person"]
@@ -459,13 +465,9 @@ def render_driving_forces_narrative(
         )
 
         parts.append(
-            (
-                "That contrast can be particularly useful "
-                "in understanding why your priorities may "
-                "feel obvious to you while another family "
-                "member can approach the same situation "
-                "from a very different motivational starting point."
-            )
+            "That contrast can be particularly useful in understanding why your priorities may feel obvious to you "
+            + ("while a colleague" if experience == "business" else "while another family member")
+            + " can approach the same situation from a very different motivational starting point."
         )
 
     # -----------------------------------
@@ -482,9 +484,10 @@ def render_driving_forces_narrative(
 #EQ
 def render_eq_narrative(
     persona: dict[str, Any],
+    experience: str = "family",
 ) -> str:
     library = load_narrative_library(
-        EQ_LIBRARY_PATH
+        Experience(experience).narrative("eq_narrative.json") if experience == "business" else EQ_LIBRARY_PATH
     )
 
     person = persona["person"]
@@ -774,9 +777,10 @@ def _has_situational_force(
 #Actual renderer
 def render_integrated_narrative(
     persona: dict[str, Any],
+    experience: str = "family",
 ) -> str:
     library = load_narrative_library(
-        INTEGRATED_LIBRARY_PATH
+        Experience(experience).narrative("integrated_narrative.json") if experience == "business" else INTEGRATED_LIBRARY_PATH
     )
 
     person = persona["person"]

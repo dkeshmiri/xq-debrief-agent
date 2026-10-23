@@ -1,0 +1,178 @@
+{
+  "profiles": {
+    "Conductor": {
+      "opening": "Your Conductor pattern tends to combine directness, independence, and a strong orientation toward moving things forward.",
+      "family_presence": "Within the team, you may naturally become a source of direction when decisions need to be made or obstacles need to be addressed.",
+      "strength": "Your style may bring courage, decisiveness, and momentum.",
+      "watchout": "Your intensity may help you create progress, while sometimes feeling abrupt or demanding to team members who need more discussion or reassurance."
+    },
+    "Persuader": {
+      "opening": "Your Persuader pattern blends assertiveness with social influence, giving you a natural tendency to move both people and ideas forward.",
+      "family_presence": "Within the team, you may often bring energy to conversations while also helping turn discussion into action.",
+      "strength": "This combination can make you enthusiastic, convincing, and comfortable influencing direction.",
+      "watchout": "Your pace and confidence may occasionally move faster than quieter or more deliberate team members."
+    },
+    "Promoter": {
+      "opening": "Your Promoter pattern tends to bring expression, enthusiasm, optimism, and interpersonal energy into the way you engage with others.",
+      "family_presence": "Within the team, you may naturally help create connection, conversation, and excitement around people or possibilities.",
+      "strength": "Your style may make relationships feel energetic, encouraging, and socially engaging.",
+      "watchout": "Your enthusiasm may sometimes move ahead of follow-through, detail, or the quieter concerns of others."
+    },
+    "Relater": {
+      "opening": "Your Relater pattern tends to combine warmth, interpersonal connection, patience, and a preference for positive relationships.",
+      "family_presence": "Within the team, you may naturally help people feel included, heard, and connected.",
+      "strength": "Your style may create trust, encouragement, and a strong sense of relational support.",
+      "watchout": "Your desire to preserve connection may sometimes make difficult conversations easier to postpone than confront."
+    },
+    "Supporter": {
+      "opening": "Your Supporter pattern tends to bring steadiness, patience, consistency, and a strong preference for dependable relationships.",
+      "family_presence": "Within the team, you may often serve as a stabilizing presence when other people or circumstances become unpredictable.",
+      "strength": "Your style may create reliability, loyalty, patience, and emotional continuity.",
+      "watchout": "Your willingness to accommodate others can occasionally allow your own preferences or concerns to remain unspoken for too long."
+    },
+    "Coordinator": {
+      "opening": "Your Coordinator pattern tends to combine steadiness with careful attention to structure, accuracy, and dependable follow-through.",
+      "family_presence": "Within the team, you may naturally help create order, consistency, and a thoughtful approach to responsibilities.",
+      "strength": "Your style may bring patience, reliability, organization, and attention to what needs to be done correctly.",
+      "watchout": "You may need more time to process rapid change, unclear expectations, or emotionally charged decisions than other team members realize."
+    },
+    "Analyzer": {
+      "opening": "Your Analyzer pattern tends to approach situations through logic, accuracy, evidence, and careful evaluation.",
+      "family_presence": "Within the team, you may naturally become the person who slows a decision down long enough to examine details, risks, or inconsistencies.",
+      "strength": "Your style may bring precision, objectivity, thoughtful problem-solving, and high standards.",
+      "watchout": "Your need for enough information can sometimes be experienced as hesitation or emotional distance by people who are ready to move sooner."
+    },
+    "Implementor": {
+      "opening": "Your Implementor pattern tends to combine decisive action with analysis, standards, and a strong concern for getting things right.",
+      "family_presence": "Within the team, you may naturally focus on solving problems efficiently while also expecting decisions to withstand scrutiny.",
+      "strength": "Your style may combine determination, independence, logic, and disciplined execution.",
+      "watchout": "Your high standards and direct problem-solving may sometimes feel demanding to team members who place more emphasis on pace, reassurance, or discussion."
+    }
+  },
+  "traits": {
+    "D": {
+      "very_high": {
+        "strength": "Your strong Dominance score suggests a pronounced comfort with challenge, directness, and forward movement.",
+        "family_expression": "In team situations, you may naturally step toward a decision or problem rather than wait for someone else to take charge.",
+        "watchout": "The speed and certainty that feel productive to you can sometimes feel intense to someone who needs more time or participation."
+      },
+      "high": {
+        "strength": "Your Dominance score suggests that you are generally comfortable taking initiative and addressing problems directly.",
+        "family_expression": "At work, you may often help move conversations from discussion toward a decision.",
+        "watchout": "You may need to leave others more room to contribute before they are ready to move forward."
+      },
+      "moderate": {
+        "strength": "Your Dominance score suggests flexibility between taking charge and allowing others to lead.",
+        "family_expression": "You may become more assertive when the situation calls for it without needing to control every decision.",
+        "watchout": "Your level of directness may vary noticeably depending on the stakes, people, or environment."
+      },
+      "low": {
+        "strength": "Your lower Dominance score may support cooperation, patience, and a preference for less confrontational decision-making.",
+        "family_expression": "You may naturally leave room for other team members to influence the direction before pushing toward a conclusion.",
+        "watchout": "In highly forceful environments, your patience or cooperation may sometimes be mistaken for uncertainty."
+      },
+      "very_low": {
+        "strength": "Your lower Dominance score suggests a strong preference for avoiding unnecessary confrontation or control.",
+        "family_expression": "You may often create room for others rather than competing to determine the direction.",
+        "watchout": "Stronger personalities can occasionally occupy more of the decision-making space than you intended to give them."
+      }
+    },
+    "I": {
+      "very_high": {
+        "strength": "Your strong Influence score suggests a pronounced preference for expression, interaction, enthusiasm, and interpersonal engagement.",
+        "family_expression": "You may naturally bring conversation, optimism, persuasion, or emotional energy into the team.",
+        "watchout": "Your outward energy can sometimes move ahead of details or make quieter team members harder to notice."
+      },
+      "high": {
+        "strength": "Your Influence score suggests comfort engaging, expressing ideas, and building interpersonal momentum.",
+        "family_expression": "You may often help conversations feel more open, animated, or optimistic.",
+        "watchout": "Your enthusiasm may occasionally lead the conversation before you have explored every concern."
+      },
+      "moderate": {
+        "strength": "Your Influence score suggests flexibility between social expression and a more reserved approach.",
+        "family_expression": "You may comfortably engage with others while also being able to step back when the situation requires it.",
+        "watchout": "Your expressiveness may change depending on familiarity, confidence, or the emotional climate."
+      },
+      "low": {
+        "strength": "Your lower Influence score may support a more measured, selective, or reserved communication style.",
+        "family_expression": "You may prefer meaningful conversation over constant verbal interaction or social stimulation.",
+        "watchout": "More expressive team members may not always realize what you are thinking unless you deliberately make it visible."
+      },
+      "very_low": {
+        "strength": "Your lower Influence score suggests that you may prefer observation, privacy, or concise communication over high social expression.",
+        "family_expression": "You may contribute through thoughtfulness and selective communication rather than being the most vocal person in the room.",
+        "watchout": "Others can occasionally misread reserve as disengagement when you may simply be processing internally."
+      }
+    },
+    "S": {
+      "very_high": {
+        "strength": "Your strong Steadiness score suggests a pronounced preference for patience, consistency, cooperation, and dependable relationships.",
+        "family_expression": "You may naturally become a calming or stabilizing presence within the team.",
+        "watchout": "Your strong preference for stability may make abrupt change or unresolved conflict especially disruptive."
+      },
+      "high": {
+        "strength": "Your Steadiness score suggests patience, consistency, and comfort supporting stable relationships.",
+        "family_expression": "You may often help maintain continuity and give other team members time to process.",
+        "watchout": "You may occasionally remain patient with an uncomfortable situation longer than is actually useful."
+      },
+      "moderate": {
+        "strength": "Your Steadiness score suggests flexibility between consistency and change.",
+        "family_expression": "You may be able to support routine while still adjusting when circumstances require a different pace.",
+        "watchout": "Your tolerance for change may depend heavily on how much warning, trust, or clarity exists."
+      },
+      "low": {
+        "strength": "Your lower Steadiness score may support responsiveness, variety, and a willingness to change direction quickly.",
+        "family_expression": "You may become energized by movement and may be comfortable changing plans when a better option appears.",
+        "watchout": "Team members who value predictability may sometimes experience your pace as abrupt or restless."
+      },
+      "very_low": {
+        "strength": "Your lower Steadiness score suggests a strong preference for movement, variety, and relatively quick transitions.",
+        "family_expression": "You may naturally become restless when conversations or decisions remain stationary for too long.",
+        "watchout": "Your urgency to keep moving may occasionally outpace another person's need for consistency or adjustment time."
+      }
+    },
+    "C": {
+      "very_high": {
+        "strength": "Your strong Compliance score suggests a pronounced concern for accuracy, logic, standards, and careful evaluation.",
+        "family_expression": "You may naturally examine details, risks, or inconsistencies that other team members overlook.",
+        "watchout": "Your strong need for accuracy may sometimes delay action or make imperfect solutions harder to accept."
+      },
+      "high": {
+        "strength": "Your Compliance score suggests comfort with careful analysis, quality, and attention to standards.",
+        "family_expression": "You may help the team evaluate whether a decision is logical, complete, or sufficiently thought through.",
+        "watchout": "Others may occasionally interpret your questions as resistance when you are actually trying to improve the decision."
+      },
+      "moderate": {
+        "strength": "Your Compliance score suggests flexibility between analysis and pragmatism.",
+        "family_expression": "You may value enough information to make a sound decision without always needing every detail resolved first.",
+        "watchout": "Your level of detail-orientation may shift depending on how important or unfamiliar the issue is."
+      },
+      "low": {
+        "strength": "Your lower Compliance score may support flexibility, experimentation, and comfort acting without exhaustive information.",
+        "family_expression": "You may prefer practical movement over prolonged analysis when a workable solution is already available.",
+        "watchout": "More detail-oriented team members may sometimes need additional evidence or structure before they share your confidence."
+      },
+      "very_low": {
+        "strength": "Your lower Compliance score suggests a strong preference for flexibility and practical action over rigid structure or extensive analysis.",
+        "family_expression": "You may be comfortable improvising and adjusting as circumstances unfold.",
+        "watchout": "You may occasionally give important details or constraints less attention than they require."
+      }
+    }
+  },
+  "shifts": {
+    "significant_increase": "shows a substantial increase in the adapted environment",
+    "moderate_increase": "shows a noticeable increase in the adapted environment",
+    "moderate_decrease": "shows a noticeable decrease in the adapted environment",
+    "significant_decrease": "shows a substantial decrease in the adapted environment"
+  },
+  "trait_names": {
+    "D": "Dominance",
+    "I": "Influence",
+    "S": "Steadiness",
+    "C": "Compliance"
+  },
+  "closing": [
+    "Your behavioral dimensions work together, and your overall pattern comes from the way those tendencies combine.",
+    "In workplace interactions, you can preserve your natural behavioral strengths while recognizing when you help others and when they may need a different pace, style, or approach."
+  ]
+}

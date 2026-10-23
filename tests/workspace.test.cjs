@@ -3,11 +3,12 @@ const assert = require('node:assert/strict');
 const vm = require('node:vm');
 const fs = require('node:fs');
 
-function fixture() {
+function fixture(business = false) {
     const elements = new Map();
     function element() {
         return {value:'', textContent:'', hidden:false, disabled:false, dataset:{}, children:[],
             classList:{toggle(){}}, handlers:{}, setAttribute(){}, removeAttribute(){},
+            focus(){this.focused=true;},
             addEventListener(name, fn){this.handlers[name] = fn;},
             dispatchEvent(event){this.handlers[event.type]?.(event);},
             replaceChildren(){this.children=[];},
@@ -27,10 +28,12 @@ function fixture() {
         return {};
     };
     const context = vm.createContext({
-        document:{getElementById:get, createElement:element, querySelectorAll:()=>[], hidden:false},
+        document:{body:{dataset:business ? {experience:'business',apiBase:'/business'} : {}}, getElementById:get, createElement:element, querySelectorAll:()=>[], hidden:false},
         window:{location:{search:''}, addEventListener(){}},
-        fetch:async (url,options)=>{calls.push([url,options]); const data=await handler(url, options); return {ok:true,json:async()=>data};},
-        URLSearchParams, AbortSignal, Event, Date, setTimeout:()=>1, setInterval:()=>1, clearInterval(){}
+        fetch:async (url,options)=>{calls.push([url,options]); const data=await handler(business ? url.replace(/^\/business/,'') : url, options); return {ok:true,json:async()=>data};},
+        URLSearchParams, AbortSignal, Event, Date,
+        setTimeout:(fn,ms)=>ms===150 ? setImmediate(fn) : 1,
+        setInterval:()=>1, clearInterval(){}
     });
     vm.runInContext(fs.readFileSync('static/app.js','utf8'),context);
     return {get, calls, idle, run:code=>vm.runInContext(code,context), respond:fn=>handler=fn};
@@ -85,3 +88,86 @@ test('answer ownership disables questions and history is bounded',async()=>{
     assert.equal(f.get('activity-history').children.length,4);
 });
 
+const narrating = {active:true, connected:true, pending:true, phase:'narrating',
+    code:'speaking', title:'Sharing the next thought', state:'introduction'};
+const questionReady = {...narrating, pending:false, phase:'question_ready', code:'question', question_ready:true};
+
+test('manual question control is available only during joined narration',async()=>{
+    const f=fixture(); await settle();
+    assert.equal(f.get('pause-question-button').disabled,true);
+    f.run('callFrame={}; joined=true;');
+    f.run(`renderActivity(${JSON.stringify(narrating)})`);
+    assert.equal(f.get('pause-question-button').disabled,false);
+    for(const changes of [{code:'preparing'}, {phase:'answering'}, {interrupted:true},
+        {connected:false}, {changing:true}, questionReady]) {
+        f.run(`renderActivity(${JSON.stringify({...narrating,...changes})})`);
+        assert.equal(f.get('pause-question-button').disabled,true);
+    }
+});
+
+test('manual pause waits for acknowledgement, ignores duplicate clicks, and focuses the question',async()=>{
+    const f=fixture(); await settle();
+    f.run('callFrame={}; joined=true;');
+    f.run(`renderActivity(${JSON.stringify(narrating)})`);
+    let polls=0;
+    f.respond(async url=>url==='/api/activity'
+        ? (++polls===1 ? {...narrating,interrupted:true,code:'pausing'} : questionReady) : {});
+    const first=f.get('pause-question-button').handlers.click();
+    await f.get('pause-question-button').handlers.click();
+    assert.equal(f.get('question-input').focused,undefined);
+    await first;
+    assert.equal(f.calls.filter(([url])=>url==='/api/debrief/interrupt').length,1);
+    assert.equal(f.calls.some(([url])=>url==='/api/question'),false);
+    assert.equal(f.get('question-input').focused,true);
+    assert.equal(f.get('dismiss-button').disabled,false);
+    assert.match(f.get('question-mode-hint').textContent,/Question mode is open/);
+});
+
+test('failed manual interruption reports the error without focusing the question',async()=>{
+    const f=fixture(); await settle();
+    f.run('callFrame={}; joined=true;');
+    f.respond(async url=>{
+        if(url==='/api/debrief/interrupt') throw new Error('Waiting for Tavus playback to start.');
+        return narrating;
+    });
+    await f.get('pause-question-button').handlers.click();
+    assert.match(f.get('notice').textContent,/Waiting for Tavus/);
+    assert.equal(f.get('question-input').focused,undefined);
+    assert.equal(f.get('pause-question-button').disabled,false);
+});
+
+test('missing stop acknowledgement times out without submitting a question',async()=>{
+    const f=fixture(); await settle();
+    f.run('callFrame={}; joined=true; let ticks=0; Date=class extends Date {static now(){return ticks++*11000;}};');
+    f.respond(async url=>url==='/api/activity' ? {...narrating,interrupted:true,code:'pausing'} : {});
+    await f.get('pause-question-button').handlers.click();
+    assert.match(f.get('notice').textContent,/Speech has not stopped yet/);
+    assert.equal(f.get('question-input').focused,undefined);
+    assert.equal(f.calls.some(([url])=>url==='/api/question'),false);
+});
+
+test('typed questions still wait for the same stop acknowledgement before submitting',async()=>{
+    const f=fixture(); await settle();
+    f.run("callFrame={}; joined=true; $('question-input').value='How can we communicate?';");
+    let polls=0;
+    f.respond(async url=>{
+        if(url==='/api/activity') return ++polls===1 ? narrating : questionReady;
+        if(url==='/api/question') return {answer:'An example answer'};
+        return {};
+    });
+    await f.run('run(askQuestion)');
+    const paths=f.calls.map(([url])=>url);
+    assert.ok(paths.indexOf('/api/debrief/interrupt')<paths.indexOf('/api/question'));
+    assert.equal(f.get('answer-text').textContent,'An example answer');
+});
+
+
+test('business conversation controls keep all API calls in the business namespace',async()=>{
+    const f=fixture(true);await settle();
+    f.run('callFrame={}; joined=true;');
+    f.respond(async url=>url==='/api/activity' ? questionReady : {});
+    await f.get('pause-question-button').handlers.click();
+    assert.equal(f.get('question-input').focused,true);
+    assert.ok(f.calls.every(([url])=>url.startsWith('/business/api/')));
+    assert.equal(f.calls.filter(([url])=>url==='/business/api/debrief/interrupt').length,1);
+});
