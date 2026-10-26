@@ -72,7 +72,7 @@
     if (type === "number") {
       input.min = "0";
       input.max = path === "person.age" ? "120" : "100";
-      input.step = path === "person.age" ? "1" : "any";
+      input.step = "1";
     } else input.maxLength = 200;
     input.addEventListener("input", () => {
       set(path, input.value === "" ? null : type === "number" ? Number(input.value) : input.value.trim());

@@ -29,6 +29,9 @@ five EQ scores and three composites ONLY when explicitly present. Never estimate
 missing scores, calculate missing composites, copy demo values, or map another
 instrument's dimensions to EQ. Use null for unknown/unreadable/missing facts,
 empty lists for unreported clusters, and explain missing data in warnings.
+Store scores as whole numbers from 0 to 100 (72, not 72.0). If a reported
+score has a nonzero fractional part, do not round it: leave that field null
+and include the exact reported value in evidence and a warning for review.
 
 Combine complementary reports for the SAME person into one set of facts: a
 Talent Insights report may provide DISC and Driving Forces while a separate

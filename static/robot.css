@@ -1,0 +1,20 @@
+.xq-robot{position:absolute;inset:55px 0 45px;display:flex;flex-direction:column;align-items:center;justify-content:center;isolation:isolate;--mouth:1}
+.xq-robot svg{height:85%;max-width:90%;overflow:visible;filter:drop-shadow(0 12px 28px #100b3044)}
+.robot-halo{position:absolute;width:220px;height:220px;border:1px solid #b9a5ea33;border-radius:50%;background:radial-gradient(circle,#8b72c828,transparent 70%);z-index:-1}
+.robot-state-label{color:#ded6ef;font:500 12px/1.6 system-ui;letter-spacing:.1em}
+.robot-body{animation:robot-float 5s ease-in-out infinite;transform-origin:center}
+.robot-eyes{animation:robot-blink 6s infinite;transform-origin:180px 145px}
+.robot-mouth{transform:scaleY(var(--mouth));transform-origin:180px 188px;transition:transform 65ms linear}
+.robot-thought{display:none}
+.xq-robot[data-state="listening"] .robot-halo{border-color:#a8f0e3;animation:robot-listen 2s ease-in-out infinite}
+.xq-robot[data-state="listening"] .robot-body{transform:rotate(-4deg);animation:none}
+.xq-robot[data-state="thinking"] .robot-mouth{display:none}
+.xq-robot[data-state="thinking"] .robot-thought{display:block}
+.xq-robot[data-state="thinking"] .robot-thought circle{animation:robot-think 1s infinite alternate}
+.xq-robot[data-state="thinking"] .robot-thought circle:nth-child(2){animation-delay:.2s}
+.xq-robot[data-state="thinking"] .robot-thought circle:nth-child(3){animation-delay:.4s}
+@keyframes robot-float{50%{transform:translateY(-5px)}}
+@keyframes robot-blink{0%,43%,47%,100%{transform:scaleY(1)}45%{transform:scaleY(.1)}}
+@keyframes robot-listen{50%{transform:scale(1.12);opacity:.4}}
+@keyframes robot-think{to{opacity:.2}}
+@media(prefers-reduced-motion:reduce){.xq-robot *{animation:none!important;transition:none!important}.robot-mouth{transform:none}}

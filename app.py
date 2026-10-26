@@ -1,3 +1,4 @@
+from playback_logging import logger
 import json
 import os
 import math
@@ -104,9 +105,9 @@ def create_engine_for_active_person() -> DebriefEngine:
         return UnselectedEngine()
     member = repository.get_active_member()
     if EXPERIENCE.business:
-        return DebriefEngine(member['persona_file'], experience='business')
+        return DebriefEngine(BASE_DIR / member['persona_file'], experience='business')
     return DebriefEngine(
-        member["persona_file"]
+        BASE_DIR / member["persona_file"]
     )
 
 
@@ -180,7 +181,17 @@ class RouteError(Exception):
 # TAVUS SETUP
 # =========================================================
 
-tavus = TavusClient()
+from local_playback import LocalPlayback, local_playback_blueprint
+
+LOCAL_PLAYBACK = os.getenv('XQ_PLAYBACK_PROVIDER', 'kokoro') == 'kokoro'
+# Retain this legacy transport name while the orchestration contract stays shared.
+tavus = LocalPlayback() if LOCAL_PLAYBACK else TavusClient()
+if LOCAL_PLAYBACK:
+    app.register_blueprint(local_playback_blueprint(tavus))
+
+@app.context_processor
+def playback_template_settings():
+    return {'local_playback': LOCAL_PLAYBACK}
 if EXPERIENCE.business:
     tavus.voice_user_name = os.getenv('XQ_BUSINESS_VOICE_USER_NAME', 'XQ Workplace Participant')
     tavus.pal_id = os.getenv('XQ_BUSINESS_TAVUS_PAL_ID') or tavus.pal_id
@@ -227,10 +238,8 @@ def handle_tavus_playback_event(event: dict) -> None:
                 == "conversation.replica.stopped_speaking"
                 and inference_id == interrupted_inference_id
             ):
-                print(
-                    "[XQ INTERRUPT] Tavus confirmed "
-                    "that narration has stopped."
-                )
+                logger.debug('%s', "[XQ INTERRUPT] Tavus confirmed "
+                    "that narration has stopped.")
 
                 orchestrator.interrupt()
                 question_mode_generation += 1
@@ -241,11 +250,9 @@ def handle_tavus_playback_event(event: dict) -> None:
                 interruption_pending = False
                 interrupted_inference_id = None
 
-                print(
-                    "[XQ INTERRUPT] Narration paused. "
+                logger.debug('%s', "[XQ INTERRUPT] Narration paused. "
                     f"Preserved sentence index: "
-                    f"{orchestrator.cursor.sentence_index}"
-                )
+                    f"{orchestrator.cursor.sentence_index}")
 
             return
 
@@ -280,12 +287,10 @@ def handle_tavus_playback_event(event: dict) -> None:
                             narration_tracker=playback_tracker,
                         )
                         
-                        print(
-                            "[XQ RECOVERY] "
+                        logger.warning('%s', "[XQ RECOVERY] "
                             "Resume submission uncertain. "
                             "Narration ownership preserved: "
-                            f"{error}"
-                        )
+                            f"{error}")
 
             elif (
                 event_type
@@ -302,11 +307,9 @@ def handle_tavus_playback_event(event: dict) -> None:
                     answer_tracker=answer_playback_tracker,
                 )
 
-                print(
-                    "[XQ RECOVERY] "
+                logger.debug('%s', "[XQ RECOVERY] "
                     "Interrupted answer recovered. "
-                    "Narration position preserved."
-                )
+                    "Narration position preserved.")
 
             return
 
@@ -345,10 +348,8 @@ def handle_tavus_playback_event(event: dict) -> None:
             )
             recovery_controller.reset()
 
-            print(
-                "[XQ RECOVERY] Uncertain resume confirmed "
-                f"by Tavus ({inference_id}). Recovery cleared."
-            )
+            logger.warning('%s', "[XQ RECOVERY] Uncertain resume confirmed "
+                f"by Tavus ({inference_id}). Recovery cleared.")
 
         if (
             event_type == PlaybackEventTracker.STARTED
@@ -361,34 +362,26 @@ def handle_tavus_playback_event(event: dict) -> None:
 
         if completed:
             retired_inference_ids.add(inference_id)
-            print(
-                "[XQ PLAYBACK] Sentence completed. "
+            logger.debug('%s', "[XQ PLAYBACK] Sentence completed. "
                 f"Next sentence index: "
-                f"{orchestrator.cursor.sentence_index}"
-            )
+                f"{orchestrator.cursor.sentence_index}")
 
             try:
                 next_turn = submit_next_tracked_sentence(received_at, handler_entered_at)
 
             except Exception as error:
-                print(
-                    "[XQ PLAYBACK] Automatic continuation "
-                    f"failed: {error}"
-                )
+                logger.warning('%s', "[XQ PLAYBACK] Automatic continuation "
+                    f"failed: {error}")
                 return
 
             if next_turn is None:
-                print(
-                    "[XQ PLAYBACK] Current section finished."
-                )
+                logger.debug('%s', "[XQ PLAYBACK] Current section finished.")
 
         elif event_type == (
             "conversation.replica.stopped_speaking"
         ):
-            print(
-                "[XQ PLAYBACK] Stop event received; "
-                "no sentence completion accepted."
-            )
+            logger.debug('%s', "[XQ PLAYBACK] Stop event received; "
+                "no sentence completion accepted.")
 
 
 tavus.on_playback_event = handle_tavus_playback_event
@@ -563,6 +556,17 @@ def speak_text(
     if playback_tracker.utterance_id is None and answer_playback_tracker.utterance_id is None:
         untracked_playback_active = True
     tavus.speak(text)
+    if isinstance(tavus, LocalPlayback):
+        cursor = orchestrator.cursor
+        tavus.prefetch(cursor.sentences[cursor.sentence_index+1:cursor.sentence_index+3])
+
+
+def play_section_text(text):
+    if isinstance(tavus, LocalPlayback):
+        orchestrator.load_current_section()
+        submit_next_tracked_sentence()
+    else:
+        speak_text(text)
 
 
 def tracked_playback_active() -> bool:
@@ -629,10 +633,7 @@ def submit_next_tracked_sentence(stopped_at=None, handler_entered_at=None):
     speak_text(turn.text)
     playback_latency.sent(turn.utterance_id)
 
-    print(
-        "[XQ PLAYBACK] Submitted utterance "
-        f"{turn.utterance_id}: {turn.text}"
-    )
+    logger.debug('Submitted utterance %s', turn.utterance_id)
 
     if (
         failure_recovery.state
@@ -641,10 +642,8 @@ def submit_next_tracked_sentence(stopped_at=None, handler_entered_at=None):
         # Narration is back after an interrupted answer.
         recovery_controller.reset()
 
-        print(
-            "[XQ RECOVERY] Narration resumed after an "
-            "interrupted answer. Recovery cleared."
-        )
+        logger.debug('%s', "[XQ RECOVERY] Narration resumed after an "
+            "interrupted answer. Recovery cleared.")
 
     return turn
 
@@ -810,10 +809,8 @@ def dismiss_open_question(
             500,
         ) from error
 
-    print(
-        "[XQ QUESTION] Question mode dismissed. "
-        f"Resumed utterance {turn.utterance_id}."
-    )
+    logger.debug('%s', "[XQ QUESTION] Question mode dismissed. "
+        f"Resumed utterance {turn.utterance_id}.")
 
     return {
         "resumed": True,
@@ -990,10 +987,8 @@ def run_question_mode_watchdog() -> None:
                 check_question_mode_timeout()
 
         except Exception:
-            print(
-                "[XQ QUESTION] Question mode "
-                "timeout check failed."
-            )
+            logger.warning('%s', "[XQ QUESTION] Question mode "
+                "timeout check failed.")
             traceback.print_exc()
 
 
@@ -1009,9 +1004,7 @@ def record_voice_event(
         **details,
     }
 
-    print(
-        f"[XQ VOICE] {action}: {details}"
-    )
+    logger.debug('%s', f"[XQ VOICE] {action}: {details}")
 
     return last_voice_event
 
@@ -1289,6 +1282,13 @@ if QUESTION_MODE_TIMEOUT_SECONDS > 0:
 
 @app.get("/")
 def index():
+    if not EXPERIENCE.business:
+        return render_template("products.html")
+    return render_template(EXPERIENCE.template("start.html"))
+
+
+@app.get("/profiles")
+def profile_menu():
     return render_template(EXPERIENCE.template("start.html"))
 
 
@@ -1521,10 +1521,17 @@ def activity_status():
     question_ready = orchestrator.phase == ConversationPhase.QUESTION_READY
     code, title, detail = describe_activity(
         active=active, connected=tavus.connected, starting=session_starting,
-        ending=session_ending, reasoning=reasoning_active.is_set(),
+        ending=session_ending, reasoning=reasoning_active.is_set() or (LOCAL_PLAYBACK and http_voice_pending),
         interrupted=interruption_pending, question_ready=question_ready,
         pending=pending, speaking=speaking, voice_busy=voice_pipeline.busy(), experience=EXPERIENCE.name,
     )
+    if LOCAL_PLAYBACK:
+        if code == 'connecting':
+            title, detail = 'Warming up the local voice', 'Loading Kokoro on this computer. The first start takes longer.'
+        elif code == 'ending':
+            detail = 'Stopping local audio and releasing this conversation.'
+        elif code == 'disconnected':
+            title, detail = 'Local audio unavailable', 'End the conversation before trying again.'
     response = jsonify(code=code, title=title, detail=detail,
                        active=active, connected=tavus.connected,
                        changing=session_starting or session_ending,
@@ -1585,10 +1592,8 @@ def start_session():
             except Exception as error:
                 voice_error = str(error)
 
-                print(
-                    "[XQ VOICE] Could not attach to "
-                    f"participants already in the room: {error}"
-                )
+                logger.warning('%s', "[XQ VOICE] Could not attach to "
+                    f"participants already in the room: {error}")
 
         return jsonify({
             "ok": True,
@@ -1699,9 +1704,7 @@ def speak_current_section():
         text = engine.get_current_content()
         
         try:
-            speak_text(
-                text
-            )
+            play_section_text(text)
 
         except Exception as error:
             return error_response(
@@ -1909,9 +1912,7 @@ def repeat_section():
             )
 
         try:
-            speak_text(
-                text
-            )
+            play_section_text(text)
 
         except Exception as error:
             return error_response(
@@ -1951,9 +1952,7 @@ def restart_debrief():
                 engine.get_current_content()
             )
 
-            speak_text(
-                text
-            )
+            play_section_text(text)
 
         except Exception as error:
             return error_response(
@@ -1976,6 +1975,15 @@ def restart_debrief():
 @serialized_route
 def interrupt_debrief():
     with playback_lock:
+        if (tavus.connected and not interruption_pending
+                and not tracked_playback_active()
+                and answer_playback_tracker.utterance_id is None
+                and not untracked_playback_active
+                and orchestrator.phase == ConversationPhase.NARRATING):
+            orchestrator.open_question()
+            restart_question_mode_timer()
+            return jsonify({"ok": True, "interruption_pending": False,
+                            "interrupted_inference_id": None})
         try:
             request_interruption()
 
@@ -2265,6 +2273,8 @@ def dev_integrated_narrative():
 # =========================================================
 
 if not EXPERIENCE.business:
+    from presentation import create_presentation_blueprint
+    app.register_blueprint(create_presentation_blueprint())
     from werkzeug.middleware.dispatcher import DispatcherMiddleware
     from workspace_host import LazyBusinessApplication
     business_application = LazyBusinessApplication()

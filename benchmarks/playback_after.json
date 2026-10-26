@@ -1,0 +1,17 @@
+{
+  "scope": "Full inbound callback through next Echo submission; mocked transport, no provider or audible timing.",
+  "normal_output": {
+    "iterations": 1000,
+    "stdout_write_delay_ms": 0,
+    "median_ms": 0.1009,
+    "p95_ms": 0.1709,
+    "max_ms": 5.1544
+  },
+  "slow_output": {
+    "iterations": 100,
+    "stdout_write_delay_ms": 1.0,
+    "median_ms": 0.098,
+    "p95_ms": 0.1757,
+    "max_ms": 0.372
+  }
+}

@@ -1,6 +1,7 @@
 const $ = id => document.getElementById(id);
 const workspaceBase = document.body?.dataset?.apiBase || '';
 const businessWorkspace = document.body?.dataset?.experience === 'business';
+const localPlayback = document.body?.dataset?.playback === 'kokoro';
 let callFrame = null, conversationId = null, busy = false, online = false, joined = false;
 let activity = {}, lastCode = '', keepalive = null, lastInput = 0, profiles = [];
 const sections = [...document.querySelectorAll('[data-section]')];
@@ -22,6 +23,10 @@ async function request(url, body, method = 'POST') {
 function controls() {
     const active = activity.active || !!conversationId;
     const ready = online && activity.connected && active && joined && !busy && !activity.changing;
+    if (localPlayback) {
+        const recording = recorder?.state === 'recording';
+        $('record-question-button').disabled = !recording && (!ready || !activity.question_ready);
+    }
     $('start-button').disabled = !online || busy || active || activity.changing || !$('person-select').value;
     $('start-button').hidden = active;
     $('end-button').hidden = !active;
@@ -31,8 +36,14 @@ function controls() {
         $(id).disabled = !ready || activity.pending || activity.question_ready || activity.code === 'reasoning';
     $('ask-button').disabled = !ready || activity.answer_pending || activity.code === 'reasoning' || !$('question-input').value.trim();
     $('dismiss-button').disabled = !ready || !activity.question_ready || activity.pending;
+    if (localPlayback && recorder?.state === 'recording') {
+        $('ask-button').disabled = true;
+        $('dismiss-button').disabled = true;
+    }
     $('pause-question-button').disabled = !ready || activity.phase !== 'narrating'
-        || activity.code !== 'speaking' || !!activity.interrupted;
+        || (activity.pending && activity.code !== 'speaking') || !!activity.interrupted;
+    $('pause-question-button').textContent = activity.pending
+        ? 'Pause and Enter Question Mode' : 'Enter Question Mode';
     const questionHint = activity.interrupted
         ? 'Pausing narration. Waiting for the guide to stop…'
         : activity.question_ready
@@ -44,6 +55,7 @@ function controls() {
 }
 function renderActivity(data) {
     activity = data;
+    if (localPlayback && callFrame) callFrame.stateFrom(data);
     const currentProfile = profiles.find(person => person.person_id === data.person_id);
     if (data.active && currentProfile) {
         $('person-select').value = currentProfile.file;
@@ -62,7 +74,7 @@ function renderActivity(data) {
         while ($('activity-history').children.length > 4) $('activity-history').lastElementChild.remove();
         lastCode = data.code;
     }
-    const index = data.state === 'complete' ? sections.length : sections.findIndex(el => el.dataset.section === data.state);
+    const index = sections.findIndex(el => el.dataset.section === data.state);
     sections.forEach((el, i) => {
         el.classList.toggle('active', i === index);
         el.classList.toggle('done', i < index);
@@ -102,6 +114,17 @@ async function run(action) {
     finally { busy = false; await refresh(); controls(); }
 }
 async function startSession() {
+    if (localPlayback) {
+        if (callFrame) await callFrame.destroy();
+        callFrame = new window.XQLocalPlayer(workspaceBase, message => {joined=false; notice(message); controls();});
+        await callFrame.unlock();
+        await request('/api/person/select', {file: $('person-select').value});
+        const data = await request('/api/session/start');
+        conversationId = data.conversation.conversation_id;
+        await callFrame.join(conversationId); joined = true;
+        await request('/api/debrief/tracked/next');
+        return;
+    }
     if (!window.DailyIframe) throw new Error('The video player could not load. Check your connection and reload the page.');
     await request('/api/person/select', {file: $('person-select').value});
     const data = await request('/api/session/start');
@@ -131,6 +154,7 @@ async function startSession() {
     await request('/api/debrief/tracked/next');
 }
 async function endSession() {
+    if (localPlayback) stopRecording(true);
     await request('/api/session/end');
     joined = false;
     conversationId = null;
@@ -139,7 +163,7 @@ async function endSession() {
         await callFrame.destroy();
         callFrame = null;
     }
-    $('video-placeholder').hidden = false;
+    if (!localPlayback) $('video-placeholder').hidden = false;
     $('answer-card').hidden = true;
     notice();
 }
@@ -147,7 +171,7 @@ async function askQuestion() {
     const question = $('question-input').value.trim();
     if (!question) return;
     const current = await request('/api/activity', undefined, 'GET');
-    if (current.phase === 'narrating' && current.pending) {
+    if (current.phase === 'narrating') {
         await pauseForQuestion();
     }
     const data = await request('/api/question', {question});
@@ -175,6 +199,45 @@ async function enterManualQuestionMode() {
     await pauseForQuestion();
     $('question-input').focus();
 }
+let recorder = null, recordingStream = null, recordingTimer = null, discardRecording = false;
+let recordingKeepalive = null;
+function stopRecording(discard = false) {
+    discardRecording = discard;
+    clearTimeout(recordingTimer);
+    clearInterval(recordingKeepalive);
+    if (recorder?.state === 'recording') recorder.stop();
+    recordingStream?.getTracks().forEach(track=>track.stop());
+    recordingStream = null;
+}
+if (localPlayback) $('record-question-button').addEventListener('click', async () => {
+    if (recorder?.state === 'recording') { stopRecording(); return; }
+    if (busy || !joined || !activity.question_ready) { notice('Open question mode before recording.'); return; }
+    try {
+        recordingStream = await navigator.mediaDevices.getUserMedia({audio:true});
+        if (!joined || !activity.question_ready) { stopRecording(true); return; }
+        discardRecording = false;
+        const session = conversationId, chunks = [];
+        recorder = new MediaRecorder(recordingStream);
+        recorder.ondataavailable = event=>chunks.push(event.data);
+        recorder.onstop = async () => {
+            $('record-question-button').textContent = 'Record a question';
+            if (discardRecording || session !== conversationId) return;
+            const mime = recorder.mimeType.split(';')[0];
+            await run(async () => {
+                callFrame.uploading = true; callFrame.stateFrom(activity);
+                try {
+                    const response = await fetch(workspaceBase+'/api/voice/audio', {method:'POST',
+                        headers:{'Content-Type':mime}, body:new Blob(chunks, {type:mime})});
+                    const data = await response.json();
+                    if (!response.ok) throw new Error(data.error || 'Voice question failed.');
+                } finally { if (callFrame) callFrame.uploading = false; }
+            });
+        };
+        recorder.start(); $('record-question-button').textContent = 'Stop and send question'; controls();
+        recordingKeepalive = setInterval(()=>request('/api/question/keepalive').catch(()=>stopRecording(true)), 5000);
+        recordingTimer = setTimeout(()=>stopRecording(), 60000);
+    } catch(error) { stopRecording(true); notice('Microphone unavailable: '+error.message); }
+});
 function stopKeepalive() { clearInterval(keepalive); keepalive = null; }
 async function keepQuestionOpen() {
     if (Date.now() - lastInput > 15000) return stopKeepalive();
@@ -232,4 +295,5 @@ async function loadPersonas() {
     } catch (error) { notice(error.message); }
 }
 loadPersonas();
+if (localPlayback) request('/api/local/warmup').catch(()=>{}); // Start reports any model setup error.
 poll();

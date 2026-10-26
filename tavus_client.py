@@ -1,3 +1,4 @@
+from playback_logging import logger
 from typing import Any, Callable
 from threading import Lock
 
@@ -33,19 +34,13 @@ class TavusEventHandler(EventHandler):
         if self.generation != self.tavus_client._connection_generation:
             return
 
-        print()
-        print(
-            "[DAILY CALL STATE]",
-            state,
-        )
+        logger.debug('%s %s', "[DAILY CALL STATE]", state)
 
         if state == "joined":
             self.tavus_client.connected = True
 
-            print(
-                "[TAVUS] Backend Daily client "
-                "is fully joined."
-            )
+            logger.debug('%s', "[TAVUS] Backend Daily client "
+                "is fully joined.")
 
         elif state == "left":
             self.tavus_client.connected = False
@@ -57,9 +52,8 @@ class TavusEventHandler(EventHandler):
         self,
         message: str,
     ) -> None:
-        print()
-        print("[DAILY ERROR]")
-        print(message)
+        logger.warning('%s', "[DAILY ERROR]")
+        logger.debug('%s', message)
 
     def on_app_message(
         self,
@@ -69,10 +63,6 @@ class TavusEventHandler(EventHandler):
         if self.generation != self.tavus_client._connection_generation:
             return
 
-        print()
-        print("[TAVUS APP MESSAGE]")
-        print("Sender:", sender)
-        print("Message:", message)
         # Forward canonical replica events only; aliases would double-count playback.
         if not isinstance(message, dict):
             return
@@ -88,6 +78,12 @@ class TavusEventHandler(EventHandler):
             )
 
         event_type = message.get("event_type")
+        logger.debug('Tavus event: %s', event_type)
+        if event_type in ("system.shutdown", "system.conversation_ended"):
+            callback = getattr(self.tavus_client, 'on_system_event', None)
+            if callback is not None:
+                callback(message)
+            return
 
         playback_events = {
             "conversation.replica.started_speaking",
@@ -150,6 +146,7 @@ class TavusClient:
         self.on_playback_event: (
             Callable[[dict[str, Any]], None] | None
         ) = None
+        self.on_system_event = None
 
         self._daily_initialized = False
         self._connection_generation = 0
@@ -179,6 +176,7 @@ class TavusClient:
     def create_conversation(
         self,
         conversation_name: str = "XQ Family Debrief",
+        max_call_duration: int | None = None,
     ) -> dict[str, Any]:
         """
         Create a fresh Tavus conversation for the configured PAL.
@@ -197,16 +195,18 @@ class TavusClient:
                 "TAVUS_PAL_ID is not configured."
             )
 
+        payload = {"pal_id": self.pal_id, "conversation_name": conversation_name}
+        if max_call_duration is not None:
+            if type(max_call_duration) is not int or max_call_duration <= 0:
+                raise ValueError("max_call_duration must be a positive integer.")
+            payload["properties"] = {"max_call_duration": max_call_duration}
         response = requests.post(
             "https://tavusapi.com/v2/conversations",
             headers={
                 "Content-Type": "application/json",
                 "x-api-key": self.api_key,
             },
-            json={
-                "pal_id": self.pal_id,
-                "conversation_name": conversation_name,
-            },
+            json=payload,
             timeout=30,
         )
 
@@ -286,19 +286,16 @@ class TavusClient:
         self.conversation_url = cleaned_url
         self.conversation_id = cleaned_id
 
-        print()
-        print("[TAVUS]")
-        print("Joining conversation...")
+        logger.debug('%s', "[TAVUS]")
+        logger.debug('%s', "Joining conversation...")
 
         self.call_client.join(
             cleaned_url
         )
 
-        print(
-            "[TAVUS] Waiting for Daily join confirmation..."
-        )
+        logger.debug('%s', "[TAVUS] Waiting for Daily join confirmation...")
 
-        print("[TAVUS] Join request sent.")
+        logger.debug('%s', "[TAVUS] Join request sent.")
 
     def speak(
         self,
@@ -343,15 +340,13 @@ class TavusClient:
             },
         }
 
-        print()
-        print("[TAVUS ECHO ABOUT TO SEND]")
-        print(interaction)
+        logger.debug('Submitting Tavus Echo (%d characters)', len(cleaned_text))
 
         self.call_client.send_app_message(
             interaction
         )
 
-        print("[TAVUS ECHO SENT]")
+        logger.debug('%s', "[TAVUS ECHO SENT]")
 
     def interrupt(self) -> None:
         """
@@ -380,15 +375,14 @@ class TavusClient:
             "conversation_id": self.conversation_id,
         }
 
-        print()
-        print("[TAVUS INTERRUPT ABOUT TO SEND]")
-        print(interaction)
+        logger.debug('%s', "[TAVUS INTERRUPT ABOUT TO SEND]")
+        logger.debug('%s', interaction)
 
         self.call_client.send_app_message(
             interaction
         )
 
-        print("[TAVUS INTERRUPT SENT]")
+        logger.debug('%s', "[TAVUS INTERRUPT SENT]")
 
     def end_conversation(self) -> None:
         """
@@ -443,8 +437,7 @@ class TavusClient:
 
         self.pal_participant_ids.clear()
 
-        print()
-        print("[TAVUS] Disconnected.")
+        logger.debug('%s', "[TAVUS] Disconnected.")
 
     def status(self) -> dict[str, Any]:
         """
@@ -522,12 +515,10 @@ class TavusClient:
             self.voice_user_name is not None
             and user_name != self.voice_user_name
         ):
-            print(
-                "[XQ VOICE] Not listening to participant "
+            logger.debug('%s', "[XQ VOICE] Not listening to participant "
                 f"{participant_id} (userName={user_name!r}); "
                 "XQ_VOICE_USER_NAME is "
-                f"{self.voice_user_name!r}."
-            )
+                f"{self.voice_user_name!r}.")
             return
 
         call_client = self.call_client
@@ -543,10 +534,8 @@ class TavusClient:
 
         self.listening_participant_ids.add(participant_id)
 
-        print(
-            "[XQ VOICE] Listening to participant "
-            f"{participant_id} (userName={user_name!r})."
-        )
+        logger.debug('%s', "[XQ VOICE] Listening to participant "
+            f"{participant_id} (userName={user_name!r}).")
 
     def mark_pal_participant(
         self,
@@ -560,10 +549,8 @@ class TavusClient:
 
         self.pal_participant_ids.add(participant_id)
 
-        print(
-            "[XQ VOICE] Participant "
-            f"{participant_id} identified as the PAL."
-        )
+        logger.debug('%s', "[XQ VOICE] Participant "
+            f"{participant_id} identified as the PAL.")
 
         self.stop_listening(participant_id)
 

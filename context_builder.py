@@ -20,7 +20,7 @@ class ContextBuilder:
         experience: str = 'family',
     ) -> None:
 
-        self.knowledge_dir = Path(knowledge_dir)
+        self.knowledge_dir = Path(__file__).resolve().parent / knowledge_dir
         self.experience = experience
 
         self.disc_knowledge = self._load_json(

@@ -1,3 +1,4 @@
+from score_formatting import format_score
 import json
 from pathlib import Path
 from typing import Any
@@ -125,15 +126,15 @@ class DebriefEngine:
 
         return (
             f"Your Natural DISC scores are "
-            f"D {natural['D']}, "
-            f"I {natural['I']}, "
-            f"S {natural['S']}, "
-            f"and C {natural['C']}.\n\n"
+            f"D {format_score(natural['D'])}, "
+            f"I {format_score(natural['I'])}, "
+            f"S {format_score(natural['S'])}, "
+            f"and C {format_score(natural['C'])}.\n\n"
             f"Your Adapted DISC scores are "
-            f"D {adapted['D']}, "
-            f"I {adapted['I']}, "
-            f"S {adapted['S']}, "
-            f"and C {adapted['C']}."
+            f"D {format_score(adapted['D'])}, "
+            f"I {format_score(adapted['I'])}, "
+            f"S {format_score(adapted['S'])}, "
+            f"and C {format_score(adapted['C'])}."
         )
 
     def get_primary_disc_style(self) -> str:
@@ -205,7 +206,7 @@ class DebriefEngine:
 
         for force, score in scores.items():
             lines.append(
-                f"- {force}: {score}"
+                f"- {force}: {format_score(score)}"
             )
 
         return "\n".join(lines)
@@ -247,14 +248,14 @@ class DebriefEngine:
 
         return (
             f"Your Emotional Intelligence scores are:\n"
-            f"- Self-Awareness: {scores['self_awareness']}\n"
-            f"- Self-Regulation: {scores['self_regulation']}\n"
-            f"- Motivation: {scores['motivation']}\n"
-            f"- Social Awareness: {scores['social_awareness']}\n"
-            f"- Social Regulation: {scores['social_regulation']}\n"
-            f"- SELF Composite: {eq['self_composite']}\n"
-            f"- OTHERS Composite: {eq['others_composite']}\n"
-            f"- TOTAL EQ: {eq['total_eq']}"
+            f"- Self-Awareness: {format_score(scores['self_awareness'])}\n"
+            f"- Self-Regulation: {format_score(scores['self_regulation'])}\n"
+            f"- Motivation: {format_score(scores['motivation'])}\n"
+            f"- Social Awareness: {format_score(scores['social_awareness'])}\n"
+            f"- Social Regulation: {format_score(scores['social_regulation'])}\n"
+            f"- SELF Composite: {format_score(eq['self_composite'])}\n"
+            f"- OTHERS Composite: {format_score(eq['others_composite'])}\n"
+            f"- TOTAL EQ: {format_score(eq['total_eq'])}"
         )
 
     def get_integrated_analysis(self) -> str:
@@ -364,9 +365,7 @@ class DebriefEngine:
         }
 
         if self.current_state == DebriefState.COMPLETE:
-            return (
-                f"Your debrief is complete."
-            )
+            return self.get_conclusion()
 
         handler = state_handlers.get(
             self.current_state
@@ -458,6 +457,17 @@ class DebriefEngine:
 
         return self.interaction_mode
 
+
+    def get_conclusion(self) -> str:
+        context = "workplace" if self.experience.business else "family"
+        return (
+            f"Thank you, {self.display_name}, for taking time to explore your {context} insights. "
+            "Your debrief is complete. Take a moment to consider one insight you would like to put into practice. "
+            "If you have questions, type one in the question box and select Ask your guide. "
+            "To ask aloud, select Enter Question Mode, then use Record a question if it is available. "
+            "To start again, open Conversation options and select Restart the debrief. "
+            "Thank you for joining us."
+        )
 
     def enter_question_mode(self) -> None:
         """

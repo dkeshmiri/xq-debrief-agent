@@ -17,7 +17,7 @@ class ComparisonContextBuilder:
         self,
         knowledge_dir: str | Path = "knowledge",
     ) -> None:
-        self.knowledge_dir = Path(knowledge_dir)
+        self.knowledge_dir = Path(__file__).resolve().parent / knowledge_dir
 
         validate_all_knowledge(
             self.knowledge_dir

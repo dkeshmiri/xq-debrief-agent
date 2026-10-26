@@ -11,6 +11,13 @@ from family_schema import (
 )
 from schemas import validate_persona
 
+PROJECT_ROOT = Path(__file__).resolve().parent
+
+
+def resolve_project_path(path: str | Path) -> Path:
+    """Roster paths are project-relative; explicit external absolute paths remain valid."""
+    return (PROJECT_ROOT / path).resolve()
+
 
 class FamilyRepository:
     """
@@ -21,7 +28,7 @@ class FamilyRepository:
         self,
         manifest_path: str | Path,
     ) -> None:
-        self.manifest_path = Path(manifest_path)
+        self.manifest_path = resolve_project_path(manifest_path)
 
         self.family_data = load_family_manifest(
             self.manifest_path
@@ -43,7 +50,7 @@ class FamilyRepository:
     def _load_members(self) -> None:
         for member in self.family_data["members"]:
             person_id = member["person_id"]
-            persona_path = Path(member["persona_file"])
+            persona_path = resolve_project_path(member["persona_file"])
 
             if not persona_path.exists():
                 raise ValueError(
@@ -193,10 +200,12 @@ class FamilyRepository:
             if self.get_persona(person_id) != persona:
                 raise ValueError("A different profile already uses this person ID.")
             return Path(self.get_member(person_id)["persona_file"]).name
+        directory = resolve_project_path(directory)
         directory.mkdir(parents=True, exist_ok=True)
         target = directory / f"{uuid4().hex}.json"
         member = {key: person[key] for key in ("person_id", "display_name", "family_role")}
-        member.update(persona_file=str(target.resolve()), debrief_enabled=True)
+        stored_path = target.relative_to(PROJECT_ROOT) if target.is_relative_to(PROJECT_ROOT) else target
+        member.update(persona_file=stored_path.as_posix(), debrief_enabled=True)
         updated = {**self.family_data, "members": [*self.family_data["members"], member]}
         if not updated['default_person_id']:
             updated['default_person_id'] = person_id

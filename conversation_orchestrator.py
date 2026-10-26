@@ -138,6 +138,14 @@ class ConversationOrchestrator:
 
         self.phase = ConversationPhase.QUESTION_READY
 
+    def open_question(self) -> None:
+        """Open questions between sections or after the closing narration."""
+        if self.phase != ConversationPhase.NARRATING or self.cursor.active_utterance is not None:
+            raise RuntimeError("Finish or interrupt narration before opening question mode.")
+        self.cursor.interrupt()
+        self.engine.enter_question_mode()
+        self.phase = ConversationPhase.QUESTION_READY
+
     def ask_question(self, question: str) -> str:
         """
         Generate an approved answer using the existing

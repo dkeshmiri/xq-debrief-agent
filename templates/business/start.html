@@ -7,9 +7,10 @@
   <link rel="stylesheet" href="/static/json_maker.css">
   <link rel="stylesheet" href="/static/portal.css">
   <script src="/static/start.js" defer></script>
+<link rel="stylesheet" href="/static/dev-brand.css">
 </head>
 <body data-experience="business" data-api-base="/business" class="welcome">
-  <header class="topbar"><a class="brand" href="/business/">xq <span>WORKPLACE</span></a><span>Better conversations. Stronger teams.</span></header>
+  <header class="topbar"><a class="brand" href="/business/">xq <span>WORKPLACE</span></a><span>Better conversations. Stronger teams.</span><a href="/" class="dev-product-link">Choose a product ↗</a></header>
   <main>
     <p class="eyebrow">WORKPLACE DEBRIEF</p>
     <h1>A little understanding.<br>A stronger team.</h1>
@@ -36,5 +37,6 @@
       <p class="hint">Missing scores can be entered by hand. Saving those changes requires your operator PIN.</p>
     </section>
   </main>
+{% include "partials/dev_brand.html" %}
 </body>
 </html>

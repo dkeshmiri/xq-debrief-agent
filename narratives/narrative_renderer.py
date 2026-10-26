@@ -1,4 +1,5 @@
 """Deterministic family narration from reviewed score-range language."""
+from score_formatting import format_score
 import json
 from pathlib import Path
 from typing import Any
@@ -83,8 +84,8 @@ def render_disc_shift(
 
     return (
         f"Your {trait_name} score {shift_text}, "
-        f"moving from {natural_score} naturally "
-        f"to {adapted_score} in the adapted profile."
+        f"moving from {format_score(natural_score)} naturally "
+        f"to {format_score(adapted_score)} in the adapted profile."
     )
 
 
@@ -154,10 +155,10 @@ def render_disc_narrative(
     parts.append(
         (
             f"Your natural DISC scores are "
-            f"D {natural['D']}, "
-            f"I {natural['I']}, "
-            f"S {natural['S']}, "
-            f"and C {natural['C']}."
+            f"D {format_score(natural['D'])}, "
+            f"I {format_score(natural['I'])}, "
+            f"S {format_score(natural['S'])}, "
+            f"and C {format_score(natural['C'])}."
         )
     )
 
@@ -244,7 +245,7 @@ def render_disc_narrative(
     for trait in ("D", "I", "S", "C"):
         label = library["trait_names"][trait]
         level = classify_disc_score(adapted[trait])
-        parts.append(f"Your adapted {label} score is {adapted[trait]}.")
+        parts.append(f"Your adapted {label} score is {format_score(adapted[trait])}.")
         if level == classify_disc_score(natural[trait]):
             parts.append("Its preference description is similar to your natural pattern.")
         else:
@@ -405,7 +406,7 @@ def render_driving_forces_narrative(
     # Explain every measured force, including situational and indifferent results.
     for force, score in scores.items():
         atom = library["forces"][force][classify_driving_force_score(score)]
-        parts.append(f"Your {force} score is {score}.")
+        parts.append(f"Your {force} score is {format_score(score)}.")
         parts.extend(atom[key] for key in ("core", "family_expression", "strength", "watchout"))
 
     # -----------------------------------
@@ -459,8 +460,8 @@ def render_driving_forces_narrative(
             (
                 f"One of the clearest motivational contrasts "
                 f"in your profile is between {higher} "
-                f"at {scores[higher]} and {lower} "
-                f"at {scores[lower]}."
+                f"at {format_score(scores[higher])} and {lower} "
+                f"at {format_score(scores[lower])}."
             )
         )
 
@@ -553,7 +554,7 @@ def render_eq_narrative(
 
         parts.append(
             (
-                f"Your {label} score is {score}."
+                f"Your {label} score is {format_score(score)}."
             )
         )
 
@@ -684,7 +685,7 @@ def render_eq_narrative(
         ("others", "Others Composite", others_composite),
         ("total", "Total EQ", total_eq),
     ):
-        parts.append(f"Your {label} is {score}. {library['composites'][key]}")
+        parts.append(f"Your {label} is {format_score(score)}. {library['composites'][key]}")
         atom = library["composite_ranges"][key][classify_eq_score(score)]
         parts.extend(atom.values())
 
@@ -805,7 +806,7 @@ def render_integrated_narrative(
             f"Your primary DISC style is {style}, "
             f"your strongest Driving Forces are "
             f"{', '.join(primary_forces)}, "
-            f"and your Total EQ is {eq['total_eq']}."
+            f"and your Total EQ is {format_score(eq['total_eq'])}."
         )
     )
 

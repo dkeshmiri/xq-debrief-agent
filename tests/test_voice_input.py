@@ -631,6 +631,7 @@ class AppVoiceFlowTests(unittest.TestCase):
             "OPENAI_API_KEY": "test-key-not-used",
             "XQ_VAD_BACKEND": "energy",
             "XQ_QUESTION_TIMEOUT_SECONDS": "30",
+            "XQ_PLAYBACK_PROVIDER": "tavus",
         }):
             install_daily_stub()
             install_engine_stubs()

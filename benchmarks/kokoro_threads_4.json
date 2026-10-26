@@ -1,0 +1,26 @@
+{
+  "model_load_seconds": 3.062972952000564,
+  "threads": "4",
+  "samples": [
+    {
+      "characters": 14,
+      "synthesis_seconds": 2.3411134019997917,
+      "audio_seconds": 1.24
+    },
+    {
+      "characters": 81,
+      "synthesis_seconds": 4.178605052999956,
+      "audio_seconds": 4.295458333333333
+    },
+    {
+      "characters": 81,
+      "synthesis_seconds": 4.166732822000085,
+      "audio_seconds": 4.295458333333333
+    },
+    {
+      "characters": 81,
+      "synthesis_seconds": 4.201341336999576,
+      "audio_seconds": 4.295458333333333
+    }
+  ]
+}

@@ -19,9 +19,9 @@
     },
     {
       "person_id": "person_335c302d321343b89a2d586aadbeead5",
-      "display_name": "Ali Mozayeni",
+      "display_name": "Al",
       "family_role": "Father",
-      "persona_file": "/home/dkeshmiri/Development/xq-debrief-agent/data/personas/422b5ba741224bc2b22d02308f7c9ea4.json",
+      "persona_file": "data/personas/422b5ba741224bc2b22d02308f7c9ea4.json",
       "debrief_enabled": true
     }
   ],

@@ -3,7 +3,7 @@ const assert = require('node:assert/strict');
 const vm = require('node:vm');
 const fs = require('node:fs');
 
-function fixture(business = false) {
+function fixture(business = false, local = false) {
     const elements = new Map();
     function element() {
         return {value:'', textContent:'', hidden:false, disabled:false, dataset:{}, children:[],
@@ -28,7 +28,7 @@ function fixture(business = false) {
         return {};
     };
     const context = vm.createContext({
-        document:{body:{dataset:business ? {experience:'business',apiBase:'/business'} : {}}, getElementById:get, createElement:element, querySelectorAll:()=>[], hidden:false},
+        document:{body:{dataset:{...(business ? {experience:'business',apiBase:'/business'} : {}), ...(local ? {playback:'kokoro'} : {})}}, getElementById:get, createElement:element, querySelectorAll:()=>[], hidden:false},
         window:{location:{search:''}, addEventListener(){}},
         fetch:async (url,options)=>{calls.push([url,options]); const data=await handler(business ? url.replace(/^\/business/,'') : url, options); return {ok:true,json:async()=>data};},
         URLSearchParams, AbortSignal, Event, Date,
@@ -39,6 +39,15 @@ function fixture(business = false) {
     return {get, calls, idle, run:code=>vm.runInContext(code,context), respond:fn=>handler=fn};
 }
 const settle = () => new Promise(resolve=>setImmediate(resolve));
+
+test('local workspaces warm the voice on page load without opening a session', async()=>{
+    for (const business of [false,true]) {
+        const f = fixture(business, true); await settle();
+        assert.equal(f.calls.filter(([url])=>url.endsWith('/api/local/warmup')).length,1);
+        assert.ok(f.calls.some(([url])=>url === (business ? '/business' : '')+'/api/local/warmup'));
+        assert.equal(f.calls.filter(([url])=>url.endsWith('/api/session/start')).length,0);
+    }
+});
 
 test('idle controls permit starting only after profile and telemetry load', async()=>{
     const f=fixture(); await settle();
@@ -161,6 +170,30 @@ test('typed questions still wait for the same stop acknowledgement before submit
     assert.equal(f.get('answer-text').textContent,'An example answer');
 });
 
+
+test('both local products allow typed and recorded questions after the conclusion',async()=>{
+    for (const business of [false, true]) {
+        const f=fixture(business, true); await settle();
+        const complete={...narrating, pending:false, code:'between', state:'complete'};
+        f.run("callFrame={stateFrom(){}}; joined=true; $('question-input').value='What next?';");
+        f.run(`renderActivity(${JSON.stringify(complete)})`);
+        assert.equal(f.get('pause-question-button').disabled,false);
+        assert.equal(f.get('pause-question-button').textContent,'Enter Question Mode');
+        assert.equal(f.get('restart-button').disabled,false);
+        let opened=false;
+        f.respond(async url=>{
+            if(url==='/api/debrief/interrupt') opened=true;
+            if(url==='/api/activity') return opened ? {...questionReady,state:'complete'} : complete;
+            if(url==='/api/question') return {answer:'Your next step.'};
+            return {};
+        });
+        await f.run('run(askQuestion)');
+        assert.equal(opened,true);
+        assert.equal(f.get('answer-text').textContent,'Your next step.');
+        f.run(`renderActivity(${JSON.stringify({...questionReady,state:'complete'})})`);
+        assert.equal(f.get('record-question-button').disabled,false);
+    }
+});
 
 test('business conversation controls keep all API calls in the business namespace',async()=>{
     const f=fixture(true);await settle();

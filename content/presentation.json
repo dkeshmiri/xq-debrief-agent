@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Why XQ exists",
+    "text": "Hello, and welcome to XQ Innovation. This is a scripted introduction to our working prototype. Our starting point is simple: an assessment becomes more useful when people can connect its findings to an everyday conversation. A score on a page can describe a preference or a pattern, but a person still needs to understand what that might mean at home or at work. XQ brings structured assessment information into a guided debrief, with room to pause, ask questions, and explore an interpretation. The purpose is to support understanding, not to put someone into a permanent category."
+  },
+  {
+    "title": "Two places to build understanding",
+    "text": "The prototype offers two experiences. XQ Family uses family-oriented language to explore communication, motivations, and emotional intelligence at home. XQ Workplace uses a separate workplace context for feedback, collaboration, handoffs, and leadership development. Both experiences organize a debrief around DISC, Driving Forces, and emotional intelligence. Their profiles and language are kept separate. A workplace role is not treated as a household relationship. The intention is to make the same assessment facts useful in the setting where the person will actually have a conversation."
+  },
+  {
+    "title": "What works today",
+    "text": "An operator can select a saved profile or create one from assessment documents. The JSON Maker accepts multiple PDF reports for one person, including a separate emotional intelligence supplement. It extracts information for review, allows missing values to remain unknown, and supports manual corrections saved with an operator PIN. Reviewed information can then become a profile for the debrief. The conversation workspace provides section controls, typed questions, and voice-question handling. It tracks playback so an interrupted debrief can return to its place. A small activity window describes observed work, such as preparing speech or responding to a question. These are implemented prototype capabilities, not a claim that every deployment condition has been validated."
+  },
+  {
+    "title": "Guardrails are part of the product",
+    "text": "The assessment facts are the foundation. Scores should not be invented, silently recalculated, or replaced by a model's guess. An unknown value should remain unknown until an operator supplies a correction. Interpretations should be presented as possibilities that depend on context. The application includes rules and response checks intended to reduce unsupported claims. It is not a diagnostic tool, and workplace coaching should not become a claim about hiring eligibility, job performance, or promotion potential. It should not infer personality from age, gender, family role, or birth order. Experimental family-context research remains disconnected from the main application. These safeguards reduce risk; they are not a guarantee that generated responses can never be wrong. Human review and evaluation remain necessary."
+  },
+  {
+    "title": "Where funding could help",
+    "text": "The next stage is about making a useful prototype dependable. Proposed funding priorities include structured user pilots, stronger evaluation of assessment fidelity, accessibility, and more resilient playback and recovery. The prototype now includes local speech synthesis and a lightweight animated robot guide. Prepared debrief narration can run without a live avatar-service connection. Further investment could improve uncached speech speed and test performance across different computers. Question answering and document extraction currently use external APIs. Moving those remaining features locally would require engineering, performance testing, and a deliberate choice of models and licenses. These additional investments are proposed development priorities. Funding would also support clearer operational controls and evidence about which parts of the experience help people have better conversations."
+  },
+  {
+    "title": "The invitation",
+    "text": "XQ's opportunity is to make assessment insights easier to understand and discuss, while preserving a clear boundary between measured facts and interpretation. Today you can inspect the profile workflow, the separate Family and Workplace experiences, and the debrief controls. This presentation uses Tavus to deliver a prepared script; it is not an unscripted demonstration of reasoning. The next demonstration can show the actual product and its question workflow. Our invitation is to help us test, refine, and responsibly develop that experience. Thank you for taking a closer look at XQ Innovation."
+  }
+]

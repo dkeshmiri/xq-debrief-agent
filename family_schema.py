@@ -148,7 +148,7 @@ def validate_family_personas(
     validate_family_manifest(family_data)
 
     for member in family_data["members"]:
-        persona_path = Path(member["persona_file"])
+        persona_path = Path(__file__).resolve().parent / member["persona_file"]
 
         if not persona_path.exists():
             raise ValueError(

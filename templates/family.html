@@ -8,10 +8,11 @@
   <link rel="stylesheet" href="/static/portal.css">
   <link rel="stylesheet" href="/static/family.css">
   <script src="/static/family.js" defer></script>
+<link rel="stylesheet" href="/static/dev-brand.css">
 </head>
 <body>
   <a class="family-skip" href="#main">Skip to family comparison</a>
-  <header><a class="brand" href="/">xq <span>FAMILY</span></a><a href="/">Profile menu ↗</a></header>
+  <header><a class="brand" href="/profiles">xq <span>FAMILY</span></a><a href="/profiles">Profile menu ↗</a></header>
   <main id="main">
     <div class="intro"><p class="eyebrow">A FAMILY PERSPECTIVE</p><h1>Different perspectives.<br>More understanding.</h1><p>Explore two to four family profiles side by side, then ask how their preferences may show up together.</p></div>
     <p id="family-name" class="family-name"></p>
@@ -44,5 +45,6 @@
     </section>
     <footer><span>XQ FAMILY</span><span>Understand the person. Strengthen the connection.</span></footer>
   </main>
+{% include "partials/dev_brand.html" %}
 </body>
 </html>

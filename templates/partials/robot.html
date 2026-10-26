@@ -1,0 +1,26 @@
+<div id="xq-robot" class="xq-robot" data-state="idle" role="img" aria-label="XQ robot guide, idle">
+  <div class="robot-halo" aria-hidden="true"></div>
+  <svg viewBox="0 0 360 350" aria-hidden="true">
+    <defs>
+      <linearGradient id="shell" x2=".8" y2="1"><stop stop-color="#fff"/><stop offset="1" stop-color="#bdb1e5"/></linearGradient>
+      <linearGradient id="visor" x2="1" y2="1"><stop stop-color="#35285e"/><stop offset="1" stop-color="#151327"/></linearGradient>
+    </defs>
+    <ellipse cx="180" cy="324" rx="94" ry="13" fill="#0d0927" opacity=".25"/>
+    <g class="robot-body">
+      <path d="M112 265Q180 231 248 265L262 311Q180 337 98 311Z" fill="url(#shell)"/>
+      <rect x="158" y="236" width="44" height="27" rx="11" fill="#8e7ac5"/>
+      <path d="M180 60V36" stroke="#cbbef2" stroke-width="7" stroke-linecap="round"/>
+      <circle class="robot-beacon" cx="180" cy="28" r="10" fill="#a8f0e3"/>
+      <rect x="52" y="125" width="25" height="69" rx="12" fill="#9279cc"/>
+      <rect x="283" y="125" width="25" height="69" rx="12" fill="#9279cc"/>
+      <rect x="68" y="65" width="224" height="185" rx="64" fill="url(#shell)"/>
+      <rect x="83" y="88" width="194" height="136" rx="48" fill="url(#visor)"/>
+      <g class="robot-eyes" fill="#b5f7ec"><rect x="115" y="128" width="31" height="33" rx="14"/><rect x="214" y="128" width="31" height="33" rx="14"/></g>
+      <rect class="robot-mouth" x="157" y="185" width="46" height="7" rx="4" fill="#c2afff"/>
+      <g class="robot-thought" fill="#b5f7ec"><circle cx="160" cy="188" r="4"/><circle cx="180" cy="188" r="4"/><circle cx="200" cy="188" r="4"/></g>
+      <text x="180" y="294" text-anchor="middle" fill="#584691" font-family="Georgia,serif" font-weight="bold" font-size="30">xq</text>
+      <path d="M153 302H207" stroke="#9c8aba" stroke-width="2"/>
+    </g>
+  </svg>
+  <span id="robot-state-label" class="robot-state-label">Ready when you are</span>
+</div>

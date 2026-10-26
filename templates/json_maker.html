@@ -8,9 +8,10 @@
   <link rel="stylesheet" href="/static/json_maker.css">
   <link rel="stylesheet" href="/static/portal.css">
   <script src="/static/json_maker.js" defer></script>
+<link rel="stylesheet" href="/static/dev-brand.css">
 </head>
 <body>
-  <header><a class="brand" href="/">XQ <span>FAMILY</span></a><a href="/">Profile menu <span aria-hidden="true">↗</span></a></header>
+  <header><a class="brand" href="/profiles">XQ <span>FAMILY</span></a><a href="/profiles">Profile menu <span aria-hidden="true">↗</span></a></header>
   <main>
     <div class="intro"><p class="eyebrow">ASSESSMENT WORKSPACE</p><h1>From assessment<br>to family understanding.</h1><p>Bring the report. Keep the facts. Create a family-oriented persona in the format your debrief already uses.</p></div>
     <ol class="steps" aria-label="Workflow"><li><b>01</b> Upload reports</li><li><b>02</b> Review the facts</li><li><b>03</b> Create & download</li></ol>
@@ -54,5 +55,6 @@
     </section>
     <footer>Exact scores. Thoughtful interpretation. <span>Nothing is added to your family roster automatically.</span></footer>
   </main>
+{% include "partials/dev_brand.html" %}
 </body>
 </html>

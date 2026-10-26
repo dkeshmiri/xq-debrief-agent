@@ -163,7 +163,9 @@ class TestFlaskAnswerLifecycle(unittest.TestCase):
         self.assertIsNone(app.answer_playback_tracker.utterance_id)
 
     def test_untracked_echo_reserved_before_start_and_wrong_stop_ignored(self):
-        self.assertEqual(self.client.post('/api/debrief/speak').status_code, 200)
+        # Legacy Tavus whole-section Echo is untracked; local replay is sentence-tracked.
+        with patch.object(app, 'tavus', MagicMock(connected=True)):
+            self.assertEqual(self.client.post('/api/debrief/speak').status_code, 200)
         self.assertEqual(self.client.post('/api/debrief/repeat').status_code, 409)
         self.event(PlaybackEventTracker.STOPPED, 'unrelated', interrupted=False)
         self.assertTrue(app.untracked_playback_active)

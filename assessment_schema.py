@@ -2,7 +2,7 @@
 from datetime import date
 from typing import Annotated, Literal
 
-from pydantic import BaseModel, ConfigDict, Field, create_model
+from pydantic import BaseModel, BeforeValidator, ConfigDict, Field, create_model
 
 FORCES = (
     "Intellectual", "Instinctive", "Resourceful", "Selfless", "Harmonious",
@@ -14,7 +14,14 @@ EQ_DIMENSIONS = (
     "social_regulation",
 )
 COMPOSITES = ("self_composite", "others_composite", "total_eq")
-Score = Annotated[float, Field(strict=True, ge=0, le=100)]
+def whole_score(value):
+    """Accept legacy whole-valued decimals without rounding assessment data."""
+    if isinstance(value, float) and value.is_integer():
+        return int(value)
+    return value
+
+
+Score = Annotated[int, Field(strict=True, ge=0, le=100), BeforeValidator(whole_score)]
 Text = Annotated[str, Field(min_length=1, max_length=12000)]
 Force = Literal[*FORCES]
 

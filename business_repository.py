@@ -1,13 +1,13 @@
 """Separate workplace roster using the existing validated profile storage contract."""
 from pathlib import Path
 
-from family_repository import FamilyRepository
+from family_repository import FamilyRepository, resolve_project_path
 from debrief_state import DebriefState, InteractionMode
 
 
 class BusinessRepository(FamilyRepository):
     def __init__(self, manifest_path):
-        path = Path(manifest_path)
+        path = resolve_project_path(manifest_path)
         if path.exists():
             super().__init__(path)
             for persona in self._personas.values():

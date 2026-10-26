@@ -7,9 +7,10 @@
   <link rel="stylesheet" href="/static/json_maker.css">
   <link rel="stylesheet" href="/static/portal.css">
   <script src="/static/start.js" defer></script>
+<link rel="stylesheet" href="/static/dev-brand.css">
 </head>
 <body class="welcome">
-  <header class="topbar"><a class="brand" href="/">xq <span>FAMILY</span></a><span>Understanding begins at home.</span></header>
+  <header class="topbar"><a class="brand" href="/profiles">xq <span>FAMILY</span></a><span>Understanding begins at home.</span><a href="/" class="dev-product-link">Choose a product ↗</a></header>
   <main>
     <p class="eyebrow">FAMILY DEBRIEF</p>
     <h1>A little understanding.<br>A closer family.</h1>
@@ -36,5 +37,6 @@
       <p class="hint">Missing scores can be entered by hand. Saving those changes requires your operator PIN.</p>
     </section>
   </main>
+{% include "partials/dev_brand.html" %}
 </body>
 </html>

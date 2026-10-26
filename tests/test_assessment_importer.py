@@ -154,8 +154,25 @@ class ImporterTests(unittest.TestCase):
         self.assertNotIn("age", result["persona"]["person"])
         self.assertEqual(result["persona"]["disc"]["natural"]["D"], 0)
 
+    def test_legacy_decimal_scores_generate_whole_number_json(self):
+        data = self.extraction.model_dump()
+        facts = data['facts']
+        for group in (facts['disc']['natural'], facts['disc']['adapted'],
+                      facts['driving_forces']['scores'], facts['eq']['scores']):
+            for key in group:
+                group[key] = float(group[key])
+        for key in ('self_composite', 'others_composite', 'total_eq'):
+            facts['eq'][key] = float(facts['eq'][key])
+        self.reply(self.language)
+        result = self.service.generate(Extraction.model_validate(data), 'Sibling')['persona']
+        for group in (result['disc']['natural'], result['disc']['adapted'],
+                      result['driving_forces']['scores'], result['eq']['scores']):
+            self.assertTrue(all(type(value) is int for value in group.values()))
+        for key in ('self_composite', 'others_composite', 'total_eq'):
+            self.assertIs(type(result['eq'][key]), int)
+
     def test_bad_numeric_values_rejected(self):
-        for value in (-1, 101, True, "72", float("nan"), float("inf")):
+        for value in (-1, 101, 72.5, True, "72", float("nan"), float("inf")):
             data = self.extraction.model_dump()
             data["facts"]["disc"]["natural"]["D"] = value
             with self.subTest(value=value), self.assertRaises(ValidationError):

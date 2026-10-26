@@ -66,8 +66,8 @@ class StartupTests(unittest.TestCase):
 
     def test_menu_and_console_are_separate(self):
         client = app_module.app.test_client()
-        self.assertIn(b"Use a saved profile", client.get("/").data)
-        self.assertIn(b"Create a new profile", client.get("/").data)
+        self.assertIn(b"Use a saved profile", client.get("/profiles").data)
+        self.assertIn(b"Create a new profile", client.get("/profiles").data)
         self.assertIn(b"video-container", client.get("/debrief").data)
 
     def test_adding_profile_during_session_is_rejected(self):
