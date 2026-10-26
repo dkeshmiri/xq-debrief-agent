@@ -1,4 +1,4 @@
-"""Isolated, scripted investor presentation. Never reads assessment profiles."""
+"""Isolated, prepared profile debrief. Never reads workspace assessment profiles."""
 import json
 import os
 from pathlib import Path

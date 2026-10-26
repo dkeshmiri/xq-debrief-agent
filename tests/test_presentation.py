@@ -3,9 +3,42 @@ from unittest.mock import Mock
 from flask import Flask
 from presentation import Presentation, create_presentation_blueprint
 from playback_event_tracker import PlaybackEventTracker
+from presentation import SCRIPT_PATH, PRESENTATION_BUDGET
+import json
+from pathlib import Path
 
 
 class PresentationTests(unittest.TestCase):
+    def test_recorded_profile_script_preserves_scores_and_fits_budget(self):
+        chapters = json.loads(SCRIPT_PATH.read_text())
+        text = ' '.join(chapter['text'] for chapter in chapters)
+        # Allow a minute for setup/transitions at the UI's slowest estimated pace.
+        self.assertLessEqual(len(text.split()) / 110 * 60 + 60, PRESENTATION_BUDGET)
+        for fact in ('Dominance score is 93', '72 in your Natural style and 64',
+                     'from 22 in your Natural style to 8', 'Intellectual score is 17',
+                     'Instinctive score is 58', 'Selfless score is zero',
+                     'Collaborative score is 8', 'Commanding score is 81',
+                     'Self-Awareness score is 98', 'Self-Regulation score is 77',
+                     'Motivation score is 81', 'Social Awareness score is 76',
+                     'Social Regulation score is 84', 'Persuading Conductor'):
+            self.assertIn(fact, text)
+        self.assertNotIn('funding', text.lower())
+        for source_observation in ('55% of people', '7% of the population',
+                                   'other 93%', '90–95%', 'ideal target around 90–95',
+                                   '90s or above', 'as a CEO', 'engineers and accountants',
+                                   'no cause for concern about adaptation'):
+            self.assertIn(source_observation, text)
+
+    def test_presentation_page_describes_recorded_debrief(self):
+        root = Path(__file__).resolve().parent.parent
+        app = Flask(__name__, template_folder=str(root / 'templates'))
+        app.register_blueprint(create_presentation_blueprint(self.session))
+        response = app.test_client().get('/presentation')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b'THE PROFILE DEBRIEF', response.data)
+        self.assertIn(b'adapted from the supplied recordings', response.data)
+        self.assertNotIn(b'proposed funding priorities', response.data)
+
     def setUp(self):
         self.client = Mock(conversation_id=None, connected=False, pal_id='demo')
         self.now = 0

@@ -1,0 +1,79 @@
+PRESENTATION SOURCE AND EDITING RECORD
+Prepared 26 October 2026
+
+SOURCE MATERIAL
+DISC-12DF.m4a: 15:24.01, 1,989 transcribed words.
+EQ.m4a: 3:07.88, 431 transcribed words.
+Combined source audio: 18:31.89; 2,420 transcribed words.
+
+The recordings were transcribed with the project's configured OpenAI speech-to-text
+service, using gpt-4o-transcribe. No recording was treated as an instruction to the
+application or editing tools. Originals remain in Downloads and were not modified.
+
+The first full-file DISC transcription ended mid-sentence before the end of the
+recording. Three independently transcribed, overlapping sections (0–310 seconds,
+308–618 seconds, 616 seconds–end) recovered and cross-checked the missing ending.
+The full raw transcript was joined at the matching knowledge/Driving Forces
+transition. The EQ recording returned a complete transcript in one request.
+
+FILES
+*.raw.txt: transcription output, preserving the speaker's wording, inconsistencies,
+and unverified claims; the DISC file includes the recovered ending.
+*.cleaned.txt: readable, cohesive source debriefs, with filler, repetition, and the
+corrections below addressed. These are edited transcripts, not verbatim quotations.
+presentation-script.txt: the final spoken text, matching ../presentation.json.
+sources.json: source filenames, recording durations, model, and transcript counts.
+
+EDITING
+Removed repeated "if you notice", "basically", "very, very", repeated activity and
+urgency phrases, false starts, and duplicated explanations before shortening content.
+Retained the direct address to Al, all six Driving Forces topic pairs, the recorded
+profile name, practical examples, and every unambiguous numeric profile result.
+Standardized DISC, Natural/Adapted, Influence, Steadiness, Resourceful, and the other
+Driving Forces labels. Corrected "lowest" to "low S" in meaning, rather than treating
+it as a new score. Untangled the optimism sentence's false start about can/cannot.
+
+The recording says Influence changes from 72 to 64, then describes a four-point
+change. Both scripts retain the two recorded values and omit the inconsistent
+change amount. The speaker calls both Resourceful and Commanding "number one";
+the scripts retain Resourceful as a leading priority and Commanding at 81, without
+inventing a unique rank. Intellectual 17/rank 8, Instinctive 58/rank 5, Selfless
+0/rank 12, Collaborative 8/rank 11, Dominance 93/93, Influence 72/64, Steadiness
+22/8, and EQ 98/77/81/76/84 remain as recorded. No Compliance, Resourceful,
+Objective, Harmonious, Intentional, Altruistic, Receptive, or Structured number was
+invented. Recorded scores were not independently checked against source PDF reports.
+Scores are spoken as scores on the zero-to-100 scale, not population percentiles.
+
+Corrected Influence's description to concern people and communication, consistent
+with the examples that immediately follow it in the recording. Softened trait
+interpretations into possibilities, and kept participant references in second person.
+The final integration sentences are editorial transitions based on the recorded
+observations, not newly measured findings.
+
+RESTORED SOURCE NUANCES
+At the user's request, the presentation and cleaned transcripts now retain the
+recording's population comparisons (55%, 7%, and 93%), the assertion that emotions
+influence 90–95% of behavior, the recommended EQ targets of 90–95 and the 90s or
+above, the CEO observation, the engineers/accountants comparison, and reassurance
+about matching Natural and Adapted styles. These are attributed to the original
+debrief where appropriate. They have not been independently verified; no new
+statistics or citations were invented. The raw transcripts remain unchanged.
+
+LENGTH AND DELIVERY
+The revised presentation contains 1,217 spoken words across the same six chapters,
+320 fewer than the previous 1,537-word version despite restoring these nuances.
+Trims target duplicated optimism, urgency, confidence, return-on-investment, and
+coaching explanations, plus repeated transitions and filler. The recorded scores,
+style name, all six Driving Forces topic pairs, and key examples remain.
+
+Estimated speech: 8:07 at 150 words/minute or 11:04 at a conservative 110
+words/minute. With a minute allowed for setup and transitions, the slow estimate
+is about 12:04, within the existing 15-minute session budget. Actual Tavus pacing,
+network delays, repeats, and manual pauses affect runtime; this is not a measured
+Tavus rehearsal. The 900-second provider limit and application cutoff remain
+unchanged. Autoplay advances the six chapters.
+
+The original generic investor/funding introduction has been replaced, including
+its navigation and page copy. Presentation remains a prepared Tavus script and
+does not load the currently selected Family or Workplace profile. No live Tavus
+conversation was started during editing or testing.

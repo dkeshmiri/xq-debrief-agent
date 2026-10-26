@@ -1,0 +1,15 @@
+[
+  {
+    "source": "DISC-12DF.m4a",
+    "duration_seconds": 924.0106666666667,
+    "model": "gpt-4o-transcribe",
+    "word_count": 1989,
+    "verification": "Re-transcribed in three overlapping sections: 0\u2013310s, 308\u2013618s, 616\u2013end. Recovered ending from section 3; matched at the knowledge/Driving Forces transition."
+  },
+  {
+    "source": "EQ.m4a",
+    "duration_seconds": 187.88266666666667,
+    "model": "gpt-4o-transcribe",
+    "word_count": 431
+  }
+]
