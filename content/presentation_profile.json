@@ -1,0 +1,46 @@
+{
+  "source": "Al’s Workplace profile · reported assessment scores; narration preserved from the recorded debrief",
+  "source_profile": "data/business/personas/43ca129c65344c4db593ecbe6bd1d346.json",
+  "disc": {
+    "natural": {
+      "D": 93,
+      "I": 72,
+      "S": 22,
+      "C": 18
+    },
+    "adapted": {
+      "D": 93,
+      "I": 64,
+      "S": 8,
+      "C": 28
+    }
+  },
+  "driving_forces": {
+    "scores": {
+      "Intellectual": 17,
+      "Instinctive": 58,
+      "Resourceful": 93,
+      "Selfless": 0,
+      "Harmonious": 11,
+      "Objective": 62,
+      "Altruistic": 35,
+      "Intentional": 47,
+      "Commanding": 81,
+      "Collaborative": 8,
+      "Structured": 14,
+      "Receptive": 74
+    }
+  },
+  "eq": {
+    "scores": {
+      "self_awareness": 98,
+      "self_regulation": 77,
+      "motivation": 81,
+      "social_awareness": 76,
+      "social_regulation": 84
+    },
+    "self_composite": 84,
+    "others_composite": 83,
+    "total_eq": 84
+  }
+}

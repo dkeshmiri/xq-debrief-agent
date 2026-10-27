@@ -27,7 +27,7 @@ class PresentationTests(unittest.TestCase):
                                    'other 93%', '90–95%', 'ideal target around 90–95',
                                    '90s or above', 'as a CEO', 'engineers and accountants',
                                    'no cause for concern about adaptation'):
-            self.assertIn(source_observation, text)
+            self.assertIn(source_observation.replace('–', ' to '), text.replace('–', ' to '))
 
     def test_presentation_page_describes_recorded_debrief(self):
         root = Path(__file__).resolve().parent.parent

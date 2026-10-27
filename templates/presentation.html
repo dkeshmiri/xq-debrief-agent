@@ -7,15 +7,17 @@
 <script src="https://unpkg.com/@daily-co/daily-js" crossorigin defer></script><script src="/static/presentation.js" defer></script>
 </head><body><header><a class="brand" href="/">xq <span>INNOVATION</span></a><a href="/">Choose a product ↗</a></header>
 <main><p class="eyebrow">THE PROFILE DEBRIEF</p><h1>Your profile.<br>In perspective.</h1>
-<p>A prepared debrief of Al’s DISC, Driving Forces, and emotional intelligence, adapted from the supplied recordings.</p>
+<p>Explore DISC, Driving Forces, and emotional intelligence. Use Al’s debrief, adapted from the supplied recordings, or upload a profile for a new presentation.</p>
+<details class="source-options"><summary>Presentation source · use the recorded example or upload a profile</summary><section class="source-picker card"><label for="profile-upload">Choose a profile JSON for a new presentation</label><input id="profile-upload" type="file" accept=".json,application/json"><button id="reset-source" class="secondary">Use Al’s recorded debrief</button><p class="hint">Uploading builds a concise score-based script and charts together. End the current session before changing profiles. Uploaded profiles are held only for this running server.</p></section></details><p id="visual-source" class="hint"></p>
 <div class="presentation-summary"><span id="runtime">Loading script…</span><span id="budget">15-minute session budget</span></div>
 <p id="notice" class="notice" role="alert" hidden></p>
-<div class="presentation-layout"><section><div id="presentation-stage"><div id="video-container"></div><div id="placeholder"><strong>xq</strong><h2>Explore your profile.</h2><p>Your presentation guide will appear here.</p></div></div>
+<div class="showcase-toolbar"><button id="showcase-toggle" class="secondary" aria-pressed="false" aria-controls="presentation-layout">Showcase view</button><span>Enlarge the charts with a presenter inset. Escape returns to split view.</span></div>
+<div class="presentation-layout" id="presentation-layout"><section><div id="presentation-stage"><div id="video-container"></div><div id="placeholder"><strong>xq</strong><h2>Explore your profile.</h2><p>Your presentation guide will appear here.</p></div></div>
 <div class="actions"><button id="start" disabled>Begin Tavus presentation</button><button id="end" class="secondary" hidden>End presentation</button><button id="play" disabled>Play chapter</button><button id="repeat" class="secondary" disabled>Repeat</button><button id="next" disabled>Next chapter →</button></div>
 <label class="confirm"><input type="checkbox" id="autoplay" checked><span>Continue automatically between chapters</span></label>
 <p class="hint">Tavus requires internet access. Camera and microphone start off. This mode reads the prepared script; it does not answer questions.</p>
 <div class="card"><p class="eyebrow">LIVE PRESENTATION ACTIVITY</p><p id="status" role="status" aria-live="polite">Checking the presentation…</p></div>
-</section><aside class="card"><p class="eyebrow">THE PRESENTATION PATH</p><ol id="chapters"></ol><h2 id="chapter-title"></h2><p id="script"></p></aside></div>
+</section><aside class="card visual-panel"><p class="eyebrow">YOUR PROFILE IN PERSPECTIVE</p><label for="preview-chapter">Preview chapter charts</label><select id="preview-chapter"></select><div id="chapter-visual"></div><details><summary>The presentation path and spoken chapter</summary><ol id="chapters"></ol><h2 id="chapter-title"></h2><p id="script"></p></details></aside></div>
 <details><summary>Review the complete script before presenting</summary><div id="full-script"></div></details>
-<p class="hint">This prepared example uses the profile discussed in the recordings. It does not read your selected Family or Workplace profile. Runtime estimates exclude connection time and manual pauses.</p>
+<p class="hint">Charts use reported values only. “Not reported” is not a zero. Uploading a profile here does not change your selected Family or Workplace profile. Runtime estimates exclude connection time and manual pauses.</p>
 </main>{% include "partials/dev_brand.html" %}</body></html>

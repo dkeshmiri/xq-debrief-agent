@@ -4,7 +4,8 @@ import os
 from pathlib import Path
 from threading import RLock
 from time import monotonic
-from flask import Blueprint, jsonify, render_template
+from flask import Blueprint, jsonify, render_template, request
+from presentation_visuals import charts, profile_presentation
 from playback_logging import logger
 from playback_event_tracker import PlaybackEventTracker
 from tavus_client import TavusClient
@@ -19,6 +20,10 @@ class Presentation:
         self.client.on_playback_event = self.on_playback
         self.client.on_system_event = self.on_system
         self.chapters = json.loads(SCRIPT_PATH.read_text())
+        profile = json.loads(SCRIPT_PATH.with_name('presentation_profile.json').read_text())
+        self.visuals = charts(profile)
+        self.source = profile['source']
+        self.revision = 0
         self.clock = clock
         self.lock = RLock()
         self.busy = False
@@ -38,7 +43,23 @@ class Presentation:
                         pending=self.tracker.utterance_id is not None,
                         speaking=self.tracker.inference_id is not None,
                         remaining_seconds=remaining, shutdown_reason=self.shutdown_reason,
-                        chapters=self.chapters, word_count=sum(len(c['text'].split()) for c in self.chapters))
+                        chapters=self.chapters, visuals=self.visuals, source=self.source, revision=self.revision,
+                        word_count=sum(len(c['text'].split()) for c in self.chapters))
+
+    def configure(self, profile):
+        with self.lock:
+            if self.busy or self.client.conversation_id:
+                raise ValueError('End the presentation before changing its source.')
+            if profile is None:
+                chapters = json.loads(SCRIPT_PATH.read_text())
+                recorded = json.loads(SCRIPT_PATH.with_name('presentation_profile.json').read_text())
+                visuals, source = charts(recorded), recorded['source']
+            else:
+                chapters, visuals, source = profile_presentation(profile)
+            self.chapters, self.visuals, self.source = chapters, visuals, source
+            self.index = 0
+            self.completed = False
+            self.revision += 1
 
     def start(self):
         with self.lock:
@@ -146,6 +167,17 @@ def create_presentation_blueprint(presentation=None):
     def action(action):
         try:
             session = current()
+            if action == 'source':
+                if request.content_length is None or request.content_length > 1_000_000:
+                    return jsonify(error='Choose a profile JSON smaller than 1 MB.'), 413
+                data = request.get_json()
+                if not isinstance(data, dict) or 'profile' not in data:
+                    return jsonify(error='Supply a profile object, or null for the recorded example.'), 400
+                try:
+                    session.configure(data['profile'])
+                except (ValueError, TypeError, KeyError, AttributeError) as error:
+                    return jsonify(error=str(error)), 400
+                return jsonify(ok=True)
             if action == 'start':
                 return jsonify(conversation=session.start())
             if action == 'end':
