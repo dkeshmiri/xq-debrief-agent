@@ -23,6 +23,8 @@ class PresentationTests(unittest.TestCase):
                      'Social Regulation score is 84', 'Persuading Conductor'):
             self.assertIn(fact, text)
         self.assertNotIn('funding', text.lower())
+        for previous_session in ('original debrief', 'last debrief', 'previous debrief', 'you heard', 'your debriefer'):
+            self.assertNotIn(previous_session, text.lower())
         for source_observation in ('55% of people', '7% of the population',
                                    'other 93%', '90–95%', 'ideal target around 90–95',
                                    '90s or above', 'as a CEO', 'engineers and accountants',

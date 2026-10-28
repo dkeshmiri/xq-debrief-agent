@@ -67,3 +67,11 @@ class PresentationVisualTests(unittest.TestCase):
         self.assertEqual(sum(len(r['series']) for key, chart in visuals.items() for r in chart.get('rows', [])), 28)
         self.assertLess(sum(len(c['text'].split()) for c in chapters), 110 * 14)
         self.assertEqual(visuals['eq']['rows'][-1]['series'][0]['value'], self.profile['eq']['total_eq'])
+
+    def test_report_color_families_follow_dimensions_not_bar_order(self):
+        visuals = charts(self.profile)
+        rows = visuals['forces_first']['rows'] + visuals['forces_second']['rows']
+        for row, color in zip(rows, ['knowledge', 'utility', 'surroundings', 'others', 'power', 'methodologies']):
+            self.assertEqual([s['color'] for s in row['series']], [color, color])
+        self.assertEqual([r['series'][0]['color'] for r in visuals['eq']['rows'][:5]],
+                         ['self_awareness', 'self_regulation', 'motivation', 'social_awareness', 'social_regulation'])

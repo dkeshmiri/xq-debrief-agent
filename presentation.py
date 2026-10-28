@@ -38,8 +38,10 @@ class Presentation:
         with self.lock:
             remaining = PRESENTATION_BUDGET if self.started_at is None else max(0, int(PRESENTATION_BUDGET - (self.clock()-self.started_at)))
             active = bool(self.client.conversation_id)
+            replica_ids = getattr(self.client, 'pal_participant_ids', set())
             return dict(active=active, connected=self.client.connected, busy=self.busy,
                         index=self.index, completed=self.completed,
+                        replica_participant_ids=sorted(replica_ids) if isinstance(replica_ids, (set, list, tuple)) else [],
                         pending=self.tracker.utterance_id is not None,
                         speaking=self.tracker.inference_id is not None,
                         remaining_seconds=remaining, shutdown_reason=self.shutdown_reason,

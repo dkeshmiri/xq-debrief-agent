@@ -3,7 +3,7 @@
 Open `/presentation` to use Al’s prepared narration and chapter-specific charts.
 Choose **Showcase view** for larger charts and an in-page presenter inset. Choose
 **Return to split view**, or press Escape, to restore the side-by-side layout.
-This resizes the existing Tavus iframe without moving or recreating it. It is
+This resizes the existing replica-only video without reconnecting the Daily call. It is
 an in-page layout, not an operating-system always-on-top picture-in-picture window.
 At widths of 900 pixels or less, the inset becomes a normal stacked player so
 it cannot cover chart labels. On narrow phones the two DISC plots also stack.
@@ -13,6 +13,18 @@ and outlines marking the active chapter’s dimensions. Driving Forces use paire
 cards with independent 0–100 scales. EQ shows five dimensions and three separate
 composite summaries. The styling is XQ’s; the 50 reference line is not a norm,
 and no normative ranges, rankings, or target scores are inferred.
+
+The player uses Daily's headless call object and renders only the replica's
+video/audio tracks, identified by its Tavus replica user ID or the server's PAL
+participant IDs. Other attendees do not create tiles or play audio. Video uses
+`object-fit: contain` to preserve the complete frame, with letterboxing when
+needed. Camera and microphone capture remain off. Browser-blocked audio exposes
+an “Enable presenter audio” button. Layout changes retain the same call object.
+
+Colors follow the supplied TTI report examples: Knowledge red, Utility gold,
+Surroundings purple, Others teal, Power black, Methodologies gray. EQ uses peach,
+coral, orange, lavender, and purple for the five dimensions in report order.
+Each Driving Forces pair shares a color; exact numeric labels remain visible.
 
 Use “Preview chapter charts” to inspect every section before opening Tavus.
 Charts advance with the chapter, including during autoplay. Missing scores say

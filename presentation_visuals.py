@@ -9,6 +9,8 @@ FORCES = [('Intellectual', 'Instinctive'), ('Resourceful', 'Selfless'),
 EQ = {'self_awareness': 'Self-Awareness', 'self_regulation': 'Self-Regulation',
       'motivation': 'Motivation', 'social_awareness': 'Social Awareness',
       'social_regulation': 'Social Regulation'}
+FORCE_COLORS = {force: color for pair, color in zip(FORCES,
+    ('knowledge', 'utility', 'surroundings', 'others', 'power', 'methodologies')) for force in pair}
 
 
 def charts(profile):
@@ -28,10 +30,10 @@ def charts(profile):
     def force_chart(pairs):
         return {'kind': 'forces', 'title': 'Driving Forces', 'note': 'Each force has its own score. Paired scores do not need to add up to 100.',
                 'rows': [{'label': ' / '.join(pair), 'series': [
-                    {'label': key, 'value': forces.get(key), 'color': 'force'} for key in pair]} for pair in pairs]}
+                    {'label': key, 'value': forces.get(key), 'color': FORCE_COLORS[key]} for key in pair]} for pair in pairs]}
 
     eq_chart = {'kind': 'eq', 'title': 'Emotional intelligence', 'note': 'Reported scores, not population percentiles or prescribed targets.',
-                'rows': [{'label': label, 'series': [{'label': 'Score', 'value': eq.get('scores', {}).get(key), 'color': 'eq'}]}
+                'rows': [{'label': label, 'series': [{'label': 'Score', 'value': eq.get('scores', {}).get(key), 'color': key}]}
                          for key, label in EQ.items()]}
     for key, label in [('self_composite', 'Self composite'), ('others_composite', 'Others composite'), ('total_eq', 'Total EQ')]:
         eq_chart['rows'].append({'label': label, 'composite': True, 'series': [{'label': 'Score', 'value': eq.get(key), 'color': 'eq'}]})

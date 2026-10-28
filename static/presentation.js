@@ -33,6 +33,7 @@ function controls() {
 }
 function render(data) {
     state = data; online = true;
+    if (frame?.setReplicaIds) frame.setReplicaIds(data.replica_participant_ids || []);
     if (scriptRevision !== data.revision) {
         scriptLoaded = false; visualKey = null; scriptRevision = data.revision; previewIndex = 0;
         $('chapters').replaceChildren(); $('full-script').replaceChildren();
@@ -125,6 +126,7 @@ function renderVisual(chart) {
         if (row.composite) {
             const value = row.series[0].value;
             const tile = node('div', '', 'eq-composite');
+            tile.dataset.color = row.label === 'Self composite' ? 'self' : row.label === 'Others composite' ? 'others' : 'total';
             tile.append(node('span', row.label), node('strong', value == null ? 'Not reported' : String(value)));
             composites.append(tile); continue;
         }
@@ -186,12 +188,12 @@ async function start() {
     if (!window.DailyIframe) throw new Error('Video player unavailable. Check your internet connection and reload.');
     const data = await api('start');
     await refresh();
-    frame = window.DailyIframe.createFrame($('video-container'), {showLeaveButton:false, iframeStyle:{width:'100%',height:'100%',border:'0'}});
+    frame = new window.PresentationPlayer($('video-container'), $('placeholder'), notice);
     frame.on('error', () => { joined=false; controls(); notice('Video connection failed. End the presentation before retrying.'); });
     frame.on('left-meeting', () => { joined=false; controls(); });
     const c = data.conversation;
     await frame.join({url:c.conversation_url, startVideoOff:true, startAudioOff:true, userName:'XQ Presentation Viewer', ...(c.meeting_token ? {token:c.meeting_token} : {})});
-    joined = true; $('placeholder').hidden = true;
+    joined = true;
     const deadline = Date.now()+20000;
     do {
         await refresh();

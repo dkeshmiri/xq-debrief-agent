@@ -20,7 +20,7 @@
 .disc-well .score-bar{width:100%;border-radius:4px 4px 0 0;max-height:100%}
 .disc-column[data-focus=true] .disc-well{outline:2px solid #503080;outline-offset:2px}
 [data-kind=forces] .score-group{background:#f5f2f9;border:1px solid #d8cde6;border-radius:12px;padding:16px}
-[data-kind=forces] .score-line:nth-child(3) .score-bar{background:#387c89}
+
 [data-kind=forces] .score-track,[data-kind=eq] .score-track{height:16px;background-image:repeating-linear-gradient(to right,transparent 0,transparent calc(25% - 1px),#b7abc9 calc(25% - 1px),#b7abc9 25%)}
 .eq-composites{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
 .eq-composite{display:flex;flex-direction:column;gap:10px;text-align:center;padding:14px 8px;background:#e5f0f1;border-radius:12px;font-size:12px}
@@ -36,3 +36,10 @@
 @media(min-width:1100px){main:has(.presentation-layout){max-width:1380px}.showcase>.visual-panel{padding-right:330px}.showcase #presentation-stage{width:270px}}
 @media(max-width:900px){.presentation-layout{grid-template-columns:1fr}.presentation-layout #presentation-stage{min-height:0;max-height:420px;aspect-ratio:16/9}.showcase>.visual-panel{padding-right:24px;min-height:0}.showcase #presentation-stage{position:relative;inset:auto;width:min(100%,320px);aspect-ratio:4/3;margin:0 0 18px;max-height:none}.showcase .disc-grid{height:230px}.showcase-toolbar{align-items:flex-start;flex-direction:column;gap:8px}}
 @media(max-width:430px){.disc-plots{grid-template-columns:1fr}.disc-grid{height:210px}.eq-composites{grid-template-columns:1fr}.eq-composite{flex-direction:row;align-items:center;justify-content:space-between}.visual-panel h2{font-size:23px}}
+
+.replica-video{width:100%;height:100%;object-fit:contain;background:#161322}.resume-presenter-audio{position:absolute;bottom:12px;left:12px;right:12px;z-index:5}#video-container:has(.replica-video){pointer-events:none}#video-container .resume-presenter-audio{pointer-events:auto}
+.score-bar[data-color=knowledge]{background:#980000}.score-bar[data-color=utility]{background:#ffc12b}.score-bar[data-color=surroundings]{background:#68519a}.score-bar[data-color=others]{background:#008788}.score-bar[data-color=power]{background:#151515}.score-bar[data-color=methodologies]{background:#aaa}
+.score-bar[data-color=self_awareness]{background:#f7a17e}.score-bar[data-color=self_regulation]{background:#f3774e}.score-bar[data-color=motivation]{background:#f65b27}.score-bar[data-color=social_awareness]{background:#b17cb5}.score-bar[data-color=social_regulation]{background:#81429a}
+.eq-composite{background:#f0e7f3}.eq-composite strong{color:#713587}
+.eq-composite[data-color=self]{background:#fff0e8}.eq-composite[data-color=self] strong{color:#a34222}
+.eq-composite[data-color=total]{background:#eeeaf2}.eq-composite[data-color=total] strong{color:#503080}
