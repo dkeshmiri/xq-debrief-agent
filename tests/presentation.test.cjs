@@ -72,3 +72,52 @@ test('DISC plots keep all four exact scores and show missing as a dash',()=>{
     assert.equal(grid.children[1].dataset.focus,'true');
     assert.equal(grid.children[4].dataset.focus,'false');
 });
+
+
+test('startup waits for replica presence and video, then five seconds of readiness', async()=>{
+    const f=fixture();
+    f.run(`
+        var clock=0, observations=0;
+        Date.now=()=>clock;
+        setTimeout=fn=>{clock+=1000; fn();};
+        joined=true; frame={video:{srcObject:null}};
+        refresh=async()=>{
+            observations++;
+            online=true;
+            state={active:true,connected:true,replica_participant_ids:observations>=3?['replica']:[]};
+            if(observations>=4) frame.video.srcObject={};
+        };
+    `);
+    await f.run('waitForPresenter()');
+    assert.equal(f.run('clock'),8000);
+});
+
+test('startup times out without a replica and never sends Echo', async()=>{
+    const f=fixture();
+    f.run(`
+        var clock=0, sends=0;
+        Date.now=()=>clock;
+        setTimeout=fn=>{clock+=1000; fn();};
+        joined=true; frame={video:{srcObject:null}};
+        api=async()=>{sends++;};
+        refresh=async()=>{online=true;state={active:true,connected:true,replica_participant_ids:[]};};
+    `);
+    await assert.rejects(f.run('waitForPresenter()'),/did not become ready/);
+    assert.equal(f.run('sends'),0);
+});
+
+test('startup restarts its warm-up after a connection interruption', async()=>{
+    const f=fixture();
+    f.run(`
+        var clock=0;
+        Date.now=()=>clock;
+        setTimeout=fn=>{clock+=1000; fn();};
+        joined=true; frame={video:{srcObject:{}}};
+        refresh=async()=>{
+            online=clock!==3000;
+            state={active:true,connected:true,replica_participant_ids:['replica']};
+        };
+    `);
+    await f.run('waitForPresenter()');
+    assert.equal(f.run('clock'),9000);
+});

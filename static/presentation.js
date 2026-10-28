@@ -194,14 +194,32 @@ async function start() {
     const c = data.conversation;
     await frame.join({url:c.conversation_url, startVideoOff:true, startAudioOff:true, userName:'XQ Presentation Viewer', ...(c.meeting_token ? {token:c.meeting_token} : {})});
     joined = true;
-    const deadline = Date.now()+20000;
+    await waitForPresenter();
+    await api('play');
+}
+async function waitForPresenter() {
+    // Room join can precede the replica. Require its video and backend presence,
+    // then allow a short warm-up before the first Echo. Never resend blindly.
+    const deadline = Date.now() + 45000;
+    let readySince = null;
     do {
         await refresh();
-        if (state.connected) { await api('play'); return; }
-        if (state.shutdown_reason) break;
+        if (state.shutdown_reason || !state.active)
+            throw new Error('The presentation ended before speech could begin. End this session and try again.');
+        const ready = online && joined && state.connected
+            && state.replica_participant_ids?.length > 0
+            && !!frame?.video?.srcObject;
+        if (ready) {
+            if (readySince === null) readySince = Date.now();
+            $('status').textContent = 'Presenter connected. Preparing speech…';
+            if (Date.now() - readySince >= 5000) return;
+        } else {
+            readySince = null;
+            $('status').textContent = 'Waiting for the presenter to be ready…';
+        }
         await new Promise(resolve=>setTimeout(resolve,300));
     } while (Date.now()<deadline);
-    throw new Error('The guide could not connect. End this presentation and try again.');
+    throw new Error('The presenter did not become ready. End this presentation and try again.');
 }
 for (const [id, action] of Object.entries({start, end, play:()=>api('play'), next:()=>api('next'), repeat:()=>api('repeat')}))
     $(id).addEventListener('click',()=>run(action));
