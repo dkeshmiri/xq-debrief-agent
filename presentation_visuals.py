@@ -1,6 +1,7 @@
 """Presentation charts and optional narration from one assessment source."""
 from schemas import validate_persona
 from score_formatting import format_score
+from presentation_acumen import acumen_charts
 
 DISC = {'D': 'Dominance', 'I': 'Influence', 'S': 'Steadiness', 'C': 'Compliance'}
 FORCES = [('Intellectual', 'Instinctive'), ('Resourceful', 'Selfless'),
@@ -37,12 +38,19 @@ def charts(profile):
                          for key, label in EQ.items()]}
     for key, label in [('self_composite', 'Self composite'), ('others_composite', 'Others composite'), ('total_eq', 'Total EQ')]:
         eq_chart['rows'].append({'label': label, 'composite': True, 'series': [{'label': 'Score', 'value': eq.get(key), 'color': 'eq'}]})
-    return {'overview': {'title': 'Three perspectives. One conversation.', 'note': 'Explore behavior, motivation, and emotional intelligence without combining them into a single score.',
+    visuals = {'overview': {'title': 'Three perspectives. One conversation.', 'note': 'Explore behavior, motivation, and emotional intelligence without combining them into a single score.',
                          'cards': [{'title': 'DISC', 'text': 'How you approach people, pace, problems, and processes.'},
                                    {'title': 'Driving Forces', 'text': 'What makes an activity worth pursuing for you.'},
                                    {'title': 'EQ', 'text': 'How you understand and manage emotions and relationships.'}]},
             'disc_di': disc_chart('DI'), 'disc_sc': disc_chart('SC'),
             'forces_first': force_chart(FORCES[:3]), 'forces_second': force_chart(FORCES[3:]), 'eq': eq_chart}
+    if 'aci' in profile:
+        visuals.pop('eq')
+        visuals.update(acumen_charts(profile['aci']))
+        visuals['overview']['note'] = 'Explore behavior, motivation, and acumen without combining them into a single score.'
+        visuals['overview']['cards'][-1] = {'title': 'Acumen / ACI', 'text': 'How you evaluate people, tasks, and systems, and yourself, your roles, and your future.'}
+    return visuals
+
 
 
 def profile_presentation(profile):

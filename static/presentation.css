@@ -43,3 +43,18 @@
 .eq-composite{background:#f0e7f3}.eq-composite strong{color:#713587}
 .eq-composite[data-color=self]{background:#fff0e8}.eq-composite[data-color=self] strong{color:#a34222}
 .eq-composite[data-color=total]{background:#eeeaf2}.eq-composite[data-color=total] strong{color:#503080}
+
+/* ACI retains report dimensions and valuation directions without estimating norms. */
+.aci-panels{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:18px;margin-top:20px}
+.aci-panel{min-width:0;border:1px solid #d8cde6;border-radius:14px;padding:16px;background:#f8f6fb}
+.aci-panel h3{font-size:18px;margin:0 0 12px}.aci-summary{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:12px;margin-bottom:16px}.aci-summary strong{font-size:28px;color:var(--purple)}
+.aci-grid{display:grid;grid-template-columns:24px repeat(3,minmax(0,1fr));gap:10px}
+.aci-axis{height:220px;margin-top:25px;display:flex;flex-direction:column;justify-content:space-between;font-size:10px;color:var(--muted)}
+.aci-column{display:grid;grid-template-rows:25px 220px 30px minmax(42px,auto) minmax(38px,auto) auto;text-align:center;font-size:12px;min-width:0;gap:0}
+.aci-context{font-weight:600}.aci-well{display:flex;align-items:flex-end;background:repeating-linear-gradient(to top,#ece8f3 0,#ece8f3 calc(25% - 1px),#cbbfd9 calc(25% - 1px),#cbbfd9 25%);border-bottom:1px solid #867a99;padding:0 12px}
+.aci-well .score-bar{width:100%;border-radius:5px 5px 0 0}.aci-value{align-self:center;font-size:17px}.aci-label{font-weight:600;line-height:1.4}.aci-valuation{font-size:11px;line-height:1.4}.aci-blind-spot{font-size:11px;color:var(--muted)}
+.aci-distortion{font-size:12px;margin:16px 0 0;padding-top:12px;border-top:1px solid #d8cde6}
+.score-bar[data-color=intrinsic]{background:#36b74b}.score-bar[data-color=extrinsic]{background:#d7d729}.score-bar[data-color=systemic]{background:#407ac8}
+@media(max-width:430px){.aci-panel{padding:12px 8px}.aci-grid{gap:6px}.aci-well{padding:0 8px}.aci-label{font-size:11px}.aci-valuation{font-size:10px}}
+
+.aci-problem{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;margin:16px 0;font-size:12px}.aci-problem>span{max-width:85%}.aci-problem small{color:var(--muted)}

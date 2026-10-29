@@ -1,0 +1,60 @@
+AMETHYST SOURCE AND EDITING RECORD — 29 October 2026
+
+The supplied audio was transcribed using gpt-4o-transcribe, as for Al, after
+explicit user approval to send it to OpenAI. Four 300-second sections overlap
+by two seconds; the final section ends at 1013.845333 seconds. Raw chunk outputs
+are retained. The shared phrases at each boundary were removed once when joining:
+“with high empathy”; “you are someone who's motivated by”; “but back in June”.
+The last segment includes the speaker's full closing and goodbye. This was not
+a word-by-word human listening audit; transcription uncertainty remains possible.
+
+amethyst.raw.txt: Joined API output, including source claims and inconsistencies.
+amethyst.cleaned.txt: Full-length transcript with selected fillers, repeated
+words, and false starts removed. Interpretations and wording largely retained.
+presentation-script.txt: The shorter prepared adaptation, matching the JSON.
+sources.json: Input hashes, duration, chunk boundaries, model, counts, report pages.
+No source recording or PDF was changed, and neither was copied into the repository.
+
+The presentation condenses repeated explanations to fit the existing 15-minute
+provider budget. It retains all DISC scores and the spoken Driving Forces and ACI
+numbers, correcting percentages to scores. Charts supplement unspoken numbers
+from the PDF, without requiring the script to enumerate them. The complete cleaned
+transcript remains available for review rather than being silently replaced by
+the shorter adaptation. Eight chapters bind to DISC, Driving Forces, and ACI.
+
+Report graphs were checked visually on pages 26, 39, 52, 53, 55, 56, and 60.
+ACI clarity: 92/84/80 externally; 56/60/48 internally. Blind spots:
+8/16/20 and 44/40/52. Bias: mixed/under/over and under/over/over.
+The report's rounded clarity averages 85 and 55 are copied, not recalculated.
+Emotional bias distortion 15 and 45 is distinct from dimension-level blind spots.
+Problem-solving scores and numbered reference markers are copied from pages
+55–56. Unnumbered gauges, population bands and bias dial magnitudes are not
+estimated from pixels. No EQ values or invented ACI norms are added.
+
+Source discrepancies and editorial clarifications:
+- The recording calls Understanding Others non-biased; the report says mixed
+  valuation. The presentation explicitly distinguishes these.
+- Practical Thinking has an undervaluation arrow. The source's claim of strong
+  bias distortion is retained in the raw/cleaned transcript, but the presentation
+  uses the reported direction and distinguishes it from clarity.
+- Natural and Adapted are not literally home/work in every circumstance. The
+  presentation uses comfortable behavior and adaptation to the environment.
+- Compliance changes by 20 points. The presentation notes this as the largest
+  difference instead of implying no significant difference across every dimension.
+- Internal distortion concerns self/roles/future; the presentation does not repeat
+  the recording's external people/tasks/systems explanation as an internal result.
+- No-bias/no-fear absolutes are softened. Upward valuation arrows are not presented
+  as measured improvement since June. Predictions of improved scores are omitted.
+- Difficult relationship experiences are attributed to the recorded interpretation,
+  not asserted as a finding established by an assessment score.
+- Soft-skills and Attitude Index observations from the audio are retained as context,
+  without manufacturing numerical charts for them.
+- The closing adds accurate presentation restart instructions and directs questions
+  to the debriefer. Tavus Presentation Mode itself does not answer questions.
+
+Estimated speech: 1098 words, about 7.3–10 minutes at 150–110 words per minute,
+leaving time for setup. This is an estimate, not a live Tavus timing measurement.
+No live Tavus session was created for verification. Al remains the default; the
+source chooser loads Amethyst's independent script and score snapshot atomically.
+Family/Workplace schemas, debrief engines, speech playback, and Birth Order are
+unchanged.

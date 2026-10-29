@@ -1,0 +1,42 @@
+{
+  "audio_file": "Amethyst.m4a",
+  "audio_duration_seconds": 1013.845333,
+  "audio_sha256": "7ba23dc342e9e0a9f151d68a5f2909f3526a93e021ad4a4fd1242cee1f38c45b",
+  "report_file": "Broomand_Amethyst_TriHD2manMKT_46899972usCOLE-e65.pdf",
+  "report_sha256": "b28eee21c64c5b46e656f24548afe2169657dd0edd03bd4dc9f21b071ccf019b",
+  "model": "gpt-4o-transcribe",
+  "sections_seconds": [
+    [
+      0,
+      300
+    ],
+    [
+      298,
+      598
+    ],
+    [
+      596,
+      896
+    ],
+    [
+      894,
+      1013.845333
+    ]
+  ],
+  "raw_word_count": 2109,
+  "cleaned_word_count": 2067,
+  "presentation_word_count": 1098,
+  "score_pages": {
+    "disc": 26,
+    "driving_forces": 39,
+    "aci_emotional_bias_distortion": [
+      52,
+      53
+    ],
+    "aci_dimensional_balance": 60,
+    "aci_problem_solving": [
+      55,
+      56
+    ]
+  }
+}

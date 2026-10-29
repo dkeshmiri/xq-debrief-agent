@@ -121,3 +121,31 @@ test('startup restarts its warm-up after a connection interruption', async()=>{
     await f.run('waitForPresenter()');
     assert.equal(f.run('clock'),9000);
 });
+
+
+test('ACI renders clarity, valuation, blind spots and summaries without treating missing as zero',()=>{
+    const f=fixture();
+    f.run(`renderVisual(${JSON.stringify({kind:'aci',title:'ACI',note:'Scores',panels:[{
+        title:'World View',clarity_average:85,emotional_bias_distortion:15,
+        dimensions:[{label:'Understanding Others',context:'People',color:'intrinsic',clarity:92,blind_spot:8,bias:'mixed',valuation:'Mixed valuation'},
+            {label:'Practical Thinking',context:'Tasks',color:'extrinsic',clarity:0,blind_spot:0,bias:'under',valuation:'Undervaluation'},
+            {label:'Systems Judgment',context:'Systems',color:'systemic',clarity:null,blind_spot:null,bias:null,valuation:'Not reported'}],
+        problems:[{label:'People',value:84,reference:86}]}]})})`);
+    const panel=f.get('chapter-visual').children[2].children[0];
+    assert.equal(panel.children[1].children[1].textContent,'85');
+    const grid=panel.children[2];
+    assert.equal(grid.children[1].children[1].children[0].style.height,'92%');
+    assert.equal(grid.children[1].children[4].textContent,'↕ Mixed valuation');
+    assert.equal(grid.children[1].children[5].textContent,'Blind spot: 8');
+    assert.equal(grid.children[2].children[2].textContent,'0');
+    assert.equal(grid.children[3].children[2].textContent,'Not reported');
+    assert.equal(panel.children[3].textContent,'Emotional bias distortion: 15');
+    assert.equal(panel.children[4].children[2].children[1].textContent,'84');
+});
+
+test('prepared presentation selector is locked during a live session',()=>{
+    const f=fixture(); f.run(`render(${JSON.stringify({...state,active:true})})`);
+    assert.equal(f.get('amethyst-source').disabled,true);
+    f.run(`render(${JSON.stringify(state)})`);
+    assert.equal(f.get('amethyst-source').disabled,false);
+});

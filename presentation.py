@@ -6,12 +6,14 @@ from threading import RLock
 from time import monotonic
 from flask import Blueprint, jsonify, render_template, request
 from presentation_visuals import charts, profile_presentation
+from presentation_bundle import bundle_presentation
 from playback_logging import logger
 from playback_event_tracker import PlaybackEventTracker
 from tavus_client import TavusClient
 
 SCRIPT_PATH = Path(__file__).resolve().parent / 'content/presentation.json'
 PRESENTATION_BUDGET = 15 * 60
+PRESETS = {'amethyst': SCRIPT_PATH.parent / 'presentations/amethyst.json'}
 
 class Presentation:
     def __init__(self, client=None, clock=monotonic):
@@ -48,14 +50,22 @@ class Presentation:
                         chapters=self.chapters, visuals=self.visuals, source=self.source, revision=self.revision,
                         word_count=sum(len(c['text'].split()) for c in self.chapters))
 
-    def configure(self, profile):
+    def configure(self, profile, preset=None):
         with self.lock:
             if self.busy or self.client.conversation_id:
                 raise ValueError('End the presentation before changing its source.')
+            if preset is not None:
+                if not isinstance(preset, str) or preset not in PRESETS:
+                    raise ValueError('Unknown prepared presentation.')
+                if profile is not None:
+                    raise ValueError('Choose a prepared presentation or an upload.')
+                profile = json.loads(PRESETS[preset].read_text())
             if profile is None:
                 chapters = json.loads(SCRIPT_PATH.read_text())
                 recorded = json.loads(SCRIPT_PATH.with_name('presentation_profile.json').read_text())
                 visuals, source = charts(recorded), recorded['source']
+            elif isinstance(profile, dict) and 'presentation_version' in profile:
+                chapters, visuals, source = bundle_presentation(profile)
             else:
                 chapters, visuals, source = profile_presentation(profile)
             self.chapters, self.visuals, self.source = chapters, visuals, source
@@ -176,7 +186,7 @@ def create_presentation_blueprint(presentation=None):
                 if not isinstance(data, dict) or 'profile' not in data:
                     return jsonify(error='Supply a profile object, or null for the recorded example.'), 400
                 try:
-                    session.configure(data['profile'])
+                    session.configure(data['profile'], preset=data.get('preset'))
                 except (ValueError, TypeError, KeyError, AttributeError) as error:
                     return jsonify(error=str(error)), 400
                 return jsonify(ok=True)

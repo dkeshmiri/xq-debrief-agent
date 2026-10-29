@@ -22,6 +22,7 @@ function controls() {
     $('preview-chapter').disabled = busy || state.active || state.busy;
     $('profile-upload').disabled = busy || state.active || state.busy;
     $('reset-source').disabled = busy || state.active || state.busy;
+    $('amethyst-source').disabled = busy || state.active || state.busy;
     $('start').hidden = state.active;
     $('start').disabled = !online || busy || state.active || state.busy;
     $('end').hidden = !state.active && !frame;
@@ -86,6 +87,55 @@ function renderVisual(chart) {
     }
     if (!chart) { container.append(node('p', 'No chart is assigned to this chapter.')); return; }
     container.append(node('h2', chart.title), node('p', chart.note, 'chart-note'));
+    if (chart.kind === 'aci') {
+        const panels = node('div', '', 'aci-panels');
+        const value = score => typeof score === 'number' && Number.isFinite(score) ? String(score) : 'Not reported';
+        const arrows = {over:'↑', mixed:'↕', under:'↓'};
+        for (const panel of chart.panels) {
+            const section = node('section', '', 'aci-panel');
+            section.append(node('h3', panel.title));
+            const summary = node('div', '', 'aci-summary');
+            summary.append(node('span', 'Reported clarity average'), node('strong', value(panel.clarity_average)));
+            section.append(summary);
+            const grid = node('div', '', 'aci-grid');
+            const axis = node('div', '', 'aci-axis');
+            for (const tick of ['100', '75', '50', '25', '0']) axis.append(node('span', tick));
+            grid.append(axis);
+            for (const dimension of panel.dimensions) {
+                const column = node('div', '', 'aci-column');
+                column.append(node('span', dimension.context, 'aci-context'));
+                const well = node('div', '', 'aci-well');
+                well.setAttribute('aria-label', `${dimension.label}: clarity ${value(dimension.clarity)}`);
+                const bar = node('div', '', 'score-bar'); bar.dataset.color = dimension.color;
+                const known = typeof dimension.clarity === 'number' && Number.isFinite(dimension.clarity);
+                bar.style.height = known ? `${Math.max(0, Math.min(100, dimension.clarity))}%` : '0%';
+                well.append(bar); column.append(well);
+                column.append(node('strong', value(dimension.clarity), 'aci-value'), node('span', dimension.label, 'aci-label'));
+                column.append(node('span', `${arrows[dimension.bias] || '—'} ${dimension.valuation}`, 'aci-valuation'));
+                column.append(node('span', `Blind spot: ${value(dimension.blind_spot)}`, 'aci-blind-spot'));
+                grid.append(column);
+            }
+            section.append(grid, node('p', `Emotional bias distortion: ${value(panel.emotional_bias_distortion)}`, 'aci-distortion'));
+            if (panel.problems?.length) {
+                const details = node('details', '', 'aci-problems');
+                details.append(node('summary', 'Problem solving and decision making'));
+                details.append(node('p', 'Reported scores and the report’s numbered reference markers. The shaded population ranges are not estimated.', 'chart-note'));
+                for (const problem of panel.problems) {
+                    const row = node('div', '', 'aci-problem');
+                    row.append(node('span', problem.label), node('strong', value(problem.value)));
+                    const track = node('div', '', 'score-track');
+                    const bar = node('div', '', 'score-bar');
+                    bar.style.width = typeof problem.value === 'number' ? `${problem.value}%` : '0%';
+                    track.append(bar); row.append(track, node('small', `Report reference: ${value(problem.reference)}`));
+                    details.append(row);
+                }
+                section.append(details);
+            }
+            panels.append(section);
+        }
+        container.append(panels, node('p', 'Green · Intrinsic (people / self). Yellow · Extrinsic (tasks / roles). Blue · Systemic (systems / future). Blind spots and emotional bias distortion are separate from clarity; higher does not mean better.', 'chart-note'));
+        return;
+    }
     if (chart.kind === 'disc') {
         const plots = node('div', '', 'disc-plots');
         for (const profile of chart.profiles) {
@@ -152,9 +202,9 @@ function renderVisual(chart) {
         container.append(node('h3', 'Reported composites', 'composite-title'), composites);
     }
 }
-async function changeSource(profile) {
+async function changeSource(profile, preset = null) {
     const response = await fetch('/api/presentation/source', {
-        method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({profile})
+        method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({profile, preset})
     });
     const data = await response.json();
     if (!response.ok) throw new Error(data.error || 'Could not load this profile.');
@@ -168,6 +218,7 @@ $('profile-upload').addEventListener('change', () => run(async () => {
     } finally { $('profile-upload').value = ''; }
 }));
 $('reset-source').addEventListener('click', () => run(() => changeSource(null)));
+$('amethyst-source').addEventListener('click', () => run(() => changeSource(null, 'amethyst')));
 async function refresh() {
     try { render(await api('status','GET')); }
     catch { online = false; $('status').textContent = 'Live updates unavailable. Reconnecting…'; controls(); }

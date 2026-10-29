@@ -1,0 +1,160 @@
+{
+  "presentation_version": 1,
+  "profile": {
+    "source": "Amethyst Broomand · TriMetrix HD · report pages 26, 39, 52–53, 55–56, 60",
+    "person": {
+      "display_name": "Amethyst"
+    },
+    "source_report": "Broomand_Amethyst_TriHD2manMKT_46899972usCOLE-e65.pdf",
+    "disc": {
+      "natural": {
+        "D": 7,
+        "I": 94,
+        "S": 90,
+        "C": 28
+      },
+      "adapted": {
+        "D": 7,
+        "I": 92,
+        "S": 84,
+        "C": 8
+      }
+    },
+    "driving_forces": {
+      "scores": {
+        "Intellectual": 61,
+        "Instinctive": 24,
+        "Resourceful": 35,
+        "Selfless": 38,
+        "Harmonious": 69,
+        "Objective": 12,
+        "Altruistic": 46,
+        "Intentional": 39,
+        "Commanding": 19,
+        "Collaborative": 67,
+        "Structured": 19,
+        "Receptive": 71
+      }
+    },
+    "aci": {
+      "dimensions": {
+        "understanding_others": {
+          "clarity": 92,
+          "blind_spot": 8,
+          "bias": "mixed"
+        },
+        "practical_thinking": {
+          "clarity": 84,
+          "blind_spot": 16,
+          "bias": "under"
+        },
+        "systems_judgment": {
+          "clarity": 80,
+          "blind_spot": 20,
+          "bias": "over"
+        },
+        "sense_of_self": {
+          "clarity": 56,
+          "blind_spot": 44,
+          "bias": "under"
+        },
+        "role_awareness": {
+          "clarity": 60,
+          "blind_spot": 40,
+          "bias": "over"
+        },
+        "self_direction": {
+          "clarity": 48,
+          "blind_spot": 52,
+          "bias": "over"
+        }
+      },
+      "world": {
+        "clarity_average": 85,
+        "emotional_bias_distortion": 15,
+        "problem_solving": {
+          "people": {
+            "score": 84,
+            "report_reference": 86
+          },
+          "practical": {
+            "score": 80,
+            "report_reference": 82
+          },
+          "theoretical": {
+            "score": 78,
+            "report_reference": 81
+          },
+          "decisions": {
+            "score": 84,
+            "report_reference": 79
+          }
+        }
+      },
+      "self": {
+        "clarity_average": 55,
+        "emotional_bias_distortion": 45,
+        "problem_solving": {
+          "people": {
+            "score": 64,
+            "report_reference": 77
+          },
+          "practical": {
+            "score": 68,
+            "report_reference": 75
+          },
+          "theoretical": {
+            "score": 56,
+            "report_reference": 75
+          },
+          "decisions": {
+            "score": 30,
+            "report_reference": 66
+          }
+        }
+      }
+    }
+  },
+  "chapters": [
+    {
+      "title": "Welcome, Amethyst",
+      "visual": "overview",
+      "text": "Hello, Amethyst. I’m excited to walk you through your profile. You took this assessment in June, and things may have changed since then. If something no longer fits, consider what has changed rather than treating this snapshot as a permanent description. We’ll explore how you approach situations through DISC, what motivates you through Driving Forces, and how you see yourself and the world through Acumen."
+    },
+    {
+      "title": "DISC · Dominance and Influence",
+      "visual": "disc_di",
+      "text": "DISC describes how you do what you do. Natural reflects your more comfortable behavior; Adapted reflects how you may modify it for your environment. Each dimension uses a zero-to-100 scale.\n\nDominance concerns decisiveness, assertiveness, and how you approach problems. Your score is 7 in both Natural and Adapted styles. You tend to be peace-oriented, taking your time rather than jumping into confrontation. You prefer not to leave people with bad feelings. A possible challenge is holding stress inside for a long time before showing frustration. Not displaying anger doesn’t mean you never feel it; noticing it earlier can help.\n\nInfluence is your strongest DISC dimension, at 94 Natural and 92 Adapted. You’re people-oriented and tend to see possibilities with optimism. You can be creative and articulate feelings and ideas in words. You enjoy being with people you care about and helping them. That gift for expression can also mean becoming a little wordy or sidetracked. Your combination of communication and empathy can be a real strength."
+    },
+    {
+      "title": "DISC · Steadiness and Compliance",
+      "visual": "disc_sc",
+      "text": "Steadiness concerns pace and consistency. Your scores are 90 Natural and 84 Adapted. You prefer a steady pace and can be someone others count on. Together, high Influence and Steadiness suggest a caring, compassionate approach: you want to help people and avoid hurting them. You may not always show your emotions openly.\n\nCompliance concerns rules, detail, accuracy, and precision. Your score moves from 28 Natural to 8 Adapted. You prefer flexibility over following rules simply because they exist, and you may look for a different way to help people. This can support boldness and experimentation, while still leaving room to consider useful safeguards and details.\n\nYour pattern is described as a Promoting Relator. You can be a bridge between people with different behavioral styles and promote what you believe in. When you believe an idea will help people, you can be steadfast and committed. Most dimensions are relatively similar between the two styles; Compliance shows the largest change."
+    },
+    {
+      "title": "Driving Forces · Knowledge, Utility, Surroundings",
+      "visual": "forces_first",
+      "text": "Driving Forces explore why you do what you do. For Knowledge, Intellectual is 61 and Instinctive is 24. You tend to prefer reading and studying over relying only on instinct.\n\nFor Utility, Resourceful is 35 and Selfless is 38. You appreciate a return on your time, money, and energy, while also being willing to give those resources for other people. You can care about family and team needs while still asking whether an investment is worthwhile.\n\nFor Surroundings, Harmonious is your second-ranked driver. You’re motivated by how an environment feels, its beauty, and the harmony between people. You want people to get along rather than experience hostility. Giving and receiving love and care matters to you. The contrast with Objective reflects a stronger pull toward the overall experience than function alone."
+    },
+    {
+      "title": "Driving Forces · Others, Power, Methodologies",
+      "visual": "forces_second",
+      "text": "For Others, Intentional is 39 and Altruistic is 46. Both matter, with a preference toward helping. You don’t mind catching the fish, preparing it, and putting it in front of someone. Performance, strategy, and purpose still matter, but helping people is a recurring theme.\n\nFor Power, Collaborative is stronger than Commanding. You prefer building consensus, asking for opinions, and creating something people can agree on.\n\nFor Methodologies, Receptive is your leading driver. You’re motivated by innovation, creativity, and new perspectives more than tradition or structure for its own sake. Combined with Intellectual and Harmonious, this suggests an interest in learning and creating change that brings people harmony, love, and care. Compassion appears in both your behavioral style and your motivations."
+    },
+    {
+      "title": "Acumen · Clarity and perspective",
+      "visual": "aci_balance",
+      "text": "Your report also highlights people-related skills, including Understanding Others, Negotiation, Flexibility, Conflict Management, Creativity and Innovation, Employee Development and Coaching, Appreciating Others, and Interpersonal Skills.\n\nAcumen concerns the clarity with which you see the world and yourself. World View looks at people, tasks, and systems. Self View looks at you as a person, your roles, and your future. The charts distinguish clarity, blind spots, and valuation direction; these are different pieces of information.\n\nYour internal emotional bias distortion score is 45. Personal feelings and assumptions may influence conclusions or make it harder to separate facts from interpretations. This is an area to explore alongside the rest of your profile. It does not establish emotional instability, lack of intelligence, or consistently poor decisions.\n\nYour Attitude Index is described positively in the debrief: approving, favorable, dynamic, lively, energetic, appreciative, grateful, encouraging, upbeat, open-minded, accessible, and flexible."
+    },
+    {
+      "title": "Acumen · World View",
+      "visual": "aci_world",
+      "text": "Understanding Others has a clarity score of 92. Understanding people is a strong theme throughout your profile. The report marks mixed valuation here; that is different from having no bias at all.\n\nPractical Thinking reflects how you see tasks and practical situations. You have strong clarity in this area, alongside a downward valuation arrow. The debrief connects this with preferring exciting, engaging activities over mundane tasks. Clarity and valuation direction can differ; one does not replace the other.\n\nSystems Judgment is 80, with an upward valuation arrow. The debrief connects this with enjoying strategies, systems, and new ways of working, particularly when those systems help people. That interpretation fits the recurring interest in innovation and care that we’ve been discussing."
+    },
+    {
+      "title": "Acumen · Self View and closing",
+      "visual": "aci_self",
+      "text": "Sense of Self is 56. The debrief interprets this June snapshot as a time when you may not have felt fully sure of yourself, perhaps while recovering from difficult relationship experiences. That is a personal interpretation, not something the score alone proves, and your circumstances may have changed.\n\nRole Awareness is 60, with an upward valuation arrow. The debrief describes looking forward to new roles and exploring what could be more fulfilling. Helping people remains a theme in how you imagine those roles.\n\nSelf Direction is 48, also with an upward valuation arrow. The debrief describes a combination of uncertainty about the future and optimism about what it could become. The arrows show valuation direction, not a measured improvement over time.\n\nTaken together, the debrief suggests a transitional period when you took the assessment. Staying connected with your desire to help, and finding new ways to extend care and compassion, may be useful themes to reflect on.\n\nThank you for your time, Amethyst. I hope this gives you a helpful starting point for reflection and questions. You can end this presentation and begin again to replay it, or bring your questions to your debriefer."
+    }
+  ]
+}
