@@ -14,6 +14,7 @@ function fixture() {
     const get = id => {if (!elements.has(id)) elements.set(id, element()); return elements.get(id);};
     const context = vm.createContext({document:{getElementById:get, createElement:element, querySelectorAll:()=>[]},
         window:{addEventListener(){}}, fetch:()=>new Promise(()=>{}), AbortSignal, setTimeout(){}});
+    vm.runInContext(fs.readFileSync('static/investor-visuals.js', 'utf8'), context);
     vm.runInContext(fs.readFileSync('static/presentation.js', 'utf8'), context);
     return {get, run:code=>vm.runInContext(code, context)};
 }
@@ -148,4 +149,30 @@ test('prepared presentation selector is locked during a live session',()=>{
     assert.equal(f.get('amethyst-source').disabled,true);
     f.run(`render(${JSON.stringify(state)})`);
     assert.equal(f.get('amethyst-source').disabled,false);
+});
+
+
+test('investor graphics use business units and a zero baseline rather than assessment scales',()=>{
+    const f=fixture();
+    f.run(`renderVisual(${JSON.stringify({kind:'investor',layout:'bars',title:'ROI',note:'Illustrative',takeaway:'Subscription only',source:'Deck',items:[{
+        label:'Annual cost',unit:'USD',bars:[{label:'Cost',value:588000},{label:'Value',value:600000},{label:'Zero',value:0}]}]})})`);
+    const group=f.get('chapter-visual').children[2].children[0];
+    assert.equal(group.children[1].children[1].textContent,'600,000 USD');
+    assert.equal(group.children[2].children[2].children[0].style.width,'98%');
+    assert.equal(group.children[3].children[2].children[0].style.width,'100%');
+    assert.equal(group.children[4].children[2].children[0].style.width,'0%');
+    assert.equal(group.children[4].children[1].textContent,'0');
+});
+
+test('investor source locks in session and chapter preview supports each prepared graphic',()=>{
+    const f=fixture(); f.run(`render(${JSON.stringify({...state,active:true})})`);
+    assert.equal(f.get('workforce-source').disabled,true);
+    const bundle=JSON.parse(fs.readFileSync('content/presentations/workforce-investor.json','utf8'));
+    f.run(`render(${JSON.stringify({...state,chapters:bundle.chapters,visuals:bundle.visuals,revision:1})})`);
+    assert.equal(f.get('workforce-source').disabled,false);
+    for (const [index,chapter] of bundle.chapters.entries()) {
+        f.get('preview-chapter').value=String(index); f.get('preview-chapter').handlers.change();
+        assert.equal(f.get('chapter-visual').dataset.kind,'investor');
+        assert.equal(f.get('chapter-visual').children[0].textContent,bundle.visuals[chapter.visual].title);
+    }
 });

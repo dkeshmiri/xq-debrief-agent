@@ -23,6 +23,7 @@ function controls() {
     $('profile-upload').disabled = busy || state.active || state.busy;
     $('reset-source').disabled = busy || state.active || state.busy;
     $('amethyst-source').disabled = busy || state.active || state.busy;
+    $('workforce-source').disabled = busy || state.active || state.busy;
     $('start').hidden = state.active;
     $('start').disabled = !online || busy || state.active || state.busy;
     $('end').hidden = !state.active && !frame;
@@ -87,6 +88,7 @@ function renderVisual(chart) {
     }
     if (!chart) { container.append(node('p', 'No chart is assigned to this chapter.')); return; }
     container.append(node('h2', chart.title), node('p', chart.note, 'chart-note'));
+    if (chart.kind === 'investor') { renderInvestorVisual(container, chart); return; }
     if (chart.kind === 'aci') {
         const panels = node('div', '', 'aci-panels');
         const value = score => typeof score === 'number' && Number.isFinite(score) ? String(score) : 'Not reported';
@@ -219,6 +221,7 @@ $('profile-upload').addEventListener('change', () => run(async () => {
 }));
 $('reset-source').addEventListener('click', () => run(() => changeSource(null)));
 $('amethyst-source').addEventListener('click', () => run(() => changeSource(null, 'amethyst')));
+$('workforce-source').addEventListener('click', () => run(() => changeSource(null, 'workforce-investor')));
 async function refresh() {
     try { render(await api('status','GET')); }
     catch { online = false; $('status').textContent = 'Live updates unavailable. Reconnecting…'; controls(); }

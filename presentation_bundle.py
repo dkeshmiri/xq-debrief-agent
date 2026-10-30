@@ -3,6 +3,7 @@ from copy import deepcopy
 from math import isfinite
 from presentation_acumen import DIMENSIONS, VALUATIONS, PROBLEMS
 from presentation_visuals import charts, DISC, FORCES, EQ
+from presentation_investor import investor_visuals
 
 
 def object_value(value, label):
@@ -19,7 +20,28 @@ def score(value):
 def bundle_presentation(bundle):
     if type(bundle.get('presentation_version')) is not int or bundle['presentation_version'] != 1:
         raise ValueError('Unsupported presentation version.')
-    profile = object_value(bundle.get('profile'), 'profile')
+    kind = bundle.get('presentation_type')
+    if kind == 'investor':
+        visuals, source = investor_visuals(bundle)
+    elif kind is None:
+        visuals, source = profile_visuals(bundle.get('profile'))
+    else:
+        raise ValueError('Unknown presentation type.')
+    chapters = bundle.get('chapters')
+    if not isinstance(chapters, list) or not 1 <= len(chapters) <= 30:
+        raise ValueError('Supply between 1 and 30 presentation chapters.')
+    for chapter in chapters:
+        object_value(chapter, 'Chapter')
+        for key in ('title', 'text', 'visual'):
+            if not isinstance(chapter.get(key), str) or not chapter[key].strip():
+                raise ValueError(f'Each chapter needs a {key}.')
+        if chapter['visual'] not in visuals:
+            raise ValueError('A chapter references an unavailable chart.')
+    return deepcopy(chapters), visuals, source
+
+
+def profile_visuals(profile):
+    profile = object_value(profile, 'profile')
     source = profile.get('source')
     if not isinstance(source, str) or not source.strip():
         raise ValueError('A presentation source label is required.')
@@ -61,14 +83,4 @@ def bundle_presentation(bundle):
         for key in ('self_composite', 'others_composite', 'total_eq'):
             score(eq.get(key))
     visuals = charts(profile)
-    chapters = bundle.get('chapters')
-    if not isinstance(chapters, list) or not 1 <= len(chapters) <= 30:
-        raise ValueError('Supply between 1 and 30 presentation chapters.')
-    for chapter in chapters:
-        object_value(chapter, 'Chapter')
-        for key in ('title', 'text', 'visual'):
-            if not isinstance(chapter.get(key), str) or not chapter[key].strip():
-                raise ValueError(f'Each chapter needs a {key}.')
-        if chapter['visual'] not in visuals:
-            raise ValueError('A chapter references an unavailable chart.')
-    return deepcopy(chapters), visuals, source
+    return visuals, source

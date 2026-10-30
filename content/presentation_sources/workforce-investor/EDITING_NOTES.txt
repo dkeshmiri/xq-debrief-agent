@@ -1,0 +1,58 @@
+WORKFORCE INVESTOR PRESENTATION — PERSUASIVE REVISION
+
+Rewritten at the user's request around Attention, Interest, Conviction, Desire,
+and Close. The opening states the business problem and names XQ as the solution.
+Capability limits, legal caveats, defensive contrasts and Q&A discussion were
+removed from the narration and graphics. Short labels such as forecast and
+capacity-value scenario identify the numbers without interrupting the pitch.
+The product vision is introduced as the workforce experience we are building;
+the script does not claim enterprise workflows are already deployed.
+
+Source: the supplied 31-page XQ Workforce AI investor deck. The problem-first revision verifies the deck’s national cost figures against
+Gallup and adds its manager replacement-cost estimate. No customer results,
+signed revenue or investment amount added.
+Priority customer segments and buyers come from page 22. XQ differentiation
+comes from page 18. The forecast and subscription-churn sensitivity are the
+supplied model outputs, not independently rebuilt forecasts.
+
+ROI support for Q&A:
+The original weak retention-only example is replaced by the deck's page 12
+AI-productivity opportunity: 5–10% capacity gain across 200 augmentable roles,
+valued at $1M–$2M annually. The implied $20M cost base is made explicit in the
+spoken example as 200 roles at $100,000 loaded annual cost each.
+For 1,000 paid seats at $49/month, annual subscription = $588,000.
+At 5%: $1,000,000 modeled capacity value; $412,000 above subscription;
+($1,000,000-$588,000)/$588,000 = 70.07% subscription-relative return.
+At 10%: $2,000,000 modeled capacity value; $1,412,000 above subscription;
+($2,000,000-$588,000)/$588,000 = 240.14% subscription-relative return.
+These are conditional capacity-value calculations, not measured cash savings
+or full project ROI. Implementation, integration and administration are outside
+this subscription-only comparison. No retention or training value is added to
+this example. Validate realized capacity use and full costs with each customer.
+The narration explicitly states the role count, cost base, gain assumptions and
+subscription comparison, and introduces the outcome with “If”.
+
+$588/$75 = 7.84 annual hours; 9.05 minutes/week across 52 weeks.
+$588/$50 = 11.76 annual hours; 13.57 minutes/week across 52 weeks.
+Later $49 SaaS pricing is used consistently; the earlier $8–$18 PEPM alternative
+is not combined with it. Workforce attrition and subscription churn remain
+separate concepts. Market-wide statistics are now used in the opening, as detailed below.
+
+The authoritative narration and graphics are in workforce-investor.json;
+presentation-script.txt is the synchronized review copy. The 900-second Tavus
+limit and playback mechanics are unchanged. Live timing has not been rehearsed.
+
+
+PROBLEM-FIRST OPENING
+Revisited and visually checked slide 3. Opening now leads with Gallup's estimated
+$2T annual U.S. disengagement productivity loss, then the separately attributed
+$1T annual voluntary-turnover estimate from 2019. They are not added together,
+not described as global losses, and not presented as XQ's addressable revenue.
+Verified URLs are in sources.json. Replacement of leaders/managers at around
+200% of salary comes from Gallup's article updated February 16, 2026. This is a
+replacement-cost estimate, not a universal numeric estimate of a bad hire.
+Bad-hire costs are explained qualitatively through recruiting, onboarding,
+management attention, lost output, and another hiring cycle. The source deck
+does not supply a standalone bad-hire cost estimate. The $1.08T unfilled-job
+figure and company-level $5.04M model are not mixed into a national total.
+Chapter 2 now explicitly names XQ Workforce AI and its connected solution.

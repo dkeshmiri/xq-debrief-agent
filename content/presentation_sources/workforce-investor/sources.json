@@ -1,0 +1,33 @@
+{
+  "source_file": "XQ_Workforce_AI_Investor_Ready_.pdf",
+  "source_sha256": "474882edc4ae358c53761bdec0621f1605ddfaf71a94b3c3bf663e99f394b6a6",
+  "source_pages": 31,
+  "word_count": 1395,
+  "chapter_pages": {
+    "thesis": "Source deck \u00b7 page 3; Gallup engagement (2026), turnover (2019), replacement-cost estimates (updated 2026).",
+    "losses": "Source deck \u00b7 pages 2, 8, 15",
+    "retention": "Source deck \u00b7 pages 8\u20139, 12",
+    "training": "Source deck \u00b7 pages 7\u20139, 16\u201318",
+    "motivation": "Source deck \u00b7 pages 5, 9, 19, 28",
+    "economics": "Source deck \u00b7 pages 20, 27",
+    "roi": "Source deck \u00b7 pages 12, 20; subscription-return calculation",
+    "pilot": "Source deck \u00b7 pages 12, 20, 27, 29\u201330",
+    "growth": "Source deck \u00b7 pages 20\u201324, 26",
+    "churn": "Source deck \u00b7 pages 18, 25, 27",
+    "funding": "Source deck \u00b7 pages 28\u201331"
+  },
+  "verified_problem_sources": [
+    {
+      "url": "https://www.gallup.com/workplace/712433/employee-engagement-remains-flat-adoption-accelerates.aspx",
+      "claim": "Estimated $2T annual U.S. lost productivity from disengagement"
+    },
+    {
+      "url": "https://www.gallup.com/workplace/247391/fixable-problem-costs-businesses-trillion.aspx",
+      "claim": "2019 estimate of $1T annual U.S. voluntary-turnover cost"
+    },
+    {
+      "url": "https://www.gallup.com/workplace/646538/employee-turnover-preventable-often-ignored.aspx",
+      "claim": "Leader and manager replacement costs around 200% of salary; updated February 16, 2026"
+    }
+  ]
+}

@@ -91,3 +91,41 @@ shorter presentation script, provenance, and editorial decisions are under
 the full cleaned transcript is preserved separately. Scores were verified against
 the supplied PDF's pages 26, 39, 52–53, 55–56, and 60. No new assessment extraction
 or STT service was added to the runtime app; this is a prepared presentation.
+
+
+## Workforce AI investor presentation
+
+Choose **Presentation source → Workforce AI · Investor presentation** before
+starting Tavus. Eleven chapters adapt the supplied investor strategy PDF into a
+15-minute presentation slot, emphasizing retention, applied training, motivation,
+ongoing support, break-even math and measurable pilots. About 1,395 spoken words
+leave setup/transition margin; playback duration is estimated, not guaranteed.
+Al remains the default. All source changes are blocked during an active session.
+
+`content/presentations/workforce-investor.json` is the authoritative script and
+graphics source. It uses `presentation_version: 1`, `presentation_type: investor`,
+`source`, `chapters` and `visuals`; no assessment profile is required. Chapters
+bind to graphic keys via `visual`. Each graphic has `kind: investor`, `layout`
+(cards, steps or bars), `title`, `note`, `source`, `takeaway` and `items`.
+Cards/steps use label/value/detail text. Bar groups use label/unit/bars, with each
+bar containing label and a finite nonnegative numeric value. Bar widths use a
+zero baseline and the group's maximum; currency is not clamped to 0–100.
+
+The JSON uploader also accepts this format. Strings render as text, not HTML;
+unsupported layouts and invalid values are rejected before replacing the source.
+The business graphic renderer is isolated in `static/investor-visuals.js` and
+`.css`; the assessment schemas and runtime debrief engines are unchanged.
+
+The graphics are adapted layouts, not screenshots of all 31 original slides.
+Pricing, customer ROI examples and business forecasts are explicitly labeled as
+proposals/scenarios. The presentation uses the later $49/user/month model and
+does not add overlapping cost categories. It distinguishes subscription churn
+from employee attrition and actual product functionality from the roadmap.
+Full source mapping, script review copy, timing and calculation notes live in
+`content/presentation_sources/workforce-investor/`.
+
+The investor narrative follows Attention → Interest → Conviction → Desire → Close.
+Q&A assumptions and calculation detail are kept in its EDITING_NOTES.txt; the
+presentation focuses on the problem, solution, customer economics and invitation
+to invest. Its ROI graphic uses the deck’s $1M–$2M capacity-value scenario against
+a $588K annual subscription, with the scenario inputs stated in the speech.
