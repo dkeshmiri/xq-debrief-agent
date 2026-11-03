@@ -35,7 +35,9 @@ class PresentationTests(unittest.TestCase):
         root = Path(__file__).resolve().parent.parent
         app = Flask(__name__, template_folder=str(root / 'templates'))
         app.register_blueprint(create_presentation_blueprint(self.session))
-        response = app.test_client().get('/presentation')
+        api = app.test_client()
+        self.assertEqual(api.post('/api/presentation/unlock', json={'pin':'2020'}).status_code, 200)
+        response = api.get('/presentation')
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'THE PROFILE DEBRIEF', response.data)
         self.assertIn(b'adapted from the supplied recordings', response.data)
@@ -117,6 +119,7 @@ class PresentationTests(unittest.TestCase):
         app = Flask(__name__)
         app.register_blueprint(create_presentation_blueprint(self.session))
         api = app.test_client()
+        self.assertEqual(api.post('/api/presentation/unlock', json={'pin':'2020'}).status_code, 200)
         self.assertEqual(api.post('/api/presentation/start').status_code, 409)
         self.assertEqual(api.post('/api/presentation/unknown').status_code, 404)
         response = api.get('/api/presentation/status')

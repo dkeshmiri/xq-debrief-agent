@@ -176,3 +176,46 @@ test('investor source locks in session and chapter preview supports each prepare
         assert.equal(f.get('chapter-visual').children[0].textContent,bundle.visuals[chapter.visual].title);
     }
 });
+
+
+test('workforce barometers preserve percentage widths and show both mixes',()=>{
+    const f=fixture();
+    const bundle=JSON.parse(fs.readFileSync('content/presentations/workforce-investor.json','utf8'));
+    f.run(`renderVisual(${JSON.stringify(bundle.visuals.transformation)})`);
+    const groups=f.get('chapter-visual').children[2].children;
+    assert.equal(groups.length,2);
+    assert.deepEqual(groups[0].children[2].children.map(segment=>segment.style.width), ['25%','50%','25%']);
+    assert.deepEqual(groups[1].children[2].children.map(segment=>segment.style.width), ['40%','45%','15%']);
+    assert.equal(groups[1].children[3].children[2].children[1].textContent,'At-risk');
+    assert.match(groups[1].children[0].textContent,/goal/);
+});
+
+test('Persian content is RTL, human-led, and switches back to English cleanly',()=>{
+    const f=fixture();
+    const bundle=JSON.parse(fs.readFileSync('content/presentations/iranian-american-fa.json','utf8'));
+    const persian={...state,language:'fa',narration_supported:false,chapters:bundle.chapters,visuals:bundle.visuals,revision:1};
+    f.run(`render(${JSON.stringify(persian)})`);
+    for (const id of ['chapter-visual','script','full-script','chapters','preview-chapter','visual-source']) {
+        assert.equal(f.get(id).dir,'rtl');
+        assert.equal(f.get(id).lang,'fa');
+    }
+    assert.equal(f.get('start').disabled,true);
+    assert.equal(f.get('language-note').hidden,false);
+    for(const [index,chapter] of bundle.chapters.entries()) {
+        f.get('preview-chapter').value=String(index); f.get('preview-chapter').handlers.change();
+        assert.equal(f.get('chapter-visual').children[0].textContent,chapter.title);
+        assert.equal(f.get('script').textContent,chapter.text);
+    }
+    f.run(`render(${JSON.stringify({...state,revision:2})})`);
+    assert.equal(f.get('chapter-visual').dir,'ltr');
+    assert.equal(f.get('full-script').lang,'en');
+    assert.equal(f.get('start').disabled,false);
+    assert.equal(f.get('language-note').hidden,true);
+});
+
+test('both Iranian-American source buttons lock during a live presentation',()=>{
+    const f=fixture(); f.run(`render(${JSON.stringify({...state,active:true})})`);
+    for(const id of ['iranian-source','iranian-fa-source']) assert.equal(f.get(id).disabled,true);
+    f.run(`render(${JSON.stringify(state)})`);
+    for(const id of ['iranian-source','iranian-fa-source']) assert.equal(f.get(id).disabled,false);
+});

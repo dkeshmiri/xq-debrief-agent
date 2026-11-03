@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="/static/theme.css">
   <link rel="stylesheet" href="/static/products.css">
   <link rel="stylesheet" href="/static/dev-brand.css">
+  <script src="/static/presentation-access.js" defer></script>
 </head>
 <body class="product-page">
   <header class="product-header"><span class="product-wordmark">xq <span>INNOVATION</span></span><span>People first. Possibilities ahead.</span></header>
@@ -31,7 +32,19 @@
         <div class="product-cta">Explore XQ Workplace <span aria-hidden="true">↗</span></div>
       </a>
     </div>
-    <p class="product-footnote"><a href="/presentation">Presentation — Al’s profile debrief ↗</a></p>
+    <section id="presentation-access" class="presentation-access" aria-label="Operator presentation access">
+      <div><p class="product-eyebrow">OPERATOR ACCESS</p>
+        <button id="presentation-mode" type="button" disabled aria-describedby="presentation-access-status">Presentation Mode</button>
+      </div>
+      <form id="presentation-unlock">
+        <label for="presentation-pin">Operator PIN</label>
+        <div class="presentation-pin-row">
+          <input id="presentation-pin" name="pin" type="password" inputmode="numeric" maxlength="64" autocomplete="off" required aria-describedby="presentation-access-status">
+          <button id="presentation-unlock-button" type="submit">Unlock</button>
+        </div>
+        <p id="presentation-access-status" role="status" aria-live="polite">Operator PIN required.</p>
+      </form>
+    </section>
     <p class="product-footnote">Your next step: choose a saved profile or create one from your assessment reports.</p>
   </main>
   {% include "partials/dev_brand.html" %}

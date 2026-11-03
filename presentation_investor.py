@@ -18,7 +18,7 @@ def investor_visuals(bundle):
         text(key, 'Chart key')
         if not isinstance(chart, dict) or chart.get('kind') != 'investor':
             raise ValueError('Investor bundles must use investor graphics.')
-        if chart.get('layout') not in ('cards', 'steps', 'bars'):
+        if chart.get('layout') not in ('cards', 'steps', 'bars', 'barometer'):
             raise ValueError('Unknown investor graphic layout.')
         for field in ('title', 'note', 'source', 'takeaway'):
             text(chart.get(field), field)
@@ -29,7 +29,7 @@ def investor_visuals(bundle):
             if not isinstance(item, dict):
                 raise ValueError('Graphic items must be objects.')
             text(item.get('label'), 'Label')
-            if chart['layout'] != 'bars':
+            if chart['layout'] not in ('bars', 'barometer'):
                 text(item.get('value'), 'Value')
                 text(item.get('detail'), 'Detail')
                 continue
@@ -44,4 +44,11 @@ def investor_visuals(bundle):
                 value = bar.get('value')
                 if type(value) not in (int, float) or not isfinite(value) or not 0 <= value <= 1e15:
                     raise ValueError('Bar values must be finite, nonnegative numbers up to 1e15.')
+            if chart['layout'] == 'barometer':
+                if item['unit'] != '%' or len(bars) != 3:
+                    raise ValueError('Workforce barometers need three percentage groups.')
+                if [bar['label'] for bar in bars] != ['Superstars', 'At-leasters', 'At-risk']:
+                    raise ValueError('Workforce barometer categories must keep their defined order.')
+                if any(bar['value'] > 100 for bar in bars) or abs(sum(bar['value'] for bar in bars)-100) > 1e-9:
+                    raise ValueError('Workforce barometer percentages must sum to 100.')
     return deepcopy(visuals), source

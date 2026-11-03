@@ -25,7 +25,7 @@
   ],
   "raw_word_count": 2109,
   "cleaned_word_count": 2067,
-  "presentation_word_count": 1098,
+  "presentation_word_count": 1514,
   "score_pages": {
     "disc": 26,
     "driving_forces": 39,
@@ -38,5 +38,11 @@
       55,
       56
     ]
-  }
+  },
+  "presentation_revision": "2026-11-01 · Original wording with repetition-only abridgment",
+  "active_transcription": "retranscription-2026-11-01/metadata.json",
+  "estimated_speech_minutes_at_110_to_150_wpm": [
+    10.09,
+    13.76
+  ]
 }

@@ -1,0 +1,29 @@
+{
+  "audio_file": "Amethyst (1).m4a",
+  "audio_sha256": "7ba23dc342e9e0a9f151d68a5f2909f3526a93e021ad4a4fd1242cee1f38c45b",
+  "model": "gpt-4o-transcribe",
+  "date": "2026-11-01",
+  "raw_word_count": 2095,
+  "sections_seconds": [
+    [
+      0,
+      300
+    ],
+    [
+      298,
+      598
+    ],
+    [
+      596,
+      896
+    ],
+    [
+      894,
+      1013.845333
+    ]
+  ],
+  "discarded_attempt": "Whole-file output ended mid-sentence; replaced with four overlapping sections.",
+  "cleaned_word_count": 2057,
+  "presentation_word_count": 1514,
+  "session_budget_seconds": 900
+}

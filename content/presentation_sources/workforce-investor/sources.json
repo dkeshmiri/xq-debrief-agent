@@ -2,19 +2,22 @@
   "source_file": "XQ_Workforce_AI_Investor_Ready_.pdf",
   "source_sha256": "474882edc4ae358c53761bdec0621f1605ddfaf71a94b3c3bf663e99f394b6a6",
   "source_pages": 31,
-  "word_count": 1395,
+  "word_count": 1389,
   "chapter_pages": {
-    "thesis": "Source deck \u00b7 page 3; Gallup engagement (2026), turnover (2019), replacement-cost estimates (updated 2026).",
-    "losses": "Source deck \u00b7 pages 2, 8, 15",
-    "retention": "Source deck \u00b7 pages 8\u20139, 12",
-    "training": "Source deck \u00b7 pages 7\u20139, 16\u201318",
-    "motivation": "Source deck \u00b7 pages 5, 9, 19, 28",
-    "economics": "Source deck \u00b7 pages 20, 27",
-    "roi": "Source deck \u00b7 pages 12, 20; subscription-return calculation",
-    "pilot": "Source deck \u00b7 pages 12, 20, 27, 29\u201330",
-    "growth": "Source deck \u00b7 pages 20\u201324, 26",
-    "churn": "Source deck \u00b7 pages 18, 25, 27",
-    "funding": "Source deck \u00b7 pages 28\u201331"
+    "thesis": "Source deck · page 3; Gallup engagement (2026), turnover (2019), replacement-cost estimates (updated 2026).",
+    "execution": "Strategy & Execution update · page 1 · Kotter (2008), PMI (2025), McKinsey",
+    "implementation": "Strategy & Execution update · page 2 · PMI (2014, 2021)",
+    "losses": "Source deck · pages 2, 8, 15",
+    "barometer": "Workforce Barometers update · page 1; Strategy & Execution update · page 3",
+    "transformation": "Workforce Barometers update · page 2; Strategy & Execution update · page 4",
+    "alignment": "Strategy & Execution update · pages 2, 4",
+    "retention": "Source deck · pages 7–9, 12, 16–19; Strategy & Execution update · page 4",
+    "economics": "Source deck · pages 20, 27",
+    "roi": "Source deck · pages 12, 20; subscription-return calculation",
+    "pilot": "Source deck · pages 12, 20, 27, 29–30",
+    "growth": "Source deck · pages 20–24, 26",
+    "churn": "Source deck · pages 18, 25, 27",
+    "funding": "Source deck · pages 28–31"
   },
   "verified_problem_sources": [
     {
@@ -29,5 +32,59 @@
       "url": "https://www.gallup.com/workplace/646538/employee-turnover-preventable-often-ignored.aspx",
       "claim": "Leader and manager replacement costs around 200% of salary; updated February 16, 2026"
     }
-  ]
+  ],
+  "update_documents": [
+    {
+      "source_file": "XQ_Workforce_Productivity_25_50_25_Barometers_2_Slides (1) (1).pdf",
+      "source_sha256": "5067d562b596b85c0d4cd526e181c599a476932e3b1cbe6776074ddfd15370b7",
+      "source_pages": 2,
+      "chapter_mapping": {
+        "1": "barometer",
+        "2": "transformation"
+      }
+    },
+    {
+      "source_file": "XQ_Strategy_Execution_and_Productivity_4_Slides_ (1).pdf",
+      "source_sha256": "96ced48f4dc9fca2e4155ce61b4557737ab3ee934bc8f100a3ebc26bdb3eeeac",
+      "source_pages": 4,
+      "chapter_mapping": {
+        "1": "execution",
+        "2": [
+          "implementation",
+          "alignment"
+        ],
+        "3": "barometer",
+        "4": [
+          "transformation",
+          "alignment"
+        ]
+      }
+    }
+  ],
+  "persuasive_structure": {
+    "Attention": [
+      "thesis",
+      "execution",
+      "implementation"
+    ],
+    "Interest": [
+      "losses",
+      "barometer"
+    ],
+    "Conviction": [
+      "transformation",
+      "alignment",
+      "retention",
+      "economics",
+      "roi",
+      "pilot"
+    ],
+    "Desire": [
+      "growth",
+      "churn"
+    ],
+    "Close": [
+      "funding"
+    ]
+  }
 }

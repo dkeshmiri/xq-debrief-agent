@@ -1,62 +1,77 @@
 {
   "presentation_version": 1,
   "presentation_type": "investor",
-  "source": "XQ Workforce AI · Investor presentation",
+  "source": "XQ Workforce AI · Investor pitch · Strategy, execution, and workforce productivity",
   "chapters": [
     {
       "title": "01 · The trillion-dollar workforce problem",
       "visual": "thesis",
-      "text": "American businesses face a two-trillion-dollar productivity problem. That is Gallup’s estimate of the annual U.S. cost of employee disengagement. People are on the payroll, but their energy, commitment, and potential are being lost.\n\nTurnover creates another enormous business burden. Gallup’s 2019 estimate put the annual U.S. cost of voluntary turnover at one trillion dollars.\n\nInside a company, those losses become very concrete. A bad hire consumes recruiting time, salary, onboarding, and management attention while the team waits for results. An unfilled role delays work. A disengaged employee contributes less than they could. When a valuable person leaves, experience and relationships leave with them, and the hiring cycle starts again.\n\nGallup estimates that replacing a leader or manager costs around twice their annual salary. The business pays to find talent, develop it, and then replace it.\n\nThe problem is clear: companies are losing money through poor fit, weak engagement, stalled development, and avoidable turnover. They need a practical way to help people succeed throughout the working day.\n\nThat is the opportunity XQ Workforce AI is built to address."
+      "text": "American businesses face a two-trillion-dollar productivity problem: Gallup’s estimate of the annual U.S. cost of employee disengagement. Its 2019 estimate put voluntary turnover at another trillion dollars a year.\n\nInside a company, those burdens become concrete. A bad hire consumes recruiting, onboarding, and management time. An unfilled role delays work. When a valuable person leaves, experience and relationships leave too. Gallup estimates replacing a leader or manager costs around twice their salary.\n\nCompanies invest in people and strategy. The opportunity is to turn that investment into stronger execution, higher productivity, and talent that stays. That is where XQ Workforce AI comes in."
     },
     {
-      "title": "02 · The solution: XQ Workforce AI",
+      "title": "02 · Great strategy needs great execution",
+      "visual": "execution",
+      "text": "The strategy-execution gap is expensive. In 2008, John Kotter reported that seventy percent of needed changes failed, stalled, or disappointed; only ten percent of his cases delivered results far beyond expectations.\n\nPMI’s 2025 research, covering more than fifty-eight hundred professionals, found that only half of projects fully succeed. McKinsey reports that fewer than one in three transformations both improve performance and sustain the gains.\n\nBehind the numbers are everyday execution barriers: unclear priorities, weak alignment, inconsistent accountability, and managers struggling to turn a plan into action. Human capital sits at the center of strategic success. Strengthen the people side, and you strengthen execution."
+    },
+    {
+      "title": "03 · Make alignment pay",
+      "visual": "implementation",
+      "text": "Poor implementation consumes real money. PMI reported in 2014 that organizations lost one hundred nine million dollars for every billion invested in projects and programs. Its 2021 research put wasted investment at nine point four percent. Applied to a ten-million-dollar initiative, that rate represents nine hundred forty thousand dollars.\n\nAlignment offers a powerful lever. PMI’s 2014 findings showed strategic initiatives meeting their goals sixty-five percent of the time with high alignment, compared with thirty-five percent with low alignment.\n\nXQ connects strategic priorities with leadership, manager capability, and employee behavior. The investment case starts with helping organizations capture more value from the plans they already fund."
+    },
+    {
+      "title": "04 · The solution: XQ Workforce AI",
       "visual": "losses",
-      "text": "XQ Workforce AI brings personalized employee guidance, manager coaching, and workforce insight into one connected experience.\n\nImagine an employee preparing for a difficult conversation. XQ helps them understand their communication style, consider the other person’s perspective, and practice what to say. Imagine their manager preparing for a one-to-one: clearer questions, more meaningful recognition, and a development plan connected to what motivates that individual.\n\nThat is the workforce experience we are building. XQ brings assessment insight, coaching, and practical action together in the flow of work. Employees gain a guide. Managers gain a coaching partner. Leaders gain a view of progress across the organization.\n\nThe connection matters: better conversations create clearer expectations; clearer expectations support stronger performance; stronger support gives talented people more reason to stay."
+      "text": "XQ Workforce AI brings personalized employee guidance, manager coaching, and workforce insight into one connected experience.\n\nAn employee prepares for a difficult conversation. A manager connects a development goal to what motivates that person. A leader sees whether team actions support the business priority.\n\nThis is the workforce experience we are building. DISC, Driving Forces, emotional intelligence, Acumen, and competencies give coaching a deeper starting point. Role expectations and performance evidence connect that insight to the work.\n\nEmployees gain a guide. Managers gain a coaching partner. Leaders gain a clearer view of execution. Better understanding becomes practical action throughout the working day."
     },
     {
-      "title": "03 · Give great people reasons to stay",
+      "title": "05 · Find the potential already on the payroll",
+      "visual": "barometer",
+      "text": "Picture a one-hundred-person team through XQ’s twenty-five, fifty, twenty-five workforce barometer.\n\nTwenty-five are superstars: they consistently exceed role expectations and elevate the team. Protect them, develop them, and multiply their contribution.\n\nFifty are the at-leasters: they do what is required, with capacity to contribute more. This middle group is a major development opportunity.\n\nTwenty-five are at risk: they need clearer expectations, coaching, support, and accountability to improve their contribution.\n\nThe barometer makes the management challenge visible. Where can better alignment and support unlock the greatest improvement? Start with the middle fifty, while strengthening performance across the team."
+    },
+    {
+      "title": "06 · Move the middle. Lift the workforce.",
+      "visual": "transformation",
+      "text": "Now set a clear development goal for that team: move from twenty-five, fifty, twenty-five to forty, forty-five, fifteen.\n\nDevelop fifteen people from the middle group into top contributors. Help ten people from the at-risk group move into the middle. The result is forty superstars, forty-five in the middle, and fifteen still needing more focused support.\n\nThis turns a broad ambition into an operating agenda. Managers know where to focus coaching, recognition, practice, and follow-through. Leaders can track movement alongside output, quality, retention, and adoption.\n\nMove the middle. Build more top contributors. Lift the productive capacity of the workforce already on the payroll."
+    },
+    {
+      "title": "07 · Turn strategy into daily behavior",
+      "visual": "alignment",
+      "text": "XQ’s performance engine follows four actions: diagnose, align, activate, and measure.\n\nDiagnose the barriers using performance facts and behavioral insight. Align goals, roles, expectations, and incentives. Activate progress through manager coaching, practice, feedback, and support. Measure output, quality, retention, and adoption.\n\nConnect that cycle across five layers: strategy clarity, leadership alignment, manager execution, employee behavior, and measured results.\n\nEach layer reinforces the next. The strategy becomes clear priorities. Managers translate priorities into expectations and support. Employees turn them into daily action. Results tell the organization where to concentrate its next effort. XQ brings that cycle into recurring workplace conversations."
+    },
+    {
+      "title": "08 · Keep talent. Build capability. Sustain progress.",
       "visual": "retention",
-      "text": "Retention improves when people can see a future for themselves. They want to feel understood, recognize their contribution, and know how to grow.\n\nXQ turns those needs into practical opportunities for managers: prepare a career conversation, recognize progress in a way that resonates, identify a development goal, and follow through. Those are small moments with significant business consequences.\n\nEvery valuable employee retained preserves experience, customer relationships, and team momentum. For the employer, that means fewer replacement cycles and more continuity. For the employee, it means a stronger connection between today’s work and tomorrow’s opportunity.\n\nThis gives XQ a compelling place in the corporate budget: helping companies protect the people and capabilities they have already invested in."
+      "text": "Retention, training, and motivation become parts of the same performance system.\n\nHelp employees see a future inside the company. Give managers practical support for career conversations, recognition, and development plans. Every valuable employee retained preserves experience, relationships, and momentum.\n\nThen make learning useful on the job. Practice a challenging conversation. Apply an AI tool to a real task. Turn a course into an action for this week, reinforced by the manager.\n\nKeep the rhythm moving with clear expectations, useful feedback, and visible progress. XQ helps companies develop the people they have and sustain the conditions that help them perform."
     },
     {
-      "title": "04 · Make training work harder",
-      "visual": "training",
-      "text": "Now consider training. An employee completes a course, returns to work, and faces a real situation. That is the moment when guidance becomes valuable.\n\nXQ’s development approach connects learning to the individual and the job. Use behavioral insight to make an explanation relevant. Practice a challenging conversation. Turn a learning goal into an action for this week. Give the manager a way to reinforce progress.\n\nThe payoff is faster application, stronger confidence, and a clearer path to proficiency. Companies can develop talent internally and make better use of the training they already purchase.\n\nThe same approach supports AI adoption: help people find useful applications for their role, practice them, and build habits that improve their work."
-    },
-    {
-      "title": "05 · Keep performance moving",
-      "visual": "motivation",
-      "text": "Great performance needs ongoing support. Motivation grows through recognition, progress, useful feedback, and a sense of purpose.\n\nXQ brings behavioral and motivational insight into that daily rhythm. A manager can tailor how they communicate, connect an assignment to what energizes an employee, and keep development conversations moving. Employees gain practical next steps and a place to prepare, reflect, and build confidence.\n\nThis is how we approach workforce maintenance: sustain the conditions that help people perform. Keep expectations clear. Address friction early. Reinforce good habits. Celebrate progress.\n\nFor leaders, aggregated insights connect those everyday actions with team development and business priorities. Individual support becomes an organization-wide opportunity to improve."
-    },
-    {
-      "title": "06 · A small investment. A practical threshold.",
+      "title": "09 · A small investment. A practical threshold.",
       "visual": "economics",
-      "text": "The business model is simple: forty-nine dollars per user per month, paid by the employer. That is five hundred eighty-eight dollars per year.\n\nAt a labor value of seventy-five dollars an hour, just over nine minutes of useful time recovered each week matches the annual subscription price. At fifty dollars an hour, the threshold is about fourteen minutes.\n\nThink of the opportunities in a working week: preparing a conversation more quickly, resolving a misunderstanding, finding the right guidance, or applying a new skill. Small improvements, repeated across a workforce, create meaningful capacity.\n\nThat makes the buying conversation tangible. Start with an everyday problem, connect it to a measurable improvement, and show the value against the subscription."
+      "text": "The business model is forty-nine dollars per user per month, paid by the employer: five hundred eighty-eight dollars per year.\n\nAt a labor value of seventy-five dollars an hour, just over nine minutes of useful time recovered each week matches the annual subscription. At fifty dollars an hour, the threshold is about fourteen minutes.\n\nPreparing a conversation, resolving a misunderstanding, finding useful guidance, or applying a new skill can all create capacity. Small improvements repeated across a workforce make the buying conversation tangible: connect an everyday problem to measurable value."
     },
     {
-      "title": "07 · Small gains. Million-dollar potential.",
+      "title": "10 · Small gains. Million-dollar potential.",
       "visual": "roi",
-      "text": "Here is what that can look like at company scale. Take a thousand employees, including two hundred roles where better use of AI could improve productivity. At an annual loaded cost of one hundred thousand dollars per role, those two hundred roles represent twenty million dollars of workforce capacity.\n\nIf the company recovers five percent of that capacity, the annual value is one million dollars. At ten percent, it is two million.\n\nThe annual subscription for all one thousand employees is five hundred eighty-eight thousand dollars. In this capacity-value example, that leaves four hundred twelve thousand to one point four million dollars above the subscription: a seventy to two hundred forty percent return relative to subscription cost.\n\nThat is the economic potential of modest improvements at scale. Retention, faster development, and stronger manager effectiveness give customers additional reasons to buy and expand."
+      "text": "Take a company with one thousand employees, including two hundred roles where better use of AI could improve productivity. At one hundred thousand dollars in annual loaded cost per role, those roles represent twenty million dollars of capacity.\n\nA five-percent gain creates one million dollars in annual capacity value; ten percent creates two million. The subscription for all one thousand employees costs five hundred eighty-eight thousand dollars a year.\n\nThat leaves four hundred twelve thousand to one point four million dollars above subscription cost: a seventy to two hundred forty percent return against the subscription. That is the power of modest gains at workforce scale."
     },
     {
-      "title": "08 · Make the value visible",
+      "title": "11 · Make the value visible",
       "visual": "pilot",
-      "text": "The path into a customer is focused: begin with one hundred to two hundred fifty people and a business problem that matters. Choose a manager population, a business unit, or a development priority.\n\nEstablish the starting point, put XQ into the working day, and track the improvements. Are managers following through? Are employees applying new skills? Is useful time being recovered? How are retention and proficiency progressing?\n\nBring those answers into a clear value conversation with the customer. The pilot becomes the starting point for expansion into more teams, more roles, and more use cases.\n\nUseful support creates adoption. Visible results earn renewal. Successful teams become the internal champions for the next rollout."
+      "text": "Begin with one hundred to two hundred fifty people and a business priority that matters. Choose a team, a manager population, or a strategic initiative.\n\nEstablish the performance baseline and workforce barometer. Agree the goals, owners, and measures. Put XQ into the working day, then track application, output, quality, retention, and progress toward the performance mix.\n\nUseful support creates adoption. Visible progress strengthens the customer relationship. Successful teams become champions for expansion into more roles, more business units, and more strategic priorities. A focused pilot becomes the entry point to an enterprise relationship."
     },
     {
-      "title": "09 · A market with a clear buyer",
+      "title": "12 · A market with a clear buyer",
       "visual": "growth",
-      "text": "Our target customers are companies with two hundred to twenty thousand or more employees, where people performance has a direct effect on service, execution, and growth. The deck identifies professional services, healthcare administration, technology, financial services, manufacturing, and private-equity portfolios as priority markets.\n\nThe buying conversation can start with the chief people officer, chief operating officer, chief executive, or learning and development leader. Each has a reason to care: retain talent, strengthen managers, accelerate capability, and improve productivity.\n\nOur commercial path is to land with a paid pilot, expand through the enterprise, and extend distribution through advisory partners and industry relationships. The base-case model projects annual recurring revenue of three hundred fifty-six million dollars by the end of twenty twenty-nine. Customer value is the engine behind that growth strategy."
+      "text": "Our target customers have two hundred to twenty thousand or more employees, in sectors including professional services, healthcare administration, technology, financial services, manufacturing, and private-equity portfolios.\n\nThe buyer is a chief people officer, chief operating officer, chief executive, or learning leader with a reason to act: improve execution, retain capability, and develop stronger managers.\n\nLand with a paid pilot. Expand through customer value. Extend distribution through advisory partners and industry relationships. Our base-case growth plan reaches three hundred fifty-six million dollars in year-end annual recurring revenue by twenty twenty-nine. Customer success drives the commercial engine."
     },
     {
-      "title": "10 · Built around XQ’s advantage",
+      "title": "13 · XQ’s advantage compounds",
       "visual": "churn",
-      "text": "XQ brings a distinctive foundation to this opportunity: behavioral insight, assessments, coaching frameworks, and experience helping people and organizations change. Our assessment debrief experience gives investors a concrete starting point for seeing that expertise delivered through an AI guide.\n\nThe next step is to bring that insight into recurring workplace interactions and connect it to measurable outcomes. The combination is powerful: individualized guidance, manager support, organizational insight, and an ongoing customer relationship.\n\nAs customers experience value, they have reasons to renew and add seats. In the deck’s subscription model, improving annual customer churn from twenty percent to ten percent adds about twenty-five point six million dollars to projected ending annual recurring revenue.\n\nHelping customers succeed strengthens both sides of the business: their workforce performance and XQ’s recurring revenue."
+      "text": "XQ brings behavioral insight, assessments, coaching frameworks, and experience helping people and organizations change. The assessment debrief gives investors a concrete starting point for seeing that expertise delivered through an AI guide.\n\nBring that foundation into recurring workplace interactions, and the relationship grows with the customer’s priorities. Stronger execution and useful support create reasons to renew and add seats.\n\nIn the subscription growth plan, reducing annual customer churn from twenty percent to ten percent adds twenty-five point six million dollars to projected ending annual recurring revenue in twenty twenty-nine. Helping customers perform strengthens XQ’s recurring business."
     },
     {
-      "title": "11 · Help us bring it to the workforce",
+      "title": "14 · Help us turn workforce potential into performance",
       "visual": "funding",
-      "text": "We are looking for investment partners who see the opportunity to make personalized workforce support part of everyday business.\n\nFunding accelerates product development, customer deployment, the value-measurement engine, and distribution. The immediate priorities are paid design partners, a strong customer-success motion, and pilots that become enterprise relationships.\n\nThe destination is clear: employees who grow faster, managers who lead more effectively, and organizations that retain capability and get more value from their people investment.\n\nXQ brings the behavioral expertise. AI gives us the opportunity to deliver it at scale. A recurring subscription connects that ongoing value to a scalable business.\n\nJoin us in bringing XQ Workforce AI to market. Let’s help companies build stronger teams, keep great people, and turn everyday progress into measurable business value."
+      "text": "We are looking for investment partners who see the opportunity to connect human potential with strategic execution at scale.\n\nFunding accelerates product development, customer deployment, measurement, and distribution. The priorities are paid design partners, strong customer success, and pilots that become enterprise relationships.\n\nThe destination is clear: more top contributors, stronger managers, talent that stays, and organizations that capture more value from their strategy and people investment.\n\nXQ brings the behavioral expertise. AI makes personalized support scalable. Recurring value builds a recurring business. Join us in bringing XQ Workforce AI to market. Let’s move the middle and lift the entire workforce."
     }
   ],
   "visuals": {
@@ -90,10 +105,70 @@
       "source": "Source deck · page 3; Gallup engagement (2026), turnover (2019), replacement-cost estimates (updated 2026).",
       "takeaway": "Poor fit → Lost productivity → Turnover → Another hiring cycle"
     },
+    "execution": {
+      "kind": "investor",
+      "layout": "cards",
+      "title": "02 · Great strategy needs great execution",
+      "note": "The people side of strategy determines execution.",
+      "items": [
+        {
+          "label": "Needed changes · Kotter, 2008",
+          "value": "70%",
+          "detail": "Failed, stalled, or disappointed"
+        },
+        {
+          "label": "Cases · Kotter, 2008",
+          "value": "10%",
+          "detail": "Delivered results far beyond expectations"
+        },
+        {
+          "label": "Projects · PMI, 2025",
+          "value": "50%",
+          "detail": "Fully succeed · 5,800+ professionals studied"
+        },
+        {
+          "label": "Transformations · McKinsey",
+          "value": "< 1 in 3",
+          "detail": "Improve performance and sustain gains"
+        }
+      ],
+      "takeaway": "Clear priorities → Aligned leaders → Capable managers → Daily action",
+      "source": "Strategy & Execution update · page 1 · Kotter (2008), PMI (2025), McKinsey"
+    },
+    "implementation": {
+      "kind": "investor",
+      "layout": "cards",
+      "title": "03 · Make alignment pay",
+      "note": "Execution turns strategic investment into business value.",
+      "items": [
+        {
+          "label": "PMI · 2014",
+          "value": "$109M",
+          "detail": "Lost per $1B invested in projects and programs"
+        },
+        {
+          "label": "PMI · 2021",
+          "value": "9.4%",
+          "detail": "Investment wasted through poor project performance"
+        },
+        {
+          "label": "PMI · 2014 alignment comparison",
+          "value": "65% vs 35%",
+          "detail": "Strategic initiatives meeting goals · high vs low alignment"
+        },
+        {
+          "label": "$10M initiative × 9.4%",
+          "value": "$940K",
+          "detail": "Value at risk at that waste rate"
+        }
+      ],
+      "takeaway": "Strengthen alignment. Capture more of the value already funded.",
+      "source": "Strategy & Execution update · page 2 · PMI (2014, 2021)"
+    },
     "losses": {
       "kind": "investor",
       "layout": "cards",
-      "title": "02 · The solution: XQ Workforce AI",
+      "title": "04 · The solution: XQ Workforce AI",
       "note": "The solution: a personalized workforce guide, built around XQ expertise.",
       "items": [
         {
@@ -115,90 +190,144 @@
       "source": "Source deck · pages 2, 8, 15",
       "takeaway": "Understand the person → Support the manager → Improve the outcome"
     },
+    "barometer": {
+      "kind": "investor",
+      "layout": "barometer",
+      "title": "05 · Find the potential already on the payroll",
+      "note": "A 100-person team · protect talent, activate potential, strengthen accountability.",
+      "items": [
+        {
+          "label": "Starting workforce barometer · 25 / 50 / 25",
+          "unit": "%",
+          "bars": [
+            {
+              "label": "Superstars",
+              "value": 25
+            },
+            {
+              "label": "At-leasters",
+              "value": 50
+            },
+            {
+              "label": "At-risk",
+              "value": 25
+            }
+          ]
+        }
+      ],
+      "takeaway": "Superstars: protect + multiply · At-leasters: activate potential · At-risk: coach + account",
+      "source": "Workforce Barometers update · page 1; Strategy & Execution update · page 3"
+    },
+    "transformation": {
+      "kind": "investor",
+      "layout": "barometer",
+      "title": "06 · Move the middle. Lift the workforce.",
+      "note": "Development goal · 15 people move from middle to top; 10 from at-risk to middle.",
+      "items": [
+        {
+          "label": "Starting mix · 25 / 50 / 25",
+          "unit": "%",
+          "bars": [
+            {
+              "label": "Superstars",
+              "value": 25
+            },
+            {
+              "label": "At-leasters",
+              "value": 50
+            },
+            {
+              "label": "At-risk",
+              "value": 25
+            }
+          ]
+        },
+        {
+          "label": "Development goal · 40 / 45 / 15",
+          "unit": "%",
+          "bars": [
+            {
+              "label": "Superstars",
+              "value": 40
+            },
+            {
+              "label": "At-leasters",
+              "value": 45
+            },
+            {
+              "label": "At-risk",
+              "value": 15
+            }
+          ]
+        }
+      ],
+      "takeaway": "+15 top contributors · 10 fewer at-risk performers · A stronger workforce",
+      "source": "Workforce Barometers update · page 2; Strategy & Execution update · page 4"
+    },
+    "alignment": {
+      "kind": "investor",
+      "layout": "steps",
+      "title": "07 · Turn strategy into daily behavior",
+      "note": "Diagnose → Align → Activate → Measure",
+      "items": [
+        {
+          "label": "Strategy",
+          "value": "Clarity",
+          "detail": "Connect business priorities to the work."
+        },
+        {
+          "label": "Leadership",
+          "value": "Alignment",
+          "detail": "Build shared direction, ownership, and incentives."
+        },
+        {
+          "label": "Managers",
+          "value": "Execution",
+          "detail": "Coach, practice, reinforce, and follow through."
+        },
+        {
+          "label": "Employees",
+          "value": "Action",
+          "detail": "Translate expectations into daily behavior."
+        },
+        {
+          "label": "Business",
+          "value": "Results",
+          "detail": "Track output, quality, retention, and adoption."
+        }
+      ],
+      "takeaway": "Performance facts + behavioral insight → Focused action → Measured progress",
+      "source": "Strategy & Execution update · pages 2, 4"
+    },
     "retention": {
       "kind": "investor",
       "layout": "steps",
-      "title": "03 · Give great people reasons to stay",
-      "note": "Recognition, career growth and manager follow-through.",
+      "title": "08 · Keep talent. Build capability. Sustain progress.",
+      "note": "Retention, applied training, and motivation in one performance system.",
       "items": [
         {
-          "label": "Listen",
-          "value": "Stay",
-          "detail": "Career dialogue and manager check-ins"
+          "label": "Keep talent",
+          "value": "Develop",
+          "detail": "Career conversations, meaningful recognition, and growth."
         },
         {
-          "label": "Respond",
-          "value": "Act",
-          "detail": "Recognition, clarity, development and workload follow-up"
-        },
-        {
-          "label": "Verify",
-          "value": "Measure",
-          "detail": "Regrettable attrition and validated replacement costs"
-        }
-      ],
-      "source": "Source deck · pages 8–9, 12",
-      "takeaway": "Keep experience, relationships and momentum inside the business."
-    },
-    "training": {
-      "kind": "investor",
-      "layout": "steps",
-      "title": "04 · Make training work harder",
-      "note": "Personalize learning. Practice it. Put it to work.",
-      "items": [
-        {
-          "label": "Understand",
-          "value": "Assess",
-          "detail": "Combine profile context with role needs."
-        },
-        {
-          "label": "Practice",
+          "label": "Build capability",
           "value": "Apply",
-          "detail": "Use approved learning and realistic scenarios."
+          "detail": "Job-relevant learning, AI practice, and manager reinforcement."
         },
         {
-          "label": "Reinforce",
-          "value": "Coach",
-          "detail": "Manager check-ins and targeted next steps."
-        },
-        {
-          "label": "Validate",
-          "value": "Perform",
-          "detail": "Track proficiency and application on the job."
-        }
-      ],
-      "source": "Source deck · pages 7–9, 16–18",
-      "takeaway": "Turn development investment into everyday capability."
-    },
-    "motivation": {
-      "kind": "investor",
-      "layout": "cards",
-      "title": "05 · Keep performance moving",
-      "note": "Sustain performance through everyday support.",
-      "items": [
-        {
-          "label": "Employee",
+          "label": "Sustain progress",
           "value": "Support",
-          "detail": "Reflection, development and communication practice"
-        },
-        {
-          "label": "Manager",
-          "value": "Follow-through",
-          "detail": "Recognition, check-ins and agreed actions"
-        },
-        {
-          "label": "Organization",
-          "value": "Continuity",
-          "detail": "Aggregate trends, sustainable workload and progress"
+          "detail": "Clear expectations, feedback, and follow-through."
         }
       ],
-      "source": "Source deck · pages 5, 9, 19, 28",
-      "takeaway": "Clear expectations · Meaningful recognition · Continuous progress"
+      "source": "Source deck · pages 7–9, 12, 16–19; Strategy & Execution update · page 4",
+      "takeaway": "Keep experience, relationships and momentum inside the business."
     },
     "economics": {
       "kind": "investor",
       "layout": "cards",
-      "title": "06 · A small investment. A practical threshold.",
+      "title": "09 · A small investment. A practical threshold.",
       "note": "Subscription model · weekly capacity equivalent over 52 weeks",
       "items": [
         {
@@ -228,11 +357,11 @@
     "roi": {
       "kind": "investor",
       "layout": "bars",
-      "title": "07 · Small gains. Million-dollar potential.",
-      "note": "Capacity-value scenario · 200 roles × $100K/year · 5–10% productivity gain",
+      "title": "10 · Small gains. Million-dollar potential.",
+      "note": "200 roles × $100K annual loaded cost × 5–10% capacity gain",
       "items": [
         {
-          "label": "Annual capacity-value scenario · 1,000 subscriptions",
+          "label": "Annual capacity value and subscription · 1,000 employees",
           "unit": "USD",
           "bars": [
             {
@@ -251,18 +380,18 @@
         }
       ],
       "source": "Source deck · pages 12, 20; subscription-return calculation",
-      "takeaway": "70–240% modeled return relative to subscription cost"
+      "takeaway": "70–240% return against subscription cost"
     },
     "pilot": {
       "kind": "investor",
       "layout": "steps",
-      "title": "08 · Make the value visible",
-      "note": "Start with 100–250 users and a high-value business priority.",
+      "title": "11 · Make the value visible",
+      "note": "100–250 people · one business priority · clear performance goals",
       "items": [
         {
           "label": "Before launch",
           "value": "Baseline",
-          "detail": "Agree cohort, metrics, owners and costs."
+          "detail": "Set the workforce barometer, role outcomes, owners, and costs."
         },
         {
           "label": "90 days",
@@ -286,8 +415,8 @@
     "growth": {
       "kind": "investor",
       "layout": "bars",
-      "title": "09 · A market with a clear buyer",
-      "note": "Base-case growth forecast · $49/user/month · 20% annual subscription churn",
+      "title": "12 · A market with a clear buyer",
+      "note": "Base-case growth plan · $49/user/month · 20% annual subscription churn",
       "items": [
         {
           "label": "Projected recognized revenue",
@@ -332,8 +461,8 @@
     "churn": {
       "kind": "investor",
       "layout": "bars",
-      "title": "10 · Built around XQ’s advantage",
-      "note": "2029 subscription-retention scenarios",
+      "title": "13 · XQ’s advantage compounds",
+      "note": "2029 ending ARR by annual subscription churn",
       "items": [
         {
           "label": "Projected 2029 ending ARR",
@@ -360,7 +489,7 @@
     "funding": {
       "kind": "investor",
       "layout": "steps",
-      "title": "11 · Help us bring it to the workforce",
+      "title": "14 · Help us turn workforce potential into performance",
       "note": "Investment accelerates product, customers and distribution.",
       "items": [
         {
@@ -380,20 +509,23 @@
         }
       ],
       "source": "Source deck · pages 28–31",
-      "takeaway": "Join us in bringing personalized workforce support to scale."
+      "takeaway": "Move the middle. Strengthen execution. Scale personalized support."
     }
   },
   "persuasive_structure": {
     "Attention": [
-      "thesis"
+      "thesis",
+      "execution",
+      "implementation"
     ],
     "Interest": [
       "losses",
-      "retention",
-      "training",
-      "motivation"
+      "barometer"
     ],
     "Conviction": [
+      "transformation",
+      "alignment",
+      "retention",
       "economics",
       "roi",
       "pilot"

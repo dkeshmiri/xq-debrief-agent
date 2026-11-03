@@ -1,0 +1,76 @@
+What We Pass Forward - Iranian-American family pitch
+
+11 chapters follow Attention, Interest, Conviction, Desire, Close.
+The matching JSON is the app source of truth. Update both language editions and
+their presentation-script.txt files together. Keep chapter visual keys aligned.
+The career conversation is an illustrative example, not a customer testimonial.
+The 90-day rhythm is a proposed practice plan from the keynote, not a purchased
+service schedule. No prices, guaranteed outcomes, clinical services, or fabricated
+customer results were added. The population estimates and epigenetics aside were
+omitted because neither is needed to explain the family offer.
+The call to action is to speak with Joe about discovery or an introductory workshop;
+no booking address, commercial terms, or established partner program is invented.
+
+Persian edition: translated slide copy and full script, with RTL presentation
+content. Operator controls remain English. Tavus default language support does
+not include Persian, so this edition is for a human presenter using chapter preview
+and the complete script. The server rejects avatar start for this edition.
+Review pronunciation and wording with Joe before a live Persian delivery.
+Enabling avatar speech later requires a verified Persian voice configuration and
+an actual narration test. No external account settings were changed here.
+Provider reference, checked 2026-10-30:
+https://docs.tavus.io/sections/conversational-video-interface/language-support
+
+
+2 NOVEMBER 2026 — COMMUNITY CHALLENGES REVISION
+This revision supersedes the previous 11-chapter keynote/workshop-pitch structure.
+The supplied Community Challenges PDF now provides the 14-chapter sequence:
+landscape, demographics, cultural expectations, couples, family roles,
+communication, behavioral/emotional challenges, parenting, caregiving, legacy,
+help-seeking barriers, connected family pressures, XQ's six-part role, conclusion.
+The evidence appendix is recorded as source context, not narrated as a chapter.
+Both language editions have matching chapter keys and updated slide copy.
+The prior booking and workshop invitation and 90-day program sequence are removed.
+No numerical prevalence or survey estimates are repeated. The script describes
+the challenges qualitatively and attributes slide content to the supplied deck.
+Clinical care belongs to qualified clinicians; formal legal/tax/estate work stays
+with the relevant professionals. XQ's role is communication and development.
+No claim of universal Iranian-American experience or elevated clinical prevalence
+is made. Prior provenance is retained under previous_source in sources.json.
+The 900-second limit and all playback/access/language guards are unchanged.
+
+
+2 NOVEMBER 2026 — CONCISE AICDC PITCH
+The user requested a direct Problem -> Solution pitch using Attention, Interest,
+Conviction, Desire, Close. Five chapters replace the fourteen-topic survey.
+XQ appears in the opening and its practical method follows immediately.
+Conviction uses an explicitly illustrative career conversation. Desire describes
+goals, not proven results. Close invites a discovery conversation with Joe.
+This supersedes the previous no-invitation editorial choice. The detailed source
+PDF remains the research context; no numerical claims or prices were added.
+Both language scripts and slide copy are synchronized. Playback is unchanged.
+
+
+2 NOVEMBER 2026 — FULL-DECK AICDC REVISION
+The user requested 10–15 minutes covering every slide in the reattached PDF.
+Fifteen chapters replace the five-chapter short pitch. Source order is
+1–12, 15, 13, 14: the evidence appendix supports Conviction before the XQ
+solution (Desire) and conclusion/call to action (Close). Attention introduces
+the recurring conflict and community context; Interest explains the relationship
+and communication gaps; Conviction connects the remaining pressures and research
+to concrete agreements. The attached (3) PDF matches the prior source hash.
+
+The matching visuals now include the deck's demographic and survey figures,
+national clinical/parenting/caregiving data, and all appendix reference groups.
+Figures retain population labels and relevant dates/denominators. The 10% figure
+is divorced status, not a divorce rate. U.S.-wide data is not presented as
+Iranian-American prevalence. Citations attribute these figures to the supplied
+deck; this revision does not claim independent verification of its bibliography.
+Narration explains selected figures and each slide's main point without reading
+every visual label aloud. English and Persian cover identical slide keys.
+
+English: 1466 words, approximately 9.8–13.3 minutes at 150–110 words/minute.
+Adding a minute for setup/transitions gives approximately 10.8–14.3 minutes.
+These are estimates, not a measured live Tavus run. The 900-second cap remains.
+Persian: 1579 whitespace-delimited words; human-led, with live voice still disabled.
+No playback, access-control, or Amethyst content changed.

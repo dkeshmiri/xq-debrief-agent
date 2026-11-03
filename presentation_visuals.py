@@ -47,7 +47,11 @@ def charts(profile):
     if 'aci' in profile:
         visuals.pop('eq')
         visuals.update(acumen_charts(profile['aci']))
-        visuals['overview']['note'] = 'Explore behavior, motivation, and acumen without combining them into a single score.'
+        visuals['overview']['note'] = 'Explore your behavior, motivation, and perspective.'
+        for key in ('disc_di', 'disc_sc'):
+            visuals[key]['note'] = 'Scores use a 0–100 scale. Outlined columns mark this chapter’s focus; the reference line is at 50.'
+        for key in ('forces_first', 'forces_second'):
+            visuals[key]['note'] = 'Each Driving Force has its own score on a 0–100 scale.'
         visuals['overview']['cards'][-1] = {'title': 'Acumen / ACI', 'text': 'How you evaluate people, tasks, and systems, and yourself, your roles, and your future.'}
     return visuals
 

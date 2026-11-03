@@ -29,9 +29,8 @@ def acumen_charts(aci):
             problems=[dict(label=label, value=summary.get('problem_solving', {}).get(key, {}).get('score'),
                            reference=summary.get('problem_solving', {}).get(key, {}).get('report_reference'))
                       for key, label in PROBLEMS]))
-    note = ('Clarity and blind spots are reported on a 0–100 scale, not percentiles. '
-            'Arrows describe valuation direction, not a score or a diagnosis. '
-            'Population bands and unnumbered dial magnitudes are not estimated.')
+    note = ('Clarity and blind spots use a 0–100 scale. '
+            'Arrows show valuation direction: overvaluation, mixed valuation, or undervaluation.')
     return {key: dict(kind='aci', title=title, note=note, panels=selected)
             for key, title, selected in (
                 ('aci_balance', 'Acumen · Dimensional balance', panels),

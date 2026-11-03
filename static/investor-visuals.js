@@ -9,7 +9,28 @@ function renderInvestorVisual(container, chart) {
     const content = node('div', '', `investor-content investor-${chart.layout}`);
     const number = value => value.toLocaleString('en-US', {maximumFractionDigits:2});
     for (const [index, item] of chart.items.entries()) {
-        if (chart.layout === 'bars') {
+        if (chart.layout === 'barometer') {
+            const group = node('section', '', 'investor-barometer-group');
+            group.append(node('h3', item.label));
+            const scale = node('div', '', 'investor-scale');
+            for (const tick of ['0', '25', '50', '75', '100%']) scale.append(node('span', tick));
+            const track = node('div', '', 'investor-barometer-track');
+            track.setAttribute('aria-label', item.bars.map(bar => `${bar.label}: ${number(bar.value)}%`).join(', '));
+            const legend = node('div', '', 'investor-barometer-legend');
+            for (const [i, bar] of item.bars.entries()) {
+                const segment = node('div', '', 'investor-barometer-segment');
+                segment.dataset.group = String(i);
+                segment.style.width = `${bar.value}%`;
+                if (bar.value > 0) segment.append(node('strong', `${number(bar.value)}%`));
+                track.append(segment);
+                const label = node('div', '', 'investor-barometer-key');
+                label.dataset.group = String(i);
+                label.append(node('strong', `${number(bar.value)}%`), node('span', bar.label));
+                legend.append(label);
+            }
+            group.append(scale, track, legend);
+            content.append(group);
+        } else if (chart.layout === 'bars') {
             const group = node('section', '', 'investor-bar-group');
             group.append(node('h3', item.label));
             const maximum = Math.max(1, ...item.bars.map(bar => bar.value));

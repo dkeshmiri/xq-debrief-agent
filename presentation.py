@@ -7,6 +7,7 @@ from time import monotonic
 from flask import Blueprint, jsonify, render_template, request
 from presentation_visuals import charts, profile_presentation
 from presentation_bundle import bundle_presentation
+from presentation_access import protect_presentation
 from playback_logging import logger
 from playback_event_tracker import PlaybackEventTracker
 from tavus_client import TavusClient
@@ -14,7 +15,7 @@ from tavus_client import TavusClient
 SCRIPT_PATH = Path(__file__).resolve().parent / 'content/presentation.json'
 PRESENTATION_BUDGET = 15 * 60
 PRESETS = {name: SCRIPT_PATH.parent / f'presentations/{name}.json'
-           for name in ('amethyst', 'workforce-investor')}
+           for name in ('amethyst', 'workforce-investor', 'iranian-american', 'iranian-american-fa')}
 
 class Presentation:
     def __init__(self, client=None, clock=monotonic):
@@ -26,6 +27,7 @@ class Presentation:
         profile = json.loads(SCRIPT_PATH.with_name('presentation_profile.json').read_text())
         self.visuals = charts(profile)
         self.source = profile['source']
+        self.language = 'en'
         self.revision = 0
         self.clock = clock
         self.lock = RLock()
@@ -49,6 +51,7 @@ class Presentation:
                         speaking=self.tracker.inference_id is not None,
                         remaining_seconds=remaining, shutdown_reason=self.shutdown_reason,
                         chapters=self.chapters, visuals=self.visuals, source=self.source, revision=self.revision,
+                        language=self.language, narration_supported=self.language == 'en',
                         word_count=sum(len(c['text'].split()) for c in self.chapters))
 
     def configure(self, profile, preset=None):
@@ -69,6 +72,7 @@ class Presentation:
                 chapters, visuals, source = bundle_presentation(profile)
             else:
                 chapters, visuals, source = profile_presentation(profile)
+            self.language = profile.get('language', 'en') if isinstance(profile, dict) and 'presentation_version' in profile else 'en'
             self.chapters, self.visuals, self.source = chapters, visuals, source
             self.index = 0
             self.completed = False
@@ -76,6 +80,8 @@ class Presentation:
 
     def start(self):
         with self.lock:
+            if self.language != 'en':
+                raise ValueError('This Persian edition is for a human presenter. Use chapter preview and the full script; Persian avatar narration is not configured.')
             if self.busy or self.client.conversation_id:
                 raise ValueError('End the existing presentation before starting another.')
             self.busy = True
@@ -156,6 +162,7 @@ class Presentation:
 
 def create_presentation_blueprint(presentation=None):
     blueprint = Blueprint('presentation', __name__)
+    protect_presentation(blueprint)
     instance = presentation
     instance_lock = RLock()
 

@@ -18,6 +18,7 @@ class AcumenPresentationTests(unittest.TestCase):
         app = Flask(__name__)
         app.register_blueprint(create_presentation_blueprint(self.session))
         self.api = app.test_client()
+        self.assertEqual(self.api.post('/api/presentation/unlock', json={'pin':'2020'}).status_code, 200)
 
     def test_prepared_source_switches_narration_and_scores_together(self):
         response = self.api.post('/api/presentation/source', json={'profile': None, 'preset': 'amethyst'})

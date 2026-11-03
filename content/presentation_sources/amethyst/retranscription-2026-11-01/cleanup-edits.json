@@ -1,0 +1,532 @@
+[
+  {
+    "removed": "walk you to your profile",
+    "replacement": "walk you through your profile",
+    "reason": "Transcription correction: opening verb; supported by earlier transcript."
+  },
+  {
+    "removed": "so basically the picture profile, your behavior.",
+    "replacement": "it depicts your profile, your behavior.",
+    "reason": "Transcription correction: both earlier transcript and full-file pass say depicts."
+  },
+  {
+    "removed": "appreciating others and their personal skills",
+    "replacement": "appreciating others, interpersonal skills",
+    "reason": "Transcription correction: skill name, confirmed by full-file pass."
+  },
+  {
+    "removed": "I'm just going to just briefly",
+    "replacement": "I'm going to briefly",
+    "reason": "Filler, repeated word, or abandoned false start."
+  },
+  {
+    "removed": "long, long, long, long, long time",
+    "replacement": "long time",
+    "reason": "Filler, repeated word, or abandoned false start."
+  },
+  {
+    "removed": "very, very, very high",
+    "replacement": "very high",
+    "reason": "Filler, repeated word, or abandoned false start."
+  },
+  {
+    "removed": "very, very compassionate",
+    "replacement": "very compassionate",
+    "reason": "Filler, repeated word, or abandoned false start."
+  },
+  {
+    "removed": "very, very good",
+    "replacement": "very good",
+    "reason": "Filler, repeated word, or abandoned false start."
+  },
+  {
+    "removed": "very, very high",
+    "replacement": "very high",
+    "reason": "Filler, repeated word, or abandoned false start."
+  },
+  {
+    "removed": "very, very powerful",
+    "replacement": "very powerful",
+    "reason": "Filler, repeated word, or abandoned false start."
+  },
+  {
+    "removed": "long, long, long profile",
+    "replacement": "long profile",
+    "reason": "Filler, repeated word, or abandoned false start."
+  },
+  {
+    "removed": "You prefer, that's your number one driver",
+    "replacement": "That's your number one driver",
+    "reason": "Filler, repeated word, or abandoned false start."
+  },
+  {
+    "removed": "I want to jump right into your, let's",
+    "replacement": "Let's",
+    "reason": "Filler, repeated word, or abandoned false start."
+  },
+  {
+    "removed": "you have a slight, actually, it's a very strong bias distortion",
+    "replacement": "you have a very strong bias distortion",
+    "reason": "Filler, repeated word, or abandoned false start."
+  },
+  {
+    "removed": "which means you enjoy, you're looking forward",
+    "replacement": "which means you're looking forward",
+    "reason": "Filler, repeated word, or abandoned false start."
+  },
+  {
+    "removed": "You're expecting, you're creating",
+    "replacement": "You're creating",
+    "reason": "Filler, repeated word, or abandoned false start."
+  },
+  {
+    "removed": "approval, approving",
+    "replacement": "approving",
+    "reason": "Filler, repeated word, or abandoned false start."
+  },
+  {
+    "removed": "most of the time, majority of time",
+    "replacement": "most of the time",
+    "reason": "Filler, repeated word, or abandoned false start."
+  },
+  {
+    "removed": "The first thing I want to look at is your DISC profile. ",
+    "replacement": "",
+    "reason": "Transition repeats DISC profile in the next sentence."
+  },
+  {
+    "removed": "You take your time. ",
+    "replacement": "",
+    "reason": "Repeats not jumping into things; circumspection retained."
+  },
+  {
+    "removed": "You want to create something that everybody agrees to and ",
+    "replacement": "",
+    "reason": "Repeats creating consensus; asking opinions retained."
+  },
+  {
+    "removed": "You didn't have quite self-confidence and ",
+    "replacement": "",
+    "reason": "Repeats not being sure of herself; recovery interpretation retained."
+  },
+  {
+    "removed": "always seeking accuracy and precision. ",
+    "replacement": "",
+    "reason": "Synonymous repetition within the perfection/detail-oriented explanation."
+  },
+  {
+    "removed": "So overall, when we look at your four different aspects of your profiles, ",
+    "replacement": "",
+    "reason": "Summary scaffolding; transitional-period interpretation retained."
+  },
+  {
+    "removed": "So I'm going to briefly walk you through your profile back in June, and again, ",
+    "replacement": "",
+    "reason": "Repeats the opening promise and June timing."
+  },
+  {
+    "removed": "it depicts your profile, your behavior. ",
+    "replacement": "",
+    "reason": "Repeats that DISC describes how you do what you do."
+  },
+  {
+    "removed": "You don't like to have hostility. You don't like to fight. ",
+    "replacement": "",
+    "reason": "Repeats peace-oriented and dislike of confrontation."
+  },
+  {
+    "removed": "And mostly, you don't want to have any kind of bad feelings towards the others. ",
+    "replacement": "",
+    "reason": "Repeats the immediately preceding peace-oriented explanation."
+  },
+  {
+    "removed": "and then when it comes out, it comes out. ",
+    "replacement": "",
+    "reason": "Repeats the earthquake analogy."
+  },
+  {
+    "removed": "So you have a long leash for getting to exploding, for showing your frustration or anger, but when you do, it may be pretty amazing. ",
+    "replacement": "",
+    "reason": "Repeats bottling stress and the earthquake analogy."
+  },
+  {
+    "removed": "You would see the good in things. ",
+    "replacement": "",
+    "reason": "Repeats optimistic perspective."
+  },
+  {
+    "removed": "So you're very good at articulation of things in spoken words. ",
+    "replacement": "",
+    "reason": "Repeats articulating feelings and emotions verbally."
+  },
+  {
+    "removed": "People can count on you. ",
+    "replacement": "",
+    "reason": "Repeats extremely reliable; keeps the personal pillar analogy."
+  },
+  {
+    "removed": "You're extremely compassionate. The high S really likes to help people. ",
+    "replacement": "",
+    "reason": "Repeated by the immediately following personal I/S compassion statement."
+  },
+  {
+    "removed": "and you don't like to hurt people. You actually want to help people. ",
+    "replacement": "",
+    "reason": "Repeats compassion, care, and empathy in the same sentence."
+  },
+  {
+    "removed": "And you basically don't like to follow rules, only when you have to. ",
+    "replacement": "",
+    "reason": "Repeats liking some rules and disliking others."
+  },
+  {
+    "removed": "And you don't stay with the same rules. ",
+    "replacement": "",
+    "reason": "Repeated by finding a different way in the following sentence."
+  },
+  {
+    "removed": "And you're very good with people. ",
+    "replacement": "",
+    "reason": "Repeats the Influence and compassion explanations."
+  },
+  {
+    "removed": "You could really go for it when you believe in something. ",
+    "replacement": "",
+    "reason": "Repeats promoting what she believes in; steadfastness retained."
+  },
+  {
+    "removed": "but you also can be someone who likes to make sure there's return on investment of her time. ",
+    "replacement": "",
+    "reason": "Repeats the return on time, money, and energy explanation."
+  },
+  {
+    "removed": "You want people to get along. You don't like hostility. ",
+    "replacement": "",
+    "reason": "Repeats bringing harmony to people and the earlier peace-oriented description."
+  },
+  {
+    "removed": "but as long as you're helping people, that seems to be your mode of operation right now. ",
+    "replacement": "",
+    "reason": "Repeats the preference for helping people at the start of this driver."
+  },
+  {
+    "removed": "You want to create something that is good with everybody. ",
+    "replacement": "",
+    "reason": "Repeats consensus; agreement and asking opinions retained."
+  },
+  {
+    "removed": "So you're highly motivated as someone who is extremely into innovation and change as long as it brings harmony to people, as long as it brings love and care, and also as long as helping people. ",
+    "replacement": "",
+    "reason": "Repeats innovation, intellectual learning, harmony, and helping already explained in the same driver."
+  },
+  {
+    "removed": "which is your social skills, you have a great deal of soft skills as well. Again, ",
+    "replacement": "",
+    "reason": "Repeats soft skills heading; every named skill retained."
+  },
+  {
+    "removed": "These are your top soft skills. So again, it shows that you're kind of a people person. ",
+    "replacement": "",
+    "reason": "Repeats most advanced soft skills and the people-oriented interpretation."
+  },
+  {
+    "removed": "The next thing I want to walk you through real quickly is your acumen. Now ",
+    "replacement": "",
+    "reason": "Transition filler; Acumen definition retained."
+  },
+  {
+    "removed": "Basically, it implies that your bias distortion may be influencing how you interpret situations. ",
+    "replacement": "",
+    "reason": "Repeats personal feelings and assumptions influencing conclusions in preceding explanation."
+  },
+  {
+    "removed": "It identifies potential distortion and judgment that should be explored alongside with the other aspects. ",
+    "replacement": "",
+    "reason": "Repeats bias interpretation and the combined-profile context; unique list of implications retained."
+  },
+  {
+    "removed": "You have a very good way of understanding people around you. ",
+    "replacement": "",
+    "reason": "Repeats high Understanding Others and dealing with anybody."
+  },
+  {
+    "removed": "You like things that are more fun. ",
+    "replacement": "",
+    "reason": "Repeats liking exciting things."
+  },
+  {
+    "removed": "You enjoy creating systems. You enjoy creating new ways. ",
+    "replacement": "",
+    "reason": "Repeated in the following personalized systems-for-helping-people explanation."
+  },
+  {
+    "removed": "In fact, ",
+    "replacement": "",
+    "reason": "Verbal filler or repeated introductory scaffolding; observation retained."
+  },
+  {
+    "removed": "And if you notice, ",
+    "replacement": "",
+    "reason": "Verbal filler or repeated introductory scaffolding; observation retained."
+  },
+  {
+    "removed": "And if you notice, ",
+    "replacement": "",
+    "reason": "Verbal filler or repeated introductory scaffolding; observation retained."
+  },
+  {
+    "removed": "If you notice, ",
+    "replacement": "",
+    "reason": "Verbal filler or repeated introductory scaffolding; observation retained."
+  },
+  {
+    "removed": "it's like you have",
+    "replacement": "you have",
+    "reason": "Verbal filler or repeated introductory scaffolding; observation retained."
+  },
+  {
+    "removed": "what that really means is that ",
+    "replacement": "",
+    "reason": "Verbal filler or repeated introductory scaffolding; observation retained."
+  },
+  {
+    "removed": "What that really means is that ",
+    "replacement": "",
+    "reason": "Verbal filler or repeated introductory scaffolding; observation retained."
+  },
+  {
+    "removed": "What that really means is that ",
+    "replacement": "",
+    "reason": "Verbal filler or repeated introductory scaffolding; observation retained."
+  },
+  {
+    "removed": "So then what happens on the challenging side, ",
+    "replacement": "On the challenging side, ",
+    "reason": "Verbal filler or repeated introductory scaffolding; observation retained."
+  },
+  {
+    "removed": "And then it would be almost like",
+    "replacement": "It would be almost like",
+    "reason": "Verbal filler or repeated introductory scaffolding; observation retained."
+  },
+  {
+    "removed": "And again, ",
+    "replacement": "",
+    "reason": "Verbal filler or repeated introductory scaffolding; observation retained."
+  },
+  {
+    "removed": "It also means that you can be",
+    "replacement": "You can be",
+    "reason": "Verbal filler or repeated introductory scaffolding; observation retained."
+  },
+  {
+    "removed": "And this also means that you could",
+    "replacement": "You could",
+    "reason": "Verbal filler or repeated introductory scaffolding; observation retained."
+  },
+  {
+    "removed": "And so ",
+    "replacement": "",
+    "reason": "Verbal filler or repeated introductory scaffolding; observation retained."
+  },
+  {
+    "removed": "And so ",
+    "replacement": "",
+    "reason": "Verbal filler or repeated introductory scaffolding; observation retained."
+  },
+  {
+    "removed": "And so ",
+    "replacement": "",
+    "reason": "Verbal filler or repeated introductory scaffolding; observation retained."
+  },
+  {
+    "removed": "as you can see, ",
+    "replacement": "",
+    "reason": "Verbal filler or repeated introductory scaffolding; observation retained."
+  },
+  {
+    "removed": "if you notice at home",
+    "replacement": "at home",
+    "reason": "Verbal filler or repeated introductory scaffolding; observation retained."
+  },
+  {
+    "removed": "If you notice your C",
+    "replacement": "Your C",
+    "reason": "Verbal filler or repeated introductory scaffolding; observation retained."
+  },
+  {
+    "removed": "And it also means",
+    "replacement": "It means",
+    "reason": "Verbal filler or repeated introductory scaffolding; observation retained."
+  },
+  {
+    "removed": "someone who's what's called",
+    "replacement": "what's called",
+    "reason": "Verbal filler or repeated introductory scaffolding; observation retained."
+  },
+  {
+    "removed": "So overall, ",
+    "replacement": "",
+    "reason": "Verbal filler or repeated introductory scaffolding; observation retained."
+  },
+  {
+    "removed": "You're one of those people who you're",
+    "replacement": "You're",
+    "reason": "Verbal filler or repeated introductory scaffolding; observation retained."
+  },
+  {
+    "removed": "But as far as methodologies, which is really interesting,",
+    "replacement": "As far as methodologies,",
+    "reason": "Verbal filler or repeated introductory scaffolding; observation retained."
+  },
+  {
+    "removed": "Then when it comes to power, it's interesting.",
+    "replacement": "When it comes to power,",
+    "reason": "Verbal filler or repeated introductory scaffolding; observation retained."
+  },
+  {
+    "removed": "What that means is ",
+    "replacement": "",
+    "reason": "Verbal filler or repeated introductory scaffolding; observation retained."
+  },
+  {
+    "removed": "A score of 45 basically",
+    "replacement": "A score of 45",
+    "reason": "Verbal filler or repeated introductory scaffolding; observation retained."
+  },
+  {
+    "removed": "there are some implications that come from this 45, maybe judgment, maybe",
+    "replacement": "Judgment:",
+    "reason": "Verbal filler or repeated introductory scaffolding; observation retained."
+  },
+  {
+    "removed": "So I would say ",
+    "replacement": "",
+    "reason": "Verbal filler or repeated introductory scaffolding; observation retained."
+  },
+  {
+    "removed": "So if you have any questions",
+    "replacement": "If you have any questions",
+    "reason": "Verbal filler or repeated introductory scaffolding; observation retained."
+  },
+  {
+    "removed": "Otherwise, thank you",
+    "replacement": "Thank you",
+    "reason": "Verbal filler or repeated introductory scaffolding; observation retained."
+  },
+  {
+    "removed": "You want to make sure you always have",
+    "replacement": "You want to have",
+    "reason": "Verbal filler or repeated introductory scaffolding; observation retained."
+  },
+  {
+    "removed": "You want to make sure you're someone who brings",
+    "replacement": "You want to bring",
+    "reason": "Verbal filler or repeated introductory scaffolding; observation retained."
+  },
+  {
+    "removed": "And maybe you're actually very powerful when it comes to",
+    "replacement": "Maybe you're very powerful when it comes to",
+    "reason": "Verbal filler or repeated introductory scaffolding; observation retained."
+  },
+  {
+    "removed": "And you also enjoy",
+    "replacement": "You enjoy",
+    "reason": "Verbal filler or repeated introductory scaffolding; observation retained."
+  },
+  {
+    "removed": "And most people",
+    "replacement": "Most people",
+    "reason": "Verbal filler or repeated introductory scaffolding; observation retained."
+  },
+  {
+    "removed": "And this deals",
+    "replacement": "This deals",
+    "reason": "Verbal filler or repeated introductory scaffolding; observation retained."
+  },
+  {
+    "removed": "And the emotion",
+    "replacement": "The emotion",
+    "reason": "Verbal filler or repeated introductory scaffolding; observation retained."
+  },
+  {
+    "removed": "And there's",
+    "replacement": "There's",
+    "reason": "Verbal filler or repeated introductory scaffolding; observation retained."
+  },
+  {
+    "removed": "And you could",
+    "replacement": "You could",
+    "reason": "Verbal filler or repeated introductory scaffolding; observation retained."
+  },
+  {
+    "removed": "And as long",
+    "replacement": "As long",
+    "reason": "Verbal filler or repeated introductory scaffolding; observation retained."
+  },
+  {
+    "removed": "And your role",
+    "replacement": "Your role",
+    "reason": "Verbal filler or repeated introductory scaffolding; observation retained."
+  },
+  {
+    "removed": "And the more",
+    "replacement": "The more",
+    "reason": "Verbal filler or repeated introductory scaffolding; observation retained."
+  },
+  {
+    "removed": "So relators",
+    "replacement": "Relators",
+    "reason": "Verbal filler or repeated introductory scaffolding; observation retained."
+  },
+  {
+    "removed": "So you're both",
+    "replacement": "You're both",
+    "reason": "Verbal filler or repeated introductory scaffolding; observation retained."
+  },
+  {
+    "removed": "So that's your",
+    "replacement": "That's your",
+    "reason": "Verbal filler or repeated introductory scaffolding; observation retained."
+  },
+  {
+    "removed": "do what you do, there are",
+    "replacement": "do what you do. There are",
+    "reason": "Punctuation/capitalization after a cut."
+  },
+  {
+    "removed": "The next one, is steady.",
+    "replacement": "The next one is steady.",
+    "reason": "Punctuation/capitalization after a cut."
+  },
+  {
+    "removed": "with high empathy you also",
+    "replacement": "with high empathy. You also",
+    "reason": "Punctuation/capitalization after a cut."
+  },
+  {
+    "removed": "seeking perfection, The emotion",
+    "replacement": "seeking perfection. The emotion",
+    "reason": "Punctuation/capitalization after a cut."
+  },
+  {
+    "removed": "important, When it comes",
+    "replacement": "important. When it comes",
+    "reason": "Punctuation/capitalization after a cut."
+  },
+  {
+    "removed": "power, People",
+    "replacement": "power, people",
+    "reason": "Punctuation/capitalization after a cut."
+  },
+  {
+    "removed": "earthquake, The",
+    "replacement": "earthquake. The",
+    "reason": "Punctuation/capitalization after a cut."
+  },
+  {
+    "removed": "family and team oriented, Under",
+    "replacement": "family and team oriented. Under",
+    "reason": "Punctuation/capitalization after a cut."
+  }
+]

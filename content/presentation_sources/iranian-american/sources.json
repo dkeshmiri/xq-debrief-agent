@@ -1,0 +1,136 @@
+{
+  "source_file": "XQ_Iranian_American_Community_Challenges_15_Minute_Deck (3).pdf",
+  "source_sha256": "a2c82966f5abecd72d6bed50e9dbdbc73d25ee741c595d438fc48771b9520298",
+  "source_pages": 15,
+  "revision": "2026-11-02 · Full-deck AICDC presentation",
+  "language": "en",
+  "presentation_word_count": 1466,
+  "chapter_source_pages": {
+    "landscape": [
+      1
+    ],
+    "demographics": [
+      2
+    ],
+    "worlds": [
+      3
+    ],
+    "couples": [
+      4
+    ],
+    "family": [
+      5
+    ],
+    "communication": [
+      6
+    ],
+    "emotional": [
+      7
+    ],
+    "parenting": [
+      8
+    ],
+    "caregiving": [
+      9
+    ],
+    "legacy": [
+      10
+    ],
+    "barriers": [
+      11
+    ],
+    "system": [
+      12
+    ],
+    "evidence": [
+      15
+    ],
+    "solution": [
+      13
+    ],
+    "close": [
+      14
+    ]
+  },
+  "research_appendix_page": 15,
+  "previous_source": {
+    "source_file": "XQ_What_We_Pass_Forward_15_Minute_Keynote (3).pdf",
+    "source_sha256": "6f1ea40cbc6609ba1a4d98672ed4c4ea979585b0bf62bab922292575bf254699",
+    "source_pages": 12,
+    "revision": "2026-10-30",
+    "language": "en",
+    "chapter_source_pages": {
+      "legacy": [
+        1,
+        11,
+        12
+      ],
+      "argument": [
+        2,
+        7
+      ],
+      "cultures": [
+        8
+      ],
+      "beneath": [
+        3,
+        4
+      ],
+      "lenses": [
+        5,
+        6
+      ],
+      "journey": [
+        9
+      ],
+      "practice": [
+        7
+      ],
+      "offer": [
+        6,
+        9,
+        10
+      ],
+      "followthrough": [
+        10
+      ],
+      "community": [
+        12
+      ],
+      "future": [
+        11,
+        12
+      ]
+    },
+    "editorial_additions": [
+      "Illustrative career conversation",
+      "Discovery conversation and community workshop invitation"
+    ],
+    "translation": null
+  },
+  "editorial_notes": [
+    "Every source slide is covered once, including the appendix.",
+    "Evidence appendix precedes solution and close to maintain AICDC progression.",
+    "Numerical figures are reproduced from the supplied PDF with populations, dates, and denominators retained; not independently revalidated in this revision.",
+    "Clinical, parenting, and caregiving figures are U.S.-wide context, not Iranian-American prevalence.",
+    "Examples and discovery invitation are editorial applications; no customer results or outcome guarantees invented.",
+    "Persian text is aligned; live Persian narration remains unconfigured."
+  ],
+  "source_slide_order": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    15,
+    13,
+    14
+  ]
+}

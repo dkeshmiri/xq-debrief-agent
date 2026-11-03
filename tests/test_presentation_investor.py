@@ -17,6 +17,7 @@ class InvestorPresentationTests(unittest.TestCase):
         app = Flask(__name__)
         app.register_blueprint(create_presentation_blueprint(self.session))
         self.api = app.test_client()
+        self.assertEqual(self.api.post('/api/presentation/unlock', json={'pin':'2020'}).status_code, 200)
 
     def test_preset_and_uploaded_bundle_preserve_script_and_business_graphics(self):
         for payload in ({'profile': None, 'preset': 'workforce-investor'}, {'profile': self.bundle}):
@@ -65,10 +66,10 @@ class InvestorPresentationTests(unittest.TestCase):
         self.assertEqual(roi[2]['value'], 200*100000*.10)
         self.assertAlmostEqual((roi[1]['value']-roi[0]['value'])/roi[0]['value']*100, 70.0680272)
         self.assertAlmostEqual((roi[2]['value']-roi[0]['value'])/roi[0]['value']*100, 240.1360544)
-        self.assertIn('scenario', charts['roi']['note'])
+        self.assertIn('200 roles', charts['roi']['note'])
         self.assertEqual([b['value'] for b in charts['growth']['items'][0]['bars']], [9.3,56.1,198.8])
         self.assertAlmostEqual(sum(b['value'] for b in charts['growth']['items'][0]['bars']),264.2)
-        self.assertIn('forecast', charts['growth']['note'])
+        self.assertIn('growth plan', charts['growth']['note'])
         self.assertIn('subscription', charts['churn']['note'])
         self.assertIn('11.76 h', str(charts['economics']))
         self.assertEqual(49*12/50,11.76)
@@ -80,3 +81,30 @@ class InvestorPresentationTests(unittest.TestCase):
         visuals['roi']['items'][0]['bars'][0]['value'] = 0
         self.assertNotEqual(chapters, self.bundle['chapters'])
         self.assertNotEqual(visuals, self.bundle['visuals'])
+
+
+    def test_barometer_transition_conserves_the_workforce(self):
+        charts = self.bundle['visuals']
+        before, after = charts['transformation']['items']
+        self.assertEqual([b['value'] for b in before['bars']], [25, 50, 25])
+        self.assertEqual([b['value'] for b in after['bars']], [40, 45, 15])
+        self.assertEqual([b['value'] for b in charts['barometer']['items'][0]['bars']], [25, 50, 25])
+        self.assertEqual(sum(b['value'] for b in after['bars']), 100)
+        self.assertEqual(after['bars'][1]['value'], before['bars'][1]['value']-15+10)
+        self.assertIn('goal', after['label'])
+        self.assertEqual(10000000*.094, 940000)
+
+    def test_bad_barometers_are_rejected_without_replacing_content(self):
+        before = self.session.status()
+        for values in ([25,50,24], [101,0,-1], [25,True,74], [25,50,float('nan')]):
+            candidate = copy.deepcopy(self.bundle)
+            for bar, value in zip(candidate['visuals']['barometer']['items'][0]['bars'], values):
+                bar['value'] = value
+            self.assertEqual(self.api.post('/api/presentation/source', json={'profile':candidate}).status_code, 400)
+            self.assertEqual(self.session.status(), before)
+
+    def test_persuasion_sequence_covers_each_chapter_once(self):
+        order = self.bundle['persuasive_structure']
+        self.assertEqual(list(order), ['Attention','Interest','Conviction','Desire','Close'])
+        self.assertEqual([key for stage in order.values() for key in stage],
+                         [c['visual'] for c in self.bundle['chapters']])

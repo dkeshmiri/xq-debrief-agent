@@ -58,3 +58,58 @@ No live Tavus session was created for verification. Al remains the default; the
 source chooser loads Amethyst's independent script and score snapshot atomically.
 Family/Workplace schemas, debrief engines, speech playback, and Birth Order are
 unchanged.
+
+
+30 OCTOBER 2026 — FIRST-TIME DEBRIEF REVISION
+
+The active eight-chapter presentation is now 1075 words and addresses Amethyst
+directly as a first-time listener. This revision supersedes the earlier wording
+decisions above about attributing interpretations to the recorded debrief.
+Removed June/snapshot framing, references to the previous debrief, defensive
+score disclaimers, replay instructions, and referral to a prior debriefer.
+World View and Self View now introduce the reported scores directly and offer
+practical reflection prompts. The relationship-history interpretation was removed
+rather than presented as a fact inferred from Sense of Self. Practical Thinking's
+reported clarity score of 84 is now stated explicitly. Valuation directions are
+preserved; upward arrows are not recast as improvement over time.
+The complete profile object, every assessment score, chapter order, and visual
+binding are unchanged. Raw and cleaned source transcripts remain unedited.
+The review script and word-count metadata match the active JSON.
+
+Chart captions use affirmative explanations of the scale and valuation arrows.
+The ACI presentation captions are shared by prepared ACI profiles; their data,
+validation, and drawing behavior are unchanged. Q&A can draw on the source and
+interpretive distinctions retained earlier in this editing record.
+
+
+1 NOVEMBER 2026 — ORIGINAL VOICE, REPETITION-ONLY ABRIDGMENT
+
+The user requested a fresh transcription and Joe's original personal wording,
+then authorized cuts only to repeated explanations and fillers, with the existing
+15-minute agent limit unchanged. This supersedes the earlier first-time framing
+and editorial adaptation decisions. June references and personal observations
+are restored. All scores and profile/chart bindings remain unchanged.
+
+The newly attached Amethyst (1).m4a has the same SHA-256 as the earlier recording.
+A whole-file transcription ended mid-sentence; four fresh overlapping sections
+replaced it. Boundary phrases were included once: with high empathy; You are
+someone who's motivated by; but back in June. The archive below retains all four
+raw section outputs, the joined raw transcript, the full cleaned transcript, and
+the abridged script. Earlier source transcripts remain untouched.
+
+retranscription-2026-11-01/cleanup-edits.json records every substantive deletion,
+the reason, filler cleanup, and three transcription corrections corroborated by
+the previous transcript or full-file pass. Paragraph breaks, sentence case, and
+punctuation were repaired at cut boundaries. Source interpretations, personal
+remarks, analogies, and the original closing were retained. The source/report
+discrepancies documented above remain source interpretations, not new chart data.
+This is an API transcription reviewed for coverage, not a word-by-word human
+listening audit. No live Tavus timing measurement was performed.
+
+Counts: fresh joined raw 2095; full light cleanup 2057; active script 1514 words.
+Estimated speech: 10.1–13.8 minutes at 150–110 words/minute. At 110 words/minute,
+adding 60 seconds for startup and transitions gives about 14 minutes 46 seconds.
+Actual Tavus duration depends on voice pacing and pauses. The 900-second provider
+and local limit remains unchanged; no timing, playback, or provider code changed.
+The spoken invitation to ask questions is original wording; Presentation Mode
+continues to play prepared narration and does not itself answer questions.

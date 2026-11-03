@@ -1,6 +1,15 @@
 # Presentation charts
 
-Open `/presentation` to use Al’s prepared narration and chapter-specific charts.
+On the product chooser, enter the operator PIN and select **Unlock** to enable
+the **Presentation Mode** button. The default PIN is `2020`; a deployment can
+override it with `XQ_PRESENTATION_PIN`. The PIN is checked on the server and is
+never embedded in the page or stored in browser local storage. A signed HttpOnly
+browser-session cookie grants access for up to eight hours; restarting the app
+invalidates existing grants. Five incorrect attempts within a minute temporarily
+block further attempts from that address. Direct `/presentation` visits return
+to the PIN form when locked, and presentation API calls require the same grant.
+
+Once unlocked, `/presentation` offers Al’s prepared narration and chapter-specific charts.
 Choose **Showcase view** for larger charts and an in-page presenter inset. Choose
 **Return to split view**, or press Escape, to restore the side-by-side layout.
 This resizes the existing replica-only video without reconnecting the Daily call. It is
@@ -96,9 +105,9 @@ or STT service was added to the runtime app; this is a prepared presentation.
 ## Workforce AI investor presentation
 
 Choose **Presentation source → Workforce AI · Investor presentation** before
-starting Tavus. Eleven chapters adapt the supplied investor strategy PDF into a
+starting Tavus. Fourteen chapters adapt the supplied investor strategy PDF into a
 15-minute presentation slot, emphasizing retention, applied training, motivation,
-ongoing support, break-even math and measurable pilots. About 1,395 spoken words
+ongoing support, break-even math and measurable pilots. About 1,389 spoken words
 leave setup/transition margin; playback duration is estimated, not guaranteed.
 Al remains the default. All source changes are blocked during an active session.
 
@@ -106,7 +115,7 @@ Al remains the default. All source changes are blocked during an active session.
 graphics source. It uses `presentation_version: 1`, `presentation_type: investor`,
 `source`, `chapters` and `visuals`; no assessment profile is required. Chapters
 bind to graphic keys via `visual`. Each graphic has `kind: investor`, `layout`
-(cards, steps or bars), `title`, `note`, `source`, `takeaway` and `items`.
+(cards, steps, bars or barometer), `title`, `note`, `source`, `takeaway` and `items`.
 Cards/steps use label/value/detail text. Bar groups use label/unit/bars, with each
 bar containing label and a finite nonnegative numeric value. Bar widths use a
 zero baseline and the group's maximum; currency is not clamped to 0–100.
@@ -117,8 +126,8 @@ The business graphic renderer is isolated in `static/investor-visuals.js` and
 `.css`; the assessment schemas and runtime debrief engines are unchanged.
 
 The graphics are adapted layouts, not screenshots of all 31 original slides.
-Pricing, customer ROI examples and business forecasts are explicitly labeled as
-proposals/scenarios. The presentation uses the later $49/user/month model and
+The investor pitch uses direct language; supporting assumptions and Q&A detail
+live in EDITING_NOTES.txt. The presentation uses the later $49/user/month model and
 does not add overlapping cost categories. It distinguishes subscription churn
 from employee attrition and actual product functionality from the roadmap.
 Full source mapping, script review copy, timing and calculation notes live in
@@ -129,3 +138,39 @@ Q&A assumptions and calculation detail are kept in its EDITING_NOTES.txt; the
 presentation focuses on the problem, solution, customer economics and invitation
 to invest. Its ROI graphic uses the deck’s $1M–$2M capacity-value scenario against
 a $588K annual subscription, with the scenario inputs stated in the speech.
+
+
+### Strategy-execution and workforce update
+
+The two October 30 PDF updates add strategy-execution evidence, implementation
+costs, the 25/50/25 workforce barometer, and a 40/45/15 development goal. Duplicate
+barometer pages are incorporated once. The main pitch keeps the five persuasive
+stages and combines retention, training, and motivation into one chapter.
+
+The `barometer` investor layout uses `items[].bars` with exactly three ordered
+labels: Superstars, At-leasters, At-risk. Values must be nonnegative percentages
+summing to 100 and `unit` must be `%`. They render as a green/gold/red stacked
+100% bar with numeric labels and a separate legend. This is separate from the
+business-value bars and assessment charts. Source-file hashes and chapter-page
+mappings are recorded in the investor `sources.json`.
+
+
+## What We Pass Forward: Iranian-American family pitch
+
+Prepared sources `iranian-american` (English) and `iranian-american-fa` (Persian)
+contain fifteen matching chapters covering every slide in the Community Challenges
+deck. The evidence appendix precedes the solution and conclusion so the sequence
+retains Attention, Interest, Conviction, Desire, and Close. Both remain
+behind the existing operator PIN. Source notes and editable scripts live under
+`content/presentation_sources/` in matching directories. Chapter keys and the
+Attention / Interest / Conviction / Desire / Close sequence match across editions.
+
+Bundles accept optional `language`: `en` (default) or `fa`. Persian sets RTL on
+slide content, chapter navigation, and scripts; operator controls remain English.
+Switching back restores LTR. Source switching remains blocked while a session is
+active. Persian is currently for human delivery through chapter preview and the
+full script. Both the UI and server prevent starting an unsupported avatar session.
+No Tavus credentials, PAL settings, or playback event handling were changed.
+Tavus default spoken-language list excludes Persian. A future Persian voice setup
+must be verified separately before removing that guard:
+https://docs.tavus.io/sections/conversational-video-interface/language-support

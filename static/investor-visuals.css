@@ -12,3 +12,27 @@
 
 .investor-cards:has(>.investor-card:nth-child(4):last-child){grid-template-columns:repeat(2,minmax(0,1fr))}
 @media(max-width:550px){.investor-cards:has(>.investor-card:nth-child(4):last-child){grid-template-columns:1fr}}
+
+
+/* Workforce percentages share one fixed 100% baseline, independent of ROI bars. */
+.investor-barometer-group{padding:20px;border:1px solid #ddd8e9;border-radius:12px;background:#f8f9fc;min-width:0}
+.investor-barometer-group h3{margin:0 0 20px;font-size:17px;line-height:1.4}
+.investor-barometer-track{display:flex;width:100%;height:76px;border-radius:9px;overflow:hidden}
+.investor-barometer-segment{display:flex;align-items:center;justify-content:center;min-width:0;font-size:clamp(18px,2.4vw,28px);color:#fff;background:#24846a}
+.investor-barometer-segment[data-group="1"]{background:#f3c333;color:#243047}
+.investor-barometer-segment[data-group="2"]{background:#c83946}
+.investor-barometer-legend{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:15px}
+.investor-barometer-key{border-top:4px solid #24846a;padding-top:9px;font-size:13px;line-height:1.4;overflow-wrap:anywhere}
+.investor-barometer-key[data-group="1"]{border-color:#f3c333}.investor-barometer-key[data-group="2"]{border-color:#c83946}
+.investor-barometer-key strong,.investor-barometer-key span{display:block}
+@media(max-width:550px){.investor-barometer-group{padding:13px}.investor-barometer-track{height:60px}.investor-barometer-key{font-size:12px}}
+
+/* Persian presentation content; operator controls retain their English layout. */
+[lang="fa"]{font-family:Tahoma,"Segoe UI",sans-serif;line-height:1.9}
+[dir="rtl"]{text-align:right}
+[dir="rtl"] .investor-value{line-height:1.5;overflow-wrap:normal}
+[dir="rtl"] .investor-detail{line-height:1.9}
+[dir="rtl"] .chart-note{border-left:0;border-right:3px solid #5666d9;border-radius:8px 0 0 8px}
+[dir="rtl"] .investor-steps .investor-card{padding:16px 65px 16px 18px;border-left:1px solid #dedbea;border-right:4px solid var(--accent)}
+[dir="rtl"] .investor-steps .investor-card:before{left:auto;right:18px;content:counter(step,persian)}
+@media(max-width:430px){[dir="rtl"] .investor-steps .investor-card{padding-right:50px}[dir="rtl"] .investor-steps .investor-card:before{right:12px}}

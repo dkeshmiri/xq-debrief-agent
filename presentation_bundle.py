@@ -20,6 +20,8 @@ def score(value):
 def bundle_presentation(bundle):
     if type(bundle.get('presentation_version')) is not int or bundle['presentation_version'] != 1:
         raise ValueError('Unsupported presentation version.')
+    if bundle.get('language', 'en') not in ('en', 'fa'):
+        raise ValueError('Presentation language must be en or fa.')
     kind = bundle.get('presentation_type')
     if kind == 'investor':
         visuals, source = investor_visuals(bundle)

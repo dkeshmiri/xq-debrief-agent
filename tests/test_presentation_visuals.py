@@ -17,6 +17,7 @@ class PresentationVisualTests(unittest.TestCase):
         app = Flask(__name__)
         app.register_blueprint(create_presentation_blueprint(self.session))
         self.api = app.test_client()
+        self.assertEqual(self.api.post('/api/presentation/unlock', json={'pin':'2020'}).status_code, 200)
 
     def test_recorded_chapters_have_all_workplace_scores(self):
         state = self.session.status()

@@ -56,3 +56,46 @@ management attention, lost output, and another hiring cycle. The source deck
 does not supply a standalone bad-hire cost estimate. The $1.08T unfilled-job
 figure and company-level $5.04M model are not mixed into a national total.
 Chapter 2 now explicitly names XQ Workforce AI and its connected solution.
+
+
+2026-10-30 — STRATEGY, EXECUTION, AND WORKFORCE PRODUCTIVITY UPDATE
+
+Both supplied PDFs were read and visually inspected. The two barometer slides
+appear in both PDFs and are included once. The active pitch now has 14 chapters,
+1389 spoken words, and 14 graphics. At 110 words/minute plus a minute for setup,
+it fits the 900-second budget. Live delivery time still needs rehearsal.
+
+Attention: national workforce cost, strategy-execution gap, implementation cost.
+Interest: XQ's solution and the 25/50/25 workforce barometer.
+Conviction: 40/45/15 development goal, execution system, retention and training,
+subscription economics, capacity value, and measurable pilots.
+Desire: buyer, distribution, growth plan, and XQ's compounding advantage.
+Close: investment invitation linked to workforce productivity and execution.
+
+At the user's direction, disclaimers and defensive wording were removed from
+spoken narration and graphics. Q&A distinctions are retained here:
+- 25/50/25 is a conceptual starting mix, not an empirical universal distribution.
+- 40/45/15 is a development goal, not observed XQ customer performance.
+- The 100-person movement conserves headcount: 25+15=40; 50-15+10=45; 25-10=15.
+- Performance groups describe role outcomes, not personality types or inferred
+  job suitability. Assessment scores do not determine an employee's group.
+- PMI's 2014 loss estimate and 2021 waste percentage are separate findings.
+  They are not added. $10M × 9.4% = $940,000, an application of that rate.
+- 65% vs 35% is a historical alignment comparison, not an XQ treatment effect.
+- Kotter, PMI, and McKinsey describe different populations and outcomes.
+  Preserve their labels and years when discussing them.
+- Source update page 1 also cites Kaplan & Norton (2004) on execution, Gallup
+  (2024) on $8.9T global disengagement cost and managers accounting for 70% of
+  team engagement variance. These support Q&A; the pitch retains the existing
+  separately attributed U.S. opening rather than mixing global and U.S. totals.
+- New research statements are attributed as supplied in the update PDF; they
+  were not independently reverified against the original publications here.
+- Financial examples retain their stated inputs. Capacity value is not cash
+  savings; subscription-relative return excludes implementation costs.
+- Revenue and ARR are projections. Projected customer churn is separate from
+  employee performance movement and attrition.
+
+The JSON remains authoritative; the text review copy and sources.json were
+updated together. Playback, readiness hotfix, session limits, and assessment
+debrief logic are unchanged. Investor barometers use fixed 100% stacked bars
+with green/gold/red categories and explicit starting-mix/development-goal labels.

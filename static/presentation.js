@@ -24,8 +24,10 @@ function controls() {
     $('reset-source').disabled = busy || state.active || state.busy;
     $('amethyst-source').disabled = busy || state.active || state.busy;
     $('workforce-source').disabled = busy || state.active || state.busy;
+    $('iranian-source').disabled = busy || state.active || state.busy;
+    $('iranian-fa-source').disabled = busy || state.active || state.busy;
     $('start').hidden = state.active;
-    $('start').disabled = !online || busy || state.active || state.busy;
+    $('start').disabled = !online || busy || state.active || state.busy || state.narration_supported === false;
     $('end').hidden = !state.active && !frame;
     $('end').disabled = busy || state.busy;
     const ready = online && joined && state.active && state.connected && !state.shutdown_reason && state.remaining_seconds > 0 && !busy && !state.busy && !state.pending;
@@ -35,6 +37,14 @@ function controls() {
 }
 function render(data) {
     state = data; online = true;
+    const language = data.language === 'fa' ? 'fa' : 'en';
+    for (const id of ['chapter-visual', 'chapter-title', 'script', 'full-script', 'chapters', 'preview-chapter', 'visual-source']) {
+        $(id).lang = language;
+        $(id).dir = language === 'fa' ? 'rtl' : 'ltr';
+    }
+    $('language-note').hidden = data.narration_supported !== false;
+    $('language-note').textContent = data.narration_supported === false
+        ? 'Persian edition: use chapter preview and the full script for a human-led presentation. Persian avatar narration is not configured.' : '';
     if (frame?.setReplicaIds) frame.setReplicaIds(data.replica_participant_ids || []);
     if (scriptRevision !== data.revision) {
         scriptLoaded = false; visualKey = null; scriptRevision = data.revision; previewIndex = 0;
@@ -67,7 +77,7 @@ function render(data) {
     $('status').textContent = data.shutdown_reason === 'max_call_duration' || (data.active && !data.remaining_seconds) ? 'Session time limit reached. End this session before starting again.' :
         data.shutdown_reason ? 'The provider ended the presentation. End this session before starting again.' :
         data.busy ? 'Updating the presentation connection…' :
-        !data.active ? 'Ready for your presentation.' :
+        !data.active ? (data.narration_supported === false ? 'Ready for a human-led presentation. Choose a chapter to present.' : 'Ready for your presentation.') :
         !data.connected ? 'Waiting for the video connection. If it does not return, end the session.' :
         !joined ? 'This page has not joined the existing session. End it before starting again.' :
         data.speaking ? 'Presenting: ' + data.chapters[data.index].title :
@@ -222,6 +232,8 @@ $('profile-upload').addEventListener('change', () => run(async () => {
 $('reset-source').addEventListener('click', () => run(() => changeSource(null)));
 $('amethyst-source').addEventListener('click', () => run(() => changeSource(null, 'amethyst')));
 $('workforce-source').addEventListener('click', () => run(() => changeSource(null, 'workforce-investor')));
+$('iranian-source').addEventListener('click', () => run(() => changeSource(null, 'iranian-american')));
+$('iranian-fa-source').addEventListener('click', () => run(() => changeSource(null, 'iranian-american-fa')));
 async function refresh() {
     try { render(await api('status','GET')); }
     catch { online = false; $('status').textContent = 'Live updates unavailable. Reconnecting…'; controls(); }
