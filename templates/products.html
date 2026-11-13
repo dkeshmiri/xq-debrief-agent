@@ -32,6 +32,12 @@
         <div class="product-cta">Explore XQ Workplace <span aria-hidden="true">↗</span></div>
       </a>
     </div>
+    {% if config.DISC_PILOT_ENABLED %}
+    <section class="presentation-access" aria-label="Pilot assessments">
+      <div><p class="product-eyebrow">PILOT ASSESSMENT</p><strong>Discover your behavioral preferences.</strong><p>Explore Everyday and At work patterns with a guided DISC report.</p></div>
+      <a href="/pilot/disc">Take the DISC pilot →</a>
+    </section>
+    {% endif %}
     <section id="presentation-access" class="presentation-access" aria-label="Operator presentation access">
       <div><p class="product-eyebrow">OPERATOR ACCESS</p>
         <button id="presentation-mode" type="button" disabled aria-describedby="presentation-access-status">Presentation Mode</button>

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Behavioral preferences · XQ DISC Pilot</title>
+  <link rel="stylesheet" href="/static/theme.css">
+  <link rel="stylesheet" href="/static/disc-pilot.css">
+  <link rel="stylesheet" href="/static/dev-brand.css">
+  <script src="/static/disc-pilot.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to assessment</a>
+  <header class="pilot-header"><a href="/">xq <span>INNOVATION</span></a><span class="pilot-badge">DISC PILOT</span></header>
+  <main id="main" data-base="{{ url_for('disc_pilot.page') }}">
+    <section id="welcome" class="pilot-card">
+      <p class="eyebrow">YOUR BEHAVIORAL PREFERENCES</p>
+      <h1>A clearer view of<br><em>how you approach life.</em></h1>
+      <p class="lede">Explore how you take initiative, connect with people, sustain a steady rhythm, and work with details.</p>
+      <div class="context-cards"><div><b>01 · Everyday</b><p>Think about your usual behavior across everyday situations over the past three months.</p></div><div><b>02 · At work</b><p>Think about your actual behavior in your current work role over the past three months.</p></div></div>
+      <p>Rate 24 statements in each context, from Never to Very often. Choose the answer that best reflects what you do. You can review your answers before creating your report.</p>
+      <p class="fine">Progress is saved in this browser tab so you can return after a refresh.</p>
+      <div class="actions"><button id="begin" class="button primary" disabled>Begin assessment →</button><button id="resume" class="button quiet" hidden>Resume assessment</button></div>
+    </section>
+    <section id="assessment" hidden>
+      <div class="assessment-heading"><div><p id="phase" class="eyebrow"></p><h1 id="context-title" tabindex="-1"></h1><p id="context-hint"></p></div><span id="progress-label"></span></div>
+      <progress id="progress" max="48" value="0" aria-label="Statements answered"></progress>
+      <form id="answers-form"><div id="statements"></div><div class="actions"><button id="back" class="button quiet" type="button">← Back</button><button id="next" class="button primary" type="submit">Continue →</button></div></form>
+    </section>
+    <section id="report" hidden>
+      <p class="eyebrow">YOUR XQ BEHAVIORAL PREFERENCES</p><h1 id="report-heading" tabindex="-1">Two contexts.<br><em>Your perspective.</em></h1>
+      <p class="lede">Each bar summarizes how often you described the behaviors in that dimension.</p>
+      <div class="scale-key"><b>RESPONSE FREQUENCY · 0–100</b><p>0 Never · 25 Rarely · 50 Sometimes · 75 Often · 100 Very often</p></div>
+      <div id="charts" class="chart-grid"></div>
+      <div class="report-layout"><section class="pilot-card" aria-labelledby="narration-heading"><p class="eyebrow">YOUR GUIDED REPORT</p><h2 id="narration-heading">Explore your results.</h2><label for="section-select">Report section</label><select id="section-select"></select><p id="section-text"></p><div class="actions"><button id="listen" class="button primary">Listen to this section</button><button id="stop" class="button quiet" disabled>Stop</button></div><audio id="audio" controls hidden></audio></section><aside class="pilot-card"><p class="eyebrow">BEHIND YOUR REPORT</p><p id="mechanics" role="status" aria-live="polite">Answers checked. Scores calculated. Your report is ready.</p><p class="fine">Graphs and narration share the same scores and response-frequency descriptions.</p><button id="download" class="button quiet">Download report JSON</button><button id="restart" class="button quiet">Start again</button></aside></div>
+    </section>
+    <p id="notice" role="alert" hidden></p>
+    <noscript>Enable JavaScript to complete the assessment and explore your report.</noscript>
+  </main>
+  {% include "partials/dev_brand.html" %}
+</body>
+</html>

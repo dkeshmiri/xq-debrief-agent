@@ -69,6 +69,7 @@ load_dotenv(
 
 app = Flask(__name__)
 app.config["MAX_CONTENT_LENGTH"] = MAX_UPLOAD_BYTES
+app.config['DISC_PILOT_ENABLED'] = os.getenv('XQ_DISC_PILOT_ENABLED', '1') == '1'
 app.register_blueprint(create_assessment_blueprint(experience=EXPERIENCE.name))
 if EXPERIENCE.business:
     app.config['ASSESSMENT_DRAFT_DIR'] = WORKSPACE_DATA / 'assessment_drafts'
@@ -2273,6 +2274,8 @@ def dev_integrated_narrative():
 # =========================================================
 
 if not EXPERIENCE.business:
+    from disc_pilot_routes import create_disc_pilot_blueprint
+    app.register_blueprint(create_disc_pilot_blueprint())
     from presentation import create_presentation_blueprint
     app.register_blueprint(create_presentation_blueprint())
     from werkzeug.middleware.dispatcher import DispatcherMiddleware
