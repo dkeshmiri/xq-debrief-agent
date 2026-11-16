@@ -147,8 +147,43 @@ test('ACI renders clarity, valuation, blind spots and summaries without treating
 test('prepared presentation selector is locked during a live session',()=>{
     const f=fixture(); f.run(`render(${JSON.stringify({...state,active:true})})`);
     assert.equal(f.get('amethyst-source').disabled,true);
+    assert.equal(f.get('mario-source').disabled,true);
     f.run(`render(${JSON.stringify(state)})`);
     assert.equal(f.get('amethyst-source').disabled,false);
+    assert.equal(f.get('mario-source').disabled,false);
+});
+
+test('Mario selector requests its own prepared source',async()=>{
+    const f=fixture(); f.run(`render(${JSON.stringify(state)})`);
+    f.run('var requested; changeSource=async(profile,preset)=>{requested={profile,preset};}; refresh=async()=>{};');
+    await f.get('mario-source').handlers.click();
+    assert.equal(f.run('JSON.stringify(requested)'), JSON.stringify({profile:null,preset:'mario'}));
+});
+
+test('priority graphics show ranks without manufacturing percentage bars',()=>{
+    const f=fixture();
+    f.run(`renderVisual(${JSON.stringify({kind:'force_ranks',title:'Priorities',note:'Priority order',items:[
+        {label:'Receptive',rank:1,color:'methodologies'}, {label:'Harmonious',rank:5,color:'surroundings'}]})})`);
+    const rows=f.get('chapter-visual').children[2].children;
+    assert.equal(rows[0].children[0].textContent,'1');
+    assert.equal(rows[0].children[1].textContent,'Receptive');
+    assert.equal(rows[1].value,5);
+    assert.equal(rows[1].children[0].dataset.color,'surroundings');
+    assert.equal(rows[1].children[0].style.width,undefined);
+});
+
+test('ACI omits empty summaries without inventing blind spots or losing zero scores',()=>{
+    const f=fixture();
+    f.run(`renderVisual(${JSON.stringify({kind:'aci',title:'ACI',note:'Values',panels:[{
+        title:'World View',clarity_average:null,emotional_bias_distortion:0,problems:[],dimensions:[
+            {label:'People',context:'People',color:'intrinsic',clarity:0,bias:'mixed',valuation:'Mixed valuation',blind_spot:null}
+        ]}]})})`);
+    const panel=f.get('chapter-visual').children[2].children[0];
+    const column=panel.children[1].children[1];
+    assert.equal(column.children[2].textContent,'0');
+    assert.equal(column.children.length,5);
+    assert.equal(panel.children[2].textContent,'Emotional bias distortion: 0');
+    assert.equal(panel.children.length,3);
 });
 
 

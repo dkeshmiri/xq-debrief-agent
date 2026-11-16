@@ -11,3 +11,5 @@
 .presentation-access button:focus-visible,.presentation-access input:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
 #presentation-access-status{font-size:12px;color:var(--muted);margin:8px 0 0;max-width:320px}
 @media(max-width:650px){.presentation-access{align-items:stretch;flex-direction:column;padding:20px}.presentation-pin-row input{flex:1;width:100%}}
+
+.pilot-options{display:grid;gap:12px;min-width:240px}.pilot-options a{display:block;padding:12px 16px;border:1px solid #cfc2df;border-radius:10px;color:#55417f;text-decoration:none;font-weight:600}.pilot-options a:hover{background:#eee6fa}.pilot-options small{display:block;font-size:12px;font-weight:400;margin-top:4px}.pilot-options a:focus-visible{outline:3px solid var(--focus);outline-offset:3px}

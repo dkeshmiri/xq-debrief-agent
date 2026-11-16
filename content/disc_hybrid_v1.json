@@ -1,0 +1,114 @@
+{
+  "version": "xq-disc-hybrid-v1",
+  "source": "https://chatgpt.com/space/page_a6bf54189a648191a2d27f59d86fcb13",
+  "source_version": "xq-disc-scenario-v2",
+  "revision": "Four paired situations; independent frequency ratings and one first approach per situation",
+  "dimensions": {
+    "D": {
+      "name": "Direction",
+      "color": "#c73449",
+      "focus": "taking initiative, making decisions, and addressing challenges",
+      "question": "Where would a clear decision help you move something forward?"
+    },
+    "I": {
+      "name": "Interaction",
+      "color": "#967000",
+      "focus": "starting conversations, sharing ideas, and involving people",
+      "question": "Who would benefit from hearing your ideas or encouragement?"
+    },
+    "S": {
+      "name": "Steadiness",
+      "color": "#23805b",
+      "focus": "maintaining a steady pace, listening, and following through",
+      "question": "Which routine helps you give people dependable support?"
+    },
+    "C": {
+      "name": "Precision",
+      "color": "#326cb5",
+      "focus": "checking details, using criteria, and working through information",
+      "question": "Where would clearer information make your next step easier?"
+    }
+  },
+  "items": [
+    {
+      "id": "H01",
+      "stem": "When a decision is stalled",
+      "options": {
+        "D": "decide on a next step and move toward a result",
+        "I": "bring people into discussion to build momentum",
+        "S": "keep progress moving at a measured, sustainable pace",
+        "C": "review the criteria and assumptions before deciding"
+      },
+      "adapted": {
+        "stem": "When a work task is waiting for a decision",
+        "options": {
+          "D": "I choose a practical next action and get it underway",
+          "I": "I get the people involved talking so we can build momentum",
+          "S": "I keep the work moving steadily while the decision takes shape",
+          "C": "I check the decision criteria and underlying assumptions"
+        }
+      },
+      "source_id": "B01"
+    },
+    {
+      "id": "H02",
+      "stem": "When plans change suddenly",
+      "options": {
+        "D": "reset priorities and act on the new direction",
+        "I": "talk with those involved and rally them around the change",
+        "S": "restore a dependable rhythm amid the disruption",
+        "C": "identify implications and adjust the plan carefully"
+      },
+      "adapted": {
+        "stem": "When priorities change unexpectedly during my workday",
+        "options": {
+          "D": "I redirect my effort toward the new objective",
+          "I": "I discuss the change with colleagues and build support for it",
+          "S": "I establish a workable routine around the revised plan",
+          "C": "I trace what the change affects before adjusting the work"
+        }
+      },
+      "source_id": "B03"
+    },
+    {
+      "id": "H03",
+      "stem": "When joining a new group",
+      "options": {
+        "D": "clarify objectives and establish where I can take charge",
+        "I": "introduce myself widely and start conversations",
+        "S": "learn the group rhythm and contribute consistently",
+        "C": "understand its expectations, roles, and procedures"
+      },
+      "adapted": {
+        "stem": "When I start working with an unfamiliar team",
+        "options": {
+          "D": "I establish the goals and identify where I can take the lead",
+          "I": "I introduce myself and open conversations with team members",
+          "S": "I observe the working rhythm and settle into a consistent contribution",
+          "C": "I find out how responsibilities, procedures, and expectations are defined"
+        }
+      },
+      "source_id": "B08"
+    },
+    {
+      "id": "H04",
+      "stem": "When I accept responsibility for something",
+      "options": {
+        "D": "take ownership of the outcome and drive toward it",
+        "I": "serve as an active connector among those involved",
+        "S": "maintain reliable day-to-day follow-through",
+        "C": "establish quality checks and completion criteria"
+      },
+      "adapted": {
+        "stem": "When a piece of work becomes my responsibility",
+        "options": {
+          "D": "I take charge of delivering the outcome",
+          "I": "I keep the people involved connected and communicating",
+          "S": "I provide consistent follow-through from day to day",
+          "C": "I set checks for quality and define what completion looks like"
+        }
+      },
+      "source_id": "B27"
+    }
+  ]
+}

@@ -53,6 +53,14 @@ def charts(profile):
         for key in ('forces_first', 'forces_second'):
             visuals[key]['note'] = 'Each Driving Force has its own score on a 0–100 scale.'
         visuals['overview']['cards'][-1] = {'title': 'Acumen / ACI', 'text': 'How you evaluate people, tasks, and systems, and yourself, your roles, and your future.'}
+    ranks = profile.get('driving_forces', {}).get('ranks', {})
+    if ranks:
+        visuals['forces_priorities'] = {
+            'kind': 'force_ranks', 'title': 'Driving Forces · Your leading priorities',
+            'note': 'Priority order from your debrief.',
+            'items': [{'label': name, 'rank': rank, 'color': FORCE_COLORS[name]}
+                      for name, rank in sorted(ranks.items(), key=lambda item: item[1])],
+        }
     return visuals
 
 

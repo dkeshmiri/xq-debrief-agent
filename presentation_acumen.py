@@ -28,7 +28,9 @@ def acumen_charts(aci):
             emotional_bias_distortion=summary.get('emotional_bias_distortion'),
             problems=[dict(label=label, value=summary.get('problem_solving', {}).get(key, {}).get('score'),
                            reference=summary.get('problem_solving', {}).get(key, {}).get('report_reference'))
-                      for key, label in PROBLEMS]))
+                      for key, label in PROBLEMS
+                      if any(summary.get('problem_solving', {}).get(key, {}).get(field) is not None
+                             for field in ('score', 'report_reference'))]))
     note = ('Clarity and blind spots use a 0–100 scale. '
             'Arrows show valuation direction: overvaluation, mixed valuation, or undervaluation.')
     return {key: dict(kind='aci', title=title, note=note, panels=selected)

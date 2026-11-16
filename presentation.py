@@ -15,7 +15,7 @@ from tavus_client import TavusClient
 SCRIPT_PATH = Path(__file__).resolve().parent / 'content/presentation.json'
 PRESENTATION_BUDGET = 15 * 60
 PRESETS = {name: SCRIPT_PATH.parent / f'presentations/{name}.json'
-           for name in ('amethyst', 'workforce-investor', 'iranian-american', 'iranian-american-fa')}
+           for name in ('amethyst', 'mario', 'workforce-investor', 'iranian-american', 'iranian-american-fa')}
 
 class Presentation:
     def __init__(self, client=None, clock=monotonic):

@@ -1,0 +1,326 @@
+{
+  "source": "https://chatgpt.com/space/page_a6bf54189a648191a2d27f59d86fcb13",
+  "source_version": "XQ DISC v3.1",
+  "items": [
+    {
+      "id": "B01",
+      "stem": "When a decision is stalled",
+      "options": {
+        "D": "decide on a next step and move toward a result",
+        "I": "bring people into discussion to build momentum",
+        "S": "keep progress moving at a measured, sustainable pace",
+        "C": "review the criteria and assumptions before deciding"
+      }
+    },
+    {
+      "id": "B02",
+      "stem": "At the start of an unfamiliar undertaking",
+      "options": {
+        "D": "define an outcome and take initiative early",
+        "I": "make connections and generate shared enthusiasm",
+        "S": "establish a comfortable sequence of manageable steps",
+        "C": "learn the requirements and standards before proceeding"
+      }
+    },
+    {
+      "id": "B03",
+      "stem": "When plans change suddenly",
+      "options": {
+        "D": "reset priorities and act on the new direction",
+        "I": "talk with those involved and rally them around the change",
+        "S": "restore a dependable rhythm amid the disruption",
+        "C": "identify implications and adjust the plan carefully"
+      }
+    },
+    {
+      "id": "B04",
+      "stem": "During a disagreement",
+      "options": {
+        "D": "state my position directly and seek a decision",
+        "I": "look for language that wins people over",
+        "S": "give people room to be heard and maintain a calm exchange",
+        "C": "compare the claims against the available evidence"
+      }
+    },
+    {
+      "id": "B05",
+      "stem": "With limited time available",
+      "options": {
+        "D": "choose a viable direction and commit promptly",
+        "I": "coordinate people through quick conversations",
+        "S": "protect steady progress rather than make abrupt shifts",
+        "C": "verify the few facts that are critical to the decision"
+      }
+    },
+    {
+      "id": "B06",
+      "stem": "When sharing a new idea",
+      "options": {
+        "D": "lead with the outcome I want others to pursue",
+        "I": "communicate it in an engaging, expressive way",
+        "S": "show how it fits with existing commitments and relationships",
+        "C": "explain the reasoning and supporting details"
+      }
+    },
+    {
+      "id": "B07",
+      "stem": "When a familiar process is frustrating",
+      "options": {
+        "D": "challenge the obstacle and push for a faster path",
+        "I": "draw others into finding a more energizing approach",
+        "S": "maintain a stable method until a workable transition is ready",
+        "C": "check where the process deviates from its intended standard"
+      }
+    },
+    {
+      "id": "B08",
+      "stem": "When joining a new group",
+      "options": {
+        "D": "clarify objectives and establish where I can take charge",
+        "I": "introduce myself widely and start conversations",
+        "S": "learn the group rhythm and contribute consistently",
+        "C": "understand its expectations, roles, and procedures"
+      }
+    },
+    {
+      "id": "B09",
+      "stem": "When giving someone feedback",
+      "options": {
+        "D": "focus directly on what should change and by when",
+        "I": "emphasize encouragement and the possibility of improvement",
+        "S": "make the exchange patient, supportive, and predictable",
+        "C": "use concrete examples and clear evaluation criteria"
+      }
+    },
+    {
+      "id": "B10",
+      "stem": "When I need someone to take action",
+      "options": {
+        "D": "make a clear request and set a firm direction",
+        "I": "persuade them through a lively exchange",
+        "S": "offer steady assistance as they work through it",
+        "C": "describe the requirements and checkpoints precisely"
+      }
+    },
+    {
+      "id": "B11",
+      "stem": "When learning a new skill",
+      "options": {
+        "D": "experiment quickly until I can produce a result",
+        "I": "learn through conversation, examples, and interaction",
+        "S": "build confidence through repeated practice at a consistent pace",
+        "C": "study the method and its underlying principles first"
+      }
+    },
+    {
+      "id": "B12",
+      "stem": "After something goes especially well",
+      "options": {
+        "D": "identify the next ambitious target",
+        "I": "share the success with people and celebrate their contributions",
+        "S": "preserve the routines that made the result possible",
+        "C": "document what worked so the result can be reproduced"
+      }
+    },
+    {
+      "id": "B13",
+      "stem": "When expectations are unclear",
+      "options": {
+        "D": "set a provisional direction and get moving",
+        "I": "talk with others to discover what they hope to achieve",
+        "S": "seek a stable shared understanding before disrupting current work",
+        "C": "request explicit criteria and definitions"
+      }
+    },
+    {
+      "id": "B14",
+      "stem": "When someone objects to my proposal",
+      "options": {
+        "D": "address the challenge head-on and make my case",
+        "I": "explore their perspective and work to win them over",
+        "S": "allow time for concerns to settle without forcing the pace",
+        "C": "test the objection against the facts and assumptions"
+      }
+    },
+    {
+      "id": "B15",
+      "stem": "In a group meeting",
+      "options": {
+        "D": "move discussion toward decisions and ownership",
+        "I": "encourage lively participation and exchange",
+        "S": "help the conversation proceed calmly and evenly",
+        "C": "track specifics, unresolved questions, and commitments"
+      }
+    },
+    {
+      "id": "B16",
+      "stem": "When choosing between workable options",
+      "options": {
+        "D": "favor the option that permits decisive progress",
+        "I": "favor the option that can build the strongest enthusiasm",
+        "S": "favor the option that preserves continuity for those affected",
+        "C": "favor the option with the clearest criteria and evidence"
+      }
+    },
+    {
+      "id": "B17",
+      "stem": "When a group becomes tense",
+      "options": {
+        "D": "name the difficult issue and confront it directly",
+        "I": "open a conversation that reconnects the people involved",
+        "S": "create a patient atmosphere in which others can settle",
+        "C": "clarify the facts and responsibilities behind the tension"
+      }
+    },
+    {
+      "id": "B18",
+      "stem": "Faced with a complicated task",
+      "options": {
+        "D": "find the central obstacle and tackle it first",
+        "I": "think aloud with others to generate possibilities",
+        "S": "divide the work into dependable, repeatable stages",
+        "C": "specify what a correct solution must satisfy"
+      }
+    },
+    {
+      "id": "B19",
+      "stem": "When several priorities compete",
+      "options": {
+        "D": "give precedence to the largest impact or challenge",
+        "I": "consider which priority will best mobilize people",
+        "S": "protect established commitments and consistent delivery",
+        "C": "use explicit criteria to compare risks and requirements"
+      }
+    },
+    {
+      "id": "B20",
+      "stem": "At a gathering where I know few people",
+      "options": {
+        "D": "seek out purposeful exchanges and help set direction",
+        "I": "start conversations with a wide range of people",
+        "S": "settle into a smaller circle and get to know people gradually",
+        "C": "listen closely before joining discussions with useful information"
+      }
+    },
+    {
+      "id": "B21",
+      "stem": "When an interruption disrupts my momentum",
+      "options": {
+        "D": "regain control of the next action quickly",
+        "I": "reconnect with people to restart the exchange",
+        "S": "return to a reliable sequence of tasks",
+        "C": "recheck what changed before continuing"
+      }
+    },
+    {
+      "id": "B22",
+      "stem": "When a new rule or procedure is introduced",
+      "options": {
+        "D": "question it if it interferes with the desired outcome",
+        "I": "discuss it openly and gather reactions from others",
+        "S": "help people adjust to it without abrupt disruption",
+        "C": "read its provisions and apply them consistently"
+      }
+    },
+    {
+      "id": "B23",
+      "stem": "When assigning responsibilities",
+      "options": {
+        "D": "define the outcome and empower decisive ownership",
+        "I": "match people to activities involving influence and interaction",
+        "S": "distribute tasks in a way that supports dependable follow-through",
+        "C": "set clear specifications and review points"
+      }
+    },
+    {
+      "id": "B24",
+      "stem": "When someone asks for help",
+      "options": {
+        "D": "remove the immediate obstacle so they can move forward",
+        "I": "raise their energy and confidence through encouragement",
+        "S": "stay available and help at a patient pace",
+        "C": "diagnose the issue and explain a precise solution"
+      }
+    },
+    {
+      "id": "B25",
+      "stem": "When guiding an important change",
+      "options": {
+        "D": "announce the direction and push through barriers",
+        "I": "build enthusiasm and recruit advocates",
+        "S": "introduce the change in manageable stages",
+        "C": "define controls and evidence that the new approach works"
+      }
+    },
+    {
+      "id": "B26",
+      "stem": "When pressure rises",
+      "options": {
+        "D": "become more decisive about what must happen next",
+        "I": "talk options through with people to build momentum",
+        "S": "narrow the pace to something manageable and steady",
+        "C": "reduce uncertainty by verifying the essential details"
+      }
+    },
+    {
+      "id": "B27",
+      "stem": "When I accept responsibility for something",
+      "options": {
+        "D": "take ownership of the outcome and drive toward it",
+        "I": "serve as an active connector among those involved",
+        "S": "maintain reliable day-to-day follow-through",
+        "C": "establish quality checks and completion criteria"
+      }
+    },
+    {
+      "id": "B28",
+      "stem": "When someone suggests an uncertain new approach",
+      "options": {
+        "D": "try a small decisive action to test its potential",
+        "I": "explore how people might respond and participate",
+        "S": "consider its effect on routines and ongoing commitments",
+        "C": "evaluate risks and conditions before endorsing it"
+      }
+    },
+    {
+      "id": "B29",
+      "stem": "When collaborating with someone new",
+      "options": {
+        "D": "clarify goals, decisions, and accountability",
+        "I": "establish rapport through open conversation",
+        "S": "show reliability through consistent cooperation",
+        "C": "agree on methods, responsibilities, and standards"
+      }
+    },
+    {
+      "id": "B30",
+      "stem": "As an important deadline approaches",
+      "options": {
+        "D": "accelerate decisions and remove obstacles",
+        "I": "intensify coordination and keep people engaged",
+        "S": "protect an orderly pace and finish commitments",
+        "C": "check the deliverable against requirements"
+      }
+    },
+    {
+      "id": "B31",
+      "stem": "When reviewing my own contribution",
+      "options": {
+        "D": "ask whether the intended result was achieved",
+        "I": "consider whether I engaged and influenced people effectively",
+        "S": "consider whether I remained dependable and consistent",
+        "C": "examine whether the work met defined standards"
+      }
+    },
+    {
+      "id": "B32",
+      "stem": "When selecting my next challenge",
+      "options": {
+        "D": "prefer room to exercise initiative and overcome obstacles",
+        "I": "prefer interaction and opportunities to gain others’ support",
+        "S": "prefer a sustainable rhythm and stable working relationships",
+        "C": "prefer clear parameters and high standards of accuracy"
+      }
+    }
+  ]
+}

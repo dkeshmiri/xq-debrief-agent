@@ -58,3 +58,6 @@
 @media(max-width:430px){.aci-panel{padding:12px 8px}.aci-grid{gap:6px}.aci-well{padding:0 8px}.aci-label{font-size:11px}.aci-valuation{font-size:10px}}
 
 .aci-problem{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;margin:16px 0;font-size:12px}.aci-problem>span{max-width:85%}.aci-problem small{color:var(--muted)}
+
+.force-priorities{list-style:none;padding:0;display:grid;gap:12px;margin:24px 0}.force-priority{display:flex;align-items:center;gap:16px;border:1px solid #d8cde6;border-radius:12px;padding:14px;background:#f8f6fb}.force-rank.score-bar{display:grid;place-items:center;width:44px;height:44px;flex:none;border-radius:10px;color:#15151b;font-size:22px;font-weight:700}.force-priority strong{font-size:18px}
+.force-rank[data-color=knowledge],.force-rank[data-color=surroundings],.force-rank[data-color=others],.force-rank[data-color=power]{color:#fff}

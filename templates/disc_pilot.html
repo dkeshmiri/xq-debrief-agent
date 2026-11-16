@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Behavioral preferences · XQ DISC Pilot</title>
+  <title>{{ title }} · XQ DISC Pilot</title>
   <link rel="stylesheet" href="/static/theme.css">
   <link rel="stylesheet" href="/static/disc-pilot.css">
   <link rel="stylesheet" href="/static/dev-brand.css">
@@ -11,27 +11,47 @@
 <body>
   <a class="skip-link" href="#main">Skip to assessment</a>
   <header class="pilot-header"><a href="/">xq <span>INNOVATION</span></a><span class="pilot-badge">DISC PILOT</span></header>
-  <main id="main" data-base="{{ url_for('disc_pilot.page') }}">
+  <main id="main" data-base="{{ url_for(pilot_endpoint) }}" data-mode="{{ mode }}">
+    <nav class="pilot-switch" aria-label="DISC pilot options"><a href="/pilot/disc" {% if mode == 'frequency' %}aria-current="page"{% endif %}>Behavior frequency</a><a href="/pilot/disc/scenarios" {% if ranking %}aria-current="page"{% endif %}>Scenario ranking</a><a href="/pilot/disc/hybrid" {% if hybrid %}aria-current="page"{% endif %}>Hybrid assessment</a></nav>
     <section id="welcome" class="pilot-card">
-      <p class="eyebrow">YOUR BEHAVIORAL PREFERENCES</p>
+      <p class="eyebrow">{{ title|upper }}</p>
       <h1>A clearer view of<br><em>how you approach life.</em></h1>
       <p class="lede">Explore how you take initiative, connect with people, sustain a steady rhythm, and work with details.</p>
+      {% if hybrid %}
+      <div class="context-cards"><div><b>01 · Natural</b><p>Think about how you usually act in everyday situations over the past three months.</p></div><div><b>02 · Adapted</b><p>Think about how you have actually been operating in your current work role over the past three months.</p></div></div>
+      <p>Explore eight situations: four Natural and four Adapted. In each, rate how often you use four behaviors, then choose the approach you would start with. That's 32 quick ratings and eight first choices.</p>
+      <p>You can give the same rating to several behaviors. Rate each one on its own, from Never to Very often.</p>
+      {% elif ranking %}
+      <div class="context-cards"><div><b>01 · Natural</b><p>Think about how you usually prefer to behave when you have the freedom to choose your approach.</p></div><div><b>02 · Adapted</b><p>Think about how you have actually been operating in your current work role over the past three months.</p></div></div>
+      <p>Explore 32 situations: 16 Natural and 16 Adapted. The Adapted situations use work-focused wording. Select the four alternatives in order: most like you, second, third, and least like you. You can undo choices and review earlier rankings.</p>
+      {% else %}
       <div class="context-cards"><div><b>01 · Everyday</b><p>Think about your usual behavior across everyday situations over the past three months.</p></div><div><b>02 · At work</b><p>Think about your actual behavior in your current work role over the past three months.</p></div></div>
       <p>Rate 24 statements in each context, from Never to Very often. Choose the answer that best reflects what you do. You can review your answers before creating your report.</p>
+      {% endif %}
       <p class="fine">Progress is saved in this browser tab so you can return after a refresh.</p>
       <div class="actions"><button id="begin" class="button primary" disabled>Begin assessment →</button><button id="resume" class="button quiet" hidden>Resume assessment</button></div>
     </section>
     <section id="assessment" hidden>
       <div class="assessment-heading"><div><p id="phase" class="eyebrow"></p><h1 id="context-title" tabindex="-1"></h1><p id="context-hint"></p></div><span id="progress-label"></span></div>
-      <progress id="progress" max="48" value="0" aria-label="Statements answered"></progress>
+      <progress id="progress" max="{{ 8 if hybrid else 32 if ranking else 48 }}" value="0" aria-label="{{ 'Situations completed' if hybrid else 'Scenarios ranked' if ranking else 'Statements answered' }}"></progress>
       <form id="answers-form"><div id="statements"></div><div class="actions"><button id="back" class="button quiet" type="button">← Back</button><button id="next" class="button primary" type="submit">Continue →</button></div></form>
     </section>
     <section id="report" hidden>
       <p class="eyebrow">YOUR XQ BEHAVIORAL PREFERENCES</p><h1 id="report-heading" tabindex="-1">Two contexts.<br><em>Your perspective.</em></h1>
+      {% if hybrid %}
+      <p class="lede">See how often you use each behavior and which approaches you start with. Several dimensions can be high together.</p>
+      <div class="scale-key"><b>BEHAVIOR FREQUENCY · 0–100</b><p>Scores come from your independent ratings: 0 Never · 25 Rarely · 50 Sometimes · 75 Often · 100 Very often.</p><p>First choices are shown separately as counts out of four situations.</p></div>
+      <h2>Where you start</h2><div id="profile-summaries" class="context-cards"></div>
+      {% elif ranking %}
+      <p class="lede">Explore the relative emphasis you gave each approach in your Natural and Adapted choices.</p>
+      <div class="scale-key"><b>RELATIVE PREFERENCE · 0–100</b><p>Higher scores reflect placing an approach nearer the top of your rankings. 0 means ranked last in every situation; 100 means ranked first in every situation.</p></div>
+      <div id="profile-summaries" class="context-cards"></div>
+      {% else %}
       <p class="lede">Each bar summarizes how often you described the behaviors in that dimension.</p>
       <div class="scale-key"><b>RESPONSE FREQUENCY · 0–100</b><p>0 Never · 25 Rarely · 50 Sometimes · 75 Often · 100 Very often</p></div>
+      {% endif %}
       <div id="charts" class="chart-grid"></div>
-      <div class="report-layout"><section class="pilot-card" aria-labelledby="narration-heading"><p class="eyebrow">YOUR GUIDED REPORT</p><h2 id="narration-heading">Explore your results.</h2><label for="section-select">Report section</label><select id="section-select"></select><p id="section-text"></p><div class="actions"><button id="listen" class="button primary">Listen to this section</button><button id="stop" class="button quiet" disabled>Stop</button></div><audio id="audio" controls hidden></audio></section><aside class="pilot-card"><p class="eyebrow">BEHIND YOUR REPORT</p><p id="mechanics" role="status" aria-live="polite">Answers checked. Scores calculated. Your report is ready.</p><p class="fine">Graphs and narration share the same scores and response-frequency descriptions.</p><button id="download" class="button quiet">Download report JSON</button><button id="restart" class="button quiet">Start again</button></aside></div>
+      <div class="report-layout"><section class="pilot-card" aria-labelledby="narration-heading"><p class="eyebrow">YOUR GUIDED REPORT</p><h2 id="narration-heading">Explore your results.</h2><label for="section-select">Report section</label><select id="section-select"></select><p id="section-text"></p><div class="actions"><button id="listen" class="button primary">Listen to this section</button><button id="stop" class="button quiet" disabled>Stop</button></div><audio id="audio" controls hidden></audio></section><aside class="pilot-card"><p class="eyebrow">BEHIND YOUR REPORT</p><p id="mechanics" role="status" aria-live="polite">Answers checked. Scores calculated. Your report is ready.</p><p class="fine">Graphs and narration share the same scores and {{ "relative-preference feedback" if ranking else "response-frequency descriptions" }}.</p><button id="download" class="button quiet">Download report JSON</button><button id="restart" class="button quiet">Start again</button></aside></div>
     </section>
     <p id="notice" role="alert" hidden></p>
     <noscript>Enable JavaScript to complete the assessment and explore your report.</noscript>

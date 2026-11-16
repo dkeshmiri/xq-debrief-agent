@@ -2276,6 +2276,8 @@ def dev_integrated_narrative():
 if not EXPERIENCE.business:
     from disc_pilot_routes import create_disc_pilot_blueprint
     app.register_blueprint(create_disc_pilot_blueprint())
+    app.register_blueprint(create_disc_pilot_blueprint(mode='ranking'))
+    app.register_blueprint(create_disc_pilot_blueprint(mode='hybrid'))
     from presentation import create_presentation_blueprint
     app.register_blueprint(create_presentation_blueprint())
     from werkzeug.middleware.dispatcher import DispatcherMiddleware

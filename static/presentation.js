@@ -23,6 +23,7 @@ function controls() {
     $('profile-upload').disabled = busy || state.active || state.busy;
     $('reset-source').disabled = busy || state.active || state.busy;
     $('amethyst-source').disabled = busy || state.active || state.busy;
+    $('mario-source').disabled = busy || state.active || state.busy;
     $('workforce-source').disabled = busy || state.active || state.busy;
     $('iranian-source').disabled = busy || state.active || state.busy;
     $('iranian-fa-source').disabled = busy || state.active || state.busy;
@@ -99,6 +100,20 @@ function renderVisual(chart) {
     if (!chart) { container.append(node('p', 'No chart is assigned to this chapter.')); return; }
     container.append(node('h2', chart.title), node('p', chart.note, 'chart-note'));
     if (chart.kind === 'investor') { renderInvestorVisual(container, chart); return; }
+    if (chart.kind === 'force_ranks') {
+        const list = node('ol', '', 'force-priorities');
+        for (const item of chart.items) {
+            const row = node('li', '', 'force-priority');
+            row.value = item.rank;
+            const badge = node('span', String(item.rank), 'force-rank score-bar');
+            badge.dataset.color = item.color;
+            row.append(badge, node('strong', item.label));
+            row.setAttribute('aria-label', `Priority ${item.rank}: ${item.label}`);
+            list.append(row);
+        }
+        container.append(list);
+        return;
+    }
     if (chart.kind === 'aci') {
         const panels = node('div', '', 'aci-panels');
         const value = score => typeof score === 'number' && Number.isFinite(score) ? String(score) : 'Not reported';
@@ -108,7 +123,7 @@ function renderVisual(chart) {
             section.append(node('h3', panel.title));
             const summary = node('div', '', 'aci-summary');
             summary.append(node('span', 'Reported clarity average'), node('strong', value(panel.clarity_average)));
-            section.append(summary);
+            if (typeof panel.clarity_average === 'number') section.append(summary);
             const grid = node('div', '', 'aci-grid');
             const axis = node('div', '', 'aci-axis');
             for (const tick of ['100', '75', '50', '25', '0']) axis.append(node('span', tick));
@@ -124,7 +139,7 @@ function renderVisual(chart) {
                 well.append(bar); column.append(well);
                 column.append(node('strong', value(dimension.clarity), 'aci-value'), node('span', dimension.label, 'aci-label'));
                 column.append(node('span', `${arrows[dimension.bias] || '—'} ${dimension.valuation}`, 'aci-valuation'));
-                column.append(node('span', `Blind spot: ${value(dimension.blind_spot)}`, 'aci-blind-spot'));
+                if (typeof dimension.blind_spot === 'number') column.append(node('span', `Blind spot: ${value(dimension.blind_spot)}`, 'aci-blind-spot'));
                 grid.append(column);
             }
             section.append(grid, node('p', `Emotional bias distortion: ${value(panel.emotional_bias_distortion)}`, 'aci-distortion'));
@@ -231,6 +246,7 @@ $('profile-upload').addEventListener('change', () => run(async () => {
 }));
 $('reset-source').addEventListener('click', () => run(() => changeSource(null)));
 $('amethyst-source').addEventListener('click', () => run(() => changeSource(null, 'amethyst')));
+$('mario-source').addEventListener('click', () => run(() => changeSource(null, 'mario')));
 $('workforce-source').addEventListener('click', () => run(() => changeSource(null, 'workforce-investor')));
 $('iranian-source').addEventListener('click', () => run(() => changeSource(null, 'iranian-american')));
 $('iranian-fa-source').addEventListener('click', () => run(() => changeSource(null, 'iranian-american-fa')));

@@ -1,0 +1,98 @@
+{
+  "model": "gpt-4o-transcribe",
+  "date": "2026-11-15",
+  "recordings": [
+    {
+      "id": "disc",
+      "file": "Mario DISC.m4a",
+      "duration_seconds": 790.784,
+      "sha256": "1a998c2437ccf7a2b664d1c2714a8df040f8519b60fc462044ae38a144f21906",
+      "chunks": [
+        {
+          "id": "disc-1",
+          "start_seconds": 0,
+          "end_seconds": 300,
+          "raw_word_count": 643
+        },
+        {
+          "id": "disc-2",
+          "start_seconds": 298,
+          "end_seconds": 598,
+          "raw_word_count": 641
+        },
+        {
+          "id": "disc-3",
+          "start_seconds": 596,
+          "end_seconds": 790.784,
+          "raw_word_count": 435
+        }
+      ],
+      "raw_word_count": 1704,
+      "cleaned_word_count": 1692
+    },
+    {
+      "id": "acumen-12df",
+      "file": "Mario Acumen⁄12DF.m4a",
+      "duration_seconds": 841.152,
+      "sha256": "e4133202b0bb6de2a869c58ae32f8c75a6e4e8bf51503d8b2fc1496042ccfe26",
+      "chunks": [
+        {
+          "id": "acumen-12df-1",
+          "start_seconds": 0,
+          "end_seconds": 300,
+          "raw_word_count": 661
+        },
+        {
+          "id": "acumen-12df-2",
+          "start_seconds": 298,
+          "end_seconds": 598,
+          "raw_word_count": 584
+        },
+        {
+          "id": "acumen-12df-3",
+          "start_seconds": 596,
+          "end_seconds": 841.152,
+          "raw_word_count": 484
+        }
+      ],
+      "raw_word_count": 1725,
+      "cleaned_word_count": 1711
+    }
+  ],
+  "presentation_word_count": 1377,
+  "session_budget_seconds": 900,
+  "estimated_speech_seconds_at_110_wpm": 751.1,
+  "setup_allowance_seconds": 60,
+  "source_report": null,
+  "chapter_sources": {
+    "Welcome, Mario": [
+      "disc-1.raw.txt"
+    ],
+    "DISC · Dominance and Influence": [
+      "disc-1.raw.txt",
+      "disc-2.raw.txt"
+    ],
+    "DISC · Pace, detail, and adaptability": [
+      "disc-2.raw.txt",
+      "disc-3.raw.txt"
+    ],
+    "Driving Forces · Innovation, learning, and return": [
+      "acumen-12df-1.raw.txt"
+    ],
+    "Driving Forces · Harmony and collaboration": [
+      "acumen-12df-1.raw.txt",
+      "acumen-12df-2.raw.txt"
+    ],
+    "Acumen · World View": [
+      "acumen-12df-2.raw.txt",
+      "acumen-12df-3.raw.txt"
+    ],
+    "Acumen · Self View": [
+      "acumen-12df-2.raw.txt",
+      "acumen-12df-3.raw.txt"
+    ],
+    "Your outlook and next steps": [
+      "acumen-12df-3.raw.txt"
+    ]
+  }
+}

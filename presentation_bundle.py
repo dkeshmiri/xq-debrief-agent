@@ -57,6 +57,13 @@ def profile_visuals(profile):
     for pair in FORCES:
         for key in pair:
             score(values.get(key))
+    ranks = object_value(forces.get('ranks', {}), 'Driving Forces ranks')
+    known_forces = {key for pair in FORCES for key in pair}
+    if any(key not in known_forces or type(value) is not int or not 1 <= value <= 12
+           for key, value in ranks.items()):
+        raise ValueError('Driving Forces ranks must use known force names and whole numbers from 1 to 12.')
+    if len(set(ranks.values())) != len(ranks):
+        raise ValueError('Each reported Driving Force rank must be unique.')
     if 'aci' in profile and 'eq' in profile:
         raise ValueError('Choose ACI or EQ for this presentation, not both.')
     if 'aci' in profile:

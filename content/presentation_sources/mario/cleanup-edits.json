@@ -1,0 +1,106 @@
+{
+  "joins": {
+    "disc": [
+      [
+        "disc-1",
+        ""
+      ],
+      [
+        "disc-2",
+        "The next one I'm going to talk to you about is "
+      ],
+      [
+        "disc-3",
+        "to adapt to your "
+      ]
+    ],
+    "acumen-12df": [
+      [
+        "acumen-12df-1",
+        ""
+      ],
+      [
+        "acumen-12df-2",
+        "You don't like fighting. "
+      ],
+      [
+        "acumen-12df-3",
+        ""
+      ]
+    ]
+  },
+  "cleanup": [
+    {
+      "recording": "disc",
+      "from": "if you notice, ",
+      "to": "",
+      "count": 1
+    },
+    {
+      "recording": "disc",
+      "from": "If you notice, ",
+      "to": "",
+      "count": 1
+    },
+    {
+      "recording": "disc",
+      "from": "over and over and over and over again",
+      "to": "over and over again",
+      "count": 1
+    },
+    {
+      "recording": "disc",
+      "from": "too, too high",
+      "to": "too high",
+      "count": 1
+    },
+    {
+      "recording": "disc",
+      "from": "in boards",
+      "to": "in words",
+      "count": 1
+    },
+    {
+      "recording": "disc",
+      "from": "workplace is sub 64",
+      "to": "workplace is 64",
+      "count": 1
+    },
+    {
+      "recording": "disc",
+      "from": "success inside wheel",
+      "to": "Success Insights wheel",
+      "count": 1
+    },
+    {
+      "recording": "acumen-12df",
+      "from": "if you notice, ",
+      "to": "",
+      "count": 3
+    },
+    {
+      "recording": "acumen-12df",
+      "from": "very, very, very",
+      "to": "very",
+      "count": 1
+    },
+    {
+      "recording": "acumen-12df",
+      "from": "very, very",
+      "to": "very",
+      "count": 2
+    },
+    {
+      "recording": "acumen-12df",
+      "from": "with Tabis",
+      "to": "with Tavus",
+      "count": 1
+    },
+    {
+      "recording": "acumen-12df",
+      "from": "with the disk",
+      "to": "with DISC",
+      "count": 1
+    }
+  ]
+}

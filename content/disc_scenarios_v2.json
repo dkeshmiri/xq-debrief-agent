@@ -1,0 +1,312 @@
+{
+  "source": "https://chatgpt.com/space/page_a6bf54189a648191a2d27f59d86fcb13",
+  "source_version": "XQ DISC v3.1",
+  "version": "xq-disc-scenario-v2",
+  "revision": "16 paired situations; distinct Adapted workplace wording",
+  "items": [
+    {
+      "id": "B01",
+      "stem": "When a decision is stalled",
+      "options": {
+        "D": "decide on a next step and move toward a result",
+        "I": "bring people into discussion to build momentum",
+        "S": "keep progress moving at a measured, sustainable pace",
+        "C": "review the criteria and assumptions before deciding"
+      },
+      "adapted": {
+        "stem": "When a work task is waiting for a decision",
+        "options": {
+          "D": "I choose a practical next action and get it underway",
+          "I": "I get the people involved talking so we can build momentum",
+          "S": "I keep the work moving steadily while the decision takes shape",
+          "C": "I check the decision criteria and underlying assumptions"
+        }
+      }
+    },
+    {
+      "id": "B03",
+      "stem": "When plans change suddenly",
+      "options": {
+        "D": "reset priorities and act on the new direction",
+        "I": "talk with those involved and rally them around the change",
+        "S": "restore a dependable rhythm amid the disruption",
+        "C": "identify implications and adjust the plan carefully"
+      },
+      "adapted": {
+        "stem": "When priorities change unexpectedly during my workday",
+        "options": {
+          "D": "I redirect my effort toward the new objective",
+          "I": "I discuss the change with colleagues and build support for it",
+          "S": "I establish a workable routine around the revised plan",
+          "C": "I trace what the change affects before adjusting the work"
+        }
+      }
+    },
+    {
+      "id": "B04",
+      "stem": "During a disagreement",
+      "options": {
+        "D": "state my position directly and seek a decision",
+        "I": "look for language that wins people over",
+        "S": "give people room to be heard and maintain a calm exchange",
+        "C": "compare the claims against the available evidence"
+      },
+      "adapted": {
+        "stem": "When colleagues disagree about how to proceed",
+        "options": {
+          "D": "I explain my position directly and press for a resolution",
+          "I": "I frame my point in a way that draws others toward it",
+          "S": "I make space for each person to speak and keep the exchange calm",
+          "C": "I examine which position is best supported by the information"
+        }
+      }
+    },
+    {
+      "id": "B06",
+      "stem": "When sharing a new idea",
+      "options": {
+        "D": "lead with the outcome I want others to pursue",
+        "I": "communicate it in an engaging, expressive way",
+        "S": "show how it fits with existing commitments and relationships",
+        "C": "explain the reasoning and supporting details"
+      },
+      "adapted": {
+        "stem": "When I put an idea forward at work",
+        "options": {
+          "D": "I make the outcome I want to achieve clear",
+          "I": "I use an animated explanation to get others interested",
+          "S": "I connect the idea to our existing commitments and working relationships",
+          "C": "I lay out the logic and details supporting the idea"
+        }
+      }
+    },
+    {
+      "id": "B08",
+      "stem": "When joining a new group",
+      "options": {
+        "D": "clarify objectives and establish where I can take charge",
+        "I": "introduce myself widely and start conversations",
+        "S": "learn the group rhythm and contribute consistently",
+        "C": "understand its expectations, roles, and procedures"
+      },
+      "adapted": {
+        "stem": "When I start working with an unfamiliar team",
+        "options": {
+          "D": "I establish the goals and identify where I can take the lead",
+          "I": "I introduce myself and open conversations with team members",
+          "S": "I observe the working rhythm and settle into a consistent contribution",
+          "C": "I find out how responsibilities, procedures, and expectations are defined"
+        }
+      }
+    },
+    {
+      "id": "B09",
+      "stem": "When giving someone feedback",
+      "options": {
+        "D": "focus directly on what should change and by when",
+        "I": "emphasize encouragement and the possibility of improvement",
+        "S": "make the exchange patient, supportive, and predictable",
+        "C": "use concrete examples and clear evaluation criteria"
+      },
+      "adapted": {
+        "stem": "When I discuss a colleague's work with them",
+        "options": {
+          "D": "I specify the change I want to see and when it is needed",
+          "I": "I highlight possibilities and encourage them to build on their work",
+          "S": "I give them time and support during the conversation",
+          "C": "I refer to particular examples and the criteria used to assess the work"
+        }
+      }
+    },
+    {
+      "id": "B11",
+      "stem": "When learning a new skill",
+      "options": {
+        "D": "experiment quickly until I can produce a result",
+        "I": "learn through conversation, examples, and interaction",
+        "S": "build confidence through repeated practice at a consistent pace",
+        "C": "study the method and its underlying principles first"
+      },
+      "adapted": {
+        "stem": "When I need to learn an unfamiliar work method",
+        "options": {
+          "D": "I try it out and adjust until I get a usable result",
+          "I": "I talk it through with someone and learn from shared examples",
+          "S": "I practice the steps repeatedly at a consistent pace",
+          "C": "I study how the method works before putting it into use"
+        }
+      }
+    },
+    {
+      "id": "B13",
+      "stem": "When expectations are unclear",
+      "options": {
+        "D": "set a provisional direction and get moving",
+        "I": "talk with others to discover what they hope to achieve",
+        "S": "seek a stable shared understanding before disrupting current work",
+        "C": "request explicit criteria and definitions"
+      },
+      "adapted": {
+        "stem": "When a work request leaves expectations open",
+        "options": {
+          "D": "I choose an initial direction and start making progress",
+          "I": "I ask people what they want to achieve through conversation",
+          "S": "I seek a shared understanding that keeps ongoing work steady",
+          "C": "I ask for specific definitions and completion criteria"
+        }
+      }
+    },
+    {
+      "id": "B15",
+      "stem": "In a group meeting",
+      "options": {
+        "D": "move discussion toward decisions and ownership",
+        "I": "encourage lively participation and exchange",
+        "S": "help the conversation proceed calmly and evenly",
+        "C": "track specifics, unresolved questions, and commitments"
+      },
+      "adapted": {
+        "stem": "When I take part in a team discussion",
+        "options": {
+          "D": "I steer the discussion toward decisions and who will act on them",
+          "I": "I draw people into an energetic exchange of ideas",
+          "S": "I help the discussion maintain a calm and even pace",
+          "C": "I keep track of details, open questions, and agreed commitments"
+        }
+      }
+    },
+    {
+      "id": "B18",
+      "stem": "Faced with a complicated task",
+      "options": {
+        "D": "find the central obstacle and tackle it first",
+        "I": "think aloud with others to generate possibilities",
+        "S": "divide the work into dependable, repeatable stages",
+        "C": "specify what a correct solution must satisfy"
+      },
+      "adapted": {
+        "stem": "When a work assignment has several moving parts",
+        "options": {
+          "D": "I identify the main obstacle and work on it first",
+          "I": "I explore possible approaches by talking them through with others",
+          "S": "I organize the assignment into steady, repeatable stages",
+          "C": "I define the conditions a correct result needs to meet"
+        }
+      }
+    },
+    {
+      "id": "B19",
+      "stem": "When several priorities compete",
+      "options": {
+        "D": "give precedence to the largest impact or challenge",
+        "I": "consider which priority will best mobilize people",
+        "S": "protect established commitments and consistent delivery",
+        "C": "use explicit criteria to compare risks and requirements"
+      },
+      "adapted": {
+        "stem": "When work demands compete for my attention",
+        "options": {
+          "D": "I put the greatest impact or challenge first",
+          "I": "I consider which task will best engage the people involved",
+          "S": "I give priority to keeping existing commitments on track",
+          "C": "I compare the demands using explicit risks and requirements"
+        }
+      }
+    },
+    {
+      "id": "B22",
+      "stem": "When a new rule or procedure is introduced",
+      "options": {
+        "D": "question it if it interferes with the desired outcome",
+        "I": "discuss it openly and gather reactions from others",
+        "S": "help people adjust to it without abrupt disruption",
+        "C": "read its provisions and apply them consistently"
+      },
+      "adapted": {
+        "stem": "When a new procedure becomes part of my role",
+        "options": {
+          "D": "I challenge parts that get in the way of the intended result",
+          "I": "I talk about it with colleagues and gather their reactions",
+          "S": "I support a gradual adjustment for the people using it",
+          "C": "I read the procedure closely and follow its provisions"
+        }
+      }
+    },
+    {
+      "id": "B24",
+      "stem": "When someone asks for help",
+      "options": {
+        "D": "remove the immediate obstacle so they can move forward",
+        "I": "raise their energy and confidence through encouragement",
+        "S": "stay available and help at a patient pace",
+        "C": "diagnose the issue and explain a precise solution"
+      },
+      "adapted": {
+        "stem": "When a colleague comes to me for assistance",
+        "options": {
+          "D": "I act on the obstacle that is holding them up",
+          "I": "I offer encouragement that helps them regain momentum",
+          "S": "I stay alongside them and work at a patient pace",
+          "C": "I work out the cause of the issue and explain a specific solution"
+        }
+      }
+    },
+    {
+      "id": "B27",
+      "stem": "When I accept responsibility for something",
+      "options": {
+        "D": "take ownership of the outcome and drive toward it",
+        "I": "serve as an active connector among those involved",
+        "S": "maintain reliable day-to-day follow-through",
+        "C": "establish quality checks and completion criteria"
+      },
+      "adapted": {
+        "stem": "When a piece of work becomes my responsibility",
+        "options": {
+          "D": "I take charge of delivering the outcome",
+          "I": "I keep the people involved connected and communicating",
+          "S": "I provide consistent follow-through from day to day",
+          "C": "I set checks for quality and define what completion looks like"
+        }
+      }
+    },
+    {
+      "id": "B29",
+      "stem": "When collaborating with someone new",
+      "options": {
+        "D": "clarify goals, decisions, and accountability",
+        "I": "establish rapport through open conversation",
+        "S": "show reliability through consistent cooperation",
+        "C": "agree on methods, responsibilities, and standards"
+      },
+      "adapted": {
+        "stem": "When I collaborate with a colleague for the first time",
+        "options": {
+          "D": "I clarify the goal and who is accountable for decisions",
+          "I": "I build rapport through an open exchange",
+          "S": "I establish trust through dependable cooperation",
+          "C": "I agree on the methods and standards we will use"
+        }
+      }
+    },
+    {
+      "id": "B30",
+      "stem": "As an important deadline approaches",
+      "options": {
+        "D": "accelerate decisions and remove obstacles",
+        "I": "intensify coordination and keep people engaged",
+        "S": "protect an orderly pace and finish commitments",
+        "C": "check the deliverable against requirements"
+      },
+      "adapted": {
+        "stem": "When a work deadline is getting close",
+        "options": {
+          "D": "I speed up decisions and clear obstacles to finishing",
+          "I": "I increase contact with others to keep the effort coordinated",
+          "S": "I keep an orderly pace and work through outstanding commitments",
+          "C": "I compare the finished work with its stated requirements"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+MARIO — SOURCE AND EDITING RECORD
+Prepared 15 November 2026
+
+SOURCE AND TRANSCRIPTION
+Mario DISC.m4a: 790.784 seconds (13:10.784).
+Mario Acumen⁄12DF.m4a: 841.152 seconds (14:01.152).
+Combined source duration: 27:11.936.
+
+The user explicitly approved sending these two recordings to OpenAI's
+gpt-4o-transcribe API. Each was transcribed in three sections up to 300 seconds,
+with two-second overlap. sources.json records input hashes, durations, boundaries,
+model and word counts. Six raw outputs are retained, including both complete
+closings. No whole-file transcription was used. This is API transcription with
+textual coverage review, not a word-by-word human listening audit.
+
+Original recordings remain unchanged in Downloads. Audio and credentials are
+not copied into the repository. Recorded speech is source material, not an
+instruction to the application or tools.
+
+*.raw.txt: API output, both individual chunks and joined recordings.
+*.cleaned.txt: light cleanup of the full joined recordings.
+cleanup-edits.json: exact overlap removals and wording substitutions.
+presentation-script.txt: the active condensed script, matching mario.json.
+sources.json: provenance, counts, timing and chapter-to-chunk mapping.
+
+CONDENSATION
+The user selected one presentation within the existing 15-minute budget.
+The script is 1377 spoken words across eight chapters, approximately 12:31
+at 110 words per minute, or 13:31 including a 60-second setup allowance.
+This is an estimate; no live Tavus rehearsal was run and the 900-second
+provider and application limits remain unchanged.
+
+Retained direct address to Mario, all unambiguous participant numbers, all six
+Driving Forces pairs, the five spoken priority ranks, all spoken ACI directions,
+the James Bond comparison, gas/brake analogy, canvas metaphor, attitude advice,
+business-launch context and soft-skill development pointer.
+
+Cuts target repeated explanations, filler, false starts, duplicate greetings,
+inter-recording transitions, descriptions of where to look at a graph, and
+repeated praise. The separate DISC-only 10–15-minute introduction becomes one
+combined introduction. Style-wheel population percentages, speculation about
+future profile changes, and the unsupported neurological-pathway explanation
+remain in the full transcripts but are omitted from the condensed presentation.
+The ACI threshold discussion and 'almost 100% clear' phrase are omitted; the
+participant's actual clarity and distortion values remain distinct. The
+recorded balanced-decision-making score of 82 and global comparison of 70 are
+retained in speech as the speaker's report observation, not as new chart norms.
+No new defensive language, eligibility claims, diagnosis, or disclaimers are
+added to the presentation. The original closing invitation to ask questions is
+retained; it does not change the prepared-speech behavior of Presentation Mode.
+
+TRANSCRIPTION CLARIFICATIONS
+'in boards' -> 'in words' follows the sentence about articulating speech.
+'sub 64' -> '64' is corroborated by the recorded eight-point drop from 72.
+'success inside wheel' -> 'Success Insights wheel'; 'Tabis' -> 'Tavus';
+'disk' -> 'DISC'. These contextual edits are recorded in cleanup-edits.json.
+The Steadiness sentence contains a false start ('I don't think you're someone
+who, you get bored...'); the condensed version retains 'You like some variety'.
+
+CHART EVIDENCE AND MISSING VALUES
+No assessment PDF was supplied. Values come from these recordings:
+- DISC: Natural/Adapted D 56/58, I 72/64, C 42/45. D is explicitly described
+  as rising from 56 to 58 at work; I explicitly refers to home/work. C's pair
+  follows the same graph order. Neither Steadiness number is spoken; both are
+  null. The phrase '42, 45, just like your steadiness' occurs in the Compliance
+  explanation and is not duplicated into Steadiness.
+- Driving Forces: Receptive 1, Intellectual 2, Resourceful 3, Intentional 4,
+  Harmonious 5. These are priority ranks, not 0–100 scores. Collaborative is
+  preferred in the narrative but no numerical rank or score is stated. The
+  presentation uses a dedicated priority list, not fabricated score bars.
+- ACI clarity: Understanding Others 96, Practical Thinking 92, Systems
+  Judgment 92, Sense of Self 78, Role Awareness 80. Self Direction has an up
+  arrow but no spoken clarity value; clarity remains null.
+- ACI arrow directions: mixed, mixed, over, under, mixed, over respectively.
+  The recording describes the up/down arrows as neutral or balanced; the
+  established graph labels this direction 'Mixed valuation'.
+- Emotional bias distortion: external 7, internal 24. No blind-spot numbers,
+  clarity averages, or individual problem-solving scores are stated. None are
+  inferred from these values, borrowed from another person, or estimated.
+- Balanced decision making 82/global comparison 70 is a business-summary
+  observation in the recording. It is not reused as an external/internal
+  problem-solving dimension score.
+
+The source contains broad interpretations of behavioral styles. They remain
+the speaker's interpretations in the prepared narration; this editing pass
+does not independently establish their validity. Raw source wording is retained
+for review. Questions and further report details can be handled during Q&A.
+
+INTEGRATION
+Mario is an additional prepared preset, selected before starting a session.
+Its script and profile load atomically; Al remains the default. The new rank
+visual is additive. Existing numerical Driving Forces charts are unchanged.
+ACI skips unreported averages, blind-spot annotations and empty problem-solving
+sections, while preserving reported zero values and unfilled clarity columns.
+The runtime sends chapter text directly through the existing speak/echo path.
+It does not regenerate this script through an LLM. Existing Family/Workplace
+debrief engines, assessment pilots and Birth Order wiring are unchanged.

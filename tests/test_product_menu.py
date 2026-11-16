@@ -10,9 +10,23 @@ class ProductMenuTests(unittest.TestCase):
         engine, orchestrator, transport = app.engine, app.orchestrator, app.tavus
         with patch.dict(app.app.config, DISC_PILOT_ENABLED=True):
             self.assertIn(b'href="/pilot/disc"', client.get('/').data)
+            self.assertIn(b'href="/pilot/disc/scenarios"', client.get('/').data)
+            self.assertIn(b'href="/pilot/disc/hybrid"', client.get('/').data)
             self.assertEqual(client.get('/pilot/disc').status_code, 200)
+            self.assertEqual(client.get('/pilot/disc/scenarios').status_code, 200)
+            self.assertEqual(client.get('/pilot/disc/hybrid').status_code, 200)
             result = client.post('/pilot/disc/report', json={'version': VERSION, 'responses': {
                 context: {item['id']: 2 for item in ITEMS} for context in ('natural', 'adapted')}})
+            self.assertEqual(result.status_code, 200)
+            from disc_hybrid_scoring import ITEMS as HYBRID_ITEMS, VERSION as HYBRID_VERSION
+            result = client.post('/pilot/disc/hybrid/report', json={'version': HYBRID_VERSION, 'responses': {
+                context: {item['id']: {'ratings': dict.fromkeys('DISC', 4), 'first': 'D'} for item in HYBRID_ITEMS}
+                for context in ('natural', 'adapted')}})
+            self.assertEqual(result.status_code, 200)
+            self.assertEqual(result.json['profiles']['natural']['C']['score'], 100)
+            from disc_scenario_scoring import ITEMS as SCENARIOS, VERSION as SCENARIO_VERSION
+            result = client.post('/pilot/disc/scenarios/report', json={'version': SCENARIO_VERSION, 'responses': {
+                context: {item['id']: list('DISC') for item in SCENARIOS} for context in ('natural', 'adapted')}})
             self.assertEqual(result.status_code, 200)
         self.assertIs(app.engine, engine)
         self.assertIs(app.orchestrator, orchestrator)
@@ -23,9 +37,12 @@ class ProductMenuTests(unittest.TestCase):
         with patch.dict(app.app.config, DISC_PILOT_ENABLED=False):
             page = client.get('/')
             self.assertNotIn(b'href="/pilot/disc"', page.data)
+            self.assertNotIn(b'href="/pilot/disc/scenarios"', page.data)
+            self.assertNotIn(b'href="/pilot/disc/hybrid"', page.data)
             self.assertIn(b'href="/profiles"', page.data)
             self.assertIn(b'href="/business/"', page.data)
             self.assertEqual(client.get('/pilot/disc').status_code, 404)
+            self.assertEqual(client.get('/pilot/disc/hybrid').status_code, 404)
 
     def test_product_selector_links_to_existing_profile_flows(self):
         client = app.app.test_client()

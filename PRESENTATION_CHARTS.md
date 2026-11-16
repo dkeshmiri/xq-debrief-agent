@@ -102,6 +102,32 @@ the supplied PDF's pages 26, 39, 52–53, 55–56, and 60. No new assessment ext
 or STT service was added to the runtime app; this is a prepared presentation.
 
 
+## Mario recorded debrief
+
+Choose **Presentation source → Mario · DISC / Driving Forces / ACI** before
+starting. `content/presentations/mario.json` contains the prepared script and
+recorded score snapshot. Eight chapters condense the two supplied recordings
+into 1377 spoken words: about 13½ minutes at 110 words per minute with one
+minute for setup. The 15-minute session limit remains unchanged.
+
+The recordings state the top five Driving Forces **ranks**, rather than their
+0–100 scores. `profile.driving_forces.ranks` stores unique integer priorities
+from 1 through 12. The additive `forces_priorities` chart displays these as a
+numbered list using the existing force-family colors. Ranks never populate
+numeric score bars. Scripted uploads support the same optional rank mapping.
+
+Unspoken scores remain missing, including both Steadiness values and ACI Self
+Direction clarity. The six ACI valuation directions and both emotional bias
+distortion values are included. No blind spots, averages or problem-solving
+numbers are inferred. Empty ACI detail sections are omitted. A later source
+report can supply these values without rewriting the chapter text.
+
+The six raw transcription segments, joined transcripts, light cleanup,
+condensed review script and evidence/editing notes are in
+`content/presentation_sources/mario/`. Playback uses the supplied chapter text
+directly. No source audio is copied into the repository and no live Tavus
+conversation is needed to preview or validate the presentation.
+
 ## Workforce AI investor presentation
 
 Choose **Presentation source → Workforce AI · Investor presentation** before

@@ -4,11 +4,18 @@ from threading import BoundedSemaphore
 
 from flask import Blueprint, Response, abort, current_app, jsonify, render_template, request
 
-from disc_pilot_scoring import questionnaire, score_assessment
+import disc_pilot_scoring
+import disc_scenario_scoring
+import disc_hybrid_scoring
 
 
-def create_disc_pilot_blueprint(synthesizer=None):
-    blueprint = Blueprint('disc_pilot', __name__, url_prefix='/pilot/disc')
+def create_disc_pilot_blueprint(synthesizer=None, *, mode='frequency'):
+    scorer, name, path, title = {
+        'frequency': (disc_pilot_scoring, 'disc_pilot', '/pilot/disc', 'Behavior frequency'),
+        'ranking': (disc_scenario_scoring, 'disc_scenario', '/pilot/disc/scenarios', 'Scenario ranking'),
+        'hybrid': (disc_hybrid_scoring, 'disc_hybrid', '/pilot/disc/hybrid', 'Hybrid assessment'),
+    }[mode]
+    blueprint = Blueprint(name, __name__, url_prefix=path)
     speech = synthesizer
     audio_slot = BoundedSemaphore(1)
 
@@ -19,16 +26,18 @@ def create_disc_pilot_blueprint(synthesizer=None):
 
     @blueprint.get('')
     def page():
-        return render_template('disc_pilot.html')
+        return render_template('disc_pilot.html', mode=mode, title=title,
+                               ranking=mode == 'ranking', hybrid=mode == 'hybrid',
+                               pilot_endpoint=f'{blueprint.name}.page')
 
     @blueprint.get('/questionnaire')
     def questions():
-        return jsonify(questionnaire())
+        return jsonify(scorer.questionnaire())
 
     def submission():
         if request.content_length and request.content_length > 16_384:
             abort(413)
-        return score_assessment(request.get_json(silent=True))
+        return scorer.score_assessment(request.get_json(silent=True))
 
     @blueprint.post('/report')
     def report():
