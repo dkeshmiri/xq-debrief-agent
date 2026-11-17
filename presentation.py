@@ -6,7 +6,7 @@ from threading import RLock
 from time import monotonic
 from flask import Blueprint, jsonify, render_template, request
 from presentation_visuals import charts, profile_presentation
-from presentation_bundle import bundle_presentation
+from presentation_bundle import bundle_presentation, presentation_parts
 from presentation_access import protect_presentation
 from playback_logging import logger
 from playback_event_tracker import PlaybackEventTracker
@@ -38,12 +38,15 @@ class Presentation:
         self.tracker = PlaybackEventTracker()
         self.retired = set()
         self.shutdown_reason = None
+        self.parts = presentation_parts({}, self.chapters)
+        self.part_index = 0
 
     def status(self):
         with self.lock:
             remaining = PRESENTATION_BUDGET if self.started_at is None else max(0, int(PRESENTATION_BUDGET - (self.clock()-self.started_at)))
             active = bool(self.client.conversation_id)
             replica_ids = getattr(self.client, 'pal_participant_ids', set())
+            part = self.parts[self.part_index]
             return dict(active=active, connected=self.client.connected, busy=self.busy,
                         index=self.index, completed=self.completed,
                         replica_participant_ids=sorted(replica_ids) if isinstance(replica_ids, (set, list, tuple)) else [],
@@ -52,7 +55,13 @@ class Presentation:
                         remaining_seconds=remaining, shutdown_reason=self.shutdown_reason,
                         chapters=self.chapters, visuals=self.visuals, source=self.source, revision=self.revision,
                         language=self.language, narration_supported=self.language == 'en',
-                        word_count=sum(len(c['text'].split()) for c in self.chapters))
+                        word_count=sum(len(c['text'].split()) for c in self.chapters),
+                        session_id=self.client.conversation_id,
+                        parts=self.parts, part_index=self.part_index, part_count=len(self.parts),
+                        part_end_index=part['chapter_end'],
+                        has_next_part=self.part_index < len(self.parts)-1,
+                        part_word_count=sum(len(c['text'].split()) for c in
+                                            self.chapters[part['chapter_start']:part['chapter_end']+1]))
 
     def configure(self, profile, preset=None):
         with self.lock:
@@ -72,7 +81,9 @@ class Presentation:
                 chapters, visuals, source = bundle_presentation(profile)
             else:
                 chapters, visuals, source = profile_presentation(profile)
+            parts = presentation_parts(profile if isinstance(profile, dict) else {}, chapters)
             self.language = profile.get('language', 'en') if isinstance(profile, dict) and 'presentation_version' in profile else 'en'
+            self.parts, self.part_index = parts, 0
             self.chapters, self.visuals, self.source = chapters, visuals, source
             self.index = 0
             self.completed = False
@@ -85,6 +96,7 @@ class Presentation:
             if self.busy or self.client.conversation_id:
                 raise ValueError('End the existing presentation before starting another.')
             self.busy = True
+            self.part_index = 0
             self.index = 0
             self.completed = False
             self.shutdown_reason = None
@@ -95,6 +107,40 @@ class Presentation:
             data = self.client.create_conversation(
                 conversation_name='XQ Investor Presentation', max_call_duration=PRESENTATION_BUDGET)
             return {key: data[key] for key in ('conversation_id','conversation_url','meeting_token') if key in data}
+        finally:
+            with self.lock:
+                self.busy = False
+
+    def next_part(self, expected_session_id):
+        """End the completed part before creating the next room. Never retry Echo."""
+        with self.lock:
+            part = self.parts[self.part_index]
+            if (self.busy or not isinstance(expected_session_id, str) or not expected_session_id
+                    or expected_session_id != self.client.conversation_id):
+                raise ValueError('This presentation connection has changed. Refresh before continuing.')
+            if (self.shutdown_reason or self.tracker.utterance_id is not None or not self.completed
+                    or self.index != part['chapter_end'] or self.part_index >= len(self.parts)-1):
+                raise ValueError('Finish the current part before continuing to the next one.')
+            self.busy = True
+        try:
+            # Provider operations can wait on callbacks; do not hold self.lock.
+            self.client.end_conversation()
+            with self.lock:
+                self.part_index += 1
+                self.index = self.parts[self.part_index]['chapter_start']
+                self.completed = False
+                self.tracker.clear()
+                self.shutdown_reason = None
+                self.started_at = self.clock()
+                # Retain retired inference IDs across the handoff as extra protection.
+            data = self.client.create_conversation(
+                conversation_name=f'XQ Presentation · {self.parts[self.part_index]["title"]}',
+                max_call_duration=PRESENTATION_BUDGET)
+            return {key: data[key] for key in ('conversation_id','conversation_url','meeting_token') if key in data}
+        except Exception:
+            with self.lock:
+                self.shutdown_reason = 'part_transition_failed'
+            raise
         finally:
             with self.lock:
                 self.busy = False
@@ -110,7 +156,7 @@ class Presentation:
             if action not in ('play','next','repeat'):
                 raise ValueError('Unknown presentation action.')
             if action == 'next':
-                if not self.completed or self.index == len(self.chapters)-1:
+                if not self.completed or self.index >= self.parts[self.part_index]['chapter_end']:
                     raise ValueError('There is no completed chapter to advance from.')
                 self.index += 1
             self.completed = False
@@ -137,7 +183,7 @@ class Presentation:
 
     def on_system(self, event):
         with self.lock:
-            if not self.client.conversation_id or event.get('conversation_id') not in (None, self.client.conversation_id):
+            if self.busy or not self.client.conversation_id or event.get('conversation_id') not in (None, self.client.conversation_id):
                 return
             reason = (event.get('properties') or {}).get('shutdown_reason')
             self.shutdown_reason = reason or self.shutdown_reason or 'conversation_ended'
@@ -200,6 +246,11 @@ def create_presentation_blueprint(presentation=None):
                 return jsonify(ok=True)
             if action == 'start':
                 return jsonify(conversation=session.start())
+            if action == 'next-part':
+                data = request.get_json(silent=True)
+                if not isinstance(data, dict):
+                    return jsonify(error='Supply the completed presentation session.'), 400
+                return jsonify(conversation=session.next_part(data.get('session_id')))
             if action == 'end':
                 session.end()
             elif action in ('play','repeat','next'):

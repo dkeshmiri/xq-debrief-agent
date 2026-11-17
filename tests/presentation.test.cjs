@@ -24,6 +24,68 @@ const state = {active:false, connected:false, busy:false, index:0, completed:fal
         {label:'Force',series:[{label:'Zero',value:0,color:'force'}, {label:'Unknown',value:null,color:'force'}]}]}},
     word_count:2, remaining_seconds:900, revision:0, source:'Recorded'};
 
+function partFixture() {
+    const f=fixture();
+    f.run(`state=${JSON.stringify({...state,active:true,connected:true,completed:true,has_next_part:true,part_end_index:0,session_id:'first'})};
+        online=true; joined=true; refresh=async()=>{}; var calls=[];
+        frame={destroy:async()=>calls.push('destroy')};
+        api=async(action,method,body)=>{calls.push([action,body]);return {conversation:{conversation_id:'second'}};};
+        joinConversation=async()=>{calls.push('join-ready');joined=true;state.completed=false;state.index=1;};`);
+    return f;
+}
+
+test('automatic boundary destroys old viewer, creates next session, waits, then speaks once',async()=>{
+    const f=partFixture(); f.get('autoplay').checked=true;
+    await f.run('poll()'); await f.run('poll()');
+    assert.deepEqual(JSON.parse(f.run('JSON.stringify(calls)')),
+        ['destroy',['next-part',{session_id:'first'}],'join-ready',['play',null]]);
+});
+
+test('autoplay off pauses at boundary and manual next starts the next part',async()=>{
+    const f=partFixture(); f.get('autoplay').checked=false;
+    await f.run('poll()'); assert.equal(f.run('calls.length'),0);
+    await f.run('next()'); assert.equal(f.run('calls[1][0]'),'next-part');
+    assert.equal(f.run('calls[3][0]'),'play');
+});
+
+test('failed handoff disables autoplay and never retries automatically',async()=>{
+    const f=partFixture(); f.get('autoplay').checked=true;
+    f.run('api=async()=>{calls.push("failed");throw new Error("Connection failed");};');
+    await f.run('poll()'); await f.run('poll()');
+    assert.equal(f.get('autoplay').checked,false);
+    assert.equal(f.run('calls.filter(c=>c==="failed").length'),1);
+});
+
+test('turning autoplay off during reconnection holds the next part before Echo',async()=>{
+    const f=partFixture(); f.get('autoplay').checked=true;
+    f.run('joinConversation=async()=>{joined=true;$("autoplay").checked=false;};');
+    await f.run('next(true)');
+    assert.equal(f.run('calls.some(c=>c[0]==="play")'),false);
+});
+
+test('busy handoff rejects another browser action',async()=>{
+    const f=partFixture();
+    f.run('var release; joinConversation=()=>new Promise(resolve=>{release=resolve;});var firstRun=run(next);');
+    await Promise.resolve(); await Promise.resolve(); await Promise.resolve();
+    assert.equal(await f.run('run(next)'),false);
+    f.run('release();'); await f.run('firstRun');
+    assert.equal(f.run('calls.filter(c=>c[0]==="next-part").length'),1);
+});
+
+test('late leave or error from an old viewer cannot disconnect the new viewer',async()=>{
+    const f=fixture();
+    f.run(`refresh=async()=>{};waitForPresenter=async()=>{};var players=[];
+        window.PresentationPlayer=class {
+            constructor(){this.handlers={};players.push(this);}
+            on(name,fn){this.handlers[name]=fn;}
+            async join(){}
+        };`);
+    await f.run('joinConversation({conversation:{conversation_url:"first"}})');
+    await f.run('joinConversation({conversation:{conversation_url:"second"}})');
+    f.run('players[0].handlers["left-meeting"]();players[0].handlers.error();');
+    assert.equal(f.run('joined && frame===players[1]'),true);
+});
+
 test('preview follows chapter selection, distinguishes zero from missing, and live chapter takes over',()=>{
     const f=fixture(); f.run(`render(${JSON.stringify(state)})`);
     f.get('preview-chapter').value='1'; f.get('preview-chapter').handlers.change();
@@ -158,6 +220,18 @@ test('Mario selector requests its own prepared source',async()=>{
     f.run('var requested; changeSource=async(profile,preset)=>{requested={profile,preset};}; refresh=async()=>{};');
     await f.get('mario-source').handlers.click();
     assert.equal(f.run('JSON.stringify(requested)'), JSON.stringify({profile:null,preset:'mario'}));
+});
+
+test('report wheel renders the source image with an accessible marker legend',()=>{
+    const f=fixture();
+    const chart={kind:'report_image',title:'People and action',note:'Behavioral styles',
+        image:'/static/presentation-assets/mario-insights-wheel.png',alt:'Dot 14; star 13',
+        legend:['● Natural · 14 · Persuading Promoter','★ Adapted · 13 · Promoting Persuader'],attribution:'Report page 29'};
+    f.run(`renderVisual(${JSON.stringify(chart)})`);
+    const figure=f.get('chapter-visual').children[2];
+    assert.equal(figure.children[0].src,chart.image);
+    assert.equal(figure.children[0].alt,chart.alt);
+    assert.deepEqual(figure.children[1].children.map(p=>p.textContent),chart.legend);
 });
 
 test('priority graphics show ranks without manufacturing percentage bars',()=>{

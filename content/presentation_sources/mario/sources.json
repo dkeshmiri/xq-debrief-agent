@@ -59,40 +59,138 @@
       "cleaned_word_count": 1711
     }
   ],
-  "presentation_word_count": 1377,
+  "presentation_word_count": 2920,
   "session_budget_seconds": 900,
-  "estimated_speech_seconds_at_110_wpm": 751.1,
+  "estimated_speech_seconds_at_110_wpm": 1592.7,
   "setup_allowance_seconds": 60,
-  "source_report": null,
+  "source_report": {
+    "file": "Mario Calamita - TriMetrix HD.pdf",
+    "sha256": "72a30401ff98e939cd14da4004918d815a5f337aadb98c4482c85e26e249a387",
+    "report_date": "2026-11-11",
+    "pages": {
+      "DISC": 26,
+      "Driving Forces scores and ranks": 39,
+      "ACI emotional bias distortion": [
+        52,
+        53
+      ],
+      "ACI external problems": 55,
+      "ACI internal problems": 56,
+      "Balanced decision making": 58,
+      "ACI dimensions and averages": 60,
+      "Success Insights Wheel": 29
+    }
+  },
   "chapter_sources": {
-    "Welcome, Mario": [
-      "disc-1.raw.txt"
+    "Part 1 · Welcome, Mario": [
+      "disc.cleaned.txt"
     ],
-    "DISC · Dominance and Influence": [
-      "disc-1.raw.txt",
-      "disc-2.raw.txt"
+    "DISC · Dominance": [
+      "disc.cleaned.txt"
     ],
-    "DISC · Pace, detail, and adaptability": [
-      "disc-2.raw.txt",
-      "disc-3.raw.txt"
+    "DISC · Influence": [
+      "disc.cleaned.txt"
+    ],
+    "DISC · Steadiness": [
+      "disc.cleaned.txt"
+    ],
+    "DISC · Compliance and adaptability": [
+      "disc.cleaned.txt"
+    ],
+    "DISC · People and action": [
+      "disc.cleaned.txt"
+    ],
+    "Part 2 · Your Driving Forces": [
+      "acumen-12df.cleaned.txt"
     ],
     "Driving Forces · Innovation, learning, and return": [
-      "acumen-12df-1.raw.txt"
+      "acumen-12df.cleaned.txt"
     ],
     "Driving Forces · Harmony and collaboration": [
-      "acumen-12df-1.raw.txt",
-      "acumen-12df-2.raw.txt"
+      "acumen-12df.cleaned.txt"
     ],
     "Acumen · World View": [
-      "acumen-12df-2.raw.txt",
-      "acumen-12df-3.raw.txt"
+      "acumen-12df.cleaned.txt"
     ],
     "Acumen · Self View": [
-      "acumen-12df-2.raw.txt",
-      "acumen-12df-3.raw.txt"
+      "acumen-12df.cleaned.txt"
     ],
-    "Your outlook and next steps": [
-      "acumen-12df-3.raw.txt"
+    "Acumen · Clarity and awareness": [
+      "acumen-12df.cleaned.txt"
+    ],
+    "Acumen · Decisions, outlook, and next steps": [
+      "acumen-12df.cleaned.txt"
     ]
+  },
+  "previous_single_session_revision": {
+    "presentation_word_count": 1377,
+    "estimated_speech_seconds_at_110_wpm": 751.1,
+    "chapter_sources": {
+      "Welcome, Mario": [
+        "disc-1.raw.txt"
+      ],
+      "DISC · Dominance and Influence": [
+        "disc-1.raw.txt",
+        "disc-2.raw.txt"
+      ],
+      "DISC · Pace, detail, and adaptability": [
+        "disc-2.raw.txt",
+        "disc-3.raw.txt"
+      ],
+      "Driving Forces · Innovation, learning, and return": [
+        "acumen-12df-1.raw.txt"
+      ],
+      "Driving Forces · Harmony and collaboration": [
+        "acumen-12df-1.raw.txt",
+        "acumen-12df-2.raw.txt"
+      ],
+      "Acumen · World View": [
+        "acumen-12df-2.raw.txt",
+        "acumen-12df-3.raw.txt"
+      ],
+      "Acumen · Self View": [
+        "acumen-12df-2.raw.txt",
+        "acumen-12df-3.raw.txt"
+      ],
+      "Your outlook and next steps": [
+        "acumen-12df-3.raw.txt"
+      ]
+    }
+  },
+  "revision_date": "2026-11-16",
+  "parts": [
+    {
+      "title": "Part 1 · DISC",
+      "chapter_start": 0,
+      "chapter_end": 5,
+      "word_count": 1473,
+      "estimated_speech_seconds_at_110_wpm": 803.5,
+      "setup_allowance_seconds": 60,
+      "session_budget_seconds": 900
+    },
+    {
+      "title": "Part 2 · Driving Forces and Acumen",
+      "chapter_start": 6,
+      "chapter_end": 12,
+      "word_count": 1447,
+      "estimated_speech_seconds_at_110_wpm": 789.3,
+      "setup_allowance_seconds": 60,
+      "session_budget_seconds": 900
+    }
+  ],
+  "revision_notes": "Original uploaded recordings match stored transcription hashes. No retranscription. See two-part-edits.json for exact transcript edits. Report values supplement narration and charts; estimates are not a live Tavus measurement.",
+  "wheel_visual": {
+    "asset": "static/presentation-assets/mario-insights-wheel.png",
+    "page": 29,
+    "natural": {
+      "symbol": "dot",
+      "position": 14,
+      "style": "Persuading Promoter"
+    },
+    "adapted": {
+      "symbol": "star",
+      "position": 13,
+      "style": "Promoting Persuader"
+    }
   }
 }

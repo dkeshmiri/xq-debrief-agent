@@ -11,8 +11,9 @@ function setShowcase(enabled) {
 $('showcase-toggle').addEventListener('click', () => setShowcase(!showcase));
 window.addEventListener('keydown', event => { if (event.key === 'Escape') setShowcase(false); });
 function notice(message = '') { $('notice').textContent = message; $('notice').hidden = !message; }
-async function api(action, method = 'POST') {
+async function api(action, method = 'POST', body = null) {
     const response = await fetch('/api/presentation/' + action, {method, cache:'no-store',
+        ...(body === null ? {} : {headers:{'Content-Type':'application/json'}, body:JSON.stringify(body)}),
         ...(method === 'GET' ? {signal:AbortSignal.timeout(5000)} : {})});
     const data = await response.json();
     if (!response.ok) throw new Error(data.error || 'The presentation service could not be reached.');
@@ -34,7 +35,9 @@ function controls() {
     const ready = online && joined && state.active && state.connected && !state.shutdown_reason && state.remaining_seconds > 0 && !busy && !state.busy && !state.pending;
     $('play').disabled = !ready;
     $('repeat').disabled = !ready;
-    $('next').disabled = !ready || !state.completed || state.index >= state.chapters.length-1;
+    const boundary = state.has_next_part && state.index === state.part_end_index;
+    $('next').textContent = boundary ? `Continue to Part ${state.part_index+2} →` : 'Next chapter →';
+    $('next').disabled = !ready || !state.completed || (!boundary && state.index >= state.chapters.length-1);
 }
 function render(data) {
     state = data; online = true;
@@ -75,7 +78,14 @@ function render(data) {
     }
     $('runtime').textContent = data.word_count + ' words · approximately ' + Math.ceil(data.word_count/150) + '–' + Math.ceil(data.word_count/110) + ' minutes of speech';
     $('budget').textContent = data.active ? Math.floor(data.remaining_seconds/60) + ':' + String(data.remaining_seconds%60).padStart(2,'0') + ' remaining in session budget' : '15-minute session budget';
-    $('status').textContent = data.shutdown_reason === 'max_call_duration' || (data.active && !data.remaining_seconds) ? 'Session time limit reached. End this session before starting again.' :
+    if (data.part_count > 1) {
+        $('runtime').textContent += ` · ${data.part_count} parts`;
+        $('budget').textContent = data.active
+            ? `${data.parts[data.part_index].title} · ${$('budget').textContent}`
+            : `${data.part_count} consecutive sessions · up to 15 minutes each`;
+    }
+    $('status').textContent = data.shutdown_reason === 'part_transition_failed' ? 'The next part could not connect. End the presentation before retrying.' :
+        data.shutdown_reason === 'max_call_duration' || (data.active && !data.remaining_seconds) ? 'Session time limit reached. End this session before starting again.' :
         data.shutdown_reason ? 'The provider ended the presentation. End this session before starting again.' :
         data.busy ? 'Updating the presentation connection…' :
         !data.active ? (data.narration_supported === false ? 'Ready for a human-led presentation. Choose a chapter to present.' : 'Ready for your presentation.') :
@@ -83,7 +93,9 @@ function render(data) {
         !joined ? 'This page has not joined the existing session. End it before starting again.' :
         data.speaking ? 'Presenting: ' + data.chapters[data.index].title :
         data.pending ? 'Script submitted. Waiting for speech to begin.' :
-        data.completed ? 'Chapter complete.' : 'Connected and ready to present.';
+        data.completed ? (data.has_next_part && data.index === data.part_end_index
+            ? `Part ${data.part_index+1} complete. ${$('autoplay').checked ? 'Continuing to the next part…' : 'Choose Continue when ready.'}`
+            : 'Chapter complete.') : 'Connected and ready to present.';
     controls();
 }
 $('preview-chapter').addEventListener('change', () => {
@@ -100,6 +112,16 @@ function renderVisual(chart) {
     if (!chart) { container.append(node('p', 'No chart is assigned to this chapter.')); return; }
     container.append(node('h2', chart.title), node('p', chart.note, 'chart-note'));
     if (chart.kind === 'investor') { renderInvestorVisual(container, chart); return; }
+      if (chart.kind === 'report_image') {
+          const figure = node('figure', '', 'report-wheel');
+          const image = document.createElement('img');
+          image.src = chart.image; image.alt = chart.alt;
+          const caption = node('figcaption', '', 'report-wheel-legend');
+          for (const label of chart.legend) caption.append(node('p', label));
+          figure.append(image, caption);
+          container.append(figure, node('p', chart.attribution, 'chart-note'));
+          return;
+      }
     if (chart.kind === 'force_ranks') {
         const list = node('ol', '', 'force-priorities');
         for (const item of chart.items) {
@@ -255,9 +277,9 @@ async function refresh() {
     catch { online = false; $('status').textContent = 'Live updates unavailable. Reconnecting…'; controls(); }
 }
 async function run(action) {
-    if (busy) return;
+    if (busy) return false;
     busy = true; notice(); controls();
-    try { await action(); } catch (error) { notice(error.message); }
+    try { await action(); return true; } catch (error) { notice(error.message); return false; }
     finally { busy = false; await refresh(); }
 }
 async function end() {
@@ -269,15 +291,33 @@ async function end() {
 async function start() {
     if (!window.DailyIframe) throw new Error('Video player unavailable. Check your internet connection and reload.');
     const data = await api('start');
+    await joinConversation(data);
+    await api('play');
+}
+async function joinConversation(data) {
     await refresh();
-    frame = new window.PresentationPlayer($('video-container'), $('placeholder'), notice);
-    frame.on('error', () => { joined=false; controls(); notice('Video connection failed. End the presentation before retrying.'); });
-    frame.on('left-meeting', () => { joined=false; controls(); });
+    const player = new window.PresentationPlayer($('video-container'), $('placeholder'), notice);
+    frame = player;
+    player.on('error', () => { if (frame === player) { joined=false; controls(); notice('Video connection failed. End the presentation before retrying.'); } });
+    player.on('left-meeting', () => { if (frame === player) { joined=false; controls(); } });
     const c = data.conversation;
-    await frame.join({url:c.conversation_url, startVideoOff:true, startAudioOff:true, userName:'XQ Presentation Viewer', ...(c.meeting_token ? {token:c.meeting_token} : {})});
+    await player.join({url:c.conversation_url, startVideoOff:true, startAudioOff:true, userName:'XQ Presentation Viewer', ...(c.meeting_token ? {token:c.meeting_token} : {})});
     joined = true;
     await waitForPresenter();
-    await api('play');
+}
+async function nextPart(automatic = false) {
+    const sessionId = state.session_id;
+    joined = false;
+    const previous = frame;
+    frame = null;
+    if (previous) await previous.destroy();
+    const data = await api('next-part', 'POST', {session_id:sessionId});
+    await joinConversation(data);
+    if (!automatic || $('autoplay').checked) await api('play');
+}
+async function next(automatic = false) {
+    if (state.has_next_part && state.index === state.part_end_index) await nextPart(automatic);
+    else await api('next');
 }
 async function waitForPresenter() {
     // Room join can precede the replica. Require its video and backend presence,
@@ -303,7 +343,7 @@ async function waitForPresenter() {
     } while (Date.now()<deadline);
     throw new Error('The presenter did not become ready. End this presentation and try again.');
 }
-for (const [id, action] of Object.entries({start, end, play:()=>api('play'), next:()=>api('next'), repeat:()=>api('repeat')}))
+for (const [id, action] of Object.entries({start, end, play:()=>api('play'), next, repeat:()=>api('repeat')}))
     $(id).addEventListener('click',()=>run(action));
 document.querySelectorAll('a[href="/"]').forEach(link=>link.addEventListener('click',event=>{
     if (busy || state.active) { event.preventDefault(); notice('End the presentation before leaving this page.'); }
@@ -312,7 +352,10 @@ window.addEventListener('beforeunload',event=>{if(state.active){event.preventDef
 async function poll() {
     await refresh();
     if (online && joined && !busy && !state.busy && !state.shutdown_reason && state.connected && state.completed && !state.pending && $('autoplay').checked) {
-        if (state.index < state.chapters.length-1) await run(()=>api('next'));
+        if (state.index < state.chapters.length-1) {
+            // A failed handoff must stop automatic requests, not create retry loops.
+            if (!await run(()=>next(true))) $('autoplay').checked = false;
+        }
         else { await run(end); if (!state.active) notice('Presentation complete. Thank you.'); }
     }
     setTimeout(poll,1000);

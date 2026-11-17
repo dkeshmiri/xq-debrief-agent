@@ -17,6 +17,27 @@ def score(value):
         raise ValueError('Reported scores must be numbers from 0 to 100, or null when not reported.')
 
 
+def presentation_parts(bundle, chapters):
+    """Contiguous chapter ranges, each played in its own provider session."""
+    parts = bundle.get('parts')
+    if parts is None:
+        return [dict(title='Presentation', chapter_start=0, chapter_end=len(chapters)-1)]
+    if not isinstance(parts, list) or not 1 <= len(parts) <= len(chapters):
+        raise ValueError('Presentation parts must cover all chapters in order.')
+    expected = 0
+    for part in parts:
+        object_value(part, 'Part')
+        start, end = part.get('chapter_start'), part.get('chapter_end')
+        if (not isinstance(part.get('title'), str) or not part['title'].strip()
+                or type(start) is not int or type(end) is not int
+                or start != expected or not start <= end < len(chapters)):
+            raise ValueError('Each part needs a title and consecutive chapter boundaries.')
+        expected = end + 1
+    if expected != len(chapters):
+        raise ValueError('Presentation parts must cover every chapter exactly once.')
+    return deepcopy(parts)
+
+
 def bundle_presentation(bundle):
     if type(bundle.get('presentation_version')) is not int or bundle['presentation_version'] != 1:
         raise ValueError('Unsupported presentation version.')
@@ -39,6 +60,7 @@ def bundle_presentation(bundle):
                 raise ValueError(f'Each chapter needs a {key}.')
         if chapter['visual'] not in visuals:
             raise ValueError('A chapter references an unavailable chart.')
+    presentation_parts(bundle, chapters)
     return deepcopy(chapters), visuals, source
 
 
@@ -92,4 +114,17 @@ def profile_visuals(profile):
         for key in ('self_composite', 'others_composite', 'total_eq'):
             score(eq.get(key))
     visuals = charts(profile)
+    wheel = disc.get('wheel')
+    if wheel is not None:
+        # Curated report assets only: uploads cannot supply arbitrary image URLs.
+        if wheel != 'mario-2026-11-11':
+            raise ValueError('Unknown report wheel.')
+        visuals['disc_wheel'] = dict(
+            kind='report_image', title='DISC · People and action',
+            note='Mario’s Natural and Adapted behavioral styles',
+            image='/static/presentation-assets/mario-insights-wheel.png',
+            alt='Mario’s Success Insights Wheel: Natural dot at position 14, Persuading Promoter; Adapted star at position 13, Promoting Persuader.',
+            legend=['● Natural · 14 · Persuading Promoter',
+                    '★ Adapted · 13 · Promoting Persuader'],
+            attribution='Source: Mario Calamita · TriMetrix HD · November 11, 2026 · page 29. TTI Success Insights® Wheel. Copyright © 1992–2026 TTI Success Insights LTD.')
     return visuals, source

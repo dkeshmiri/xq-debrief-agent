@@ -200,3 +200,21 @@ No Tavus credentials, PAL settings, or playback event handling were changed.
 Tavus default spoken-language list excludes Persian. A future Persian voice setup
 must be verified separately before removing that guard:
 https://docs.tavus.io/sections/conversational-video-interface/language-support
+
+
+## Consecutive presentation parts
+
+Prepared bundles may include `parts`, each with a `title`, zero-based
+`chapter_start` and inclusive `chapter_end`. Parts must cover every chapter
+exactly once, consecutively. Bundles without parts retain one-session behavior.
+Mario uses six DISC chapters followed by seven Driving Forces/Acumen chapters.
+
+`POST /api/presentation/next-part` accepts the current `session_id`. It requires
+completed speech at the part boundary, ends the old room before creating the
+next, and gives each room the existing 900-second limit. Connection work occurs
+outside the presentation lock; busy guards serialize transitions and Echo.
+Stale session requests and playback events cannot advance a completed part twice.
+The browser reconnects and waits for presenter readiness before sending one Echo.
+Automatic continuation can be disabled; handoff failure disables it automatically.
+Original transcript files and the edit log are under
+`content/presentation_sources/mario/`.

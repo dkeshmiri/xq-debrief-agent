@@ -1,7 +1,7 @@
 {
   "presentation_version": 1,
   "profile": {
-    "source": "Mario · Recorded DISC / Driving Forces / Acumen debrief",
+    "source": "Mario · TriMetrix HD report (11 November 2026) and original recorded debrief",
     "person": {
       "display_name": "Mario"
     },
@@ -9,101 +9,203 @@
       "natural": {
         "D": 56,
         "I": 72,
-        "S": null,
+        "S": 36,
         "C": 42
       },
       "adapted": {
         "D": 58,
         "I": 64,
-        "S": null,
+        "S": 45,
         "C": 45
-      }
+      },
+      "wheel": "mario-2026-11-11"
     },
     "driving_forces": {
-      "scores": {},
+      "scores": {
+        "Intellectual": 79,
+        "Instinctive": 11,
+        "Resourceful": 65,
+        "Selfless": 12,
+        "Harmonious": 51,
+        "Objective": 25,
+        "Intentional": 65,
+        "Altruistic": 21,
+        "Collaborative": 46,
+        "Commanding": 33,
+        "Receptive": 90,
+        "Structured": 0
+      },
       "ranks": {
         "Receptive": 1,
         "Intellectual": 2,
         "Resourceful": 3,
         "Intentional": 4,
-        "Harmonious": 5
+        "Harmonious": 5,
+        "Collaborative": 6,
+        "Commanding": 7,
+        "Objective": 8,
+        "Altruistic": 9,
+        "Selfless": 10,
+        "Instinctive": 11,
+        "Structured": 12
       }
     },
     "aci": {
       "dimensions": {
         "understanding_others": {
           "clarity": 96,
-          "bias": "mixed"
+          "bias": "mixed",
+          "blind_spot": 4
         },
         "practical_thinking": {
           "clarity": 92,
-          "bias": "mixed"
+          "bias": "mixed",
+          "blind_spot": 8
         },
         "systems_judgment": {
           "clarity": 92,
-          "bias": "over"
+          "bias": "over",
+          "blind_spot": 8
         },
         "sense_of_self": {
           "clarity": 78,
-          "bias": "under"
+          "bias": "under",
+          "blind_spot": 22
         },
         "role_awareness": {
           "clarity": 80,
-          "bias": "mixed"
+          "bias": "mixed",
+          "blind_spot": 20
         },
         "self_direction": {
-          "clarity": null,
-          "bias": "over"
+          "clarity": 70,
+          "bias": "over",
+          "blind_spot": 30
         }
       },
       "world": {
-        "emotional_bias_distortion": 7
+        "emotional_bias_distortion": 7,
+        "clarity_average": 93,
+        "problem_solving": {
+          "people": {
+            "score": 100,
+            "report_reference": 86
+          },
+          "practical": {
+            "score": 100,
+            "report_reference": 82
+          },
+          "theoretical": {
+            "score": 82,
+            "report_reference": 81
+          },
+          "decisions": {
+            "score": 96,
+            "report_reference": 79
+          }
+        }
       },
       "self": {
-        "emotional_bias_distortion": 24
+        "emotional_bias_distortion": 24,
+        "clarity_average": 76,
+        "problem_solving": {
+          "people": {
+            "score": 80,
+            "report_reference": 77
+          },
+          "practical": {
+            "score": 100,
+            "report_reference": 75
+          },
+          "theoretical": {
+            "score": 78,
+            "report_reference": 75
+          },
+          "decisions": {
+            "score": 86,
+            "report_reference": 66
+          }
+        }
       }
     }
   },
   "chapters": [
     {
-      "title": "Welcome, Mario",
+      "title": "Part 1 · Welcome, Mario",
       "visual": "overview",
-      "text": "Hi Mario, thank you for giving me the opportunity to debrief you on your assessment results. Let's look at how you behave, why you do what you do, and your acumen, which is how clearly you're thinking. There are two DISC graphs: Natural, how you behave at home, and Adapted, how you might modify your behavior in the workplace. Each graph runs from zero to 100, with the center at 50. Most of your colors are near the center. You're someone who's very adaptive and adaptable, depending on the situation."
+      "text": "Hi Mario, thank you for giving me the opportunity to debrief you on your assessment results. You took this assessment in four different sections. The first one was how you behave, the second one was why you do what you do, third one was your acumen, which is how clearly you're thinking, and last but not least was your 25 DNA soft skills. In this first part, let's go over your behavior patterns. The first thing I want to look at is if you notice there are two different graphs in here. One is natural, one is adapted. Natural is how you behave at home, and the adapted is how you might modify your behavior in the workplace. When we see drastic changes from one to another, then we might tell you that you might be under some stress or you might be going through some adaptation process, which I will discuss shortly. If you notice both of these have a 0 and 100, and there's a gray bar in the center, which is the 50% mark. Anything above that we say you have a high behavior, anything below that we say you have a low behavior. Most of your four different colors are near the center, which means you're someone who's very adaptive and adaptable. Depending on the situation, you can increase or decrease that particular color on your profile."
     },
     {
-      "title": "DISC · Dominance and Influence",
+      "title": "DISC · Dominance",
       "visual": "disc_di",
-      "text": "Your red is D for Dominance: how you approach problems and challenges. People with high Dominance are urgent, task-oriented, and focused on getting the job done. They have high expectations of others and themselves. You could almost say D is for doers. Yours is 56 and 58. You're not always urgent or pushing for the next project. You're more circumspect than someone at 90 or 100. You tend to be mild-mannered, and you may get frustrated when people aren't responsive or responsible enough to meet your expectations. The emotion behind Dominance is frustration or anger. You may also get upset when you feel people are taking advantage of you. High D tells itself, 'I can conquer my environment.' You don't shy away from challenges. If you need to, you can be confrontational, strong, and debate with the best of them. Overall, I would put you as a mild Dominance, able to raise it or decrease it when you need to.\n\nYour Influence is 72 at home and 64 in the workplace. This deals with people and contacts. You can articulate what you want to say, be verbal and optimistic, but you also need private time to pull back and recharge. Next to your Dominance, your optimism says, 'Yes, I can do this.' As much as you want to be with people and talk to people, you can also step away from the crowd. Creativity, innovation, marketing, and promoting things are important traits here. You drop Influence by eight points at work and raise Dominance from 56 to 58: less talkative and more action-based. Together, it's almost like a James Bond character, mixing charm with being decisive and action-oriented, on a mild level."
+      "text": "The first thing I want to talk to you about is your red, which is D for dominance. People with high dominance are people who are very urgent, they're very task-oriented, they're very much into getting the job done, and they have high expectations of others and themselves, and they're always finding ways to get things done. So D you could almost say is for doers. Now yours is 56 and 58, what that means is you're not always urgent, you're not always pushing for the next project, you're more circumspect than someone with let's say 90 or 100. The emotion behind this is frustration or anger, and again since you're at 56-58, you tend to be more mild-mannered, and the only time you may get upset or get frustrated is when people around you are not responsive enough, are not responsible enough, and they may not be able to meet your expectations. But other than that, I think you're in pretty good shape as far as being able to control your frustration. Now the high dominance basically stands for problems and challenges. It talks about how you approach things that need to get done, and so it looks like you attack those things with urgency and with dominance and with a lot of self-confidence. Now one of the things that you might get upset with is when you feel people are taking advantage of you. That's one of the traits of high dominance. It also talks about how someone with high D tells himself or herself, listen, I can conquer my environment. So you don't shy away from challenges, and if you need to, you could be confrontational, you could be strong, and you could debate with the best of them. Overall, I would put you as a mild Dominance, able to raise it or decrease it when you need to."
     },
     {
-      "title": "DISC · Pace, detail, and adaptability",
+      "title": "DISC · Influence",
+      "visual": "disc_di",
+      "text": "The next one I'm going to talk to you about is your influencing. And if you notice at home, you're 72 and the workplace is 64. This deals with people and contacts. People with high influencing are the kind of people who have no problem articulating what they want to say in words. They could be very verbal. They could also be very optimistic. So because it's right next to a D, you might say that, yes, I can do this. And it's not too high, which means as much as you want to be with people or you can talk to people, you could also need your private time. You need to pull back from the crowd and kind of recharge your battery. Again, one of the main traits of the high influencing is creativity, innovation, and good with marketing, good with being able to promote things. And I really see that you drop it down by almost eight points in the workplace. You try to be less talkative and more action based, because you even raise your 56 to 58. Together combined, it gives you almost like a James Bond character where you can mix being charming with being decisive and action oriented, but on a mild level."
+    },
+    {
+      "title": "DISC · Steadiness",
       "visual": "disc_sc",
-      "text": "Green is Steadiness, which deals with pace and consistency. As green goes higher, pace slows and consistency increases. As it goes lower, the pace becomes faster. You can multitask when you need to. Near the center, especially at work, you're trying to be adaptive. If a task requires speed, you're able to do that. If it needs steady, careful consideration, you're able to see it through. You like some variety in your life. The emotion behind Steadiness is non-expression: as S rises, you tend to be less expressive; as it falls, you tend to be more emotionally expressive. Your steady pace depends on what you're doing.\n\nBlue is Compliance: analysis, details, constraints, regulations, and doing things right. You're at 42 and 45. You pick where to be compliant and where to use more creativity. The emotion behind Compliance is fear or cautiousness. In your case, there are some things you're cautious about and some you're not. Sometimes you follow a steady progression as long as things make sense; sometimes you ask, 'What if we look at it from a different angle?'\n\nAs you and your partner launch a business, you can put your foot on the gas or on the brake. You can be creative, steady, fast, dominant, or non-confrontational. On the Success Insights wheel, you move between Persuading Promoter and Promoting Persuader: people and action. You're able to promote and communicate why you want to do something. When I put this next to your acumen, I see that you're able to start, withstand the long process, and finish. Congratulations: I hardly ever see this. You can take a project, be creative, think it through, strategize, and make it happen."
+      "text": "The next one we see in your profile is your green, which stands for steadiness. Steadiness deals with pace and consistency. Your Natural score is 36 and your Adapted score is 45. As your green goes higher, your pace gets reduced, but you become far more consistent. And as the green goes lower, you become less consistent, but very fast pace. It also talks about you could be very multitasking if you need to be. And also means because you're near the center, especially at work, you're trying to be very adaptive. So let's say a task requires you to be very fast and quick to the point, you're able to do that. You lower your S if you need to. But let's say something needs steadiness. It needs some careful consideration. Then you're able to raise your S and see the project through. You get bored with doing the same thing over and over again. You'd like some variety in your life. And the emotion behind steadiness is non-expression. So as your S goes higher, you tend to be less expressive. As your S goes down, you tend to be more emotionally expressive. So I would say your steady pace is depending upon what you're doing. You're able to go up, you're able to go down."
+    },
+    {
+      "title": "DISC · Compliance and adaptability",
+      "visual": "disc_sc",
+      "text": "Next to it, you see a blue line, which stands for compliance. Compliance is very interesting because it talks about how you look at analysis, details, constraints, regulations, doing things right. Your scores are 42 Natural and 45 Adapted. Like your Steadiness, you pick and choose where you want to be very compliant, where you want to bypass rules. You could use more creativity. Sometimes you like to follow a steady progression, as long as things are making sense. Sometimes you might say, listen, why don't I just look at it from a different angle? What if we do it a different way? And the emotion behind compliance is fear or cautiousness. And in this particular case, some things you're cautious about, some things you're not. So I know you were surprised to see this, and I'm sure Stefano would be surprised to see it. And frankly, I was a bit surprised to see it. But in this moment in time where you and your partner are launching a business, I believe you have been able to adapt to your environment, both naturally and as far as your environment is concerned. I believe you're able to really make things happen as they need to happen. You can put your foot on the gas, you can put your foot on the brake, you could be creative, you could be steady, you could be fast, you could be dominant, you could be non-confrontational, you can be with people or enjoy time on your own. When I put this next to your acumen, you're extremely smart. You've adapted and adopted new forms of behavior. And so you're able to really see things through to the end. You're able to start, you're able to withstand the long process, you're able to finish it. So congratulations. I hardly ever see this. It's a very adaptive profile. But I would say based on this, you're able to truly take a project, be creative, think it through, strategize, and make it happen."
+    },
+    {
+      "title": "DISC · People and action",
+      "visual": "disc_wheel",
+      "text": "So the next I want to show you is your Success Insights wheel. your dot is your persuading promoter, and your adapted, which is the star, is your promoting persuader and then persuading promoter both. So what this means is you oscillate between people and action. And you're also able to promote and communicate to people why you need to do what you want to do. So somehow you're able to, you've created the opportunity for yourself to relate to everybody. Your drivers will help explain why this behavior is so appropriate for where you are in life. But my feeling is once the project is done and you guys have launched your company successfully, my feeling is that you're going to go towards the blue and green line a little bit more. So that's it for your behavior profile. I'm going to next talk to you about why you do what you do as well as some of the highlights of your acumen. Thank you for listening."
+    },
+    {
+      "title": "Part 2 · Your Driving Forces",
+      "visual": "forces_first",
+      "text": "Mario, let's continue with your drivers and acumen. I now want to take you to your drivers, which is why you do the things you do. Your driving force graph has six categories: knowledge, utility, surroundings, others, power, and methodologies. And on each side you will see the opposites. The large number is your score on that driver; the smaller number shows its priority rank. The top four are very powerful, and we will spend some time on them."
     },
     {
       "title": "Driving Forces · Innovation, learning, and return",
-      "visual": "forces_priorities",
-      "text": "Your drivers explain why you do the things you do. Your number one is Receptive, opposite Structured. Structured is old ways and practices; Receptive is innovation, change, and creativity. You're all about creating things, and this goes hand in hand with your persuasive profile.\n\nNumber two is Intellectual versus Instinctive. You like to study, learn, and understand the mechanics of things: how they work and how they're put together. Combined with Receptive, you study how to innovate and create things differently.\n\nNumber three is Resourceful. You want a return on your investment of time, money, and energy. You want to be efficient and effective. You don't want to waste time on things that aren't giving you ROI. You find an innovation, study it, and make sure it can make money and work efficiently.\n\nNumber four is Intentional versus Altruistic. You're purpose-driven and think strategically. Your brain almost doesn't stop: 'I'm going to create something. How do I do it?' If you hit a stumbling block, you research solutions. Then you ask, 'Does it make money? Is it efficient? What do I need to get it done?'"
+      "visual": "forces_first",
+      "text": "Your number one is Receptive, with a score of 90. And on the other side is structured. Structured is old ways of doing things, old practices. And receptive is the opposite. Receptive is you're driven by innovation, change, big stuff, and extremely creative. I hardly ever see Receptive as number one. You're all about innovation and change. You just enjoy creating things. You're very creative. And this goes hand in hand with your persuasive profile. Number two is Intellectual, at 79, versus Instinctive. Intellectual means you like to study. You like to learn. You like to understand the mechanics of things, how things work, how things are put together. And combined with your number one receptive, which means you will study, you will learn how to innovate, how things change, how you can create things that are different than how things have been. Number three is Resourceful, at 65. This talks about utility: the return on your investment of time, money, and energy. Number three means I don't want to waste time. I want to be efficient. I want to be effective, and I don't want to mess around with things that are not giving me ROI. So then what this means is you're going to go find what innovation you can bring. You want to study it, and you want to make sure you make money with it. You want to make sure it's efficient and it works out. Number four is Intentional, also at 65, versus Altruistic. Intentional means you're purpose-driven. It means you don't want to do anything without a reason behind it. You're very strategically set up, and you think in strategic terms. So that's your number four, which is very interesting, because now what that means is your brain almost like doesn't stop. You're always thinking, okay, I'm going to create something. How do I do it? Now, if your innovative thinking hits a stumbling block, then you go and search, research, and find solutions for it. Then you come in and say, okay, does that make money? Does that make sense? Is it efficient? Then you go into, well, what do I need to do to get things done? This is one of the most interesting profiles I've seen, and it shows where you're at."
     },
     {
       "title": "Driving Forces · Harmony and collaboration",
-      "visual": "forces_priorities",
-      "text": "When we overlay your drivers with DISC, I see you doing exactly what you want to be doing. Your frustration may be that the return on investment isn't present yet.\n\nNumber five is Harmonious versus Objective. You enjoy aesthetically pleasing surroundings and how things feel. Overcoming a challenge can make you feel that things are happening. You don't like a lot of bickering or fighting.\n\nWith power, you can be Collaborative or Commanding. You don't have a problem leading, but you also prefer collaborating and getting things done with other people. There's no ego invested in getting things done."
+      "visual": "forces_second",
+      "text": "And we usually overlay the drivers with DISC to see if there's any conflict. Right now, I don't see any conflict. What I do see here is you're doing exactly what you want to be doing. The only frustration you may have is that the money part, the return on investment, is not present. But if you're patient, I'm sure that will be paying off. Number five is Harmonious, at 51, versus Objective. Harmonious are people who like beautiful things, aesthetically pleasing surroundings, and they enjoy how things feel. So I bet you doing what you're doing, sometimes a challenge, overcoming the challenge, makes you feel like things are happening, you're excited. You also don't like a lot of bickering with people. You don't like fighting. And when it comes to power, you either are collaborative, which is you want to give it, or you're commanding, which is you want to take it. You don't have a problem with leading, but you also prefer being able to collaborate with people and enjoy making things done with other people. There's no ego invested in getting things done."
     },
     {
       "title": "Acumen · World View",
       "visual": "aci_world",
-      "text": "Your dimensional balance looks at people, tasks, systems, yourself, roles, and the future. For people, your clarity is 96. You can go anywhere, talk to anyone, and understand what makes people tick. The up-and-down arrow shows balance.\n\nFor tasks, your clarity is 92, again with an up-and-down arrow. You have no problem working with details. You think in practical terms and don't shy away from practical work.\n\nFor systems, your clarity is 92, with an up arrow. You can create systems and strategy, see the picture and its little dots, and enjoy doing it. Your brain works in systems. You're a big thinker. Your World View is powerful and clear, with a balanced, realistic perspective on performance and the situations around you. Your external emotional bias distortion is 7."
+      "text": "Let's turn to your acumen. If you notice on your dimensional balance, there are six different categories, people, task systems, me, roles, and future. Now, if you notice on people, you have very high clarity of 96. And what that means is you could go anywhere to any culture, talk to anyone, and you're able to get along with people. More importantly, you understand people. You understand what makes them tick. And the up and down arrow depicts neutral balance. And so you don't overvalue or undervalue people. Next to it, we see task at 92%, again, with up and down arrow. What this means is you have no problem working the details. You think in practical terms. You're not someone who shies away from practical thinking or practical work. Next is your system. Very high clarity, 92. And there's an up arrow. What that really means is that not only can you create systems, can you create strategy, can you create a picture and see all the little dots in it, you also enjoy doing it. You have tremendous joy that comes from creating strategies, creating new things, creating new systems. Your brain works in systems. You're not a small thinker. You're a big, large thinker. And so the worldview is very powerful and very clear."
     },
     {
       "title": "Acumen · Self View",
       "visual": "aci_self",
-      "text": "Your Sense of Self has clarity of 78, with a down arrow. It's like saying, 'I'm self-aware, but I'm not a finished product. There are still places on the canvas I need to paint. I need to learn, grow, and make life better for myself and the people around me.'\n\nFor the roles you're playing, at home and work, your clarity is 80, with an up-and-down arrow. You're practical and pragmatic about those roles. For the future, you have an up arrow: 'I know the future will be good.'\n\nInternally, you have a balanced perspective on performance and situational awareness. Your emotional bias distortion is 24. You can be harder on yourself, take things personally, get down on yourself after a mistake, or overanalyze. My advice is to relax with it and let it go. You have excellent acumen. Your capacity for solving problems involving people, practical situations, theoretical situations, and decisions is outstanding, externally and internally, especially regarding your role."
+      "text": "On the self view, it says me. You have 78% clarity. I'm happy to see there's a down arrow. What that means is, okay, I know I'm very self-aware, but I'm not a finished product. There are still a few places on the canvas that I need to paint. I need to learn. I need to grow. I need to make life better for myself and people around me. The roles you're playing, this would be practically all the roles, home, work. You have good clarity of 80, and you have an up and down arrow, which means, again, you are very practical, pragmatic when it comes to the roles you're playing right now. You don't love them. You don't hate them. For Self Direction, your clarity is 70, with an up arrow: I know the future will be good. So overall, you have a very good outlook on acumen."
     },
     {
-      "title": "Your outlook and next steps",
+      "title": "Acumen · Clarity and awareness",
       "visual": "aci_balance",
-      "text": "Your business performance summary shows balanced decision making at 82 against a global average of 70, and high concentration internally and externally. We say, 'If you're going to be successful, show up. If you're going to be really successful, show up with a good attitude.' Your Attitude Index is phenomenal: positive, encouraging, upbeat, appreciative, grateful, open-minded, flexible, approving, dynamic, and energetic.\n\nThe other part of your assessment is your 25 DNA soft skills. Your developmental indicators show where potential improvements could be, beginning on page 63 of your report. Overall, I would say you're exactly where you need to be. I like your clear-minded acumen, your drivers, and your DISC. The three together show someone powerful in mind and emotions, able to navigate hard times and come out on the other side. It's been great going over your profile. If you have any questions, I'm sure you'll let me know."
+      "text": "Your World View and Self View are both well developed. Your external clarity average is 93 and your internal clarity average is 76. Let's look at your clarity and awareness. You have a very balanced perspective regarding performing in the outside world. You also have a very realistic perspective on the situations around you. So very interesting, like you were made to do what you're doing right now. Emotional bias distortion describes how emotions can cloud your judgment. Your external emotional bias distortion is 7. Internally, you have a balanced perspective regarding performance and situational awareness, except if you notice your distortion is 24, which means you tend to be a bit harder on yourself from time to time. You tend to take things too personal. If you make a mistake, you may get down on yourself a little bit. You may overanalyze. So my advice to you is just relax with it and let it go. You have really excellent acumen."
+    },
+    {
+      "title": "Acumen · Decisions, outlook, and next steps",
+      "visual": "aci_balance",
+      "text": "Next is your capacity for solving problems involving people, practical, theoretical, and decision making in the outside world, which is all outstanding. Your internal problem solving is also outstanding, especially regarding your role. When it comes to reacting, you have very rational reaction to the external, internal control, a little bit of distortion. When it comes to business performance summary, we see balanced decision making at 82 against a report reference of 70, which is outstanding. You see high concentration index, both internal and external. We usually want to take a look at people's attitude, and we say if you're going to be successful, show up. If you're going to be really successful, show up with a good attitude. Your Attitude Index is phenomenal. Positive, encouraging, upbeat, appreciative, grateful, thankful, open-minded, accessible, flexible, approving, favorable, dynamic, lively, energetic, vibrant. Mario, your developmental indicators show opportunities for your soft skills. From page 63 onward, you can see where the potential improvements could be. But right now, I would say overall, you're exactly where you need to be. I really like when I look at your acumen, you're very clear-minded. I really like your drivers, and I really like your DISC, and the three of them triangulated show someone who is really very powerful in the mind, in the emotions. And I think you're able to navigate through some really hard times, and you can come out on the other side. it's been great going over your acumen and a little bit of soft skills and your drivers for you. And then if you have any questions, I'm sure you will let me know."
+    }
+  ],
+  "parts": [
+    {
+      "title": "Part 1 · DISC",
+      "chapter_start": 0,
+      "chapter_end": 5
+    },
+    {
+      "title": "Part 2 · Driving Forces and Acumen",
+      "chapter_start": 6,
+      "chapter_end": 12
     }
   ]
 }

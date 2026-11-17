@@ -95,3 +95,31 @@ sections, while preserving reported zero values and unfilled clarity columns.
 The runtime sends chapter text directly through the existing speak/echo path.
 It does not regenerate this script through an LLM. Existing Family/Workplace
 debrief engines, assessment pilots and Birth Order wiring are unchanged.
+
+
+2026-11-16 — Two-part source restoration (supersedes the single-session abridgment above)
+Part 1: DISC, 1,473 spoken words across six chapters.
+Part 2: Driving Forces and Acumen, 1,447 spoken words across seven chapters.
+At 110 words/minute plus 60 seconds setup: approximately 14:23 and 14:09.
+These are planning estimates; actual Tavus delivery has not been timed live.
+The two supplied audio files match the existing transcription hashes exactly.
+Original raw and cleaned transcripts remain unchanged. two-part-edits.json records
+the exact cuts/corrections; part-1-script.txt and part-2-script.txt are review copies.
+Restores personal address, examples, and observations while cutting fillers,
+repeated explanations and defensive asides. Report-derived additions are logged.
+The supplied November 11 report fills missing DISC, all 12 Driving Forces scores
+and ranks, and ACI clarity, blind spots, reported averages and problem-solving
+values. Page references and report hash are in sources.json. Starred comparison
+figures are report references, not Mario's scores. Structured 0 is a real score.
+With automatic continuation enabled, Part 1 must finish its canonical speech
+completion before the app ends that room, creates a new 900-second room, waits
+for the presenter and starts Part 2. There is a brief reconnection between parts.
+Turning continuation off pauses at chapter boundaries; Continue to Part 2 is
+available at the part boundary. A failed handoff stops automatic continuation.
+No original audio or PDF is copied into the application repository.
+
+2026-11-17 — People and action wheel visual
+Replaced this chapter's DISC bars with the actual wheel rendered from report page 29.
+Natural dot: 14, Persuading Promoter. Adapted star: 13, Promoting Persuader.
+The image preserves original marker positions; the readable legend and attribution
+appear below it. Narration, word counts and two-part timing remain unchanged.

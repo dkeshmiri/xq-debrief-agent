@@ -61,3 +61,7 @@
 
 .force-priorities{list-style:none;padding:0;display:grid;gap:12px;margin:24px 0}.force-priority{display:flex;align-items:center;gap:16px;border:1px solid #d8cde6;border-radius:12px;padding:14px;background:#f8f6fb}.force-rank.score-bar{display:grid;place-items:center;width:44px;height:44px;flex:none;border-radius:10px;color:#15151b;font-size:22px;font-weight:700}.force-priority strong{font-size:18px}
 .force-rank[data-color=knowledge],.force-rank[data-color=surroundings],.force-rank[data-color=others],.force-rank[data-color=power]{color:#fff}
+.report-wheel { margin: 0; }
+.report-wheel img { display: block; width: 100%; height: auto; background: white; border-radius: 12px; }
+.report-wheel-legend { display: grid; gap: .4rem; margin: 1rem 0; font-weight: 600; }
+.report-wheel-legend p { margin: 0; }
