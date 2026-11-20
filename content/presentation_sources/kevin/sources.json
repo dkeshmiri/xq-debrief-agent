@@ -1,0 +1,116 @@
+{
+  "report": {
+    "file": "Kevin Maroufkhani - TriMetrix HD.pdf",
+    "sha256": "a945351ef4fe31b6b951ad6b060a11bfd6b82fb6bdbb1883cadb0736a04ef820",
+    "pages": 76
+  },
+  "recordings": [
+    {
+      "id": "disc",
+      "file": "Kevin Audio - DISC.m4a",
+      "duration_seconds": 808.26,
+      "sha256": "6f7cd4041bea3399f6edd2088f5895c626111e653fb97d4a5618e2858edd5922",
+      "chunks": [
+        {
+          "id": "disc-1",
+          "start_seconds": 0,
+          "end_seconds": 300
+        },
+        {
+          "id": "disc-2",
+          "start_seconds": 298,
+          "end_seconds": 598
+        },
+        {
+          "id": "disc-3",
+          "start_seconds": 596,
+          "end_seconds": 808.26
+        }
+      ]
+    },
+    {
+      "id": "acumen-12df",
+      "file": "Kevin Audio - 12DF and Acumen.m4a",
+      "duration_seconds": 904.53,
+      "sha256": "5cadc889fc598d968dfe1ac81528021d7859238d87aafa6182a6953292a9c9ed",
+      "chunks": [
+        {
+          "id": "acumen-12df-1",
+          "start_seconds": 0,
+          "end_seconds": 300
+        },
+        {
+          "id": "acumen-12df-2",
+          "start_seconds": 298,
+          "end_seconds": 598
+        },
+        {
+          "id": "acumen-12df-3",
+          "start_seconds": 596,
+          "end_seconds": 896
+        },
+        {
+          "id": "acumen-12df-4",
+          "start_seconds": 894,
+          "end_seconds": 904.53
+        }
+      ]
+    }
+  ],
+  "model": "gpt-4o-transcribe",
+  "date": "2026-11-19",
+  "assets": [
+    {
+      "asset": "disc",
+      "page": 25
+    },
+    {
+      "asset": "wheel",
+      "page": 28
+    },
+    {
+      "asset": "forces",
+      "page": 38
+    },
+    {
+      "asset": "balance",
+      "page": 59
+    },
+    {
+      "asset": "self-awareness",
+      "page": 52
+    },
+    {
+      "asset": "problem-solving",
+      "page": 54
+    },
+    {
+      "asset": "outlook",
+      "page": 58
+    }
+  ],
+  "parts": [
+    {
+      "title": "Part 1 · DISC",
+      "chapter_start": 0,
+      "chapter_end": 6,
+      "word_count": 1463,
+      "estimated_speech_seconds_at_110_wpm": 798,
+      "setup_allowance_seconds": 60
+    },
+    {
+      "title": "Part 2 · Driving Forces and Acumen",
+      "chapter_start": 7,
+      "chapter_end": 15,
+      "word_count": 1460,
+      "estimated_speech_seconds_at_110_wpm": 796,
+      "setup_allowance_seconds": 60
+    }
+  ],
+  "presentation_word_count": 2923,
+  "notes": [
+    "Inherited-pattern passages retained verbatim at user request; no inference of these claims from report scores.",
+    "Raw chunks retained. Two-second overlaps removed in the edit log.",
+    "Timing estimates are not live Tavus measurements."
+  ]
+}

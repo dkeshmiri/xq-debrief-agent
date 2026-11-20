@@ -65,3 +65,10 @@
 .report-wheel img { display: block; width: 100%; height: auto; background: white; border-radius: 12px; }
 .report-wheel-legend { display: grid; gap: .4rem; margin: 1rem 0; font-weight: 600; }
 .report-wheel-legend p { margin: 0; }
+.report-gallery { display: grid; gap: 1.5rem; }
+.report-page { margin: 0; min-width: 0; }
+.report-page img { display: block; width: 100%; height: auto; max-height: 70vh; object-fit: contain; background: white; border: 1px solid #ddd; border-radius: 8px; }
+.report-gallery:has(.report-page:nth-child(2)) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 600px) { .report-gallery:has(.report-page:nth-child(2)) { grid-template-columns: 1fr; } }
+.report-page figcaption { margin-top: .5rem; overflow-wrap: anywhere; }
+.discussion-points { padding-left: 1.3rem; font-size: 1.15rem; line-height: 1.7; }

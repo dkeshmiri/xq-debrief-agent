@@ -4,6 +4,7 @@ from math import isfinite
 from presentation_acumen import DIMENSIONS, VALUATIONS, PROBLEMS
 from presentation_visuals import charts, DISC, FORCES, EQ
 from presentation_investor import investor_visuals
+from presentation_reports import report_visuals
 
 
 def object_value(value, label):
@@ -46,6 +47,8 @@ def bundle_presentation(bundle):
     kind = bundle.get('presentation_type')
     if kind == 'investor':
         visuals, source = investor_visuals(bundle)
+    elif kind == 'report_debrief':
+        visuals, source = report_visuals(bundle)
     elif kind is None:
         visuals, source = profile_visuals(bundle.get('profile'))
     else:

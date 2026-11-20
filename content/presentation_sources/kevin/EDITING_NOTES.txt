@@ -1,0 +1,45 @@
+Kevin recorded debrief — November 19, 2026
+
+Part 1: DISC, 1,463 words. Part 2: Driving Forces and Acumen, 1,460 words.
+At 110 wpm plus one minute of setup: approximately 14:18 and 14:16.
+Actual Tavus timing has not been measured for Kevin's full presentation.
+
+Original audio: 13:28 DISC and 15:05 Driving Forces/Acumen. Transcribed with
+gpt-4o-transcribe in five-minute chunks with two-second overlaps. All raw chunks
+and concatenated transcripts are retained; script-edits.json records the overlap
+removals, fillers, repeated explanations and specific corrections. The original
+recordings and full PDF remain outside the repository.
+
+At the user's explicit request, Joe's inherited-pattern passages are retained
+in both parts, including the five-generation/32-variable passage and his
+parents/grandparents discussion. These are preserved narration, not claims
+calculated from assessment scores. No defensive disclaimer was added to speech.
+
+Corrections: report Graph I is Adapted and Graph II is Natural; Compliance 8 to
+12 is an increase of four points (not 30%); Driving Forces are intensity scores,
+not percentages of a person. The ambiguous 'vague and decisive' fragment becomes
+'vague', without inventing an unheard word. A self-correction about high/low S
+was removed, retaining the speaker's final explanation.
+
+All seven visuals are direct renderings of Kevin's supplied TTI PDF pages:
+25 DISC, 28 wheel (dot 12 Conducting Persuader; star 14 Persuading Promoter),
+38 Driving Forces, 59 dimensional balance, 52 internal awareness,
+54 external problem solving, and 58 attitude. Original labels, scales and
+report attributions are preserved. Images can be opened at full size.
+
+The existing two-part session mechanism is unchanged. With automatic continuation
+enabled, the last Part 1 speech completion ends the old session, opens a new
+900-second session, waits for presenter readiness, then sends Part 2's first Echo.
+The original Mario live handoff took about 13 seconds; Kevin's reconnect time may
+vary. No blind retries or simultaneous Echo submissions were added.
+
+Files changed for Kevin:
+presentation.py (preset registration only)
+static/presentation.js (preset button only)
+templates/presentation.html (preset button and introduction)
+PRESENTATION_CHARTS.md (documentation)
+tests/presentation.test.cjs (Kevin selector and handoff regression)
+tests/test_presentation_kevin.py (new)
+content/presentations/kevin.json (new)
+content/presentation_sources/kevin/* (new raw transcripts, scripts, provenance)
+static/presentation-assets/kevin/* (seven original report images)

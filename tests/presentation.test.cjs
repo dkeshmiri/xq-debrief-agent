@@ -234,6 +234,64 @@ test('report wheel renders the source image with an accessible marker legend',()
     assert.deepEqual(figure.children[1].children.map(p=>p.textContent),chart.legend);
 });
 
+test('family report galleries preserve supplied images and link to full-size pages',()=>{
+    const f=fixture();
+    const bundle=JSON.parse(fs.readFileSync('content/presentations/sheila-kieren.json','utf8'));
+    f.run(`renderVisual(${JSON.stringify(bundle.visuals.section_1)})`);
+    const gallery=f.get('chapter-visual').children[2];
+    assert.equal(gallery.children.length,2);
+    for(let i=0;i<2;i++){
+        const link=gallery.children[i].children[1];
+        assert.equal(link.href,bundle.visuals.section_1.items[i].image);
+        assert.equal(link.children[0].src,link.href);
+        assert.equal(link.target,'_blank');
+    }
+    f.run(`renderVisual(${JSON.stringify(bundle.visuals.section_8)})`);
+    assert.equal(f.get('chapter-visual').dataset.kind,'discussion');
+    assert.match(f.get('chapter-visual').children[2].children[4].textContent,/own 0–10 response/);
+});
+
+test('family source selects its preset and locks during playback',async()=>{
+    const f=fixture();f.run(`render(${JSON.stringify(state)})`);
+    f.run('var chosen;changeSource=async(p,preset)=>{chosen=preset;};refresh=async()=>{};');
+    await f.get('family-source').handlers.click();
+    assert.equal(f.run('chosen'),'sheila-kieren');
+    f.run(`render(${JSON.stringify({...state,active:true})})`);
+    assert.equal(f.get('family-source').disabled,true);
+});
+
+test('Kevin selector uses the two-part preset and locks during playback',async()=>{
+    const f=fixture(); f.run(`render(${JSON.stringify(state)})`);
+    f.run('var chosen;changeSource=async(profile,preset)=>{chosen=preset;};refresh=async()=>{};');
+    await f.get('kevin-source').handlers.click();
+    assert.equal(f.run('chosen'),'kevin');
+    f.run(`render(${JSON.stringify({...state,active:true})})`);
+    assert.equal(f.get('kevin-source').disabled,true);
+});
+
+test('Kevin automatically hands off from his final DISC chapter to Driving Forces',async()=>{
+    const f=partFixture();
+    const bundle=JSON.parse(fs.readFileSync('content/presentations/kevin.json','utf8'));
+    f.run(`state.chapters=${JSON.stringify(bundle.chapters)};state.parts=${JSON.stringify(bundle.parts)};
+        state.index=6;state.part_end_index=6;state.part_index=0;
+        joinConversation=async()=>{calls.push('join-ready');joined=true;state.index=7;state.part_index=1;state.completed=false;};`);
+    f.get('autoplay').checked=true;await f.run('poll()');await f.run('poll()');
+    assert.equal(f.run('state.index'),7);
+    assert.deepEqual(JSON.parse(f.run('JSON.stringify(calls)')),
+        ['destroy',['next-part',{session_id:'first'}],'join-ready',['play',null]]);
+});
+
+test('family presentation advances through every chapter and ends without operator input',async()=>{
+    const f=fixture();
+    const bundle=JSON.parse(fs.readFileSync('content/presentations/sheila-kieren.json','utf8'));
+    f.run(`state=${JSON.stringify({...state,chapters:bundle.chapters,active:true,connected:true,completed:true})};
+        online=true;joined=true;var actions=[];refresh=async()=>{};
+        api=async(action)=>{actions.push(action);if(action==='next')state.index++;if(action==='end')state.active=false;};`);
+    f.get('autoplay').checked=true;
+    for(let i=0;i<9;i++)await f.run('poll()');
+    assert.deepEqual(JSON.parse(f.run('JSON.stringify(actions)')),[...Array(8).fill('next'),'end']);
+});
+
 test('priority graphics show ranks without manufacturing percentage bars',()=>{
     const f=fixture();
     f.run(`renderVisual(${JSON.stringify({kind:'force_ranks',title:'Priorities',note:'Priority order',items:[

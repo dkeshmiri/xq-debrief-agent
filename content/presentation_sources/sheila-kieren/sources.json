@@ -1,0 +1,119 @@
+{
+  "revision_date": "2026-11-19",
+  "script_sha256": "b40baa8c78b0efc1cf1fe1935c182b5ac313dd6e678a1da6da65cec4251e2e27",
+  "word_count": 1490,
+  "speech_seconds_at_110_wpm": 813,
+  "setup_allowance_seconds": 60,
+  "assets": [
+    {
+      "asset": "kieren-disc",
+      "file": "Kieren/Kieren Tan - DISC and 12DF Profile.pdf",
+      "page": 3,
+      "provider": "Indigo export of TTI results",
+      "sha256": "2bae253d14e7447e9aacee02e120313adb2a7f450fdf8ffa84a8b95bebcb3fb0",
+      "crop_points": [
+        0,
+        45,
+        0,
+        35
+      ]
+    },
+    {
+      "asset": "sheila-disc",
+      "file": "Sheila/Sheila - TriMetrix.pdf",
+      "page": 26,
+      "provider": "TTI Success Insights",
+      "sha256": "f5ad53ecda207ef834a73ce790624040f52d6fbb3d26b1bf18f4e8f8682b5663",
+      "crop_points": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "asset": "kieren-dna",
+      "file": "Kieren/Kieren Tan - DNA.pdf",
+      "page": 6,
+      "provider": "TTI Success Insights",
+      "sha256": "32df7a7084314a564b61ef58fbb07e0bd04f5bbd370f9d901616d3820590a33f",
+      "crop_points": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "asset": "sheila-dna",
+      "file": "Sheila/Sheila - TriMetrix.pdf",
+      "page": 64,
+      "provider": "TTI Success Insights",
+      "sha256": "f5ad53ecda207ef834a73ce790624040f52d6fbb3d26b1bf18f4e8f8682b5663",
+      "crop_points": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "asset": "sheila-forces",
+      "file": "Sheila/Sheila - TriMetrix.pdf",
+      "page": 35,
+      "provider": "TTI Success Insights",
+      "sha256": "f5ad53ecda207ef834a73ce790624040f52d6fbb3d26b1bf18f4e8f8682b5663",
+      "crop_points": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "asset": "kieren-aci",
+      "file": "Kieren/Kieren Tan - ACI.pdf",
+      "page": 15,
+      "provider": "TTI Success Insights",
+      "sha256": "e379b4f3b0b6645c80b3b33b8917f84fa2e37b93015a3fb6791df4b15f72b058",
+      "crop_points": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "asset": "sheila-aci",
+      "file": "Sheila/Sheila - TriMetrix.pdf",
+      "page": 60,
+      "provider": "TTI Success Insights",
+      "sha256": "f5ad53ecda207ef834a73ce790624040f52d6fbb3d26b1bf18f4e8f8682b5663",
+      "crop_points": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "asset": "kieren-eq",
+      "file": "Kieren/Kieren Tan - EQ.pdf",
+      "page": 7,
+      "provider": "TTI Success Insights",
+      "sha256": "f58a34af6a2d91fa3b0081793de4f62090d99c8cf4a3be66967bb4bb2f19215d",
+      "crop_points": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "notes": [
+    "Unattended presentation requested by user: no response collection or invented family agreements.",
+    "All assessment graphics rendered from supplied documents, with no recreated bars or converted scores.",
+    "Kieren uses six motivators, not the twelve Driving Forces model.",
+    "Tracker example is hypothetical arithmetic, not family results; no supplied tracker image."
+  ]
+}

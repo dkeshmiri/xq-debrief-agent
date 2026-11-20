@@ -218,3 +218,41 @@ The browser reconnects and waits for presenter readiness before sending one Echo
 Automatic continuation can be disabled; handoff failure disables it automatically.
 Original transcript files and the edit log are under
 `content/presentation_sources/mario/`.
+
+
+## Sheila and Kieren: source-report family debrief
+
+The `sheila-kieren` preset is a nine-chapter, unattended presentation. It retains
+the profile explanations from the supplied family script and adapts questions,
+listening cues and answer-dependent summaries into exercises for afterward.
+No responses or commitments are invented. Review the original, active script,
+edit log and page/hash provenance in `content/presentation_sources/sheila-kieren/`.
+There are 1,490 spoken words: approximately 13:33 at 110 wpm, or 14:33 with a
+one-minute setup allowance. This is an estimate, not measured live Tavus timing.
+Use the existing automatic continuation checkbox to play all nine chapters.
+
+`presentation_type: report_debrief` accepts report galleries and text discussion
+points. Galleries accept only existing PNGs under the presentation assets path;
+external URLs, HTML and path traversal are rejected. Assessment charts are rendered
+directly from the supplied PDFs with their original scales, labels and legends.
+Each image opens at full size. No assessment chart is recreated from score data.
+
+Kieren's DISC/six-motivator source is an Indigo export of TTI results, not an
+original TTI-designed report page. It is labeled accordingly. The source's browser
+header and internal dashboard URL footer are excluded from its image; its charts
+and source branding are intact. His ACI, DNA and EQ and Sheila's TriMetrix images
+are original TTI report pages, including report attribution. Six motivators and
+twelve Driving Forces remain separately named, with no score conversion.
+The progress example is hypothetical arithmetic; it is never presented as their
+recorded family progress. No tracker dataset was supplied.
+
+
+## Kevin: two-part recorded debrief
+
+The `kevin` preset uses the existing report galleries and two-part session
+handoff. DISC has seven chapters; Driving Forces/Acumen has nine. The original
+TTI pages are in `static/presentation-assets/kevin/`. Raw transcripts, exact
+edits, timing estimates, page provenance and the change list are in
+`content/presentation_sources/kevin/EDITING_NOTES.txt` and `sources.json`.
+Inherited-pattern narration is retained at the user's explicit request.
+No new transport, playback tracking or session transition behavior is introduced.

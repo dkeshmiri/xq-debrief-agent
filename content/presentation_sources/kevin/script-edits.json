@@ -1,0 +1,267 @@
+[
+  {
+    "before": "I can conquer my environment. my environment.",
+    "after": "I can conquer my environment.",
+    "reason": "Remove chunk overlap"
+  },
+  {
+    "before": "some earlier Some earlier self-perception.",
+    "after": "some earlier self-perception.",
+    "reason": "Remove chunk overlap"
+  },
+  {
+    "before": "Use these words that I just mentioned to raise your self-confidence. raise your self-confidence, to raise your sense of self.",
+    "after": "Use these words that I just mentioned to raise your self-confidence, to raise your sense of self.",
+    "reason": "Remove chunk overlap"
+  },
+  {
+    "before": "Number one is natural, number two is adapted.",
+    "after": "Graph One is Adapted, and Graph Two is Natural.",
+    "reason": "Correct graph labels to report page 25"
+  },
+  {
+    "before": "So basically dives deep into your behavior or profile.",
+    "after": "It dives into your behavioral profile.",
+    "reason": "Repair false start"
+  },
+  {
+    "before": "Influencing stands for, yellow stands for influencing",
+    "after": "Yellow stands for influencing",
+    "reason": "Remove false start"
+  },
+  {
+    "before": "or be vague and decisive.",
+    "after": "or be vague.",
+    "reason": "Remove ambiguous transcription fragment without inventing words"
+  },
+  {
+    "before": "People with high dominance, I'm referring to specifically for you, is that you become",
+    "after": "With your high dominance, you become",
+    "reason": "Repair spoken false start"
+  },
+  {
+    "before": "One of the ways to talk to a high S is to remember that their pace is slow, so you need to be a bit more patient and sincere. And if there's a change, usually high S doesn't like quick changes. And so they need to be explained why the change is necessary. On the high end, I'm sorry, on the low S, on the high S, you need to be, well, let me rephrase the high S, erase the communication with low S. ",
+    "after": "",
+    "reason": "Remove repeated explanation or restart"
+  },
+  {
+    "before": "So overall, your low S means that you could be almost very active. ",
+    "after": "",
+    "reason": "Remove repeated explanation or restart"
+  },
+  {
+    "before": "And overall, it's a very powerful behavior. ",
+    "after": "",
+    "reason": "Remove repeated explanation or restart"
+  },
+  {
+    "before": "Now, high dominance is also a very fast and very powerful behavior, and ",
+    "after": "",
+    "reason": "Remove repeated explanation or restart"
+  },
+  {
+    "before": "You're able to really focus on what people want, put yourself in their position, and sell them what they want, not even knowing what they want. ",
+    "after": "",
+    "reason": "Remove repeated explanation or restart"
+  },
+  {
+    "before": "the emotion behind it is frustration or anger.",
+    "after": "The emotion behind it is frustration or anger.",
+    "reason": "Sentence capitalization after edit"
+  },
+  {
+    "before": "You're trying to be more compliant. You're trying to be more steady. You're trying to be less dominant. ",
+    "after": "",
+    "reason": "Already explained by the four score changes"
+  },
+  {
+    "before": "a good 30% increase",
+    "after": "an increase of four points",
+    "reason": "Correct arithmetic: 8 to 12 is four points (50%), report page 25"
+  },
+  {
+    "before": "So I don't see a whole lot of point of concern, except that when you took this assessment,",
+    "after": "When you took this assessment,",
+    "reason": "Remove defensive preface"
+  },
+  {
+    "before": "So, Kevin, I hope this was a bit helpful to you, and we're going to jump right in and go into your motivational intelligence and also some of your acumen.",
+    "after": "Kevin, next we'll go into your motivational intelligence and your acumen.",
+    "reason": "Direct transition to Part 2"
+  },
+  {
+    "before": "The big number shows the percentage of that driver that you have,",
+    "after": "The big number shows the intensity score for that driver,",
+    "reason": "Report page 38 describes scores, not percentages of a person"
+  },
+  {
+    "before": "Your selfless is 8%.",
+    "after": "Your Selfless score is 8.",
+    "reason": "Use report score units"
+  },
+  {
+    "before": "your resourcefulness is 89%",
+    "after": "your Resourceful score is 89",
+    "reason": "Use report score units"
+  },
+  {
+    "before": "intellectual at 24% versus 53% instinctive",
+    "after": "Intellectual at 24 versus Instinctive at 53",
+    "reason": "Use report score units"
+  },
+  {
+    "before": "more intentional at 46%",
+    "after": "more Intentional at 46",
+    "reason": "Use report score units"
+  },
+  {
+    "before": "Your number, let's see, your number six. Very powerful. When it comes to, you know, taking power or giving power.",
+    "after": "When it comes to taking power or giving power,",
+    "reason": "Remove false start at chunk boundary; power has two separate report ranks"
+  },
+  {
+    "before": "In your particular case, your motivation, your number one motivator is extremely profound, and so that's what leads you to most of your actions. ",
+    "after": "",
+    "reason": "Trim repeated explanation, filler or defensive aside; retain the substantive point elsewhere"
+  },
+  {
+    "before": "What that means is you're very careful how you allocate your energy, how you allocate your money, how you allocate your resources. ",
+    "after": "",
+    "reason": "Trim repeated explanation, filler or defensive aside; retain the substantive point elsewhere"
+  },
+  {
+    "before": "In your case, it could be just money, could be investment in things that have the highest rate of return to you. ",
+    "after": "",
+    "reason": "Trim repeated explanation, filler or defensive aside; retain the substantive point elsewhere"
+  },
+  {
+    "before": "It pushes you to want to do things differently than other people. As long as it has returned to you, then you are happy. ",
+    "after": "",
+    "reason": "Trim repeated explanation, filler or defensive aside; retain the substantive point elsewhere"
+  },
+  {
+    "before": "You're constantly looking for methods, for ways to increase your resourcefulness, the return on investment of time, money, and energy. ",
+    "after": "",
+    "reason": "Trim repeated explanation, filler or defensive aside; retain the substantive point elsewhere"
+  },
+  {
+    "before": "You're very open to new way of looking at things. ",
+    "after": "",
+    "reason": "Trim repeated explanation, filler or defensive aside; retain the substantive point elsewhere"
+  },
+  {
+    "before": "What that means is you're not really like a bookworm. You're not one of these people who says, well, let me study. Let me read 10 books a week. ",
+    "after": "",
+    "reason": "Trim repeated explanation, filler or defensive aside; retain the substantive point elsewhere"
+  },
+  {
+    "before": "And altruistic is if you want to feed someone, go catch a fish for him several times and feed it to them. ",
+    "after": "",
+    "reason": "Trim repeated explanation, filler or defensive aside; retain the substantive point elsewhere"
+  },
+  {
+    "before": "You're one of those people, you have kind of a long leash. You will help people. ",
+    "after": "",
+    "reason": "Trim repeated explanation, filler or defensive aside; retain the substantive point elsewhere"
+  },
+  {
+    "before": "And so when it comes to power, it's very interesting. You're right almost in the center. ",
+    "after": "",
+    "reason": "Trim repeated explanation, filler or defensive aside; retain the substantive point elsewhere"
+  },
+  {
+    "before": "So I hope this kind of puts things in a little bit more perspective. ",
+    "after": "",
+    "reason": "Trim repeated explanation, filler or defensive aside; retain the substantive point elsewhere"
+  },
+  {
+    "before": "And that's a very, very high. ",
+    "after": "",
+    "reason": "Trim repeated explanation, filler or defensive aside; retain the substantive point elsewhere"
+  },
+  {
+    "before": "Next is also practical thinking, which means you are amazing. ",
+    "after": "",
+    "reason": "Trim repeated explanation, filler or defensive aside; retain the substantive point elsewhere"
+  },
+  {
+    "before": "You don't love doing it. You don't hate doing it. You just end up doing it. ",
+    "after": "",
+    "reason": "Trim repeated explanation, filler or defensive aside; retain the substantive point elsewhere"
+  },
+  {
+    "before": "Again, you could be very objective. Some things you really enjoy, some things you kind of dread, but nevertheless, you're pretty balanced when it comes to systems judgment. ",
+    "after": "",
+    "reason": "Trim repeated explanation, filler or defensive aside; retain the substantive point elsewhere"
+  },
+  {
+    "before": "So I would say you would be a very good person to talk to when it comes to a big picture and how it can work in small details. ",
+    "after": "",
+    "reason": "Trim repeated explanation, filler or defensive aside; retain the substantive point elsewhere"
+  },
+  {
+    "before": "And that's probably most likely due to your having to adapt so much in your job, whatever you had at the time. ",
+    "after": "",
+    "reason": "Trim repeated explanation, filler or defensive aside; retain the substantive point elsewhere"
+  },
+  {
+    "before": "And remember I told you the few things that you need to take a look at to make the self-direction more positive for the future. ",
+    "after": "",
+    "reason": "Trim repeated explanation, filler or defensive aside; retain the substantive point elsewhere"
+  },
+  {
+    "before": "So Kevin, overall, you have a very, very powerful and amazing profile. And just except for a few challenges that we mentioned, you may want to take a look at how you view life, how you perceive life. ",
+    "after": "",
+    "reason": "Trim repeated explanation, filler or defensive aside; retain the substantive point elsewhere"
+  },
+  {
+    "before": "Sometimes you wish you could make things different. Sometimes you wish that you could influence more. ",
+    "after": "",
+    "reason": "Trim repeated explanation, filler or defensive aside; retain the substantive point elsewhere"
+  },
+  {
+    "before": "You understand what it is you need to do. You understand where you are in life. ",
+    "after": "",
+    "reason": "Trim repeated explanation, filler or defensive aside; retain the substantive point elsewhere"
+  },
+  {
+    "before": "Overall, like I said, you have a very powerful, amazing profile. ",
+    "after": "",
+    "reason": "Trim repeated explanation, filler or defensive aside; retain the substantive point elsewhere"
+  },
+  {
+    "before": "So a couple of questions you could ask yourself and you could answer to yourself. ",
+    "after": "",
+    "reason": "Trim repeated explanation, filler or defensive aside; retain the substantive point elsewhere"
+  },
+  {
+    "before": "Your brain is constantly thinking of what's next instead of what is right now. ",
+    "after": "",
+    "reason": "Trim repeated explanation, filler or defensive aside; retain the substantive point elsewhere"
+  },
+  {
+    "before": "I want to go forward. I want to make sure that I'm happy with what I do. ",
+    "after": "",
+    "reason": "Trim repeated explanation, filler or defensive aside; retain the substantive point elsewhere"
+  },
+  {
+    "before": "So then what you would do is you use your high dominance and your charm and your persuasive skills and articulation and words to go and attract money, to go and build more wealth, to attract more resources for yourself. ",
+    "after": "",
+    "reason": "Trim repeated explanation, filler or defensive aside; retain the substantive point elsewhere"
+  },
+  {
+    "before": "taking power or giving power, You're",
+    "after": "taking power or giving power, you're",
+    "reason": "Sentence join"
+  },
+  {
+    "before": "As far as your own, so you're",
+    "after": "You're",
+    "reason": "Remove false start"
+  },
+  {
+    "before": "And you're also extremely, your attitude index is",
+    "after": "Your attitude index is",
+    "reason": "Remove false start"
+  }
+]

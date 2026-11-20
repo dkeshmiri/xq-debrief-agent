@@ -25,6 +25,8 @@ function controls() {
     $('reset-source').disabled = busy || state.active || state.busy;
     $('amethyst-source').disabled = busy || state.active || state.busy;
     $('mario-source').disabled = busy || state.active || state.busy;
+    $('kevin-source').disabled = busy || state.active || state.busy;
+    $('family-source').disabled = busy || state.active || state.busy;
     $('workforce-source').disabled = busy || state.active || state.busy;
     $('iranian-source').disabled = busy || state.active || state.busy;
     $('iranian-fa-source').disabled = busy || state.active || state.busy;
@@ -112,6 +114,26 @@ function renderVisual(chart) {
     if (!chart) { container.append(node('p', 'No chart is assigned to this chapter.')); return; }
     container.append(node('h2', chart.title), node('p', chart.note, 'chart-note'));
     if (chart.kind === 'investor') { renderInvestorVisual(container, chart); return; }
+    if (chart.kind === 'discussion') {
+        const list = node('ul', '', 'discussion-points');
+        for (const point of chart.points) list.append(node('li', point));
+        container.append(list); return;
+    }
+    if (chart.kind === 'report_gallery') {
+        const gallery = node('div', '', 'report-gallery');
+        for (const item of chart.items) {
+            const figure = node('figure', '', 'report-page');
+            const link = node('a', '', 'report-image-link');
+            link.href = item.image; link.target = '_blank'; link.rel = 'noopener';
+            link.setAttribute('aria-label', `Open full-size report: ${item.title}`);
+            const image = document.createElement('img');
+            image.src = item.image; image.alt = item.alt;
+            link.append(image);
+            figure.append(node('h3', item.title), link, node('figcaption', item.attribution, 'chart-note'));
+            gallery.append(figure);
+        }
+        container.append(gallery); return;
+    }
       if (chart.kind === 'report_image') {
           const figure = node('figure', '', 'report-wheel');
           const image = document.createElement('img');
@@ -269,6 +291,8 @@ $('profile-upload').addEventListener('change', () => run(async () => {
 $('reset-source').addEventListener('click', () => run(() => changeSource(null)));
 $('amethyst-source').addEventListener('click', () => run(() => changeSource(null, 'amethyst')));
 $('mario-source').addEventListener('click', () => run(() => changeSource(null, 'mario')));
+$('kevin-source').addEventListener('click', () => run(() => changeSource(null, 'kevin')));
+$('family-source').addEventListener('click', () => run(() => changeSource(null, 'sheila-kieren')));
 $('workforce-source').addEventListener('click', () => run(() => changeSource(null, 'workforce-investor')));
 $('iranian-source').addEventListener('click', () => run(() => changeSource(null, 'iranian-american')));
 $('iranian-fa-source').addEventListener('click', () => run(() => changeSource(null, 'iranian-american-fa')));
